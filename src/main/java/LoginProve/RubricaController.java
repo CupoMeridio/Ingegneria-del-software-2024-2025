@@ -28,8 +28,6 @@ import javafx.scene.layout.HBox;
 public class RubricaController implements Initializable {
 
     @FXML
-    private SplitPane splitPane;
-    @FXML
     private AnchorPane anchorUp;
     @FXML
     private HBox hboxButton;
@@ -38,21 +36,9 @@ public class RubricaController implements Initializable {
     @FXML
     private Button btnDelete;
     @FXML
-    private Button btnMod;
-    @FXML
-    private MenuButton menuSort;
-    @FXML
-    private MenuButton menuFilter;
-    @FXML
-    private Button btnImp;
-    @FXML
-    private Button btnExp;
-    @FXML
     private TextField txtSearch;
     @FXML
     private AnchorPane anchorBottom;
-    @FXML
-    private TableView<?> tableView;
     @FXML
     private TableColumn<?, ?> clmSurname;
     @FXML
@@ -64,19 +50,33 @@ public class RubricaController implements Initializable {
     @FXML
     private TableColumn<?, ?> clmTag;
     @FXML
-    private RadioMenuItem radioMenuSur1;
+    private SplitPane Rubrica;
     @FXML
-    private RadioMenuItem radioMenuSur2;
+    private Button btnModify;
     @FXML
-    private RadioMenuItem radioMenuName1;
+    private MenuButton mbtnSort;
     @FXML
-    private RadioMenuItem radioMenuName2;
+    private RadioMenuItem rmSurInc;
     @FXML
-    private CheckMenuItem checkMenuHome;
+    private RadioMenuItem rmSurDec;
     @FXML
-    private CheckMenuItem checkMenuUni;
+    private RadioMenuItem rmNameInc;
     @FXML
-    private CheckMenuItem checkMenuJob;
+    private RadioMenuItem rmNameDec;
+    @FXML
+    private MenuButton mbtnFilter;
+    @FXML
+    private CheckMenuItem chkmHome;
+    @FXML
+    private CheckMenuItem chkmUni;
+    @FXML
+    private CheckMenuItem chkmJob;
+    @FXML
+    private Button btnImport;
+    @FXML
+    private Button btnExport;
+    @FXML
+    private TableView<?> tblvRubrica;
 
     /**
      * Initializes the controller class.
