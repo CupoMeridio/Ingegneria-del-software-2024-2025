@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import java.util.*?>
@@ -7,15 +8,39 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="LoginProve.LoginController">
+<AnchorPane id="AnchorPane" fx:id="login" prefHeight="507.0" prefWidth="811.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginProve.LoginController">
     <stylesheets>
         <URL value="@/styles/login.css" />
     </stylesheets>
    <children>
-      <HBox alignment="CENTER" layoutX="179.0" layoutY="150.0" prefHeight="100.0" prefWidth="200.0" spacing="80.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+      <HBox fx:id="hBoxLogin" alignment="CENTER" layoutX="19.0" layoutY="40.0" prefHeight="210.0" prefWidth="782.0" spacing="80.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="btnLogin" mnemonicParsing="false" text="Login" />
-            <Button fx:id="btnSign" mnemonicParsing="false" text="Sign-in" />
+            <VBox fx:id="vBoxLogin" spacing="15.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="lblLogMail" text="E-mail" />
+                  <TextField fx:id="txtLogMail" />
+                  <Label fx:id="lblLogPass" text="Password" />
+                  <PasswordField fx:id="txtLogPass" />
+                  <Button fx:id="btnLogin" mnemonicParsing="false" text="Login" />
+               </children>
+               <padding>
+                  <Insets left="20.0" top="116.0" />
+               </padding>
+            </VBox>
+            <VBox fx:id="vBoxSingin" spacing="15.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="lblSignMail" text="E-mail" />
+                  <TextField fx:id="txtSignMail" />
+                  <Label fx:id="lblSignPass" text="Password" />
+                  <PasswordField fx:id="txtSignPass" />
+                  <Label fx:id="lblSignConfirm" layoutX="10.0" layoutY="10.0" text="Conferma password" />
+                  <PasswordField fx:id="txtConfirmPass" layoutX="30.0" layoutY="168.0" />
+                  <Button fx:id="btnSign" mnemonicParsing="false" text="Sign-in" />
+               </children>
+               <padding>
+                  <Insets left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
          </children>
       </HBox>
    </children>
