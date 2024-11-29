@@ -4,7 +4,7 @@ actor Utente as u
 actor "Utente registrato" as ur
 actor "Database" as db
 rectangle Rubrica{
-    usecase "Operazioie Rubrica" as or
+    usecase "Operazioni Rubrica" as or
     usecase "Registrazione" as reg
     usecase "Login" as log
     usecase "Aggiungere contatto" as agg
