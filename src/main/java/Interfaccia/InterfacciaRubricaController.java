@@ -25,7 +25,7 @@ import javafx.scene.layout.HBox;
  *
  * @author anuar
  */
-public class RubricaController implements Initializable {
+public class InterfacciaRubricaController implements Initializable {
 
     @FXML
     private AnchorPane anchorUp;
@@ -35,20 +35,6 @@ public class RubricaController implements Initializable {
     private Button btnAdd;
     @FXML
     private Button btnDelete;
-    @FXML
-    private TextField txtSearch;
-    @FXML
-    private AnchorPane anchorBottom;
-    @FXML
-    private TableColumn<?, ?> clmName;
-    @FXML
-    private TableColumn<?, ?> clmEmail;
-    @FXML
-    private TableColumn<?, ?> clmTel;
-    @FXML
-    private TableColumn<?, ?> clmTag;
-    @FXML
-    private SplitPane Rubrica;
     @FXML
     private Button btnModify;
     @FXML
@@ -74,9 +60,25 @@ public class RubricaController implements Initializable {
     @FXML
     private Button btnExport;
     @FXML
+    private TextField txtSearch;
+    @FXML
+    private AnchorPane anchorBottom;
+    @FXML
     private TableView<?> tblvRubrica;
     @FXML
     private TableColumn<?, ?> clmSur;
+    @FXML
+    private TableColumn<?, ?> clmName;
+    @FXML
+    private TableColumn<?, ?> clmEmail;
+    @FXML
+    private TableColumn<?, ?> clmTel;
+    @FXML
+    private TableColumn<?, ?> clmTag;
+    @FXML
+    private SplitPane interfacciaRubrica;
+    @FXML
+    private Button btnLogout;
 
     /**
      * Initializes the controller class.

@@ -8,6 +8,7 @@ package com.mycompany.rubrica_progetto_ids.persone;
 /**
  *
  * @author Mattia Sanzari
+ * 
  */
 public enum Tag {
     Home,
