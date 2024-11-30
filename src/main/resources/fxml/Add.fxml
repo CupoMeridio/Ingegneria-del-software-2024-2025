@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="add" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaccia.AddController">
+   <children>
+      <!-- Header for the contact form -->
+      <HBox fx:id="hboxInsertInfo" alignment="CENTER" layoutX="89.0" prefHeight="51.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="Inserisci le informazioni per il nuovo contatto" />
+         </children>
+      </HBox>
+
+      <!-- Name Field -->
+      <HBox fx:id="hboxName" alignment="CENTER" layoutY="51.0" prefHeight="67.0" prefWidth="600.0" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Label fx:id="lblName" prefHeight="21.0" prefWidth="108.0" text="Name:" />
+            <VBox fx:id="vboxName" alignment="CENTER_RIGHT" prefHeight="67.0" prefWidth="161.0">
+               <children>
+                  <TextField fx:id="txtName" maxWidth="159.0" prefHeight="31.0" prefWidth="146.0" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+
+      <!-- Surname Field -->
+      <HBox fx:id="hboxSur" alignment="CENTER" layoutY="114.0" prefHeight="67.0" prefWidth="600.0" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Label fx:id="lblSur" prefHeight="21.0" prefWidth="108.0" text="Surname:" />
+            <VBox fx:id="vboxSur" alignment="CENTER_RIGHT" prefHeight="67.0" prefWidth="161.0">
+               <children>
+                  <TextField fx:id="txtSur" maxWidth="159.0" prefHeight="31.0" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+
+      <!-- Email Fields -->
+      <HBox fx:id="hboxEmail" alignment="CENTER" layoutY="181.0" prefHeight="113.0" prefWidth="600.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Label fx:id="lblEmail" prefHeight="21.0" prefWidth="54.0" text="E-mail:" />
+            <VBox fx:id="vboxEmail" alignment="CENTER_RIGHT" prefHeight="113.0" prefWidth="224.0" spacing="10.0">
+               <children>
+                  <TextField fx:id="txtEmail1" maxWidth="159.0" prefHeight="31.0" />
+                  <TextField fx:id="txtEmail2" maxWidth="159.0" prefHeight="31.0" prefWidth="160.0" />
+                  <TextField fx:id="txtEmail3" maxWidth="159.0" prefHeight="31.0" prefWidth="161.0" />
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="5.0" />
+         </padding>
+      </HBox>
+
+      <!-- Phone Number Fields -->
+      <HBox fx:id="hboxNumber" alignment="CENTER" layoutY="294.0" prefHeight="113.0" prefWidth="600.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Label fx:id="lblNumber" text="Phone Number:" />
+            <VBox fx:id="vboxNumber" alignment="CENTER_RIGHT" prefHeight="113.0" prefWidth="230.0" spacing="10.0">
+               <children>
+                  <TextField fx:id="txtPhone1" maxWidth="159.0" prefHeight="31.0" />
+                  <TextField fx:id="txtPhone2" maxWidth="159.0" prefHeight="31.0" />
+                  <TextField fx:id="txtPhone3" maxWidth="159.0" prefHeight="31.0" />
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
+      </HBox>
+
+      <!-- Buttons for Cancel and Add -->
+      <HBox fx:id="hboxButton" alignment="CENTER" layoutY="428.0" prefHeight="73.0" prefWidth="600.0" spacing="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Button fx:id="btnCancel" mnemonicParsing="false" text="Cancel" />
+            <Button fx:id="btnAdd" mnemonicParsing="false" text="Add" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
