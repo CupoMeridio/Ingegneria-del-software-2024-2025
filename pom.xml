@@ -36,7 +36,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.4</version>
                 <configuration>
-                    <mainClass>com.mycompany.rubrica_progetto_ids.App</mainClass>
+                    <mainClass>it.unisa.diem.team02.App</mainClass>
                 </configuration>
                 <executions>
                     <execution>
