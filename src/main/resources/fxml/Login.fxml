@@ -27,7 +27,7 @@
                   <Insets left="20.0" top="116.0" />
                </padding>
             </VBox>
-            <VBox fx:id="vBoxSingin" spacing="15.0" HBox.hgrow="ALWAYS">
+            <VBox fx:id="vBoxSignin" spacing="15.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label fx:id="lblSignMail" text="E-mail" />
                   <TextField fx:id="txtSignMail" />
