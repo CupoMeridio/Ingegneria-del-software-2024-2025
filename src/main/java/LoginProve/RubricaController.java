@@ -40,8 +40,6 @@ public class RubricaController implements Initializable {
     @FXML
     private AnchorPane anchorBottom;
     @FXML
-    private TableColumn<?, ?> clmSurname;
-    @FXML
     private TableColumn<?, ?> clmName;
     @FXML
     private TableColumn<?, ?> clmEmail;
@@ -77,6 +75,8 @@ public class RubricaController implements Initializable {
     private Button btnExport;
     @FXML
     private TableView<?> tblvRubrica;
+    @FXML
+    private TableColumn<?, ?> clmSur;
 
     /**
      * Initializes the controller class.
