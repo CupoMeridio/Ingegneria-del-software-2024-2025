@@ -17,7 +17,7 @@ import javafx.scene.layout.VBox;
  *
  * @author anuar
  */
-public class AddController implements Initializable {
+public class AddViewController implements Initializable {
 
     @FXML
     private AnchorPane add;

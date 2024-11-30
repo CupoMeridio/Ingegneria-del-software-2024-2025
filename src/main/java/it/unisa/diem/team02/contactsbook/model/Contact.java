@@ -32,6 +32,7 @@ public class Contact extends Person{
         if(this.tag.length<3)
             this.tag[this.tag.length] = tag;
         //gestire l' elese
+        
     }
     
     public void addNumber(String number) {

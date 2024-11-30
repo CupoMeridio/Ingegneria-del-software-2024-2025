@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane fx:id="Rubrica" dividerPositions="0.1038961038961039" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interfaccia.RubricaController">
+<SplitPane fx:id="interfacciaRubrica" dividerPositions="0.1038961038961039" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController">
   <items>
     <AnchorPane fx:id="anchorUp" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
          <children>
@@ -38,6 +38,11 @@
                   <Button fx:id="btnImport" mnemonicParsing="false" text="Import" />
                   <Button fx:id="btnExport" mnemonicParsing="false" text="Export" />
                   <TextField fx:id="txtSearch" promptText="Search" />
+                  <Button fx:id="btnLogout" mnemonicParsing="false" prefHeight="31.0" prefWidth="87.0" text="Logout">
+                     <HBox.margin>
+                        <Insets left="460.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
             </HBox>
          </children></AnchorPane>

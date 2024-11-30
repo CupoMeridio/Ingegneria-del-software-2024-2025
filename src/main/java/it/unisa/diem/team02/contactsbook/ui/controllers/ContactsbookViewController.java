@@ -24,7 +24,7 @@ import javafx.scene.layout.HBox;
  *
  * @author anuar
  */
-public class ContactsbookController implements Initializable {
+public class ContactsbookViewController implements Initializable {
 
     @FXML
     private AnchorPane anchorUp;
@@ -46,8 +46,6 @@ public class ContactsbookController implements Initializable {
     private TableColumn<?, ?> clmTel;
     @FXML
     private TableColumn<?, ?> clmTag;
-    @FXML
-    private SplitPane Rubrica;
     @FXML
     private Button btnModify;
     @FXML
@@ -76,6 +74,10 @@ public class ContactsbookController implements Initializable {
     private TableView<?> tblvRubrica;
     @FXML
     private TableColumn<?, ?> clmSur;
+    @FXML
+    private SplitPane interfacciaRubrica;
+    @FXML
+    private Button btnLogout;
 
     /**
      * Initializes the controller class.

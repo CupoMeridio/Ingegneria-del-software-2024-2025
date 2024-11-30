@@ -6,6 +6,7 @@ package it.unisa.diem.team02.contactsbook.ui.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -21,12 +22,10 @@ import javafx.scene.layout.VBox;
  *
  * @author anuar
  */
-public class LoginController implements Initializable {
+public class LoginViewController implements Initializable {
 
     @FXML
     private AnchorPane login;
-    @FXML
-    private HBox hBoxLogin;
     @FXML
     private VBox vBoxLogin;
     @FXML
@@ -39,8 +38,6 @@ public class LoginController implements Initializable {
     private PasswordField txtLogPass;
     @FXML
     private Button btnLogin;
-    @FXML
-    private VBox vBoxSignin;
     @FXML
     private Label lblSignMail;
     @FXML
@@ -55,6 +52,10 @@ public class LoginController implements Initializable {
     private PasswordField txtConfirmPass;
     @FXML
     private Button btnSign;
+    @FXML
+    private HBox hboxLogin;
+    @FXML
+    private VBox vboxSignin;
 
     /**
      * Initializes the controller class.
@@ -63,5 +64,13 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void actionLogin(ActionEvent event) {
+    }
+
+    @FXML
+    private void actionSignin(ActionEvent event) {
+    }
     
 }
