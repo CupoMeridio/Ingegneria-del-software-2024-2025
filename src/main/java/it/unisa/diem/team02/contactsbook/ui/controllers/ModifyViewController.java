@@ -1,4 +1,7 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
+ */
 package it.unisa.diem.team02.contactsbook.ui.controllers;
 
 import java.net.URL;
@@ -17,7 +20,7 @@ import javafx.scene.layout.VBox;
  *
  * @author anuar
  */
-public class AddViewController implements Initializable {
+public class ModifyViewController implements Initializable {
 
     @FXML
     private AnchorPane add;
@@ -62,13 +65,13 @@ public class AddViewController implements Initializable {
     @FXML
     private TextField txtNumber2;
     @FXML
+    private TextField txtNumber3;
+    @FXML
     private HBox hboxButton;
     @FXML
     private Button btnCanc;
     @FXML
-    private TextField txtNumber3;
-    @FXML
-    private Button btnModify;
+    private Button btnAdd;
 
     /**
      * Initializes the controller class.

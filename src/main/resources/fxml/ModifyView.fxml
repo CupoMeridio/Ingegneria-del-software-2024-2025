@@ -8,11 +8,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="add" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.team02.contactsbook.ui.controllers.AddViewController">
+
+<AnchorPane fx:id="add" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.team02.contactsbook.ui.controllers.ModifyViewController">
    <children>
       <HBox fx:id="hboxInsertInfo" alignment="CENTER" layoutX="89.0" prefHeight="51.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label text="Insert info for the new contact" />
+            <Label text="Modify contact's info" />
          </children>
       </HBox>
       <HBox fx:id="hboxName" alignment="CENTER" layoutY="51.0" prefHeight="67.0" prefWidth="600.0" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -68,7 +69,7 @@
       <HBox fx:id="hboxButton" alignment="CENTER" layoutY="428.0" prefHeight="73.0" prefWidth="600.0" spacing="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <Button fx:id="btnCanc" mnemonicParsing="false" text="Cancel" />
-            <Button fx:id="btnModify" mnemonicParsing="false" text="Add" />
+            <Button fx:id="btnAdd" mnemonicParsing="false" text="Modify" />
          </children>
       </HBox>
    </children>
