@@ -5,9 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+import javafx.scene.image.Image;
 import java.io.IOException;
 import static javafx.application.Application.launch;
+
 
 /**
  * JavaFX App
@@ -18,8 +19,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("Login"));
+        scene = new Scene(loadFXML("LoginView"));
         stage.setScene(scene);
+        stage.setMaximized(true);
+        stage.setTitle("Rubrica");
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/imgs/icon.png")));
         stage.show();
     }
 

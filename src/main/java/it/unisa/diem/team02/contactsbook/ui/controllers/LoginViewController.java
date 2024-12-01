@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.event.ActionEvent;
 
 /**
  * @lang it
@@ -23,7 +24,7 @@ import javafx.scene.layout.VBox;
  * 
  * @author team02
  */
-public class LoginController implements Initializable {
+public class LoginViewController implements Initializable {
 
     @FXML
     private AnchorPane login; ///< @lang it Componente principale della schermata di login. 
@@ -216,5 +217,12 @@ public class LoginController implements Initializable {
         // @lang en Regular expression to validate the password
         String passwordRegex = "^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\",.<>?/]).{8,}$";
         return password.matches(passwordRegex);
+    }
+    
+        @FXML
+    private void actionLogin(ActionEvent event) {
+    }
+    @FXML
+    private void actionSignin(ActionEvent event) {
     }
 }
