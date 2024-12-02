@@ -2,6 +2,10 @@ package it.unisa.diem.team02.contactsbook.ui.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableBooleanValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -31,10 +35,6 @@ public class LoginViewController implements Initializable {
                                ///< @lang en Main component of the login screen.
     
     @FXML
-    private HBox hBoxLogin; ///< @lang it Contiene i VBox per login e registrazione.
-                           ///< @lang en Contains the VBox for login and registration.
-    
-    @FXML
     private VBox vBoxLogin; ///< @lang it VBox per il modulo di login.
                            ///< @lang en VBox for the login form.
     
@@ -57,10 +57,6 @@ public class LoginViewController implements Initializable {
     @FXML
     private Button btnLogin; ///< @lang it Pulsante per eseguire il login.
                             ///< @lang en Button to execute login.
-    
-    @FXML
-    private VBox vBoxSignin; ///< @lang it VBox per il modulo di registrazione.
-                            ///< @lang en VBox for the registration form.
     
     @FXML
     private Label lblSignMail; ///< @lang it Etichetta per il campo email della registrazione.
@@ -89,6 +85,16 @@ public class LoginViewController implements Initializable {
     @FXML
     private Button btnSign; ///< @lang it Pulsante per eseguire la registrazione.
                            ///< @lang en Button to execute registration.
+    @FXML
+    private HBox hboxLogin;
+    @FXML
+    private VBox vboxSignin;
+    @FXML
+    private Label lblErrorPass;
+    @FXML
+    private Label lblPassInequals;
+    @FXML
+    private Label lblErrorEmail;
 
     /**
      * @lang it
@@ -107,9 +113,9 @@ public class LoginViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        txtSignMailInitialize();
+        btnLogin.disableProperty().bind(Bindings.or(txtLogMailInitialize(), txtLogPassInitialize()));
+        btnSign.disableProperty().bind(Bindings.and(txtConfirmPassInitialize(), txtSignMailInitialize()).or(txtSignMailInitialize()));
         txtSignPassInitialize();
-        txtConfirmPassInitialize();
     }
     
     
@@ -120,16 +126,24 @@ public class LoginViewController implements Initializable {
      * @lang en
      * Configures the listener for validating the registration email field.
      */
-    private void txtSignMailInitialize(){
+    private BooleanProperty txtSignMailInitialize(){
+        BooleanProperty observableBoolean = new SimpleBooleanProperty(true);
         txtSignMail.textProperty().addListener((observable, oldValue, newValue) -> {
             if (isValidEmail(newValue)) {
                 txtSignMail.setStyle("-fx-border-color: green;");  ///< @lang it Bordo verde se valido
                                                                  ///< @lang en Green border if valid
+                observableBoolean.set(false);
+                                                              ///< @lang en Green border if valid
+                lblErrorEmail.setText("");
+                
             } else {
                 txtSignMail.setStyle("-fx-border-color: red;");    ///< @lang it Bordo rosso se non valido
                                                                  ///< @lang en Red border if invalid
+                lblErrorEmail.setText("Indirizzo email non valido");
+                
             }
         });
+     return observableBoolean;   
     }
     
     /**
@@ -144,9 +158,14 @@ public class LoginViewController implements Initializable {
             if (isValidPassword(newValue)) {
                 txtSignPass.setStyle("-fx-border-color: green;");  ///< @lang it Bordo verde se valido
                                                                  ///< @lang en Green border if valid
+                lblErrorPass.setText("");
+                   
             } else {
                 txtSignPass.setStyle("-fx-border-color: red;");    ///< @lang it Bordo rosso se non valido
                                                                  ///< @lang en Red border if invalid
+                lblErrorPass.setText("La password deve essere lunga 8 caratteri contenere un carattere \nspeciale, una maiuscola, "
+                        + "una minuscola e un numero");
+                
             }
         }); 
     }
@@ -158,14 +177,32 @@ public class LoginViewController implements Initializable {
      * @lang en
      * Configures the listener to check that the confirm password matches the main password.
      */
-    private void txtConfirmPassInitialize(){
+    private BooleanProperty txtConfirmPassInitialize(){
+        BooleanProperty b=new SimpleBooleanProperty(true);
         txtConfirmPass.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.equals(txtSignPass.getText())) {
                 txtConfirmPass.setStyle("-fx-border-color: green;");  // Bordo verde se corrispondono
+                lblPassInequals.setText("");
+                b.set(false);
             } else {
                 txtConfirmPass.setStyle("-fx-border-color: red;");    // Bordo rosso se non corrispondono
+                lblPassInequals.setText("Le password non coincidono");
+                
             }
         });
+        return b;
+    }
+    
+    private BooleanProperty txtLogMailInitialize(){
+        BooleanProperty b = new SimpleBooleanProperty(true);
+        //come si fa col database?
+     return b;   
+    }
+    
+    private BooleanProperty txtLogPassInitialize(){
+        BooleanProperty b= new SimpleBooleanProperty(true);
+        //come si fa col database?
+        return b;
     }
     
     /**
@@ -219,10 +256,15 @@ public class LoginViewController implements Initializable {
         return password.matches(passwordRegex);
     }
     
-        @FXML
+    
+    
+    @FXML
     private void actionLogin(ActionEvent event) {
+        
     }
+    
     @FXML
     private void actionSignin(ActionEvent event) {
+        
     }
 }
