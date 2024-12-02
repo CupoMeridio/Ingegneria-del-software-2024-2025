@@ -113,11 +113,9 @@ public class LoginViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        btnLogin.disableProperty().bind(Bindings.isEmpty(txtLogMail.textProperty()).or(txtLogPass.textProperty().isEmpty()));
-        btnSign.disableProperty().bind(Bindings.notEqual(txtSignPass.textProperty(), txtConfirmPass.textProperty()).or(txtSignPass.textProperty().isEmpty()).or(txtSignMailInitialize()));
-//      txtSignMailInitialize();
+        btnLogin.disableProperty().bind(Bindings.or(txtLogMailInitialize(), txtLogPassInitialize()));
+        btnSign.disableProperty().bind(Bindings.and(txtConfirmPassInitialize(), txtSignMailInitialize()).or(txtSignMailInitialize()));
         txtSignPassInitialize();
-        txtConfirmPassInitialize();
     }
     
     
@@ -179,17 +177,32 @@ public class LoginViewController implements Initializable {
      * @lang en
      * Configures the listener to check that the confirm password matches the main password.
      */
-    private void txtConfirmPassInitialize(){
+    private BooleanProperty txtConfirmPassInitialize(){
+        BooleanProperty b=new SimpleBooleanProperty(true);
         txtConfirmPass.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.equals(txtSignPass.getText())) {
                 txtConfirmPass.setStyle("-fx-border-color: green;");  // Bordo verde se corrispondono
                 lblPassInequals.setText("");
+                b.set(false);
             } else {
                 txtConfirmPass.setStyle("-fx-border-color: red;");    // Bordo rosso se non corrispondono
                 lblPassInequals.setText("Le password non coincidono");
                 
             }
         });
+        return b;
+    }
+    
+    private BooleanProperty txtLogMailInitialize(){
+        BooleanProperty b = new SimpleBooleanProperty(true);
+        //come si fa col database?
+     return b;   
+    }
+    
+    private BooleanProperty txtLogPassInitialize(){
+        BooleanProperty b= new SimpleBooleanProperty(true);
+        //come si fa col database?
+        return b;
     }
     
     /**
@@ -248,9 +261,8 @@ public class LoginViewController implements Initializable {
     @FXML
     private void actionLogin(ActionEvent event) {
         
-        
-        
     }
+    
     @FXML
     private void actionSignin(ActionEvent event) {
         
