@@ -2,6 +2,10 @@ package it.unisa.diem.team02.contactsbook.ui.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableBooleanValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -109,8 +113,9 @@ public class LoginViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        txtSignMailInitialize();
+        btnLogin.disableProperty().bind(Bindings.isEmpty(txtLogMail.textProperty()).or(txtLogPass.textProperty().isEmpty()));
+        btnSign.disableProperty().bind(Bindings.notEqual(txtSignPass.textProperty(), txtConfirmPass.textProperty()).or(txtSignPass.textProperty().isEmpty()).or(txtSignMailInitialize()));
+//      txtSignMailInitialize();
         txtSignPassInitialize();
         txtConfirmPassInitialize();
     }
@@ -123,10 +128,13 @@ public class LoginViewController implements Initializable {
      * @lang en
      * Configures the listener for validating the registration email field.
      */
-    private void txtSignMailInitialize(){
+    private BooleanProperty txtSignMailInitialize(){
+        BooleanProperty observableBoolean = new SimpleBooleanProperty(true);
         txtSignMail.textProperty().addListener((observable, oldValue, newValue) -> {
             if (isValidEmail(newValue)) {
                 txtSignMail.setStyle("-fx-border-color: green;");  ///< @lang it Bordo verde se valido
+                                                                 ///< @lang en Green border if valid
+                observableBoolean.set(false);
                                                               ///< @lang en Green border if valid
                 lblErrorEmail.setText("");
                 
@@ -137,6 +145,7 @@ public class LoginViewController implements Initializable {
                 
             }
         });
+     return observableBoolean;   
     }
     
     /**
