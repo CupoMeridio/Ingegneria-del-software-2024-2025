@@ -16,6 +16,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.event.ActionEvent;
+import java.sql.Connection;
+import it.unisa.diem.team02.contactsbook.database.Database;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import it.unisa.diem.team02.App;
+import java.io.IOException;
+
 
 /**
  * @lang it
@@ -53,7 +61,7 @@ public class LoginViewController implements Initializable {
     @FXML
     private PasswordField txtLogPass; ///< @lang it Campo password per l'inserimento della password del login.
                                       ///< @lang en Password field for entering the login password.
-    
+   
     @FXML
     private Button btnLogin; ///< @lang it Pulsante per eseguire il login.
                             ///< @lang en Button to execute login.
@@ -87,14 +95,22 @@ public class LoginViewController implements Initializable {
                            ///< @lang en Button to execute registration.
     @FXML
     private HBox hboxLogin;
+    
     @FXML
+    
     private VBox vboxSignin;
+    
     @FXML
     private Label lblErrorPass;
+    
     @FXML
     private Label lblPassInequals;
+    
     @FXML
     private Label lblErrorEmail;
+    
+    @FXML
+    private Label lblLogErr;
 
     /**
      * @lang it
@@ -113,8 +129,8 @@ public class LoginViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        btnLogin.disableProperty().bind(Bindings.or(txtLogMailInitialize(), txtLogPassInitialize()));
-        btnSign.disableProperty().bind(Bindings.and(txtConfirmPassInitialize(), txtSignMailInitialize()).or(txtSignMailInitialize()));
+        btnLoginInizialiazer();
+        btnSign.disableProperty().bind(Bindings.or(txtConfirmPassInitialize(), txtSignMailInitialize()));
         txtSignPassInitialize();
     }
     
@@ -139,7 +155,7 @@ public class LoginViewController implements Initializable {
             } else {
                 txtSignMail.setStyle("-fx-border-color: red;");    ///< @lang it Bordo rosso se non valido
                                                                  ///< @lang en Red border if invalid
-                lblErrorEmail.setText("Indirizzo email non valido");
+                lblErrorEmail.setText("Invalid email address");
                 
             }
         });
@@ -163,8 +179,7 @@ public class LoginViewController implements Initializable {
             } else {
                 txtSignPass.setStyle("-fx-border-color: red;");    ///< @lang it Bordo rosso se non valido
                                                                  ///< @lang en Red border if invalid
-                lblErrorPass.setText("La password deve essere lunga 8 caratteri contenere un carattere \nspeciale, una maiuscola, "
-                        + "una minuscola e un numero");
+                lblErrorPass.setText("The password must be 8 characters long and contain a special \ncharacter, an uppercase, " + "a lowercase and a number");
                 
             }
         }); 
@@ -186,23 +201,64 @@ public class LoginViewController implements Initializable {
                 b.set(false);
             } else {
                 txtConfirmPass.setStyle("-fx-border-color: red;");    // Bordo rosso se non corrispondono
-                lblPassInequals.setText("Le password non coincidono");
+                lblPassInequals.setText("The passwords do not match");
                 
             }
         });
         return b;
     }
     
-    private BooleanProperty txtLogMailInitialize(){
-        BooleanProperty b = new SimpleBooleanProperty(true);
-        //come si fa col database?
-     return b;   
-    }
-    
-    private BooleanProperty txtLogPassInitialize(){
-        BooleanProperty b= new SimpleBooleanProperty(true);
-        //come si fa col database?
-        return b;
+    /**
+    * @brief Inizializza il pulsante di login e gestisce l'autenticazione dell'utente.
+    * 
+    * Questo metodo imposta un listener sul pulsante di login. Verifica le credenziali inserite
+    * con il database e fornisce un feedback all'utente. Se il login è corretto, carica la vista principale dei contatti.
+    * 
+    * @details
+    * - Connette al database PostgreSQL utilizzando la classe Database.
+    * - Verifica l'email e la password attraverso il metodo checkLogin().
+    * - Mostra messaggi di errore specifici in caso di fallimento.
+    * 
+    * @throws SQLException Se si verifica un problema con la connessione al database.
+    */
+    private void btnLoginInizialiazer(){
+        
+        
+        
+        btnLogin.setOnAction(event->{
+            Database database= new Database();
+            Connection connection = database.ConnectionDB("rubrica", "postgres", "postgres");
+            try {
+                int controllo=database.checkLogin(connection, "utenti", txtLogMail.getText(), txtLogPass.getText());
+                switch(controllo){
+                    case -1:
+                    lblLogErr.setText("Error. There is no account associated with this email.");    
+                    break;
+                    
+                    case 1:
+                    lblLogErr.setText("Login successfully."); 
+                    {
+                        try {
+                            App.setRoot("ContactbookView");
+                        } catch (IOException ex) {
+                            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    break;
+
+                    
+                    case 0:
+                    lblLogErr.setText("Incorrect password.");
+                    
+                    default:
+                    lblLogErr.setText("Oops, something went wrong...");
+                }
+            } catch (SQLException ex) {
+                lblLogErr.setText("Unable to contact the server, please try again later.");
+            }
+            
+                
+        });
     }
     
     /**
