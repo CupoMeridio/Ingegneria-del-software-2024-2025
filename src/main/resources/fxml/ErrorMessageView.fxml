@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="messaggioErrore" prefHeight="157.0" prefWidth="363.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.team02.contactsbook.ui.controllers.ErrorMessageViewController">
+<AnchorPane id="AnchorPane" fx:id="messaggioErrore" prefHeight="157.0" prefWidth="363.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.team02.contactsbook.ui.controllers.ErrorMessageViewController">
     <stylesheets>
         <URL value="@/styles/errormessageview.css" />
     </stylesheets>
    <children>
-      <Label fx:id="txtError" alignment="CENTER" layoutX="112.0" layoutY="51.0" prefHeight="21.0" prefWidth="142.0" text="Error text" />
-      <Button fx:id="btnOk" layoutX="163.0" layoutY="98.0" mnemonicParsing="false" text="OK" />
+      <Label fx:id="txtError" alignment="CENTER" layoutX="108.0" layoutY="57.0" prefHeight="21.0" prefWidth="142.0" text="Error text" />
+      <Button fx:id="btnOk" layoutX="165.0" layoutY="100.0" mnemonicParsing="false" text="OK" />
    </children>
 </AnchorPane>
