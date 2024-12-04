@@ -21,7 +21,7 @@
                <children>
                   <Label fx:id="lblLogMail" text="E-mail" />
                   <TextField fx:id="txtLogMail" />
-                  <Label fx:id="lblErrorEmail" text="Password" />
+                  <Label fx:id="lblLogPass" text="Password" />
                   <PasswordField fx:id="txtLogPass" />
                   
                   <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#actionLogin" text="Login" />
@@ -35,7 +35,7 @@
                <children>
                   <Label fx:id="lblSignMail" text="E-mail" />
                   <TextField fx:id="txtSignMail" />
-                  <Label fx:id="lblErrorLogin" prefHeight="42.0" prefWidth="314.0" />
+                  <Label fx:id="lblErrorEmail" prefHeight="42.0" prefWidth="314.0" />
                   <Label fx:id="lblSignPass" text="Password" />
                   <PasswordField fx:id="txtSignPass" />
                   <Label fx:id="lblErrorPass" prefHeight="47.0" prefWidth="350.0" />

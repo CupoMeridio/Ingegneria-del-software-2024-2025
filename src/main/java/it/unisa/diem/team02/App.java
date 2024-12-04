@@ -26,7 +26,7 @@ public class App extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("LoginView"));
+        scene = new Scene(loadFXML("ContactbookView"));
         stage.setScene(scene);
 //        stage.setMaximized(true);
 //        stage.setTitle("Rubrica");

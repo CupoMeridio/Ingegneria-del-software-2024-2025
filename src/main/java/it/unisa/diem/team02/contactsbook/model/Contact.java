@@ -20,12 +20,16 @@ public class Contact extends Person{
         this.tag= new Tag[3];
     }
     
-    public String[] getNumber(){
-        return this.number;
+    public String getNumber(){
+        if(number[1]==null) return number[0];
+        if (number[2]==null) return number[0]+"\n"+number[1];
+        return number[0]+"\n"+number[1]+"\n"+number[2];
     }
 
-    public String[] getEmail() {
-        return email;
+    public String getEmail() {
+        if(email[1]==null) return email[0];
+        if (email[2]==null) return email[0]+"\n"+email[1];
+        return email[0]+"\n"+email[1]+"\n"+email[2];
     }
 
     public void addTag(Tag tag) {
@@ -39,13 +43,22 @@ public class Contact extends Person{
         if (this.number.length>=3){
             //gestire
         }
-        
+        if (this.number[0]==null) this.number[0]=number;
+        else 
+            if (this.number[1]==null) this.number[1]=number;
+            else 
+                if (this.number[2]==null) this.number[2]=number;
     }
     
     public void addEmail(String email){
         if (this.email.length>=3){
             //gestire
         }
+              if (this.email[0]==null) this.email[0]=email;
+        else 
+            if (this.email[1]==null) this.email[1]=email;
+            else 
+                if (this.email[2]==null) this.email[2]=email;
     }
             
     @Override
