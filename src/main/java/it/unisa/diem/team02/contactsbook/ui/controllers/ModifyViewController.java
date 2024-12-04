@@ -79,6 +79,7 @@ public class ModifyViewController implements Initializable {
     private Button btnModify;
     
     private ObservableList contacts;
+    private Contact c;
 
     /**
      * Initializes the controller class.
@@ -98,21 +99,51 @@ public class ModifyViewController implements Initializable {
         this.contacts=contacts;
     }
     
+    public void setContact(Contact contact){
+        c=contact;
+        if (c.getName()!=null) txtName.setText(c.getName());
+        if (c.getSurname()!=null) txtSur.setText(c.getSurname());
+        String number=c.getNumber();
+        if (number!=null){
+            String[] numbers=number.split("\n");
+            txtNumber1.setText(numbers[0]);
+            if (numbers[1]!=null){
+                txtNumber2.setText(numbers[1]);
+                if (numbers[2]!=null){
+                    txtNumber3.setText(numbers[3]);
+                }
+            }
+        }
+        
+        String email=c.getEmail();
+        if (email!=null){
+            String[] emails=email.split("\n");
+            txtEmail1.setText(emails[0]);
+            if (emails[1]!=null){
+                txtEmail2.setText(emails[1]);
+                if (emails[2]!=null){
+                    txtEmail3.setText(emails[3]);
+                }
+            }
+        }
+    }
+    
     @FXML
     private void actionModify(ActionEvent event) {
-        Contact c=new Contact(txtName.getText(), txtSur.getText());
-        if (txtNumber1.getText()!=null) c.addNumber(txtNumber1.getText());
-        if (txtNumber2.getText()!=null) c.addNumber(txtNumber2.getText());
-        if (txtNumber3.getText()!=null) c.addNumber(txtNumber3.getText());
-        if(txtEmail1.getText()!=null) c.addEmail(txtEmail1.getText());
-        if(txtEmail2.getText()!=null) c.addEmail(txtEmail2.getText());
-        if(txtEmail3.getText()!=null) c.addEmail(txtEmail3.getText());
+        c.setName(txtName.getText());
+        c.setSurname(txtSur.getText());
+        String [] numbers=new String[3];
+        String [] emails=new String [3];
+        if (txtNumber1.getText()!=null) numbers[0]=txtNumber1.getText();
+        if (txtNumber2.getText()!=null) numbers[1]=txtNumber1.getText();
+        if (txtNumber3.getText()!=null) numbers[2]=txtNumber1.getText();
+        if(txtEmail1.getText()!=null) emails[0]=txtEmail1.getText();
+        if(txtEmail2.getText()!=null) emails[1]=txtEmail1.getText();
+        if(txtEmail3.getText()!=null) emails[2]=txtEmail1.getText();
+
         
         if (contacts.contains(c))
-            ;//contatto duplicato
-        else 
-            contacts.add(c);
-            
+            ;//contatto duplicato        
         
         Stage stage=(Stage) btnModify.getScene().getWindow();
         stage.close();

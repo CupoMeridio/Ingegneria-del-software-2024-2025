@@ -95,12 +95,12 @@ public class AddViewController implements Initializable {
     
     public void actionAdd(ActionEvent event){
         Contact c=new Contact(txtName.getText(), txtSur.getText());
-        if (txtNumber1.getText()!=null) c.addNumber(txtNumber1.getText());
-        if (txtNumber2.getText()!=null) c.addNumber(txtNumber2.getText());
-        if (txtNumber3.getText()!=null) c.addNumber(txtNumber3.getText());
-        if(txtEmail1.getText()!=null) c.addEmail(txtEmail1.getText());
-        if(txtEmail2.getText()!=null) c.addEmail(txtEmail2.getText());
-        if(txtEmail3.getText()!=null) c.addEmail(txtEmail3.getText());
+        if (!txtNumber1.getText().isEmpty()) c.addNumber(txtNumber1.getText());
+        if (!txtNumber2.getText().isEmpty()) c.addNumber(txtNumber2.getText());
+        if (!txtNumber3.getText().isEmpty()) c.addNumber(txtNumber3.getText());
+        if(!txtEmail1.getText().isEmpty()) c.addEmail(txtEmail1.getText());
+        if(!txtEmail2.getText().isEmpty()) c.addEmail(txtEmail2.getText());
+        if(!txtEmail3.getText().isEmpty()) c.addEmail(txtEmail3.getText());
         
         if (!contacts.contains(c))
             contacts.add(c);

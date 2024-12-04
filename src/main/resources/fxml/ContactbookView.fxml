@@ -22,9 +22,9 @@
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin></Button>
-                  <Button fx:id="btnDelete" mnemonicParsing="false" text="Delete" />
+                  <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#actionDelete" text="Delete" />
                   <Button fx:id="btnModify" mnemonicParsing="false" onAction="#actionModify" text="Modify" />
-                  <MenuButton fx:id="mbtnSort" mnemonicParsing="false" text="Sort">
+                  <MenuButton fx:id="mbtnSort" mnemonicParsing="false" onAction="#actionSort" text="Sort">
                     <items>
                         <RadioMenuItem fx:id="rmSurInc" mnemonicParsing="false" text="By Surname A-Z" />
                         <RadioMenuItem fx:id="rmSurDec" mnemonicParsing="false" text="By Sognome Z-A" />
@@ -32,16 +32,16 @@
                         <RadioMenuItem fx:id="rmNameDec" mnemonicParsing="false" text="By Name Z-A" />
                     </items>
                   </MenuButton>
-                  <MenuButton fx:id="mbtnFilter" mnemonicParsing="false" text="Filter">
+                  <MenuButton fx:id="mbtnFilter" mnemonicParsing="false" onAction="#actionFilter" text="Filter">
                      <items>
                         <CheckMenuItem fx:id="chkmHome" mnemonicParsing="false" text="Home" />
                         <CheckMenuItem fx:id="chkmUni" mnemonicParsing="false" text="University" />
                         <CheckMenuItem fx:id="chkmJob" mnemonicParsing="false" text="Job" />
                      </items>
                   </MenuButton>
-                  <Button fx:id="btnImport" mnemonicParsing="false" text="Import" />
-                  <Button fx:id="btnExport" mnemonicParsing="false" text="Export" />
-                  <TextField fx:id="txtSearch" promptText="Search" />
+                  <Button fx:id="btnImport" mnemonicParsing="false" onAction="#actionImport" text="Import" />
+                  <Button fx:id="btnExport" mnemonicParsing="false" onAction="#actionExport" text="Export" />
+                  <TextField fx:id="txtSearch" onAction="#actionSearch" promptText="Search" />
                   <Button fx:id="btnLogout" mnemonicParsing="false" prefHeight="31.0" prefWidth="87.0" text="Logout">
                      <HBox.margin>
                         <Insets left="460.0" />
@@ -57,7 +57,7 @@
                 <TableColumn fx:id="clmSur" prefWidth="75.0" text="Surname" />
                 <TableColumn fx:id="clmName" prefWidth="75.0" text="Name" />
                   <TableColumn fx:id="clmEmail" prefWidth="75.0" text="E-mail" />
-                  <TableColumn fx:id="clmTel" prefWidth="75.0" text="Number" />
+                  <TableColumn fx:id="clmNum" prefWidth="75.0" text="Number" />
                   <TableColumn fx:id="clmTag" prefWidth="75.0" text="Tag" />
               </columns>
                <columnResizePolicy>

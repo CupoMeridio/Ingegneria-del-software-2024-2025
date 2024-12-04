@@ -57,7 +57,7 @@ public class ContactsbookViewController implements Initializable {
     @FXML
     private TableColumn<Contact, String> clmEmail;
     @FXML
-    private TableColumn<Contact, String> clmTel;
+    private TableColumn<Contact, String> clmNum;
     @FXML
     private TableColumn<Contact, Tag> clmTag;
     @FXML
@@ -102,15 +102,16 @@ public class ContactsbookViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         createList();
         initializeList();
-        txtMofidyInitialize();
-        txtDeleteInitialize();
+        btnMofidyInitialize();
+        btnDeleteInitialize();
     }    
     
     public void createList(){
         contacts = FXCollections.observableArrayList();
         clmName.setCellValueFactory(new PropertyValueFactory("name"));
         clmSur.setCellValueFactory(new PropertyValueFactory("surname"));
-        clmTel.setCellValueFactory(new PropertyValueFactory("number"));
+        clmNum.setCellValueFactory(new PropertyValueFactory("number"));
+        clmEmail.setCellValueFactory(new PropertyValueFactory("email"));
         tblvRubrica.setItems(contacts);
     }
     
@@ -118,6 +119,7 @@ public class ContactsbookViewController implements Initializable {
         
     }
     
+    @FXML
     public void actionAdd(ActionEvent event) throws IOException{
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AddView.fxml"));
               if(loader == null) {
@@ -142,6 +144,7 @@ public class ContactsbookViewController implements Initializable {
               
     }
     
+    @FXML
     public void actionModify(ActionEvent event) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ModifyView.fxml"));
               if(loader == null) {
@@ -152,9 +155,7 @@ public class ContactsbookViewController implements Initializable {
               Parent root = loader.load();
               Scene scene=new Scene(root);
               
-              ModifyViewController modifyC=loader.getController();
-              modifyC.setObservableList(contacts);
-              
+              ModifyViewController modifyC=loader.getController();          
     
               //gestire eccezione
               Stage newStage = new Stage();
@@ -163,9 +164,13 @@ public class ContactsbookViewController implements Initializable {
               newStage.initModality(Modality.WINDOW_MODAL);
               newStage.initOwner(btnModify.getScene().getWindow());
               newStage.show();
+              
+              Contact selectedContact = tblvRubrica.getSelectionModel().getSelectedItem();
+              modifyC.setObservableList(contacts);
+              modifyC.setContact(selectedContact);
     }
     
-    public void txtMofidyInitialize(){
+    public void btnMofidyInitialize(){
         btnModify.setDisable(true);
 
         tblvRubrica.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Contact>() {
@@ -176,7 +181,7 @@ public class ContactsbookViewController implements Initializable {
         });
     }
     
-    public void txtDeleteInitialize(){
+    public void btnDeleteInitialize(){
         btnDelete.setDisable(true);
 
         tblvRubrica.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Contact>() {
@@ -185,5 +190,29 @@ public class ContactsbookViewController implements Initializable {
                 btnDelete.setDisable(newValue == null);
             }
         });
+    }
+
+    @FXML
+    private void actionDelete(ActionEvent event) {
+    }
+
+    @FXML
+    private void actionSort(ActionEvent event) {
+    }
+
+    @FXML
+    private void actionFilter(ActionEvent event) {
+    }
+
+    @FXML
+    private void actionImport(ActionEvent event) {
+    }
+
+    @FXML
+    private void actionExport(ActionEvent event) {
+    }
+
+    @FXML
+    private void actionSearch(ActionEvent event) {
     }
 }

@@ -1,4 +1,3 @@
-
 package it.unisa.diem.team02.contactsbook.model;
 
 public abstract class Person {
