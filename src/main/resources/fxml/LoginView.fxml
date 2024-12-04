@@ -25,7 +25,18 @@
                   <PasswordField fx:id="txtLogPass" />
                   
                   <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#actionLogin" text="Login" />
-                  <Label fx:id="lblLogErr" prefHeight="61.0" prefWidth="276.0" />
+                  <Label fx:id="lblLogErr" prefHeight="37.0" prefWidth="276.0" />
+                  <!-- Centrare il bottone e l'etichetta 'oppure' -->
+                  <HBox alignment="CENTER" spacing="10.0">
+                      <children>
+                          <Label fx:id="lblLogOpp" alignment="CENTER" text="oppure" />
+                      </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="26.0" prefWidth="233.0">
+                     <children>
+                          <Button fx:id="btnLoginLocal" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#ActionbtnLoginLocal" text="Accedi con un account locale" />
+                     </children>
+                  </HBox>
                </children>
                <padding>
                   <Insets left="20.0" top="116.0" />

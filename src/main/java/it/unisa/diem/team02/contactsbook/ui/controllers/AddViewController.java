@@ -2,19 +2,24 @@
 package it.unisa.diem.team02.contactsbook.ui.controllers;
 
 import it.unisa.diem.team02.contactsbook.model.Contact;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -93,7 +98,7 @@ public class AddViewController implements Initializable {
         this.contacts=contacts;
     }
     
-    public void actionAdd(ActionEvent event){
+    public void actionAdd(ActionEvent event) throws IOException{
         Contact c=new Contact(txtName.getText(), txtSur.getText());
         if (!txtNumber1.getText().isEmpty()) c.addNumber(txtNumber1.getText());
         if (!txtNumber2.getText().isEmpty()) c.addNumber(txtNumber2.getText());
@@ -102,9 +107,27 @@ public class AddViewController implements Initializable {
         if(!txtEmail2.getText().isEmpty()) c.addEmail(txtEmail2.getText());
         if(!txtEmail3.getText().isEmpty()) c.addEmail(txtEmail3.getText());
         
-        if (!contacts.contains(c))
-            contacts.add(c);
-        
+        if (contacts.contains(c)){
+            System.out.println("COntatto duplicato");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DuplicateContectViewController.fxml"));
+              
+              Parent root = loader.load();
+              Scene scene=new Scene(root);
+              
+              DuplicateContactViewController modifyC=loader.getController();
+             
+              
+    
+              //gestire eccezione
+              Stage newStage = new Stage();
+              newStage.setScene(scene);
+              
+              newStage.initModality(Modality.WINDOW_MODAL);
+              newStage.initOwner(btnAdd.getScene().getWindow());
+              newStage.show();       
+        }
+        System.out.println("Contatto inserito");
+        contacts.add(c);
         Stage stage=(Stage) btnAdd.getScene().getWindow();
         stage.close();
     }
