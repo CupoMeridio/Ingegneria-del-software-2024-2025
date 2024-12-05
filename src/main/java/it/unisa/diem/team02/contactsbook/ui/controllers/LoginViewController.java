@@ -129,7 +129,7 @@ public class LoginViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        btnLoginInizialiazer();
+        
         btnSign.disableProperty().bind(Bindings.or(txtConfirmPassInitialize(), txtSignMailInitialize()));
         txtSignPassInitialize();
     }
@@ -208,58 +208,8 @@ public class LoginViewController implements Initializable {
         return b;
     }
     
-    /**
-    * @brief Inizializza il pulsante di login e gestisce l'autenticazione dell'utente.
-    * 
-    * Questo metodo imposta un listener sul pulsante di login. Verifica le credenziali inserite
-    * con il database e fornisce un feedback all'utente. Se il login è corretto, carica la vista principale dei contatti.
-    * 
-    * @details
-    * - Connette al database PostgreSQL utilizzando la classe Database.
-    * - Verifica l'email e la password attraverso il metodo checkLogin().
-    * - Mostra messaggi di errore specifici in caso di fallimento.
-    * 
-    * @throws SQLException Se si verifica un problema con la connessione al database.
-    */
-    private void btnLoginInizialiazer(){
-        
-        
-        
-        btnLogin.setOnAction(event->{
-            Database database= new Database();
-            Connection connection = database.ConnectionDB("rubrica", "postgres", "postgres");
-            try {
-                int controllo=database.checkLogin(connection, "utenti", txtLogMail.getText(), txtLogPass.getText());
-                switch(controllo){
-                    case -1:
-                    lblLogErr.setText("Error. There is no account associated with this email.");    
-                    break;
-                    
-                    case 1:
-                    lblLogErr.setText("Login successfully."); 
-                    {
-                        try {
-                            App.setRoot("ContactbookView");
-                        } catch (IOException ex) {
-                            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                    break;
-
-                    
-                    case 0:
-                    lblLogErr.setText("Incorrect password.");
-                    
-                    default:
-                    lblLogErr.setText("Oops, something went wrong...");
-                }
-            } catch (SQLException ex) {
-                lblLogErr.setText("Unable to contact the server, please try again later.");
-            }
-            
-                
-        });
-    }
+    
+    
     
     /**
      * @lang it
@@ -313,14 +263,64 @@ public class LoginViewController implements Initializable {
     }
     
     
+    /**
+    * @brief Inizializza il pulsante di login e gestisce l'autenticazione dell'utente.
+    * 
+    * Questo metodo imposta un listener sul pulsante di login. Verifica le credenziali inserite
+    * con il database e fornisce un feedback all'utente. Se il login è corretto, carica la vista principale dei contatti.
+    * 
+    * @details
+    * - Connette al database PostgreSQL utilizzando la classe Database.
+    * - Verifica l'email e la password attraverso il metodo checkLogin().
+    * - Mostra messaggi di errore specifici in caso di fallimento.
+    * 
+    * @throws SQLException Se si verifica un problema con la connessione al database.
+    */
     
     @FXML
     private void actionLogin(ActionEvent event) {
-        
+        Database database= new Database();
+        Connection connection = database.ConnectionDB("rubrica", "postgres", "postgres");
+            try {
+                int controllo=database.checkLogin(connection, "utenti", txtLogMail.getText(), txtLogPass.getText());
+                switch(controllo){
+                    case -1:
+                    lblLogErr.setText("Error. There is no account associated with this email.");    
+                    break;
+                    
+                    case 1:
+                    lblLogErr.setText("Login successfully."); 
+                    {
+                        try {
+                            App.setRoot("ContactbookView");
+                        } catch (IOException ex) {
+                            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    break;
+
+                    
+                    case 0:
+                    lblLogErr.setText("Incorrect password.");
+                    
+                    default:
+                    lblLogErr.setText("Oops, something went wrong...");
+                }
+            } catch (SQLException ex) {
+                lblLogErr.setText("Unable to contact the server, please try again later.");
+            }
     }
     
     @FXML
     private void actionSignin(ActionEvent event) {
         
+    }
+    
+    @FXML
+    private void ActionbtnLoginLocal(ActionEvent event){
+        try{ 
+            App.setRoot("ContactbookView");} 
+        catch (IOException ex) {
+            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);}
     }
 }
