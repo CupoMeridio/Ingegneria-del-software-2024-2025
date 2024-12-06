@@ -1,0 +1,22 @@
+@startuml
+actor Utente
+participant ContactsbookViewController
+participant ModifyViewController
+participant "Contatto" as Contact
+
+
+Utente -> ContactsbookViewController: actionModify
+activate ContactsbookViewController
+ContactsbookViewController->ModifyViewController: setContact
+activate ModifyViewController
+ModifyViewController -> ModifyViewController: actionModify
+ModifyViewController->Contact:new
+activate Contact
+Contact-->ModifyViewController:contact
+deactivate Contact
+ModifyViewController-->ContactsbookViewController: contact
+deactivate ModifyViewController
+ContactsbookViewController->ContactsbookViewController: actionDelete
+ContactsbookViewController->ContactsbookViewController: actionAdd
+deactivate ContactsbookViewController
+@enduml 

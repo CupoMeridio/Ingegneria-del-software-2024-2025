@@ -1,0 +1,38 @@
+@startuml
+actor Utente
+participant ContactsbookViewController
+participant AddViewController
+participant "Contatto" as Contact
+participant DuplicateContactViewController
+
+
+Utente -> ContactsbookViewController: actionAdd
+activate ContactsbookViewController
+ContactsbookViewController->AddViewController: setObservableList
+activate AddViewController
+AddViewController -> AddViewController: actionAdd
+AddViewController -> Contact: new
+activate Contact
+Contact->Contact: new(txtName, txtSur)
+opt Numero di telefono presente
+    Contact -> Contact: addNumber
+end
+opt Email presente
+    Contact -> Contact: addEmail
+end
+Contact --> AddViewController
+deactivate Contact
+AddViewController->ContactsbookViewController: contains
+ContactsbookViewController-->AddViewController
+alt Contatto duplicato
+    AddViewController -> DuplicateContactViewController: gestisciContattoDuplicato
+    activate DuplicateContactViewController
+    deactivate DuplicateContactViewController 
+else Contatto non duplicato
+    AddViewController -> ContactsbookViewController: addContact
+end
+deactivate Contact
+AddViewController-->ContactsbookViewController
+deactivate AddViewController
+deactivate ContactsbookViewController
+@enduml 
