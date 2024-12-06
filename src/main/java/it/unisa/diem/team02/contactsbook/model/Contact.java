@@ -75,6 +75,14 @@ public class Contact extends Person{
             else 
                 if (this.email[2]==null) this.email[2]=email;
     }
+    
+    public void setNumber(String[] number){
+        this.number=number;
+    }
+    
+    public void setEmail(String[] email){
+        this.email=email;
+    }
             
     @Override
     public String getRole() {

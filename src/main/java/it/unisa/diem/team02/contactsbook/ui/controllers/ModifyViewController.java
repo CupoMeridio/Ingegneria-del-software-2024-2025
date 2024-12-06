@@ -124,9 +124,21 @@ public class ModifyViewController implements Initializable {
         stage.close();
     }
 
-//    public void setObservableList(ObservableList<Contact> contacts){
-//        this.contacts=contacts;
-//    }
+    /**
+     * @lang it
+     * Setta il campo contacts con la lista passata come parametro.
+     * 
+     * @param ObservableList<Contact> contacts è la lista osservabile che rappresenta la rubrica.
+     * 
+     * @lang en
+     *
+     * Sets the contacts field with the list passed as a parameter.
+     * 
+     * @param ObservableList<Contact> contacts is the observable list representing the contactbook.
+     */
+    public void setObservableList(ObservableList<Contact> contacts){
+        this.contacts=contacts;
+    }
     
     /**
      * @lang it
@@ -187,23 +199,31 @@ public class ModifyViewController implements Initializable {
      */
     @FXML
     private void actionModify(ActionEvent event) {
+        if(contacts.contains(new Contact(txtName.getText(), txtSur.getText())))
+            ;//gestire contatto duplicato
+        contacts.remove(c);
         c.setName(txtName.getText());
         c.setSurname(txtSur.getText());
         String [] numbers=new String[3];
         String [] emails=new String [3];
-        if (txtNumber1.getText()!=null) numbers[0]=txtNumber1.getText();
-        if (txtNumber2.getText()!=null) numbers[1]=txtNumber2.getText();
-        if (txtNumber3.getText()!=null) numbers[2]=txtNumber3.getText();
+        if (!txtNumber1.getText().isEmpty()) numbers[0]=txtNumber1.getText();
+        else numbers[0]=null;
+        if (!txtNumber2.getText().isEmpty()) numbers[1]=txtNumber2.getText();
+        else numbers[1]=null;
+        if (!txtNumber3.getText().isEmpty()) numbers[2]=txtNumber3.getText();
+        else numbers[2]=null;
 
-        if(txtEmail1.getText()!=null) emails[0]=txtEmail1.getText();
-        if(txtEmail2.getText()!=null) emails[1]=txtEmail2.getText();
-        if(txtEmail3.getText()!=null) emails[2]=txtEmail3.getText();
+        if(!txtEmail1.getText().isEmpty()) emails[0]=txtEmail1.getText();
+        else emails[0]=null;
+        if(!txtEmail2.getText().isEmpty()) emails[1]=txtEmail2.getText();
+        else emails[1]=null;
+        if(!txtEmail3.getText().isEmpty()) emails[2]=txtEmail3.getText();
+        else emails[2]=null;
 
-        
-        if (contacts.contains(c))
-            ;//contatto duplicato        
-        
-        
+        c.setNumber(numbers);
+        c.setEmail(emails);
+
+        contacts.add(c);
         
         Stage stage=(Stage) btnModify.getScene().getWindow();
         stage.close();
