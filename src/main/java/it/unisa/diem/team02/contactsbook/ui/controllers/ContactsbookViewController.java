@@ -150,6 +150,8 @@ public class ContactsbookViewController implements Initializable {
         
     }
     
+    
+    @FXML
     /**
      * @lang it
      * Implementa l'azione associcata al tasto add: si apre una schermata per aggiungere un contatto e la 
@@ -164,7 +166,6 @@ public class ContactsbookViewController implements Initializable {
      * @param [@code ActionEvent} event
      * @throws IOException
      */
-    @FXML
     public void actionAdd(ActionEvent event) throws IOException{
               FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AddView.fxml"));
               Parent root = loader.load();
