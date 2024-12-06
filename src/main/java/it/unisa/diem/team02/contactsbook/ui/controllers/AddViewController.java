@@ -23,16 +23,20 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- * FXML Controller class
- *
- * @author anuar
+ * @lang it
+ * Controller per la gestione della schermata di aggiunta di un nuovo contatto.
+ * 
+ * @lang en
+ * Controller for handling the add of a new contact.
+ * 
+ * @author team02
  */
 public class AddViewController implements Initializable {
 
     @FXML
     private AnchorPane add;
     @FXML
-    private HBox hboxInsertInfo;
+    private HBox hboxInsertInfo; 
     @FXML
     private HBox hboxName;
     @FXML
@@ -83,7 +87,19 @@ public class AddViewController implements Initializable {
     private ObservableList contacts;
 
     /**
-     * Initializes the controller class.
+     * @lang it
+     * Metodo di inizializzazione del controller.
+     * Gestisce la disattivazione dei vari bottoni.
+     * 
+     * @param url URL utilizzato per risolvere il percorso del file FXML.
+     * @param rb Risorsa contenente dati di localizzazione.
+     * 
+     * @lang en
+     * Initializes the controller.
+     * Calls the methods that initialize the various components.
+     * 
+     * @param url URL used to resolve the FXML file path.
+     * @param rb Resource containing localization data.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -94,10 +110,37 @@ public class AddViewController implements Initializable {
         txtEmail3.disableProperty().bind(Bindings.isEmpty(txtEmail2.textProperty()));
     }
     
+    /**
+     * @lang it
+     * Setta il campo contacts con la lista passata come parametro.
+     * 
+     * @param ObservableList<Contact> contacts è la lista osservabile che rappresenta la rubrica.
+     * 
+     * @lang en
+     *
+     * Sets the contacts field with the list passed as a parameter.
+     * 
+     * @param ObservableList<Contact> contacts is the observable list representing the contactbook.
+     */
     public void setObservableList(ObservableList<Contact> contacts){
         this.contacts=contacts;
     }
     
+    /**
+     * @lang it
+     * Specifica l'azione associcata al tasto add: viene creato un nuovo contatto con le informazioni
+     * presenti nei campi di testo e aggiungto alla lista. Gestisce il caso in cui sia già presente 
+     * un contatto con lo stesso nome e lo stesso cognome.
+     * 
+     * @param ActionEvent event
+     * 
+     * @lang en
+     * Specifies the action associated with the add button: a new contact is created with the 
+     * informations in the text fields and added to the list. Handles the case where a contact with 
+     * the same first name and last name already exists.
+     * 
+     * @param ActionEvent event
+     */
     public void actionAdd(ActionEvent event) throws IOException{
         Contact c=new Contact(txtName.getText(), txtSur.getText());
         if (!txtNumber1.getText().isEmpty()) c.addNumber(txtNumber1.getText());
@@ -108,15 +151,13 @@ public class AddViewController implements Initializable {
         if(!txtEmail3.getText().isEmpty()) c.addEmail(txtEmail3.getText());
         
         if (contacts.contains(c)){
-            System.out.println("COntatto duplicato");
+            System.out.println("Contatto duplicato");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DuplicateContectViewController.fxml"));
               
               Parent root = loader.load();
               Scene scene=new Scene(root);
               
               DuplicateContactViewController modifyC=loader.getController();
-             
-              
     
               //gestire eccezione
               Stage newStage = new Stage();
@@ -134,6 +175,19 @@ public class AddViewController implements Initializable {
         }
     }
     
+    /**
+     * @lang it
+     * Specifica l'azione associcata al tasto cancel: si torna alla visualizzazione della rubrica e
+     * non viene effettuata alcuna modifica
+     * 
+     * @param ActionEvent event
+     * 
+     * @lang en
+     * Specifies the action associated with the cancel button: returns to the Contactbook view, and 
+     * no changes are made.
+     * 
+     * @param ActionEvent event
+     */
     public void actionCancel(ActionEvent event){
         Stage stage=(Stage) btnCanc.getScene().getWindow();
         stage.close();
