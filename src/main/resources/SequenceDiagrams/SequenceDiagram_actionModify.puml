@@ -23,10 +23,11 @@ alt Contatto duplicato
     ModifyViewController -> DuplicateContactViewController: gestisciContattoDuplicato
     activate DuplicateContactViewController
     alt Add contact
-        DuplicateContactViewController->ModifyViewController: modify
+        DuplicateContactViewController->ModifyViewController
     activate ModifyViewController
     else Modify
         DuplicateContactViewController-->ModifyViewController
+        ModifyViewController->ModifyViewController:actionModify
     end
     deactivate DuplicateContactViewController 
 else Contatto non duplicato
