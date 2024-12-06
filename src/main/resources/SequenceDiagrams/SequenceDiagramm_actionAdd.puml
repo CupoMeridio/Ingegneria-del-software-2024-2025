@@ -24,6 +24,7 @@ Contact --> AddViewController
 deactivate Contact
 AddViewController->ContactsbookViewController: contains
 ContactsbookViewController-->AddViewController
+
 alt Contatto duplicato
     AddViewController -> DuplicateContactViewController: gestisciContattoDuplicato
     activate DuplicateContactViewController

@@ -34,7 +34,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="26.0" prefWidth="233.0">
                      <children>
-                          <Button fx:id="btnLoginLocal" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#ActionbtnLoginLocal" text="log in with a local account" />
+                          <Button fx:id="btnLoginLocal" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#actionLoginLocal" text="log in with a local account" />
                      </children>
                   </HBox>
                </children>

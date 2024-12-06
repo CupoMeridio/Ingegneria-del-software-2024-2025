@@ -1,13 +1,48 @@
 @startuml
 actor Utente
-participant "Utente" as user
-participant FXMLLoader
-participant "ContactsbookViewController" as ContactsbookViewController
-participant Stage
-participant Scene
+participant "UserInteracionDataInterface" as user
+participant "LoginViewController" as LoginViewController
+participant "App" as App 
+participant "Database" as db
 
-Utente -> user: Add()
-activate Contact
+Utente -> user: login()
+activate user
+
+alt loginLocal
+user -> LoginViewController: actionLoginLocal()
+activate LoginViewController
+LoginViewController -> App: setRoot("ContactsbookView")
+activate App
+deactivate App
+deactivate LoginViewController
+
+else else
+user-> LoginViewController: actionLogin()
+activate LoginViewController
+LoginViewController -> db: new()
+activate db
+LoginViewController -> db: ConnectionDB()
+db --> LoginViewController
+LoginViewController -> db: checkLogin()
+db --> LoginViewController: controllo
+deactivate db
+alt controllo==true
+LoginViewController -> App: setRoot("ContactsbookView")
+activate App
+deactivate App
+else else
+LoginViewController --> user: messageError()
+deactivate 
+end
+
+activate App
+deactivate App
+deactivate LoginViewController
+deactivate user
+
+
+end
+
 
 
 
