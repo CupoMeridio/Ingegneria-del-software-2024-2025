@@ -10,17 +10,18 @@ Utente -> ContactsbookViewController: actionModify
 activate ContactsbookViewController
 ContactsbookViewController->ModifyViewController: setContact
 activate ModifyViewController
+ContactsbookViewController->ModifyViewController: setObservableList
 ModifyViewController -> ModifyViewController: actionModify
 ModifyViewController->Contact: new
 activate Contact
 Contact-->ModifyViewController: contact
 deactivate Contact
-ModifyViewController-->ContactsbookViewController: contact
-deactivate ModifyViewController
-ContactsbookViewController->ContactsbookViewController: actionDelete
-ContactsbookViewController->ContactsbookViewController: actionAdd
-ContactsbookViewController->UserInteractionDataInterface: modifyContact
+ModifyViewController->ModifyViewController: remove
+ModifyViewController->ModifyViewController: add
+ModifyViewController-->UserInteractionDataInterface: modifyContact
 activate UserInteractionDataInterface
+deactivate ModifyViewController
 deactivate UserInteractionDataInterface
+ModifyViewController-->ContactsbookViewController
 deactivate ContactsbookViewController
 @enduml 

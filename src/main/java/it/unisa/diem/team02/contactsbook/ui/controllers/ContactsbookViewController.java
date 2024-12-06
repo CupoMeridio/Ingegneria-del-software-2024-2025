@@ -174,7 +174,7 @@ public class ContactsbookViewController implements Initializable {
               newStage.show();
               
               Contact selectedContact = tblvRubrica.getSelectionModel().getSelectedItem();
-//              modifyC.setObservableList(contacts);
+              modifyC.setObservableList(contacts);
               modifyC.setContact(selectedContact);
     }
     
