@@ -188,8 +188,7 @@ public class ModifyViewController implements Initializable {
         
         
     }
-    //Vittorio: Qualcosa qui non funziona. Devo capire bene come funziona
-    
+
     /**
      * @lang it
      * Implementa l'azione associcata al tasto modify: viene creato un nuovo contatto con le informazioni

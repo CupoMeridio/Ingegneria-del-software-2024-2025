@@ -335,6 +335,17 @@ public class LoginViewController implements Initializable {
         
     }
     
+    /**
+     * @lang it
+     * Permette il solo accesso locale alle operazioni sulla rubrica. Non viene 
+     * effettuato la connessione con il database.
+     * 
+     * @param ActionEvent event
+     * 
+     * @lang en
+     * Allows only local access to contacts book operations. The connection to the database is not established.
+     */
+    
     @FXML
     private void actionLoginLocal(ActionEvent event){
         try{ 

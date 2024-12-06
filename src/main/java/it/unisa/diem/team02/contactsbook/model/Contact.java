@@ -5,8 +5,14 @@
 package it.unisa.diem.team02.contactsbook.model;
 
 /**
- *
- * @author cupom
+ * @lang it
+ * Classe che estende la classe astratta {@code Person}. Definisce degli ulteriori attributi e metodi
+ * per effettuare specifiche operazioni sugli oggetti {@code Contact}.
+ * 
+ * @lang en
+ * Class that extends the abstract class {@code Person}. It defines additional attributes and methods
+ * to perform specific operations on {@code Contact} objects.
+ * 
  */
 public class Contact extends Person{
     private String[] number;
@@ -20,6 +26,13 @@ public class Contact extends Person{
         this.tag= new Tag[3];
     }
     
+   /*
+   * @lang it
+   * 
+   * 
+   * 
+   *
+   */  
     public String getNumber(){
         if(number[1]==null) return number[0];
         if (number[2]==null) return number[0]+"\n"+number[1];
@@ -76,6 +89,7 @@ public class Contact extends Person{
                 if (this.email[2]==null) this.email[2]=email;
     }
     
+    
     public void setNumber(String[] number){
         this.number=number;
     }
@@ -83,12 +97,35 @@ public class Contact extends Person{
     public void setEmail(String[] email){
         this.email=email;
     }
-            
+    
+   
     @Override
     public String getRole() {
-        return ""+this.getClass();
+        return this.getClass().toString();
     }
     
+    
+    /**
+    * @lang it
+    * Restituisce una rappresentazione dell'oggetto corrente sotto forma di stringa, 
+    * includendo il ruolo, le informazioni della classe padre e i numeri di telefono ed email associati.
+    * Utilizza un {@code StringBuffer} per concatenare le informazioni:
+    * - Il ruolo dell'oggetto (ottenuto tramite {@code getRole()}).
+    * - Le informazioni dell'oggetto della classe padre (ottenute tramite {@code super.toString()}).
+    * - I numeri di telefono associati all'oggetto, se presenti.
+    * - Gli indirizzi email associati all'oggetto, se presenti.
+    * 
+    * @lang en
+    * Returns a string representation of the current object, including the role, 
+    * parent class information, and associated phone numbers and emails.
+    * It uses a {@code StringBuffer} to concatenate the information:
+    * - The object's role (obtained through {@code getRole()}).
+    * - The information from the parent class (obtained through {@code super.toString()}).
+    * - The phone numbers associated with the object, if any.
+    * - The email addresses associated with the object, if any.
+    * 
+    */
+
     @Override
     public String toString(){
         StringBuffer sb=new StringBuffer(this.getRole()+" "+super.toString());
