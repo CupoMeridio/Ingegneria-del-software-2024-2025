@@ -7,6 +7,7 @@
  */
 package it.unisa.diem.team02.contactsbook.database;
 import it.unisa.diem.team02.contactsbook.model.Contact;
+import it.unisa.diem.team02.contactsbook.model.Tag;
 import it.unisa.diem.team02.contactsbook.model.UserInteractionDataInterface;
 
 import java.sql.DriverManager;
@@ -194,7 +195,7 @@ public class Database  {
     * @return HashMap contenente i contatti dell'utente.
     */
     
-    public HashMap<String, Contact> getContact(Connection conn, String tableName,String email){
+   public HashMap<String, Contact> getContact(Connection conn, String tableName,String email){
         
         Statement statement;
         ResultSet rs= null;
@@ -205,13 +206,14 @@ public class Database  {
             statement= conn.createStatement();
             rs= statement.executeQuery(query);
             while(rs.next()){
+            //  String em = rs.getString("email");
                 String name = rs.getString("name");
                 String surname= rs.getString("surname");
-                String em = rs.getString("email");
                 String numeri = rs.getString("number");
                 String tag = rs.getString("tag");
                 String em_cont = rs.getString("email_contact");
-                table.put(em, createContact(name,surname,numeri,tag,em_cont));
+                String ID = rs.getString("id");
+                table.put(ID, createContact(name,surname,numeri,tag,em_cont,ID));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
@@ -232,21 +234,82 @@ public class Database  {
     * @return Contact contenente con tutti i parametri passati.
     */
 
-    private Contact createContact(String name, String surname, String numeri, String tag, String em_cont) {
-        Contact c = null;
+   private Contact createContact(String name, String surname, String numeri, String tag, String em_cont,String ID) {
+        Contact c= new Contact(name,surname, Integer.valueOf(ID));
+        ArrayList<String> n = new ArrayList<>();
+        ArrayList<String> e = new ArrayList<>();
+        ArrayList<Tag> t = new ArrayList<>();
+        
+        
+            Scanner i = new Scanner(tag);
+            i.useDelimiter(";");
+             while(i.hasNext()){
+                 t.add( Tag.valueOf(i.next()));
+            }
+             System.out.print(t+" \n");
+             c.setTag(t);
+             
+            i = new Scanner(numeri);
+            i.useDelimiter(";");
+            while(i.hasNext()){
+                 n.add( i.next());
+            }
+             System.out.print(n+" \n");
+             c.setNumber(n);
+            
+            i = new Scanner(em_cont);
+            i.useDelimiter(";");
+            while(i.hasNext()){
+                 e.add( i.next());
+            }
+            System.out.print(e+" \n");
+             c.setEmail(e);
+        
         return c;
     }
     
     /**
-    * @brief Inserisce i contatti associati a un utente specifico.
+     * 
+    * @brief Inserisce il contatto associato ad un utente specifico.
     * 
+    * @param cont contatto da aggiungere
     * @param conn Oggetto Connection per interagire con il database.
     * @param tableName Nome della tabella contenente i contatti.
     * @param email_Utente Email dell'utente che ha fatto il login.
     *  @throws SQLException Se si verifica un errore durante l'interrogazione.
     */
     
-    public void insertContact(Connection conn, String tableName, Contact cont, String email_Utente) throws SQLException{
+     public void insertContact(Connection conn, String tableName, Contact cont, String email_Utente) throws SQLException{
+    
+           Statement statment;
+           String nm=cont.getName();
+           String srn=cont.getSurname();
+           String ID= String.valueOf(cont.getID());
+           
+           ArrayList<String> e = cont.getEmailList();
+           ArrayList<String> n = cont.getNumberList();
+           ArrayList<Tag> t =cont.getTagList();
+           
+            /*formatto le email*/
+           String email= formattaOut(e);
+           
+            /*formatto i numeri*/
+           String number= formattaOut(n);
+           
+           /*formatto i tag*/
+           ArrayList<String> St= new ArrayList<>();
+           for (Tag i : t) { 
+               St.add(i.name());
+           }
+           String tag= formattaOut(St);
+           
+           
+           String query;
+        query = String.format("insert into %s(email,name,surname,number,tag,email_contact,id) values('%s','%s','%s','%s','%s','%s','%s');",tableName,  email_Utente,nm,srn,number,tag,email,ID);
+           statment= conn.createStatement();
+           statment.executeUpdate(query);
+           System.out.println("Contatto inserito");
+        
     }
     
     /**
@@ -275,6 +338,34 @@ public class Database  {
     */
     public void modifyContact(Connection conn, String tableName, Contact cont, String email_Utente) throws SQLException{
         
+         Statement statment;
+           String nm=cont.getName();
+           String srn=cont.getSurname();
+           String ID= String.valueOf(cont.getID());
+           
+           ArrayList<String> e = cont.getEmailList();
+           ArrayList<String> n = cont.getNumberList();
+           ArrayList<Tag> t =cont.getTagList();
+        
+             /*formatto le email*/
+           String email= formattaOut(e);
+           
+            /*formatto i numeri*/
+           String number= formattaOut(n);
+           
+           /*formatto i tag*/
+           ArrayList<String> St= new ArrayList<>();
+           for (Tag i : t) { 
+               St.add(i.name());
+           }
+           String tag= formattaOut(St);
+           
+           
+      String query = String.format("UPDATE into %s(email,name,surname,number,tag,email_contact,id) values('%s','%s','%s','%s','%s','%s','%s'); WHERE email='%s'",tableName,  email_Utente,nm,srn,number,tag,email,ID);
+      
+      statment= conn.createStatement();
+      statment.executeUpdate(query);
+      System.out.println("Contatto modificato");
     }
     public void CloseConnection(Connection conn){
     
