@@ -8,7 +8,6 @@
 package it.unisa.diem.team02.contactsbook.database;
 import it.unisa.diem.team02.contactsbook.model.Contact;
 import it.unisa.diem.team02.contactsbook.model.Tag;
-import it.unisa.diem.team02.contactsbook.model.UserInteractionDataInterface;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;

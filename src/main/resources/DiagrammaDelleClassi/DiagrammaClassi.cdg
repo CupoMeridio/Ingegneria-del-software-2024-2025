@@ -148,7 +148,7 @@
         <Method name="toString" returnType="String" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="AddViewController" package="it.unisa.diem.team02.contactsbook.ui.controllers" visibility="public" xPosition="1630.0" yPosition="22.0">
+    <Class name="AddViewController" package="it.unisa.diem.team02.contactsbook.ui.controllers" visibility="public" xPosition="1600.0" yPosition="25.0">
       <Fields>
         <Field name="add" type="AnchorPane" visibility="private"/>
         <Field name="hboxInsertInfo" type="HBox" visibility="private"/>
@@ -194,7 +194,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="ContactsbookViewController" package="it.unisa.diem.team02.contactsbook.ui.controllers" visibility="public" xPosition="1532.0" yPosition="760.0">
+    <Class name="ContactsbookViewController" package="it.unisa.diem.team02.contactsbook.ui.controllers" visibility="public" xPosition="1463.0" yPosition="738.0">
       <Fields>
         <Field name="anchorUp" type="AnchorPane" visibility="private"/>
         <Field name="hboxButton" type="HBox" visibility="private"/>
