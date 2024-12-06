@@ -141,6 +141,8 @@ public class AddViewController implements Initializable {
      * the same first name and last name already exists.
      * 
      * @param ActionEvent event
+     * 
+     * @throws IOException
      */
     public void actionAdd(ActionEvent event) throws IOException{
         Contact c=new Contact(txtName.getText(), txtSur.getText());

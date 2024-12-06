@@ -202,6 +202,7 @@ public class ModifyViewController implements Initializable {
      * informations in the text fields and added to the list. The previous contact is removed.
      * 
      * @param ActionEvent event
+     * @throws IOExcpetion
      */
     @FXML
     private void actionModify(ActionEvent event) throws IOException {

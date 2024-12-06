@@ -166,6 +166,7 @@ public class ContactsbookViewController implements Initializable {
      * observable list is passed to the controller.
      * 
      * @param ActionEvent event
+     * @throws IOException
      */
     @FXML
     public void actionAdd(ActionEvent event) throws IOException{
@@ -206,6 +207,7 @@ public class ContactsbookViewController implements Initializable {
      * contact, and the observable list is passed to the controller.
      * 
      * @param ActionEvent event
+     * @throws IOException
      */
     @FXML
     public void actionModify(ActionEvent event) throws IOException{
