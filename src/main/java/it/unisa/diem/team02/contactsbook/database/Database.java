@@ -8,7 +8,6 @@
 package it.unisa.diem.team02.contactsbook.database;
 import it.unisa.diem.team02.contactsbook.model.Contact;
 import it.unisa.diem.team02.contactsbook.model.Tag;
-import it.unisa.diem.team02.contactsbook.model.UserInteractionDataInterface;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -500,7 +499,7 @@ public class Database  {
        statment.execute(query);
        System.out.print("\n Dato eliminato per ID");
     }
-        /**
+    /**
     * @lang it
     * @brief Chiude la connessione col database
     * @param conn Oggetto Connection per interagire con il database.

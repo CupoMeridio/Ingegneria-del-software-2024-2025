@@ -21,7 +21,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import it.unisa.diem.team02.contactsbook.model.UserInteractionDataInterface;
 
 /**
  * @lang it
@@ -85,7 +84,7 @@ public class AddViewController implements Initializable {
     @FXML
     private Button btnAdd;
     
-    private ObservableList contacts;
+    private ObservableList<Contact> contacts;
 
     /**
      * @lang it
