@@ -98,21 +98,8 @@ public class Contact extends Person{
             sb=sb.append(" Email: ").append(email[i]);
         return sb.toString();
     }
-    
-    
-    
-    //Vittorio: ho aggiunto il metodo equals per la classe contact dato che il metodo contains di observableArrayList lo utilizza.
-    //Senza questo non è possibile torvare un contatto duplicato nell'observableArrayList
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true; // Se sono lo stesso oggetto
-        if (o == null || getClass() != o.getClass()) return false; // Se o è null o le classi sono diverse
-
-        // Confronto tra Person (classe padre) e Contact
-        Contact contact = (Contact) o;
-    
-        // Confronto solo del nome e cognome
-        return this.getName().equals(contact.getName()) && this.getSurname().equals(contact.getSurname());
 }
     
-}
+    
+    
+  
