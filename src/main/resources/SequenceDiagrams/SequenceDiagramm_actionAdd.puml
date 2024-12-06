@@ -4,7 +4,7 @@ participant ContactsbookViewController
 participant AddViewController
 participant "Contatto" as Contact
 participant DuplicateContactViewController
-
+participant UserInteractionDataInterface
 
 Utente -> ContactsbookViewController: actionAdd
 activate ContactsbookViewController
@@ -28,9 +28,18 @@ ContactsbookViewController-->AddViewController
 alt Contatto duplicato
     AddViewController -> DuplicateContactViewController: gestisciContattoDuplicato
     activate DuplicateContactViewController
+    alt Add contact
+        DuplicateContactViewController->AddViewController: actionAdd
+    activate AddViewController
+    else Modify
+        DuplicateContactViewController-->AddViewController
+    end
     deactivate DuplicateContactViewController 
 else Contatto non duplicato
-    AddViewController -> ContactsbookViewController: addContact
+    AddViewController -> AddViewController: addContact
+    AddViewController->UserInteractionDataInterface: insertContact
+    activate UserInteractionDataInterface
+    deactivate UserInteractionDataInterface
 end
 deactivate Contact
 AddViewController-->ContactsbookViewController
