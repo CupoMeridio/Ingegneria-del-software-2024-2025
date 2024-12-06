@@ -11,7 +11,6 @@ Utente -> ContactsbookViewController: actionModify
 activate ContactsbookViewController
 ContactsbookViewController->ModifyViewController: setContact
 activate ModifyViewController
-ContactsbookViewController->ModifyViewController: setObservableList
 ModifyViewController -> ModifyViewController: actionModify
 ModifyViewController->Contact: new
 activate Contact
@@ -20,20 +19,22 @@ deactivate Contact
 ModifyViewController->ContactsbookViewController: contains
 ContactsbookViewController-->ModifyViewController
 alt Contatto duplicato
-    ModifyViewController -> DuplicateContactViewController: gestisciContattoDuplicato
+    ModifyViewController -> DuplicateContactViewController: set
     activate DuplicateContactViewController
-    alt Add contact
-        DuplicateContactViewController->ModifyViewController
-    activate ModifyViewController
-    else Modify
-        DuplicateContactViewController-->ModifyViewController
-        ModifyViewController->ModifyViewController:actionModify
-    end
+    DuplicateContactViewController-->ModifyViewController
     deactivate DuplicateContactViewController 
+        alt Aggiungi
+            ModifyViewController->ModifyViewController:remove
+            ModifyViewController->ModifyViewController:add
+            ModifyViewController-->UserInteractionDataInterface: modifyContact
+        else Modifica
+            ModifyViewController->ModifyViewController:show
+        end
 else Contatto non duplicato
 ModifyViewController->ModifyViewController: remove
 ModifyViewController->ModifyViewController: add
 ModifyViewController-->UserInteractionDataInterface: modifyContact
+end
 activate UserInteractionDataInterface
 deactivate ModifyViewController
 deactivate UserInteractionDataInterface
