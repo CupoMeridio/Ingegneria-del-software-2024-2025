@@ -155,13 +155,13 @@ public class ContactsbookViewController implements Initializable {
      * Implementa l'azione associcata al tasto add: si apre una schermata per aggiungere un contatto e la 
      * lista osservabile viene passata al controller.
      * 
-     * @param ActionEvent event
+     * @param {@code ActionEvent} event
      * 
      * @lang en
      * Implements the action associated with the add button: a screen opens to add a contact, and the 
      * observable list is passed to the controller.
      * 
-     * @param ActionEvent event
+     * @param [@code ActionEvent} event
      * @throws IOException
      */
     @FXML
@@ -189,13 +189,13 @@ public class ContactsbookViewController implements Initializable {
      * Implementa l'azione associcata al tasto modify: si apre una schermata per modificare il contatto 
      * selezionato e la lista osservabile viene passata al controller.
      * 
-     * @param ActionEvent event
+     * @param {@code ActionEvent} event
      * 
      * @lang en
      * Implements the action associated with the modify button: a screen opens to modify the selected 
      * contact, and the observable list is passed to the controller.
      * 
-     * @param ActionEvent event
+     * @param {@code ActionEvent} event
      * @throws IOException
      */
     @FXML
@@ -224,12 +224,12 @@ public class ContactsbookViewController implements Initializable {
      * @lang it
      * Il bottone Modify non può essere premuto se non è stato selezionato alcun contatto. Per
      * 
-     * @param ActionEvent event
+     * @param [@code ActionEvent} event
      * 
      * @lang en
      * The Modify button cannot be pressed if no contact has been selected.
      * 
-     * @param ActionEvent event
+     * @param [@code ActionEvent} event
      */
     public void btnMofidyInitialize(){
         btnModify.setDisable(true);
@@ -247,12 +247,12 @@ public class ContactsbookViewController implements Initializable {
      * Il bottone Delete non può essere premuto se non è stato selezionato alcun contatto. 
      * 
      * 
-     * @param ActionEvent event
+     * @param {@code ActionEvent} event
      * 
      * @lang en
      * The Delete button cannot be pressed if no contact has been selected.
      * 
-     * @param ActionEvent event
+     * @param {@code ActionEvent} event
      */
     public void btnDeleteInitialize(){
         btnDelete.setDisable(true);
@@ -269,13 +269,13 @@ public class ContactsbookViewController implements Initializable {
      * @lang it
      * Implementa l'azione associcata al tasto delete: il contatto selezionato viene eliminato dalla rubrica.
      * 
-     * @param ActionEvent event
+     * @param {@code ActionEvent} event
      * 
      * @lang en
      * Implements the action associated with the delete button: the selected contact is deleted from the 
      * contactbook.
      * 
-     * @param ActionEvent event
+     * @param {@code ActionEvent} event
      */
     @FXML
     private void actionDelete(ActionEvent event) {
@@ -288,13 +288,13 @@ public class ContactsbookViewController implements Initializable {
      * Implementa l'azione associcata al menu button Filter: vengono visualizzati solo i contatti associati
      * al tag selezionato.
      * 
-     * @param ActionEvent event
+     * @param {@code ActionEvent} event
      * 
      * @lang en
      * Implements the action associated with the Filter menu button: only the contacts associated with 
      * the selected tag are displayed.
      * 
-     * @param ActionEvent event
+     * @param {@code ActionEvent} event
      */
     @FXML
     private void actionFilter(ActionEvent event) {
@@ -305,13 +305,13 @@ public class ContactsbookViewController implements Initializable {
      * Implementa l'azione associcata al tasto Import: tutti i contatti di un file indicato sono aggiunti
      * nella rubrica.
      * 
-     * @param ActionEvent event
+     * @param {@code ActionEvent} event
      * 
      * @lang en
      * Implements the action associated with the Import button: all contacts from a specified file are 
      * added to the contactbook. 
      * 
-     * @param ActionEvent event
+     * @param {@code ActionEvent} event
      */
     @FXML
     private void actionImport(ActionEvent event) {
@@ -322,13 +322,13 @@ public class ContactsbookViewController implements Initializable {
      * Implementa l'azione associcata al tasto Export: tutti i contatti della rubrica sono esportati in 
      * un file specificato.
      * 
-     * @param ActionEvent event
+     * @param {@code ActionEvent} event
      * 
      * @lang en
      * Implements the action associated with the Export button: all contacts in the contactbook are 
      * exported in a specified file.
      * 
-     * @param ActionEvent event
+     * @param {@code ActionEvent} event
      */
     @FXML
     private void actionExport(ActionEvent event) {
@@ -339,13 +339,13 @@ public class ContactsbookViewController implements Initializable {
      * Vengono visualizzati solo i contatti della rubrica contenenti la sottostringa inserita nella barra
      * di ricarca
      * 
-     * @param ActionEvent event
+     * @param {@code ActionEvent} event
      * 
      * @lang en
      * Only the contacts in the contactbook containing the substring entered in the search bar are 
      * displayed.
      * 
-     * @param ActionEvent event
+     * @param {@code ActionEvent} event
      */
     @FXML
     private void actionSearch(ActionEvent event) {
@@ -356,13 +356,13 @@ public class ContactsbookViewController implements Initializable {
      * Implementa l'azione associcata al tasto Logout: l'account viene disconnesso e si torna alla schermata
      * di login/sign in.
      * 
-     * @param ActionEvent event
+     * @param {@code ActionEvent} event
      * 
      * @lang en
      * Implements the action associated with the Logout button: The account is logged out, and the system
      * returns to the login/sign-in screen.
      * 
-     * @param ActionEvent event
+     * @param {@code ActionEvent} event
      */
     @FXML
     private void actionLogout(ActionEvent event) {

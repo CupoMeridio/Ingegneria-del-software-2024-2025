@@ -7,6 +7,8 @@ package it.unisa.diem.team02.contactsbook.model;
 *
 * @param en
 * Tags to associate with contacts, which are: {Home, University, Job}.
+*
+* @author team02
 */
 public enum Tag {
     Home,

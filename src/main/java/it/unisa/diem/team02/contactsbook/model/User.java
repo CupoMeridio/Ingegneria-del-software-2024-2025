@@ -31,6 +31,8 @@ public class User extends Person{
     * Sets the password of the current object.
     *
     * @param {@code String} password.
+    *
+    * @author team02
     */
     public void setPassword(String password) {
         this.password = password;

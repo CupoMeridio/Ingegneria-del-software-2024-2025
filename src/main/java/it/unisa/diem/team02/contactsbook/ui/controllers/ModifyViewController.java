@@ -97,15 +97,15 @@ public class ModifyViewController implements Initializable {
      * Metodo di inizializzazione del controller.
      * Gestisce la disattivazione dei vari bottoni.
      * 
-     * @param url URL utilizzato per risolvere il percorso del file FXML.
-     * @param rb Risorsa contenente dati di localizzazione.
+     * @param {@code URL} url utilizzato per risolvere il percorso del file FXML.
+     * @param {@code ResourceBundle} rb contenente dati di localizzazione.
      * 
      * @lang en
      * Initializes the controller.
      * Handles the deactivation of various buttons.
      * 
-     * @param url URL used to resolve the FXML file path.
-     * @param rb Resource containing localization data.
+     * @param {@code URL} url used to resolve the FXML file path.
+     * @param  {@code ResourceBundle} rb containing localization data.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -121,13 +121,13 @@ public class ModifyViewController implements Initializable {
      * Implementa l'azione associcata al tasto cancel: si torna alla visualizzazione della rubrica e
      * non viene effettuata alcuna modifica
      * 
-     * @param ActionEvent event
+     * @param {@code ActionEvent} event
      * 
      * @lang en
      * Implements the action associated with the cancel button: returns to the Contactbook view, and 
      * no changes are made.
      * 
-     * @param ActionEvent event
+     * @param {@code ActionEvent} event
      */
     @FXML
     private void actionCancel(ActionEvent event) {
@@ -139,13 +139,13 @@ public class ModifyViewController implements Initializable {
      * @lang it
      * Setta il campo contacts con la lista passata come parametro.
      * 
-     * @param ObservableList<Contact> contacts è la lista osservabile che rappresenta la rubrica.
+     * @param {@code ObservableList<Contact>} contacts è la lista osservabile che rappresenta la rubrica.
      * 
      * @lang en
      *
      * Sets the contacts field with the list passed as a parameter.
      * 
-     * @param ObservableList<Contact> contacts is the observable list representing the contactbook.
+     * @param {@code ObservableList<Contact>} contacts is the observable list representing the contactbook.
      */
     public void setObservableList(ObservableList<Contact> contacts){
         this.contacts=contacts;
@@ -155,13 +155,13 @@ public class ModifyViewController implements Initializable {
      * @lang it
      * Setta il campo c con il contatto passato come parametro.
      * 
-     * @param Contact contact è il contatto da modificare.
+     * @param {@code Contact} contact è il contatto da modificare.
      * 
      * @lang en
      *
      * Sets the c field with the contact passed as a parameter.
      * 
-     * @param Contact contact is the contact to be edited. 
+     * @param {@code Contact} contact is the contact to be edited. 
      */
     public void setContact(Contact contact){
         oldContact=contact;
@@ -199,13 +199,13 @@ public class ModifyViewController implements Initializable {
      * Implementa l'azione associcata al tasto modify: viene creato un nuovo contatto con le informazioni
      * presenti nei campi di testo e aggiunto alla lista. Il contatto precedente viene rimosso. 
      * 
-     * @param ActionEvent event
+     * @param {@code ActionEvent} event
      * 
      * @lang en
      * Implements the action associated with the add button: a new contact is created with the 
      * informations in the text fields and added to the list. The previous contact is removed.
      * 
-     * @param ActionEvent event
+     * @param {@code ActionEvent} event
      * @throws IOExcpetion
      */
     @FXML

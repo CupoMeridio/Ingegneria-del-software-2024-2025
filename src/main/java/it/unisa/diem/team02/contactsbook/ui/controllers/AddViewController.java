@@ -92,15 +92,15 @@ public class AddViewController implements Initializable {
      * Metodo di inizializzazione del controller.
      * Gestisce la disattivazione dei vari bottoni.
      * 
-     * @param url URL utilizzato per risolvere il percorso del file FXML.
-     * @param rb Risorsa contenente dati di localizzazione.
+     * @param {@code URL} url utilizzato per risolvere il percorso del file FXML.
+     * @param {@code ResourceBundle} rb contenente dati di localizzazione.
      * 
      * @lang en
      * Initializes the controller.
      * Calls the methods that initialize the various components.
      * 
-     * @param url URL used to resolve the FXML file path.
-     * @param rb Resource containing localization data.
+     * @param {@code URL} url used to resolve the FXML file path.
+     * @param {@code ResourceBundle} rb containing localization data.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -115,13 +115,13 @@ public class AddViewController implements Initializable {
      * @lang it
      * Setta il campo contacts con la lista passata come parametro.
      * 
-     * @param ObservableList<Contact> contacts è la lista osservabile che rappresenta la rubrica.
+     * @param {@code ObservableList<Contact>} contacts è la lista osservabile che rappresenta la rubrica.
      * 
      * @lang en
      *
      * Sets the contacts field with the list passed as a parameter.
      * 
-     * @param ObservableList<Contact> contacts is the observable list representing the contactbook.
+     * @param {@code ObservableList<Contact>} contacts is the observable list representing the contactbook.
      */
     public void setObservableList(ObservableList<Contact> contacts){
         this.contacts=contacts;
@@ -133,14 +133,14 @@ public class AddViewController implements Initializable {
      * presenti nei campi di testo e aggiunto alla lista. Gestisce il caso in cui sia già presente 
      * un contatto con lo stesso nome e lo stesso cognome.
      * 
-     * @param ActionEvent event
+     * @param {@code ActionEvent} event
      * 
      * @lang en
      * Implements the action associated with the add button: a new contact is created with the 
      * informations in the text fields and added to the list. Handles the case where a contact with 
      * the same first name and last name already exists.
      * 
-     * @param ActionEvent event
+     * @param {@code ActionEvent} event
      * 
      * @throws IOException
      */
@@ -189,13 +189,13 @@ public class AddViewController implements Initializable {
      * Implementa l'azione associcata al tasto cancel: si torna alla visualizzazione della rubrica e
      * non viene effettuata alcuna modifica
      * 
-     * @param ActionEvent event
+     * @param {@code ActionEvent} event
      * 
      * @lang en
      * Implements the action associated with the cancel button: returns to the Contactbook view, and 
      * no changes are made.
      * 
-     * @param ActionEvent event
+     * @param {@code ActionEvent} event
      */
     public void actionCancel(ActionEvent event){
         Stage stage=(Stage) btnCanc.getScene().getWindow();

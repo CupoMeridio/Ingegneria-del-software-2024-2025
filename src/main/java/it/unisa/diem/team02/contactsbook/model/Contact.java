@@ -24,10 +24,12 @@ public class Contact extends Person{
     private ArrayList<String> number;
     private ArrayList<String> email;
     private ArrayList<Tag> tag;
-    private static int contatore; // bisogna Salvare il numero di contatti da rivedere 
+    private static int contatore; // bisogna Salvare il numero di contatti, da rivedere 
     private final int ID;
     
-   public Contact(String name, String surname) {
+    
+    
+    public Contact(String name, String surname) {
         super(name, surname);
         number = new ArrayList<String>(3);
         email = new ArrayList<String>(3);
@@ -36,7 +38,7 @@ public class Contact extends Person{
          contatore++;
         
     }
-   public Contact(String name, String surname, int ID) {
+    public Contact(String name, String surname, int ID) {
         super(name, surname);
         number = new ArrayList<String>();
         email = new ArrayList<String>();
