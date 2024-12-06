@@ -40,29 +40,18 @@ public abstract class Person {
         if(o==this) return true;
         if (!(o instanceof Person)) return false;
         
-        Person p = (Person) o;
+       // Confronto tra Person (classe padre) e Contact
+        Contact c = (Contact) o;
         
-        /*
-        if(p.name==null && this.name==null){
-            if(this.surname==null || p.surname==null)
-                return false;
-            return this.surname.equals(p.surname);
-        }
-        else if(p.surname==null && this.surname==null) {
-            if(this.name==null || p.name==null)
-                return false;
-            return p.name.equals(this.name);
-        }
-
-        return p.name.equals(this.name) && p.surname.equals(this.surname);
-       
-        Vittorio: non capisco la logica
+        if(c.getName()==null && this.getName()==null)
+            return c.getSurname().equals(this.getSurname());
+        else if(c.getSurname()==null && this.getSurname()==null)
+            return c.getName().equals(this.getName());
+        else if((c.getSurname()==null && this.getName()==null) || (c.getName()==null && this.getSurname()==null))
+            return false;
         
-        */
+        return c.getName().equals(this.getName()) && c.getSurname().equals(this.getSurname());
         
-        // Vittorio: Confronta i campi name e surname usando Objects.equals() che gestisce null
-        return Objects.equals(this.name, p.name) && Objects.equals(this.surname, p.surname);
-    
     }
     
     public abstract String getRole();
