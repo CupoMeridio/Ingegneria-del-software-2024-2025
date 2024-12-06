@@ -155,7 +155,7 @@ public class ModifyViewController implements Initializable {
      * @lang it
      * Setta il campo c con il contatto passato come parametro.
      * 
-     * @param Conatct contact è il contatto da modificare.
+     * @param Contact contact è il contatto da modificare.
      * 
      * @lang en
      *
@@ -191,8 +191,7 @@ public class ModifyViewController implements Initializable {
             }
         }
     }
-    //Vittorio: Qualcosa qui non funziona. Devo capire bene come funziona
-    
+
     /**
      * @lang it
      * Implementa l'azione associcata al tasto modify: viene creato un nuovo contatto con le informazioni

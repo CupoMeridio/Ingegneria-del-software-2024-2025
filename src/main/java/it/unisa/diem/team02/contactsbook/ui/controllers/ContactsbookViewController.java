@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package it.unisa.diem.team02.contactsbook.ui.controllers;
 
 import it.unisa.diem.team02.App;
@@ -170,14 +166,7 @@ public class ContactsbookViewController implements Initializable {
      */
     @FXML
     public void actionAdd(ActionEvent event) throws IOException{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AddView.fxml"));
-              /*  Vittorio: loader non è mai null. Se qualcosa non funziona l'FXMLLoader lancia direttamente delle eccezioni  
-                if(loader == null) {
-                System.out.println("File FXML non trovato");
-                return;
-              }
-              */
-              
+              FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AddView.fxml"));
               Parent root = loader.load();
               Scene scene=new Scene(root);
               
@@ -211,15 +200,8 @@ public class ContactsbookViewController implements Initializable {
      */
     @FXML
     public void actionModify(ActionEvent event) throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ModifyView.fxml"));
+              FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ModifyView.fxml"));
             
-        /*  Vittorio: loader non è mai null. Se qualcosa non funziona l'FXMLLoader lancia direttamente delle eccezioni  
-            if(loader == null) {
-                System.out.println("File FXML non trovato");
-                return;
-              }
-              */
-              
               Parent root = loader.load();
               Scene scene=new Scene(root);
               
@@ -240,7 +222,7 @@ public class ContactsbookViewController implements Initializable {
     
     /**
      * @lang it
-     * Il bottone Modify non può essere premuto se non è stato selezionato alcun contatto.
+     * Il bottone Modify non può essere premuto se non è stato selezionato alcun contatto. Per
      * 
      * @param ActionEvent event
      * 
@@ -262,7 +244,8 @@ public class ContactsbookViewController implements Initializable {
     
     /**
      * @lang it
-     * Il bottone Delete non può essere premuto se non è stato selezionato alcun contatto.
+     * Il bottone Delete non può essere premuto se non è stato selezionato alcun contatto. 
+     * 
      * 
      * @param ActionEvent event
      * 

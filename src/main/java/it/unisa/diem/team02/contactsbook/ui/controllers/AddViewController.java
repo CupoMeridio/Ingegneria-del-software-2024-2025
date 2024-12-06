@@ -130,7 +130,7 @@ public class AddViewController implements Initializable {
     /**
      * @lang it
      * Implementa l'azione associcata al tasto add: viene creato un nuovo contatto con le informazioni
-     * presenti nei campi di testo e aggiungto alla lista. Gestisce il caso in cui sia già presente 
+     * presenti nei campi di testo e aggiunto alla lista. Gestisce il caso in cui sia già presente 
      * un contatto con lo stesso nome e lo stesso cognome.
      * 
      * @param ActionEvent event
