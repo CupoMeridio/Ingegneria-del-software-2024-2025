@@ -297,10 +297,6 @@ public class ContactsbookViewController implements Initializable {
         Contact selectedContact = tblvRubrica.getSelectionModel().getSelectedItem();
         contacts.remove(selectedContact); 
     }
-
-    @FXML
-    private void actionSort(ActionEvent event) {
-    }
     
     /**
      * @lang it
