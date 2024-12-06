@@ -129,14 +129,14 @@ public class AddViewController implements Initializable {
     
     /**
      * @lang it
-     * Specifica l'azione associcata al tasto add: viene creato un nuovo contatto con le informazioni
+     * Implementa l'azione associcata al tasto add: viene creato un nuovo contatto con le informazioni
      * presenti nei campi di testo e aggiungto alla lista. Gestisce il caso in cui sia già presente 
      * un contatto con lo stesso nome e lo stesso cognome.
      * 
      * @param ActionEvent event
      * 
      * @lang en
-     * Specifies the action associated with the add button: a new contact is created with the 
+     * Implements the action associated with the add button: a new contact is created with the 
      * informations in the text fields and added to the list. Handles the case where a contact with 
      * the same first name and last name already exists.
      * 
@@ -179,13 +179,13 @@ public class AddViewController implements Initializable {
     
     /**
      * @lang it
-     * Specifica l'azione associcata al tasto cancel: si torna alla visualizzazione della rubrica e
+     * Implementa l'azione associcata al tasto cancel: si torna alla visualizzazione della rubrica e
      * non viene effettuata alcuna modifica
      * 
      * @param ActionEvent event
      * 
      * @lang en
-     * Specifies the action associated with the cancel button: returns to the Contactbook view, and 
+     * Implements the action associated with the cancel button: returns to the Contactbook view, and 
      * no changes are made.
      * 
      * @param ActionEvent event

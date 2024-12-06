@@ -4,20 +4,34 @@
  */
 package it.unisa.diem.team02.contactsbook.model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author cupom
  */
 public class Contact extends Person{
-    private String[] number;
-    private String[] email;
-    private Tag[] tag;
+    private ArrayList<String> number;
+    private ArrayList<String> email;
+    private ArrayList<Tag> tag;
+    private static int contatore; // bisogna Salvare il numero di contatti da rivedere 
+    private final int ID;
     
-    public Contact(String name, String surname) {
+   public Contact(String name, String surname) {
         super(name, surname);
-        number = new String[3];
-        email = new String[3];
-        this.tag= new Tag[3];
+        number = new ArrayList<String>();
+        email = new ArrayList<String>();
+        this.tag= new ArrayList<Tag>();
+        this.ID = contatore;
+         contatore++;
+        
+    }
+   public Contact(String name, String surname, int ID) {
+        super(name, surname);
+        number = new ArrayList<String>();
+        email = new ArrayList<String>();
+        this.tag= new ArrayList<Tag>();
+        this.ID = ID;  
     }
     
     public String getNumber(){
@@ -76,12 +90,29 @@ public class Contact extends Person{
                 if (this.email[2]==null) this.email[2]=email;
     }
     
-    public void setNumber(String[] number){
-        this.number=number;
+     public void setNumber(ArrayList<String> number) {
+        this.number = number;
     }
-    
-    public void setEmail(String[] email){
-        this.email=email;
+
+    public void setEmail(ArrayList<String> email) {
+        this.email = email;
+    }
+
+    public void setTag(ArrayList<Tag> tag) {
+        this.tag = tag;
+    }
+     public ArrayList<Tag> getTagList() {
+        return tag;
+    }
+    public ArrayList<String> getNumberList(){
+        return this.number ;
+    }
+
+    public ArrayList<String> getEmailList() {
+        return email;
+    }
+     public int getID() {
+        return ID;
     }
             
     @Override
@@ -92,7 +123,7 @@ public class Contact extends Person{
     @Override
     public String toString(){
         StringBuffer sb=new StringBuffer(this.getRole()+" "+super.toString());
-        for (int i=0; i<this.number.length;i++)
+        for (int i=0; i<this.number.size();i++)
             sb=sb.append(" Phone number: ").append(number[i]);
         for (int i=0; i<this.email.length;i++)
             sb=sb.append(" Email: ").append(email[i]);
