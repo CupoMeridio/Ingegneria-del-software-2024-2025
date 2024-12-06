@@ -95,7 +95,7 @@ public class ModifyViewController implements Initializable {
      * 
      * @lang en
      * Initializes the controller.
-     * Calls the methods that initialize the various components.
+     * Handles the deactivation of various buttons.
      * 
      * @param url URL used to resolve the FXML file path.
      * @param rb Resource containing localization data.
@@ -107,13 +107,13 @@ public class ModifyViewController implements Initializable {
 
     /**
      * @lang it
-     * Specifica l'azione associcata al tasto cancel: si torna alla visualizzazione della rubrica e
+     * Implementa l'azione associcata al tasto cancel: si torna alla visualizzazione della rubrica e
      * non viene effettuata alcuna modifica
      * 
      * @param ActionEvent event
      * 
      * @lang en
-     * Specifies the action associated with the cancel button: returns to the Contactbook view, and 
+     * Implements the action associated with the cancel button: returns to the Contactbook view, and 
      * no changes are made.
      * 
      * @param ActionEvent event
@@ -186,13 +186,13 @@ public class ModifyViewController implements Initializable {
     
     /**
      * @lang it
-     * Specifica l'azione associcata al tasto modify: viene creato un nuovo contatto con le informazioni
+     * Implementa l'azione associcata al tasto modify: viene creato un nuovo contatto con le informazioni
      * presenti nei campi di testo e aggiunto alla lista. Il contatto precedente viene rimosso. 
      * 
      * @param ActionEvent event
      * 
      * @lang en
-     * Specifies the action associated with the add button: a new contact is created with the 
+     * Implements the action associated with the add button: a new contact is created with the 
      * informations in the text fields and added to the list. The previous contact is removed.
      * 
      * @param ActionEvent event
