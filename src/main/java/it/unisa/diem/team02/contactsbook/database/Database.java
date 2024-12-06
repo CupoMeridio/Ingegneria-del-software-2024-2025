@@ -471,7 +471,7 @@ public class Database  {
       statment.executeUpdate(query);
       System.out.println("Contatto modificato");
     }
-    public void RemuveContactByID(Connection conn, String tableName, String ID) throws SQLException{
+    public void removeContactByID(Connection conn, String tableName, String ID) throws SQLException{
     
        Statement statment;
        
