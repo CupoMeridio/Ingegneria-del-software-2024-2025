@@ -130,7 +130,7 @@ public class AddViewController implements Initializable {
     /**
      * @lang it
      * Implementa l'azione associcata al tasto add: viene creato un nuovo contatto con le informazioni
-     * presenti nei campi di testo e aggiungto alla lista. Gestisce il caso in cui sia già presente 
+     * presenti nei campi di testo e aggiunto alla lista. Gestisce il caso in cui sia già presente 
      * un contatto con lo stesso nome e lo stesso cognome.
      * 
      * @param ActionEvent event
@@ -152,7 +152,6 @@ public class AddViewController implements Initializable {
         if(!txtEmail3.getText().isEmpty()) c.addEmail(txtEmail3.getText());
         
         if (contacts.contains(c)){
-            System.out.println("Contatto duplicato");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DuplicateContactViewController.fxml"));
               
               Parent root = loader.load();
@@ -169,8 +168,6 @@ public class AddViewController implements Initializable {
               newStage.show();       
         }
         else{   
-        System.out.println("Contatto inserito");
-        
         contacts.add(c);
         Stage stage=(Stage) btnAdd.getScene().getWindow();
         stage.close();

@@ -144,7 +144,7 @@ public class ModifyViewController implements Initializable {
      * @lang it
      * Setta il campo c con il contatto passato come parametro.
      * 
-     * @param Conatct contact è il contatto da modificare.
+     * @param Contact contact è il contatto da modificare.
      * 
      * @lang en
      *
@@ -222,7 +222,7 @@ public class ModifyViewController implements Initializable {
 
         c.setNumber(numbers);
         c.setEmail(emails);
-
+        
         contacts.add(c);
         
         Stage stage=(Stage) btnModify.getScene().getWindow();

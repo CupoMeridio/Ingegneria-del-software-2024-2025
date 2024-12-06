@@ -228,7 +228,6 @@ public class LoginViewController implements Initializable {
     
     
     
-    
     /**
      * @lang it
      * Valida un indirizzo email.
