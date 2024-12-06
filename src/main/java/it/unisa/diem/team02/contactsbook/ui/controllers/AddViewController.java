@@ -2,7 +2,6 @@
 package it.unisa.diem.team02.contactsbook.ui.controllers;
 
 import it.unisa.diem.team02.contactsbook.model.Contact;
-import it.unisa.diem.team02.contactsbook.model.UserInteracionDataInterface;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,6 +21,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import it.unisa.diem.team02.contactsbook.model.UserInteractionDataInterface;
 
 /**
  * @lang it
