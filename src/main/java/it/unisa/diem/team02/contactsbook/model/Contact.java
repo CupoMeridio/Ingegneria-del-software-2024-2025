@@ -9,11 +9,14 @@ import java.util.ArrayList;
 /**
  * @lang it
  * Classe che estende la classe astratta {@code Person}. Definisce degli ulteriori attributi e metodi
- * per effettuare specifiche operazioni sugli oggetti {@code Contact}.
+ * per effettuare specifiche operazioni sugli oggetti {@code Contact}. Gli attributi
+ * {@code number}, {@code email} e {@code tag} sono implementati tramite un
+ * {@code ArrayList}
  * 
  * @lang en
  * Class that extends the abstract class {@code Person}. It defines additional attributes and methods
- * to perform specific operations on {@code Contact} objects.
+ * to perform specific operations on {@code Contact} objects. The attributes {@code number},
+ * {@code email} e {
  * 
  */
 public class Contact extends Person{
