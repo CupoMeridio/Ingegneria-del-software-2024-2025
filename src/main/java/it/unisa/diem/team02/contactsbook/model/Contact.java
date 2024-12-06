@@ -33,16 +33,28 @@ public class Contact extends Person{
     }
 
     public void addTag(Tag tag) {
+        /* Vittorio: eh? lenght è sempre 3...
         if(this.tag.length<3)
             this.tag[this.tag.length] = tag;
-        //gestire l' elese
+        //gestire l' else
+        */
         
+        //Questa implementazione mancava
+        if (this.tag[0]==null) this.tag[0]=tag;
+        else 
+            if (this.tag[1]==null) this.tag[1]=tag;
+            else 
+                if (this.tag[2]==null) this.tag[2]=tag;
     }
     
     public void addNumber(String number) {
+        /*
+        Vittorio: ma wtf? lenght è sempre 3
         if (this.number.length>=3){
             //gestire
-        }
+       
+        }*/
+        
         if (this.number[0]==null) this.number[0]=number;
         else 
             if (this.number[1]==null) this.number[1]=number;
@@ -51,9 +63,12 @@ public class Contact extends Person{
     }
     
     public void addEmail(String email){
+        /*
+        Vittorio: stesso problema...
         if (this.email.length>=3){
             //gestire
         }
+        */
               if (this.email[0]==null) this.email[0]=email;
         else 
             if (this.email[1]==null) this.email[1]=email;
@@ -75,5 +90,21 @@ public class Contact extends Person{
             sb=sb.append(" Email: ").append(email[i]);
         return sb.toString();
     }
+    
+    
+    
+    //Vittorio: ho aggiunto il metodo equals per la classe contact dato che il metodo contains di observableArrayList lo utilizza.
+    //Senza questo non è possibile torvare un contatto duplicato nell'observableArrayList
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true; // Se sono lo stesso oggetto
+        if (o == null || getClass() != o.getClass()) return false; // Se o è null o le classi sono diverse
+
+        // Confronto tra Person (classe padre) e Contact
+        Contact contact = (Contact) o;
+    
+        // Confronto solo del nome e cognome
+        return this.getName().equals(contact.getName()) && this.getSurname().equals(contact.getSurname());
+}
     
 }

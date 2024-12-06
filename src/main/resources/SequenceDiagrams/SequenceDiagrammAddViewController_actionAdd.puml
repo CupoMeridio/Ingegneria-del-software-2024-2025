@@ -1,0 +1,32 @@
+@startuml
+actor Utente
+participant "Contatto" as Contact
+participant "Contatti List" as contacts
+participant FXMLLoader
+participant "DuplicateContactViewController" as DuplicateContactViewController
+participant Stage
+participant Scene
+
+Utente -> Contact: actionAdd()
+activate Contact
+Contact -> Contact: crea contatto (txtName, txtSur, txtNumber, txtEmail)
+Contact -> contacts: contains(Contact)
+alt Contatto duplicato
+    contacts -> FXMLLoader: load("/fxml/DuplicateContectViewController.fxml")
+    activate FXMLLoader
+    FXMLLoader --> Contact: loader
+    Contact -> FXMLLoader: getController()
+    FXMLLoader --> Contact: controller
+    Contact -> Stage: crea nuova finestra Stage()
+    Stage -> Scene: new Scene(root)
+    Scene --> Stage: scena
+    Stage -> Stage: imposta finestra modale
+    Stage -> Stage: show()
+    deactivate Stage
+    deactivate FXMLLoader
+else Contatto non duplicato
+    Contact -> contacts: aggiungi contatto
+    Contact -> Stage: chiudi finestra principale
+end
+deactivate Contact
+@enduml

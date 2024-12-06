@@ -126,8 +126,10 @@ public class ModifyViewController implements Initializable {
                 }
             }
         }
+        
+        
     }
-    
+    //Vittorio: Qualcosa qui non funziona. Devo capire bene come funziona
     @FXML
     private void actionModify(ActionEvent event) {
         c.setName(txtName.getText());
@@ -135,15 +137,18 @@ public class ModifyViewController implements Initializable {
         String [] numbers=new String[3];
         String [] emails=new String [3];
         if (txtNumber1.getText()!=null) numbers[0]=txtNumber1.getText();
-        if (txtNumber2.getText()!=null) numbers[1]=txtNumber1.getText();
-        if (txtNumber3.getText()!=null) numbers[2]=txtNumber1.getText();
+        if (txtNumber2.getText()!=null) numbers[1]=txtNumber2.getText();
+        if (txtNumber3.getText()!=null) numbers[2]=txtNumber3.getText();
+
         if(txtEmail1.getText()!=null) emails[0]=txtEmail1.getText();
-        if(txtEmail2.getText()!=null) emails[1]=txtEmail1.getText();
-        if(txtEmail3.getText()!=null) emails[2]=txtEmail1.getText();
+        if(txtEmail2.getText()!=null) emails[1]=txtEmail2.getText();
+        if(txtEmail3.getText()!=null) emails[2]=txtEmail3.getText();
 
         
         if (contacts.contains(c))
             ;//contatto duplicato        
+        
+        
         
         Stage stage=(Stage) btnModify.getScene().getWindow();
         stage.close();

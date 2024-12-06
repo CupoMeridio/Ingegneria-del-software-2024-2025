@@ -126,10 +126,12 @@ public class AddViewController implements Initializable {
               newStage.initOwner(btnAdd.getScene().getWindow());
               newStage.show();       
         }
+        else{
         System.out.println("Contatto inserito");
         contacts.add(c);
         Stage stage=(Stage) btnAdd.getScene().getWindow();
         stage.close();
+        }
     }
     
     public void actionCancel(ActionEvent event){

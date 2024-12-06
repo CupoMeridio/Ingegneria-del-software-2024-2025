@@ -4,11 +4,14 @@
  */
 package it.unisa.diem.team02.contactsbook.ui.controllers;
 
+import it.unisa.diem.team02.App;
 import it.unisa.diem.team02.contactsbook.model.Contact;
 import it.unisa.diem.team02.contactsbook.model.Tag;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -122,10 +125,12 @@ public class ContactsbookViewController implements Initializable {
     @FXML
     public void actionAdd(ActionEvent event) throws IOException{
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AddView.fxml"));
-              if(loader == null) {
+              /*  Vittorio: loader non è mai null. Se qualcosa non funziona l'FXMLLoader lancia direttamente delle eccezioni  
+                if(loader == null) {
                 System.out.println("File FXML non trovato");
                 return;
               }
+              */
               
               Parent root = loader.load();
               Scene scene=new Scene(root);
@@ -147,10 +152,13 @@ public class ContactsbookViewController implements Initializable {
     @FXML
     public void actionModify(ActionEvent event) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ModifyView.fxml"));
-              if(loader == null) {
+            
+        /*  Vittorio: loader non è mai null. Se qualcosa non funziona l'FXMLLoader lancia direttamente delle eccezioni  
+            if(loader == null) {
                 System.out.println("File FXML non trovato");
                 return;
               }
+              */
               
               Parent root = loader.load();
               Scene scene=new Scene(root);
@@ -194,6 +202,12 @@ public class ContactsbookViewController implements Initializable {
 
     @FXML
     private void actionDelete(ActionEvent event) {
+        Contact selectedContact = tblvRubrica.getSelectionModel().getSelectedItem();
+        contacts.remove(selectedContact);
+        
+        
+        
+        
     }
 
     @FXML
@@ -215,4 +229,17 @@ public class ContactsbookViewController implements Initializable {
     @FXML
     private void actionSearch(ActionEvent event) {
     }
+    
+    @FXML
+    private void actionLogout(ActionEvent event) {
+        //Se l'accesso è stato effettuato con il database bisogna prima disconnettersi e poi si può tornare alla schermata di login.
+        //Il controllo del tipo di accesso si può realizzare con una variabile statica booleana di LoginViewController.
+        //Se è vera è stato fatto l'acceso con il database, altrimenti no
+        
+        try{
+            App.setRoot("LoginView");} 
+        catch (IOException ex) {
+            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);}
+    }
+    
 }

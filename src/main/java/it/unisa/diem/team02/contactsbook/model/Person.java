@@ -1,5 +1,7 @@
 package it.unisa.diem.team02.contactsbook.model;
 
+import java.util.Objects;
+
 public abstract class Person {
     private String name;
     private String surname;
@@ -36,10 +38,11 @@ public abstract class Person {
     public boolean equals(Object o){
         if(o==null) return false;
         if(o==this) return true;
-        if(!(o.getClass()==Person.class)) return false;
+        if (!(o instanceof Person)) return false;
         
         Person p = (Person) o;
         
+        /*
         if(p.name==null && this.name==null){
             if(this.surname==null || p.surname==null)
                 return false;
@@ -52,8 +55,13 @@ public abstract class Person {
         }
 
         return p.name.equals(this.name) && p.surname.equals(this.surname);
-         
+       
+        Vittorio: non capisco la logica
         
+        */
+        
+        // Vittorio: Confronta i campi name e surname usando Objects.equals() che gestisce null
+        return Objects.equals(this.name, p.name) && Objects.equals(this.surname, p.surname);
     
     }
     

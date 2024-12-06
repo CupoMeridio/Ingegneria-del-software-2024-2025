@@ -1,0 +1,52 @@
+@startuml
+actor Utente
+participant ContactsbookViewController
+participant FXMLLoader
+participant Scene
+participant AddViewController
+participant Stage
+
+Utente -> ContactsbookViewController: actionAdd
+activate ContactsbookViewController
+ContactsbookViewController -> FXMLLoader: new
+activate FXMLLoader
+FXMLLoader-->ContactsbookViewController
+deactivate FXMLLoader
+ContactsbookViewController -> FXMLLoader: load
+activate FXMLLoader
+FXMLLoader-->ContactsbookViewController
+deactivate FXMLLoader
+ContactsbookViewController->Scene: new
+activate Scene
+Scene-->ContactsbookViewController:
+deactivate Scene
+ContactsbookViewController->FXMLLoader: getController
+activate FXMLLoader
+FXMLLoader-->ContactsbookViewController
+deactivate FXMLLoader
+ContactsbookViewController->FXMLLoader: getController
+activate FXMLLoader
+FXMLLoader-->ContactsbookViewController
+deactivate FXMLLoader
+ContactsbookViewController->AddViewController: setObservableList
+activate AddViewController
+AddViewController-->ContactsbookViewController
+deactivate AddViewController
+ContactsbookViewController->Stage: new
+activate Stage
+Stage-->ContactsbookViewController
+deactivate Stage
+ContactsbookViewController->Stage: initModality
+activate Stage
+Stage-->ContactsbookViewController
+deactivate Stage
+ContactsbookViewController->Stage: initOwner
+activate Stage
+Stage-->ContactsbookViewController
+deactivate Stage
+ContactsbookViewController->Stage: show
+activate Stage
+Stage-->ContactsbookViewController
+deactivate Stage
+deactivate ContactsbookViewController
+@enduml 
