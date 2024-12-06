@@ -3,6 +3,7 @@ actor Utente
 participant ContactsbookViewController
 participant ModifyViewController
 participant "Contatto" as Contact
+participant DuplicateContactViewController
 participant UserInteractionDataInterface
 
 
@@ -16,6 +17,19 @@ ModifyViewController->Contact: new
 activate Contact
 Contact-->ModifyViewController: contact
 deactivate Contact
+ModifyViewController->ContactsbookViewController: contains
+ContactsbookViewController-->ModifyViewController
+alt Contatto duplicato
+    ModifyViewController -> DuplicateContactViewController: gestisciContattoDuplicato
+    activate DuplicateContactViewController
+    alt Add contact
+        DuplicateContactViewController->ModifyViewController: modify
+    activate ModifyViewController
+    else Modify
+        DuplicateContactViewController-->ModifyViewController
+    end
+    deactivate DuplicateContactViewController 
+else Contatto non duplicato
 ModifyViewController->ModifyViewController: remove
 ModifyViewController->ModifyViewController: add
 ModifyViewController-->UserInteractionDataInterface: modifyContact
