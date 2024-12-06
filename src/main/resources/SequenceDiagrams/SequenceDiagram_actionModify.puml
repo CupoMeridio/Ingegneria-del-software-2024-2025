@@ -11,9 +11,9 @@ activate ContactsbookViewController
 ContactsbookViewController->ModifyViewController: setContact
 activate ModifyViewController
 ModifyViewController -> ModifyViewController: actionModify
-ModifyViewController->Contact:new
+ModifyViewController->Contact: new
 activate Contact
-Contact-->ModifyViewController:contact
+Contact-->ModifyViewController: contact
 deactivate Contact
 ModifyViewController-->ContactsbookViewController: contact
 deactivate ModifyViewController

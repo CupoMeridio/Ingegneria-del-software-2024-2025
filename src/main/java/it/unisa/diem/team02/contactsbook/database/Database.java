@@ -65,7 +65,7 @@ public class Database {
     * @param password Password dell'utente (verrà hashata prima dell'inserimento).
     * @throws SQLException Se si verifica un errore durante l'inserimento.
     */
-    public void insertUtente(Connection conn, String tableName, String email, String password) throws SQLException{
+    public void insertUser(Connection conn, String tableName, String email, String password) throws SQLException{
     
            Statement statment;
            String pass= hashPassword(password);
@@ -83,7 +83,7 @@ public class Database {
     * @param tableName Nome della tabella da cui recuperare gli utenti.
     * @return HashMap contenente le coppie email-password degli utenti.
     */
-    public HashMap<String, String> getUtenti(Connection conn, String tableName){
+    public HashMap<String, String> getUser(Connection conn, String tableName){
         
         Statement statement;
         ResultSet rs= null;
@@ -175,7 +175,8 @@ public class Database {
     * @param email Email dell'utente di cui recuperare i contatti.
     * @return HashMap contenente i contatti dell'utente.
     */
-     public HashMap<String, Contact> getContatti(Connection conn, String tableName,String email){
+    
+    public HashMap<String, Contact> getContact(Connection conn, String tableName,String email){
         
         Statement statement;
         ResultSet rs= null;

@@ -82,7 +82,7 @@ public class ModifyViewController implements Initializable {
     @FXML
     private Button btnModify;
     
-    private ObservableList contacts;
+    private ObservableList<Contact> contacts;
     private Contact c;
 
     /**

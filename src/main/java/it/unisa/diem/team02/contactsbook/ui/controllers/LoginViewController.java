@@ -310,7 +310,7 @@ public class LoginViewController implements Initializable {
                     lblLogErr.setText("Login successfully."); 
                     {
                         try {
-                            App.setRoot("ContactbookView");
+                            App.setRoot("ContactsbookView");
                         } catch (IOException ex) {
                             Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -335,10 +335,11 @@ public class LoginViewController implements Initializable {
     }
     
     @FXML
-    private void ActionbtnLoginLocal(ActionEvent event){
+    private void actionLoginLocal(ActionEvent event){
         try{ 
-            App.setRoot("ContactbookView");} 
+            App.setRoot("ContactsbookView");} 
         catch (IOException ex) {
-            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);}
+            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
