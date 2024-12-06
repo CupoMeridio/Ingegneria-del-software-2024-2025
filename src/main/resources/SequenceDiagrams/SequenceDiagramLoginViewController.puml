@@ -16,7 +16,7 @@ activate db
 activate LoginViewController
 LoginViewController -> db: new()
 LoginViewController -> db: ConnectionDB()
-db --> LoginViewController
+db --> LoginViewController: Connection
 
 LoginViewController -> db: checkLogin()
 db --> LoginViewController
