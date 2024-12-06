@@ -9,6 +9,7 @@ import java.util.Objects;
  * @lang en
  * Abstract class that defines the attributes and methods of a generic Person.
  * 
+ * @author team02
  */
 public abstract class Person {
     private String name;

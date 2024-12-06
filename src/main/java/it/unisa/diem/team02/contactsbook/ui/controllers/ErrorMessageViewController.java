@@ -13,9 +13,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 /**
- * FXML Controller class
- *
- * @author anuar
+ * @lang it
+ * Controller per la gestione dei messaggi di errori
+ * 
+ * 
+ * @lang en
+ * Controller for managing error messages.
+ * 
+ * @author team02
  */
 public class ErrorMessageViewController implements Initializable {
 

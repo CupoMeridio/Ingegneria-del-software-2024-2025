@@ -16,17 +16,20 @@ import java.util.ArrayList;
  * @lang en
  * Class that extends the abstract class {@code Person}. It defines additional attributes and methods
  * to perform specific operations on {@code Contact} objects. The attributes {@code number},
- * {@code email} e {
+ * {@code email} e {@code tag} are implemented by an {@code ArrayList}
  * 
+ * @author team02
  */
 public class Contact extends Person{
     private ArrayList<String> number;
     private ArrayList<String> email;
     private ArrayList<Tag> tag;
-    private static int contatore; // bisogna Salvare il numero di contatti da rivedere 
+    private static int contatore; // bisogna Salvare il numero di contatti, da rivedere 
     private final int ID;
     
-   public Contact(String name, String surname) {
+    
+    
+    public Contact(String name, String surname) {
         super(name, surname);
         number = new ArrayList<String>(3);
         email = new ArrayList<String>(3);
@@ -35,7 +38,7 @@ public class Contact extends Person{
          contatore++;
         
     }
-   public Contact(String name, String surname, int ID) {
+    public Contact(String name, String surname, int ID) {
         super(name, surname);
         number = new ArrayList<String>();
         email = new ArrayList<String>();
@@ -45,10 +48,10 @@ public class Contact extends Person{
     
    /*
    * @lang it
+   * Restituisce tutti i numeri di telefono dell'oggetto corrente.
    * 
-   * 
-   * 
-   *
+   * lang en
+   * Returns all the phone number of the current object.
    */  
     public String getNumber(){
         if(number.size()==0) return null;
@@ -56,7 +59,13 @@ public class Contact extends Person{
         if(number.size()==2) return number.get(0)+"\n"+number.get(1);
         return number.get(0)+"\n"+number.get(1)+"\n"+number.get(2);
     }
-
+    /*
+    * @lang it
+    * Restituisce tutti gli indirizzi email dell'oggetto corrente.
+    * 
+    * @lang en
+    * Returns all the email address of the current object.
+    */
     public String getEmail() {
         if(email.size()==0) return null;
         if(email.size()==1) return email.get(0);
@@ -64,16 +73,42 @@ public class Contact extends Person{
         return email.get(0)+"\n"+email.get(1)+"\n"+email.get(2);
     }
     
+    /*
+    * @lang it
+    * Restituisce tutti i tag dell'oggetto corrente.
+    *
+    * @lang en
+    * Returns all the tags of the current object.
+    */
     public String getTag(){
         return "";
     }
-
+    
+    /*
+    * @lang it
+    * Inserisce un tag tra {Home, University, Job}, per un massimo di tre tag.
+    * 
+    * 
+    * @lang en
+    * Inserts a tag from {Home, University, Job}, with a maximum of three tags.
+    *
+    */
     public void addTag(Tag tag) {
         if (this.tag.size()>=3){
             //gestire
         }
         else this.tag.add(tag);
     }
+    
+    /*
+    * @lang it
+    * Inserisce un numero di telefono per un massimo di tre.
+    * 
+    * 
+    * @lang en
+    * Inserts a phone number with a maximum of three number.
+    *
+    */
     
     public void addNumber(String number) {
         if (this.number.size()>=3){
@@ -82,6 +117,16 @@ public class Contact extends Person{
         else this.number.add(number);
     }
     
+     /*
+    * @brief Non ancora implementata
+    * @lang it
+    * Inserisce un indirizzo email per un massimo di tre.
+    * 
+    * 
+    * @lang en
+    * Inserts a email adress with a maximum of three number.
+    *
+    */
     public void addEmail(String email){
         if (this.email.size()>=3){
             //gestire
@@ -89,27 +134,92 @@ public class Contact extends Person{
         else this.email.add(email);
     }
     
-     public void setNumber(ArrayList<String> number) {
+   /**
+    * @lang it
+    * Imposta la lista dei numeri di telefono.
+    * 
+    * @param {@code ArrayList<String>} number.
+    * 
+    * @lang en
+    * Sets the list of phone numbers.
+    * 
+    * @param {@code ArrayList<String>} number.
+    */
+    public void setNumber(ArrayList<String> number) {
         this.number = number;
     }
-
+    
+    /**
+    * @lang it
+    * Imposta la lista degli indirizzi email.
+    * 
+    * @param {@code ArrayList<String>} email.
+    * 
+    * @lang en
+    * Sets the list of email addresses.
+    * 
+    * @param {@code ArrayList<String>} email
+    */
     public void setEmail(ArrayList<String> email) {
         this.email = email;
     }
-
+    
+    /**
+     * @lang it
+     * Imposta la lista dei tag associati.
+     * 
+     * @param {@code ArrayList<String>} tag.
+     * 
+     * @lang en
+     * Sets the list of associated tags.
+     * 
+     * @param {@code ArrayList<String>} tag.
+     */
     public void setTag(ArrayList<Tag> tag) {
         this.tag = tag;
     }
+    
+    /**
+    * @lang it
+    * Restituisce la lista dei tag associati.
+    * 
+    * @lang en
+    * Returns the list of associated tags.
+    */
      public ArrayList<Tag> getTagList() {
         return tag;
     }
+     
+    /**
+    * @lang it
+    * Restituisce la lista dei numeri di telefono.
+    * 
+    * @lang en
+    * Returns the list of phone numbers.
+    */ 
     public ArrayList<String> getNumberList(){
         return this.number ;
     }
-
+    
+    /**
+    * @lang it
+    * Restituisce la lista degli indirizzi email.
+    * 
+    * @lang en
+    * Returns the list of email addresses.
+    */
     public ArrayList<String> getEmailList() {
         return email;
     }
+    
+    /*
+    * @lang it
+    * Restitusce il campo id del contatto
+    *
+    * @lang en
+    * Returns the id of the contact.
+    *
+    */
      public int getID() {
         return ID;
     }

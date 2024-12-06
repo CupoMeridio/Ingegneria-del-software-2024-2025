@@ -5,7 +5,6 @@ import java.util.ResourceBundle;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ObservableBooleanValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -39,60 +38,47 @@ import java.io.IOException;
 public class LoginViewController implements Initializable {
 
     @FXML
-    private AnchorPane login; ///< @lang it Componente principale della schermata di login. 
-                               ///< @lang en Main component of the login screen.
+    private AnchorPane login; 
     
     @FXML
-    private VBox vBoxLogin; ///< @lang it VBox per il modulo di login.
-                           ///< @lang en VBox for the login form.
+    private VBox vBoxLogin; 
     
     @FXML
-    private Label lblLogMail; ///< @lang it Etichetta per il campo email del login.
-                              ///< @lang en Label for the login email field.
+    private Label lblLogMail; 
     
     @FXML
-    private TextField txtLogMail; ///< @lang it Campo di testo per l'inserimento dell'email del login.
-                                 ///< @lang en Text field for entering the login email.
+    private TextField txtLogMail; 
     
     @FXML
-    private Label lblLogPass; ///< @lang it Etichetta per il campo password del login.
-                              ///< @lang en Label for the login password field.
+    private Label lblLogPass; 
     
     @FXML
-    private PasswordField txtLogPass; ///< @lang it Campo password per l'inserimento della password del login.
-                                      ///< @lang en Password field for entering the login password.
-   
-    @FXML
-    private Button btnLogin; ///< @lang it Pulsante per eseguire il login.
-                            ///< @lang en Button to execute login.
+    private PasswordField txtLogPass;
     
     @FXML
-    private Label lblSignMail; ///< @lang it Etichetta per il campo email della registrazione.
-                              ///< @lang en Label for the registration email field.
+    private Button btnLogin;
     
     @FXML
-    private TextField txtSignMail; ///< @lang it Campo di testo per l'inserimento dell'email della registrazione.
-                                 ///< @lang en Text field for entering the registration email.
+    private Label lblSignMail;
     
     @FXML
-    private Label lblSignPass; ///< @lang it Etichetta per il campo password della registrazione.
-                              ///< @lang en Label for the registration password field.
+    private TextField txtSignMail;
     
     @FXML
-    private PasswordField txtSignPass; ///< @lang it Campo password per l'inserimento della password della registrazione.
-                                      ///< @lang en Password field for entering the registration password.
+    private Label lblSignPass;
     
     @FXML
-    private Label lblSignConfirm; ///< @lang it Etichetta per il campo di conferma password.
-                                 ///< @lang en Label for the confirm password field.
+    private PasswordField txtSignPass;
     
     @FXML
-    private PasswordField txtConfirmPass; ///< @lang it Campo password per confermare la password della registrazione.
-                                         ///< @lang en Password field to confirm the registration password.
+    private Label lblSignConfirm;
     
     @FXML
-    private Button btnSign; ///< @lang it Pulsante per eseguire la registrazione.
-                           ///< @lang en Button to execute registration.
+    private PasswordField txtConfirmPass;
+    
+    @FXML
+    private Button btnSign; 
+    
     @FXML
     private HBox hboxLogin;
     
@@ -117,15 +103,15 @@ public class LoginViewController implements Initializable {
      * Metodo di inizializzazione del controller.
      * Richiama i metodi che inizializzano i vari componenti.
      * 
-     * @param url URL utilizzato per risolvere il percorso del file FXML.
-     * @param rb Risorsa contenente dati di localizzazione.
+     * @param {@code URL} url utilizzato per risolvere il percorso del file FXML.
+     * @param {@code ResourceBoundle} rb contenente dati di localizzazione.
      * 
      * @lang en
      * Initializes the controller.
      * Calls the methods that initialize the various components.
      * 
-     * @param url URL used to resolve the FXML file path.
-     * @param rb Resource containing localization data.
+     * @param {@code URL} url used to resolve the FXML file path.
+     * @param {@code ResourceBoundle} rb containing localization data.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -237,7 +223,7 @@ public class LoginViewController implements Initializable {
      * - La parte del dominio (dopo @) può contenere lettere, numeri, punti e trattini.
      * - Termina con un dominio di primo livello (TLD) composto solo da lettere, con una lunghezza compresa tra 2 e 6 caratteri.
      * 
-     * @param email L'email da validare.
+     * @param {@code String} email L'email da validare.
      * @return true se l'email è valida, false altrimenti.
      * 
      * @lang en
@@ -248,7 +234,7 @@ public class LoginViewController implements Initializable {
      * - The domain part (after @) can contain letters, numbers, periods and dashes.
      * - Ends with a top-level domain (TLD) made up of letters only, between 2 and 6 characters in length.
      * 
-     * @param email The email to validate.
+     * @param {@code String} email The email to validate.
      * @return true if the email is valid, false otherwise.
      */
     private boolean isValidEmail(String email) {
@@ -261,14 +247,14 @@ public class LoginViewController implements Initializable {
      * Valida una password in base ai requisiti di sicurezza.
      * La password deve contenere almeno una lettera maiuscola, un numero e un carattere speciale, con una lunghezza minima di 8 caratteri.
      * 
-     * @param password La password da validare.
+     * @param {@code String} password La password da validare.
      * @return true se la password è valida, false altrimenti.
      * 
      * @lang en
      * Validates a password based on security requirements.
      * The password must contain at least one uppercase letter, one digit, and one special character, with a minimum length of 8 characters.
      * 
-     * @param password The password to validate.
+     * @param {@code String} password The password to validate.
      * @return true if the password is valid, false otherwise.
      */
     private boolean isValidPassword(String password) {
@@ -328,7 +314,15 @@ public class LoginViewController implements Initializable {
             }
     }
     
-    
+    /*
+    * @lang it
+    * Implementa l'azione associata al pulsante Sign-In. Se le credenziali inserite
+    * non sono già presenti nel database permette all'utente di registrarsi
+    *
+    * @lang en
+    * Implements the action associated with the Sign-In button. If the entered credentials
+    * are not already present in the database, it allows the user to register.
+    */
     
     @FXML
     private void actionSignin(ActionEvent event) {
@@ -338,9 +332,9 @@ public class LoginViewController implements Initializable {
     /**
      * @lang it
      * Permette il solo accesso locale alle operazioni sulla rubrica. Non viene 
-     * effettuato la connessione con il database.
+     * effettuata la connessione con il database.
      * 
-     * @param ActionEvent event
+     * @param {@code ActionEvent} event
      * 
      * @lang en
      * Allows only local access to contacts book operations. The connection to the database is not established.
