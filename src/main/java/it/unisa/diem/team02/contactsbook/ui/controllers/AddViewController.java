@@ -153,7 +153,7 @@ public class AddViewController implements Initializable {
         
         if (contacts.contains(c)){
             System.out.println("Contatto duplicato");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DuplicateContectViewController.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DuplicateContactViewController.fxml"));
               
               Parent root = loader.load();
               Scene scene=new Scene(root);
@@ -168,7 +168,7 @@ public class AddViewController implements Initializable {
               newStage.initOwner(btnAdd.getScene().getWindow());
               newStage.show();       
         }
-        else{
+        else{   
         System.out.println("Contatto inserito");
         
         contacts.add(c);
