@@ -26,20 +26,19 @@ AddViewController->ContactsbookViewController: contains
 ContactsbookViewController-->AddViewController
 
 alt Contatto duplicato
-    AddViewController -> DuplicateContactViewController: gestisciContattoDuplicato
+    AddViewController -> DuplicateContactViewController: set
     activate DuplicateContactViewController
-    alt Add contact
-        DuplicateContactViewController->AddViewController: actionAdd
-    activate AddViewController
-    else Modify
-        DuplicateContactViewController-->AddViewController
-    end
+    DuplicateContactViewController-->AddViewController
     deactivate DuplicateContactViewController 
+        alt Aggiungi
+            AddViewController->AddViewController:add
+            AddViewController-->UserInteractionDataInterface: insertContact
+        else Modifica
+            AddViewController->AddViewController:show
+        end
 else Contatto non duplicato
-    AddViewController -> AddViewController: addContact
-    AddViewController->UserInteractionDataInterface: insertContact
-    activate UserInteractionDataInterface
-    deactivate UserInteractionDataInterface
+AddViewController->AddViewController: add
+AddViewController-->UserInteractionDataInterface: insertContact
 end
 deactivate Contact
 AddViewController-->ContactsbookViewController

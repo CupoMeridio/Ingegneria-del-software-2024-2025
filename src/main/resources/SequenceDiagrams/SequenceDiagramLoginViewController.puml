@@ -1,44 +1,33 @@
 @startuml
 actor Utente
-participant "UserInteracionDataInterface" as user
 participant "LoginViewController" as LoginViewController
 participant "App" as App 
 participant "Database" as db
 
-Utente -> user: login()
-activate user
+Utente -> LoginViewController: run()
 
-alt loginLocal
-user -> LoginViewController: actionLoginLocal()
-activate LoginViewController
+alt actionLoginLocal()
 LoginViewController -> App: setRoot("ContactsbookView")
 activate App
 deactivate App
-deactivate LoginViewController
+else actionLogin()
 
-else else
-user-> LoginViewController: actionLogin()
+activate db
 activate LoginViewController
 LoginViewController -> db: new()
-activate db
 LoginViewController -> db: ConnectionDB()
-db --> LoginViewController
+db --> LoginViewController: Connection
+
 LoginViewController -> db: checkLogin()
-db --> LoginViewController: controllo
+db --> LoginViewController
 deactivate db
-alt controllo==true
+opt checkLogin()==true
 LoginViewController -> App: setRoot("ContactsbookView")
 activate App
 deactivate App
-else else
-LoginViewController --> user: messageError
-deactivate 
+deactivate LoginViewController
 end
 
-activate App
-deactivate App
-deactivate LoginViewController
-deactivate user
 
 
 end

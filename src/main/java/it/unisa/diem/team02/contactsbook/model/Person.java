@@ -1,7 +1,5 @@
 package it.unisa.diem.team02.contactsbook.model;
 
-import java.util.Objects;
-
 public abstract class Person {
     private String name;
     private String surname;

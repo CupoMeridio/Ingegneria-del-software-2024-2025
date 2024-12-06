@@ -141,6 +141,8 @@ public class AddViewController implements Initializable {
      * the same first name and last name already exists.
      * 
      * @param ActionEvent event
+     * 
+     * @throws IOException
      */
     public void actionAdd(ActionEvent event) throws IOException{
         Contact c=new Contact(txtName.getText(), txtSur.getText());
@@ -152,28 +154,33 @@ public class AddViewController implements Initializable {
         if(!txtEmail3.getText().isEmpty()) c.addEmail(txtEmail3.getText());
         
         if (contacts.contains(c)){
-            System.out.println("Contatto duplicato");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DuplicateContectViewController.fxml"));
-              
-              Parent root = loader.load();
-              Scene scene=new Scene(root);
-              
-              DuplicateContactViewController modifyC=loader.getController();
-    
-              //gestire eccezione
-              Stage newStage = new Stage();
-              newStage.setScene(scene);
-              
-              newStage.initModality(Modality.WINDOW_MODAL);
-              newStage.initOwner(btnAdd.getScene().getWindow());
-              newStage.show();       
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DuplicateContactView.fxml"));
+            Parent root = loader.load();
+            Scene scene=new Scene(root);
+            Stage newStage = new Stage();
+            newStage.setScene(scene);
+
+            DuplicateContactViewController duplicateC=loader.getController();
+            Contact c1=new Contact("Prova", "Prova");
+            duplicateC.set(c1);
+
+            newStage.initModality(Modality.APPLICATION_MODAL);
+            newStage.initOwner(btnAdd.getScene().getWindow());
+            newStage.showAndWait();
+                
+            if (c1.getName().equals("")){
+                    contacts.add(c);
+                    Stage stage=(Stage) btnAdd.getScene().getWindow();
+                    stage.close();
+                } else {
+                    Stage stage=(Stage) btnAdd.getScene().getWindow();
+                    stage.show();
+                }       
         }
         else{
-        System.out.println("Contatto inserito");
-        
-        contacts.add(c);
-        Stage stage=(Stage) btnAdd.getScene().getWindow();
-        stage.close();
+            contacts.add(c);
+            Stage stage=(Stage) btnAdd.getScene().getWindow();
+            stage.close();
         }
     }
     

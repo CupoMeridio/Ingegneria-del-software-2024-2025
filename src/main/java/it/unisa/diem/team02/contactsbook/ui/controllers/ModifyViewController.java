@@ -5,19 +5,24 @@
 package it.unisa.diem.team02.contactsbook.ui.controllers;
 
 import it.unisa.diem.team02.contactsbook.model.Contact;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -83,7 +88,8 @@ public class ModifyViewController implements Initializable {
     private Button btnModify;
     
     private ObservableList<Contact> contacts;
-    private Contact c;
+    private Contact oldContact;
+    private Contact newContact=new Contact("", "");
 
     /**
      * @lang it
@@ -153,10 +159,10 @@ public class ModifyViewController implements Initializable {
      * @param Contact contact is the contact to be edited. 
      */
     public void setContact(Contact contact){
-        c=contact;
-        if (c.getName()!=null) txtName.setText(c.getName());
-        if (c.getSurname()!=null) txtSur.setText(c.getSurname());
-        String number=c.getNumber();
+        oldContact=contact;
+        if (oldContact.getName()!=null) txtName.setText(oldContact.getName());
+        if (oldContact.getSurname()!=null) txtSur.setText(oldContact.getSurname());
+        String number=oldContact.getNumber();
         if (number!=null){
             String[] numbers=number.split("\n");
             txtNumber1.setText(numbers[0]);
@@ -168,7 +174,7 @@ public class ModifyViewController implements Initializable {
             }
         }
         
-        String email=c.getEmail();
+        String email=oldContact.getEmail();
         if (email!=null){
             String[] emails=email.split("\n");
             txtEmail1.setText(emails[0]);
@@ -196,14 +202,12 @@ public class ModifyViewController implements Initializable {
      * informations in the text fields and added to the list. The previous contact is removed.
      * 
      * @param ActionEvent event
+     * @throws IOExcpetion
      */
     @FXML
-    private void actionModify(ActionEvent event) {
-        if(contacts.contains(new Contact(txtName.getText(), txtSur.getText())))
-            ;//gestire contatto duplicato
-        contacts.remove(c);
-        c.setName(txtName.getText());
-        c.setSurname(txtSur.getText());
+    private void actionModify(ActionEvent event) throws IOException {
+        newContact.setName(txtName.getText());
+        newContact.setSurname(txtSur.getText());
         String [] numbers=new String[3];
         String [] emails=new String [3];
         if (!txtNumber1.getText().isEmpty()) numbers[0]=txtNumber1.getText();
@@ -220,13 +224,38 @@ public class ModifyViewController implements Initializable {
         if(!txtEmail3.getText().isEmpty()) emails[2]=txtEmail3.getText();
         else emails[2]=null;
 
-        c.setNumber(numbers);
-        c.setEmail(emails);
-
-        contacts.add(c);
-        
-        Stage stage=(Stage) btnModify.getScene().getWindow();
-        stage.close();
+        newContact.setNumber(numbers);
+        newContact.setEmail(emails);
+            if(!contacts.contains(newContact)){
+                contacts.remove(oldContact);
+                contacts.add(newContact);
+                Stage stage=(Stage) btnModify.getScene().getWindow();
+                stage.close();
+            } else{ 
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DuplicateContactView.fxml"));
+                Parent root = loader.load();
+                Scene scene=new Scene(root);
+                Stage newStage = new Stage();
+                newStage.setScene(scene);
+                
+                DuplicateContactViewController duplicateC=loader.getController();
+                Contact c1=new Contact("Prova", "Prova");
+                duplicateC.set(c1);
+                
+                newStage.initModality(Modality.APPLICATION_MODAL);
+                newStage.initOwner(btnModify.getScene().getWindow());
+                newStage.showAndWait();
+                  
+                if (c1.getName().equals("")){
+                    contacts.remove(oldContact);
+                    contacts.add(newContact);
+                    Stage stage=(Stage) btnModify.getScene().getWindow();
+                    stage.close();
+                } else {
+                    Stage stage=(Stage) btnModify.getScene().getWindow();
+                    stage.show();
+                }  
+            }
     }
     
 }
