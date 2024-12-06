@@ -3,32 +3,34 @@ actor Utente
 participant ContactsbookViewController
 participant AddViewController
 participant "Contatto" as Contact
-participant "Contatti List" as contacts
-participant "DuplicateContactViewController" as DuplicateContactViewController
+participant DuplicateContactViewController
 
 
 Utente -> ContactsbookViewController: actionAdd
 activate ContactsbookViewController
 ContactsbookViewController->AddViewController: setObservableList
 activate AddViewController
-AddViewController -> Contact: actionAdd
+AddViewController -> AddViewController: actionAdd
+AddViewController -> Contact: new
 activate Contact
-Contact -> Contact: crea contatto (txtName, txtSur)
+Contact->Contact: new(txtName, txtSur)
 opt Numero di telefono presente
-    Contact -> Contact: aggiungi numero
+    Contact -> Contact: addNumber
 end
 opt Email presente
-    Contact -> Contact: aggiungi email
+    Contact -> Contact: addEmail
 end
-Contact -> contacts: contains(Contact)
+Contact --> AddViewController
+deactivate Contact
+AddViewController->ContactsbookViewController: contains
+ContactsbookViewController-->AddViewController
 alt Contatto duplicato
-    Contact -> DuplicateContactViewController: gestisciContattoDuplicato
+    AddViewController -> DuplicateContactViewController: gestisciContattoDuplicato
     activate DuplicateContactViewController
     deactivate DuplicateContactViewController 
 else Contatto non duplicato
-    Contact -> contacts: aggiungi contatto
+    AddViewController -> ContactsbookViewController: addContact
 end
-Contact -->AddViewController
 deactivate Contact
 AddViewController-->ContactsbookViewController
 deactivate AddViewController
