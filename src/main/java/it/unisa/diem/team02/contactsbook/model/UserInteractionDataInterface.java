@@ -8,7 +8,7 @@ package it.unisa.diem.team02.contactsbook.model;
  *
  * @author anuar
  */
-public interface UserInteracionDataInterface {
+public interface UserInteractionDataInterface {
     
     public abstract void insertContact();
     public abstract void deleteContact();

@@ -54,7 +54,20 @@ public class DuplicateContactViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
     }    
-
+    
+    /**
+     * @lang it
+     * Implementa l'azione associcata al tasto Add: un campo del contatto viene usato come flag per indicare
+     * che l'utente desidera aggiungere il contatto.
+     * 
+     * @param ActionEvent event
+     * 
+     * @lang en
+     * Implements the action associated with the Add button: a contact field is used as a flag to indicate
+     * that the user wants to add the contact.
+     * 
+     * @param ActionEvent event
+     */
     @FXML
     private void actionYes(ActionEvent event){
         contact.setName("");
@@ -62,12 +75,36 @@ public class DuplicateContactViewController implements Initializable {
         stage.close();
     }
     
+    /**
+     * @lang it
+     * Implementa l'azione associcata al tasto Modify: il contatto/flag non viene modificato e si torna alla
+     * schermata di modifica/aggiunta.
+     * 
+     * @param ActionEvent event
+     * 
+     * @lang en
+     * Implements the action associated with the Modify button: the contact/field is not modified and the
+     * systems returns to the modify/add screen.
+     * 
+     * @param ActionEvent event
+     */
     @FXML
     private void actionNo(ActionEvent event){
         Stage stage = (Stage) btnNo.getScene().getWindow();
         stage.close();
     }
     
+    /**
+     * @lang it
+     * Setta il campo contatto con il contatto passato come parametro.
+     * 
+     * @param Contact c è il contatto da usare come flag.
+     * 
+     * @lang en
+     * Sets the contact field with the contact passed as a parameter.
+     * 
+     * @param Contact c is the contacted used as flag.
+     */
     public void set(Contact c1){
         this.contact=c1;
     }

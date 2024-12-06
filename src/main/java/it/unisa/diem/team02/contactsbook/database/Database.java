@@ -7,14 +7,17 @@
  */
 package it.unisa.diem.team02.contactsbook.database;
 import it.unisa.diem.team02.contactsbook.model.Contact;
+import it.unisa.diem.team02.contactsbook.model.UserInteractionDataInterface;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.mindrot.jbcrypt.BCrypt;
@@ -22,14 +25,14 @@ import org.mindrot.jbcrypt.BCrypt;
  *
  * @author cupom
  */
-public class Database {
+public class Database  {
         
 /**
  * @brief Stabilisce una connessione al database PostgreSQL.
  * 
  * @param dbname Nome del database a cui connettersi.
- * @param user Nome utente per l'autenticazione.
- * @param password Password per l'autenticazione.
+ * @param user Nome del possessore del database in pgAdmin.
+ * @param password Password per accedere al Database .
  * @return Oggetto Connection se la connessione è riuscita, altrimenti null.
  * @throws SQLException Se si verifica un errore durante la connessione.
  */
@@ -62,7 +65,7 @@ public class Database {
     * @param conn Oggetto Connection per interagire con il database.
     * @param tableName Nome della tabella in cui inserire l'utente.
     * @param email Email dell'utente.
-    * @param password Password dell'utente (verrà hashata prima dell'inserimento).
+    * @param password Password dell'utente (verrà criptata  prima dell'inserimento).
     * @throws SQLException Se si verifica un errore durante l'inserimento.
     */
     public void insertUser(Connection conn, String tableName, String email, String password) throws SQLException{
@@ -155,10 +158,25 @@ public class Database {
         return esito;
     }
     
+    /**
+    * @brief Cripta la password passata all' utente 
+    * 
+    * @param password è la password passata alla funzione che verra criptata
+    * @return  Una stringa criptata
+    */
+    
     private static String hashPassword(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());
         //per renderlo più sicuro conviene aggiungere un salt
     }
+    
+    /**
+    * @brief Verifica se le 2 password corrispondono 
+    * 
+    * @param password è la password non criptata passata alla funzione 
+    * @param hashed è la password criptata passata alla funzione 
+    * @return  true se la password è uguale a hashed, se sono diverse false
+    */
 
     private static boolean checkPassword(String password, String hashed) {
         return BCrypt.checkpw(password, hashed);
@@ -201,9 +219,64 @@ public class Database {
     
         return (HashMap<String, Contact>) table;
     }
+    
+    /**
+    * @brief Crea il contatto partendo dai parametri passati.
+    * 
+    * @param name nome del contatto.
+    * @param surname cognome del contatto.
+    * @param numeri stringa contenete i numeri del contatto con dei separatori.
+    * @param tag stringa contenete i tag del contatto con dei separatori.
+    * @param em_cont stringa contenete l' emails del contatto con dei separatori.
+    * @param ID contiene l' identificativo univoco del contatto
+    * @return Contact contenente con tutti i parametri passati.
+    */
 
     private Contact createContact(String name, String surname, String numeri, String tag, String em_cont) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Contact c = null;
+        return c;
     }
-
+    
+    /**
+    * @brief Inserisce i contatti associati a un utente specifico.
+    * 
+    * @param conn Oggetto Connection per interagire con il database.
+    * @param tableName Nome della tabella contenente i contatti.
+    * @param email_Utente Email dell'utente che ha fatto il login.
+    *  @throws SQLException Se si verifica un errore durante l'interrogazione.
+    */
+    
+    public void insertContact(Connection conn, String tableName, Contact cont, String email_Utente) throws SQLException{
+    }
+    
+    /**
+    * @brief Permette di impostare un ArrayList su una strinca aggiungendo un separatore specifico.
+    * @param s ArrayList da formattare.
+    * @return Una stringa con tutti i valori dis separati da un separatore
+    */
+    private String formattaOut(ArrayList<String> s) {
+        
+        String formattata="";
+        for(String i: s){
+          
+            formattata=formattata+i+";";
+        }
+        return formattata;
+    }
+    
+    /**
+    * @brief Modifica il contatto associato a un utente specifico nel Database.
+    * 
+    * @param conn Oggetto Connection per interagire con il database.
+    * @param tableName Nome della tabella contenente i contatti.
+    * @param cont il contatto da modificare nel Database
+    * @param email_Utente Email dell'utente che ha fatto il login.
+    *  @throws SQLException Se si verifica un errore durante l'interrogazione.
+    */
+    public void modifyContact(Connection conn, String tableName, Contact cont, String email_Utente) throws SQLException{
+        
+    }
+    public void CloseConnection(Connection conn){
+    
+    }
 }
