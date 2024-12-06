@@ -1,0 +1,15 @@
+@startuml
+actor Utente
+participant "Utente" as user
+participant FXMLLoader
+participant "ContactsbookViewController" as ContactsbookViewController
+participant Stage
+participant Scene
+
+Utente -> user: Add()
+activate Contact
+
+
+
+
+@enduml

@@ -2,6 +2,7 @@
 package it.unisa.diem.team02.contactsbook.ui.controllers;
 
 import it.unisa.diem.team02.contactsbook.model.Contact;
+import it.unisa.diem.team02.contactsbook.model.UserInteracionDataInterface;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -109,7 +110,7 @@ public class AddViewController implements Initializable {
         
         if (contacts.contains(c)){
             System.out.println("COntatto duplicato");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DuplicateContectViewController.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DuplicateContactViewController.fxml"));
               
               Parent root = loader.load();
               Scene scene=new Scene(root);
@@ -128,6 +129,7 @@ public class AddViewController implements Initializable {
         }
         else{
         System.out.println("Contatto inserito");
+        
         contacts.add(c);
         Stage stage=(Stage) btnAdd.getScene().getWindow();
         stage.close();
@@ -138,4 +140,6 @@ public class AddViewController implements Initializable {
         Stage stage=(Stage) btnCanc.getScene().getWindow();
         stage.close();
     }
+    
+        
 }
