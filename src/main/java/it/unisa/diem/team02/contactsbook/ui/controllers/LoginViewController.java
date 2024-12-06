@@ -115,32 +115,36 @@ public class LoginViewController implements Initializable {
     /**
      * @lang it
      * Metodo di inizializzazione del controller.
-     * Richiama i metodi che inizializzano i vari componenti
+     * Richiama i metodi che inizializzano i vari componenti.
      * 
      * @param url URL utilizzato per risolvere il percorso del file FXML.
      * @param rb Risorsa contenente dati di localizzazione.
      * 
      * @lang en
      * Initializes the controller.
-     * Calls the methods that initialize the various components
+     * Calls the methods that initialize the various components.
      * 
      * @param url URL used to resolve the FXML file path.
      * @param rb Resource containing localization data.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        btnSign.disableProperty().bind(Bindings.or(txtConfirmPassInitialize(), txtSignMailInitialize()));
-        txtSignPassInitialize();
+        btnSign.disableProperty().bind(Bindings.or(txtConfirmPassInitialize(), txtSignMailInitialize()).or(txtSignPassInitialize()));
     }
     
     
     /**
      * @lang it
      * Configura il listener per la validazione del campo email nella registrazione.
+     * Restituisce un BooleanProperty:
+     *  -false se l'email è valida
+     *  -true se l'email non è valida
      * 
      * @lang en
      * Configures the listener for validating the registration email field.
+     * Returns a BooleanProperty:
+     *  -false if the email is valid
+     *  -true if the email is not valid
      */
     private BooleanProperty txtSignMailInitialize(){
         BooleanProperty observableBoolean = new SimpleBooleanProperty(true);
@@ -149,7 +153,6 @@ public class LoginViewController implements Initializable {
                 txtSignMail.setStyle("-fx-border-color: green;");  ///< @lang it Bordo verde se valido
                                                                  ///< @lang en Green border if valid
                 observableBoolean.set(false);
-                                                              ///< @lang en Green border if valid
                 lblErrorEmail.setText("");
                 
             } else {
@@ -165,15 +168,23 @@ public class LoginViewController implements Initializable {
     /**
      * @lang it
      * Configura il listener per la validazione del campo password nella registrazione.
+     * Restituisce un BooleanProperty:
+     *  -false se la password è valida
+     *  -true se la password non è valida
      * 
      * @lang en
      * Configures the listener for validating the registration password field.
+     * Returns a BooleanProperty:
+     *  -false if the password is valid
+     *  -true if the password is not valid
      */
-    private void txtSignPassInitialize(){
+    private BooleanProperty txtSignPassInitialize(){
+        BooleanProperty observableBoolean = new SimpleBooleanProperty(true);
         txtSignPass.textProperty().addListener((observable, oldValue, newValue) -> {
             if (isValidPassword(newValue)) {
                 txtSignPass.setStyle("-fx-border-color: green;");  ///< @lang it Bordo verde se valido
                                                                  ///< @lang en Green border if valid
+                observableBoolean.set(false);
                 lblErrorPass.setText("");
                    
             } else {
@@ -183,14 +194,21 @@ public class LoginViewController implements Initializable {
                 
             }
         }); 
+        return observableBoolean;
     }
     
     /**
      * @lang it
      * Configura il listener per verificare che la password di conferma corrisponda alla password principale.
+     * Restituisce un BooleanProperty:
+     *  -false se le password coincidono
+     *  -true se le password non coincidono
      * 
      * @lang en
      * Configures the listener to check that the confirm password matches the main password.
+     * Returns a BooleanProperty:
+     *  -false if passwords macth
+     *  -true if passwords don't match
      */
     private BooleanProperty txtConfirmPassInitialize(){
         BooleanProperty b=new SimpleBooleanProperty(true);

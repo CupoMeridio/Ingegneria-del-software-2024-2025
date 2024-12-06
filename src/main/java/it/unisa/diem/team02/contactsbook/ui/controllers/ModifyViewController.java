@@ -21,9 +21,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * FXML Controller class
- *
- * @author anuar
+ * @lang it
+ * Controller per la gestione della schermata di modifica di un contatto già esistente.
+ * 
+ * @lang en
+ * Controller for handling the edit of an existing contact.
+ * 
+ * @author team02
  */
 public class ModifyViewController implements Initializable {
 
@@ -82,23 +86,60 @@ public class ModifyViewController implements Initializable {
     private Contact c;
 
     /**
-     * Initializes the controller class.
+     * @lang it
+     * Metodo di inizializzazione del controller.
+     * Gestisce la disattivazione dei vari bottoni.
+     * 
+     * @param url URL utilizzato per risolvere il percorso del file FXML.
+     * @param rb Risorsa contenente dati di localizzazione.
+     * 
+     * @lang en
+     * Initializes the controller.
+     * Calls the methods that initialize the various components.
+     * 
+     * @param url URL used to resolve the FXML file path.
+     * @param rb Resource containing localization data.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         btnModify.disableProperty().bind(Bindings.and(txtName.textProperty().isEmpty(), txtSur.textProperty().isEmpty()));
     }    
 
+    /**
+     * @lang it
+     * Specifica l'azione associcata al tasto cancel: si torna alla visualizzazione della rubrica e
+     * non viene effettuata alcuna modifica
+     * 
+     * @param ActionEvent event
+     * 
+     * @lang en
+     * Specifies the action associated with the cancel button: returns to the Contactbook view, and 
+     * no changes are made.
+     * 
+     * @param ActionEvent event
+     */
     @FXML
     private void actionCancel(ActionEvent event) {
         Stage stage=(Stage) btnCanc.getScene().getWindow();
         stage.close();
     }
 
-    public void setObservableList(ObservableList<Contact> contacts){
-        this.contacts=contacts;
-    }
+//    public void setObservableList(ObservableList<Contact> contacts){
+//        this.contacts=contacts;
+//    }
     
+    /**
+     * @lang it
+     * Setta il campo c con il contatto passato come parametro.
+     * 
+     * @param Conatct contact è il contatto da modificare.
+     * 
+     * @lang en
+     *
+     * Sets the c field with the contact passed as a parameter.
+     * 
+     * @param Contact contact is the contact to be edited. 
+     */
     public void setContact(Contact contact){
         c=contact;
         if (c.getName()!=null) txtName.setText(c.getName());
@@ -130,6 +171,20 @@ public class ModifyViewController implements Initializable {
         
     }
     //Vittorio: Qualcosa qui non funziona. Devo capire bene come funziona
+    
+    /**
+     * @lang it
+     * Specifica l'azione associcata al tasto modify: viene creato un nuovo contatto con le informazioni
+     * presenti nei campi di testo e aggiunto alla lista. Il contatto precedente viene rimosso. 
+     * 
+     * @param ActionEvent event
+     * 
+     * @lang en
+     * Specifies the action associated with the add button: a new contact is created with the 
+     * informations in the text fields and added to the list. The previous contact is removed.
+     * 
+     * @param ActionEvent event
+     */
     @FXML
     private void actionModify(ActionEvent event) {
         c.setName(txtName.getText());
