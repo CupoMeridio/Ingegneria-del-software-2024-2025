@@ -84,7 +84,7 @@ public class AddViewController implements Initializable {
     @FXML
     private Button btnAdd;
     
-    private ObservableList contacts;
+    private ObservableList<Contact> contacts;
 
     /**
      * @lang it
