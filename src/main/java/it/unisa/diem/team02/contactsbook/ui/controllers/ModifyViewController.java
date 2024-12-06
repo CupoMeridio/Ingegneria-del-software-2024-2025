@@ -171,10 +171,10 @@ public class ModifyViewController implements Initializable {
         if (number!=null){
             String[] numbers=number.split("\n");
             txtNumber1.setText(numbers[0]);
-            if (numbers[1]!=null){
+            if (numbers.length>1){
                 txtNumber2.setText(numbers[1]);
-                if (numbers[2]!=null){
-                    txtNumber3.setText(numbers[3]);
+                if (numbers.length>2){
+                    txtNumber3.setText(numbers[2]);
                 }
             }
         }
@@ -183,15 +183,13 @@ public class ModifyViewController implements Initializable {
         if (email!=null){
             String[] emails=email.split("\n");
             txtEmail1.setText(emails[0]);
-            if (emails[1]!=null){
+            if (emails.length>1){
                 txtEmail2.setText(emails[1]);
-                if (emails[2]!=null){
+                if (emails.length>2){
                     txtEmail3.setText(emails[3]);
                 }
             }
         }
-        
-        
     }
     //Vittorio: Qualcosa qui non funziona. Devo capire bene come funziona
     
