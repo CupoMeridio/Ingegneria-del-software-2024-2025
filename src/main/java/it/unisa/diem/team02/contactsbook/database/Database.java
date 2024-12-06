@@ -472,6 +472,25 @@ public class Database  {
       statment.executeUpdate(query);
       System.out.println("Contatto modificato");
     }
+      /**
+    * @lang it
+    * @brief Elimina il contatto (riconosciuto per ID) associato a un utente specifico nel Database.
+    * @param conn Oggetto Connection per interagire con il database.
+    * @param tableName Nome della tabella contenente i contatti.
+    * @param ID il contatto da modificare nel Database
+    * 
+    * @throws SQLException Se si verifica un errore durante l'interrogazione.
+    * @lang en
+    * 
+    * @brief Deletes the contact (identified by ID) associated with a specific user in the database.
+    * 
+    * @param conn Connection object to interact with the database.
+    * @param tableName Name of the table containing the contacts.
+    * @param ID The contact to be deleted in the database.
+    * 
+    * @throws SQLException If an error occurs during the query.
+    */
+
     public void RemuveContactByID(Connection conn, String tableName, String ID) throws SQLException{
     
        Statement statment;
@@ -481,6 +500,22 @@ public class Database  {
        statment.execute(query);
        System.out.print("\n Dato eliminato per ID");
     }
+        /**
+    * @lang it
+    * @brief Chiude la connessione col database
+    * @param conn Oggetto Connection per interagire con il database.
+    * 
+    * @throws SQLException Se si verifica un errore durante l'interrogazione.
+    * @lang en
+    * 
+    * @brief Closes the connection to the database.
+    * 
+    * @param conn Connection object to interact with the database.
+    * 
+    * @throws SQLException If an error occurs during the query.
+    */
+
+    
     public void CloseConnection(Connection conn) throws SQLException{
         conn.close();
     }
