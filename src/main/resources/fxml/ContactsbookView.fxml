@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -24,14 +23,6 @@
                      </HBox.margin></Button>
                   <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#actionDelete" text="Delete" />
                   <Button fx:id="btnModify" mnemonicParsing="false" onAction="#actionModify" text="Modify" />
-                  <MenuButton fx:id="mbtnSort" mnemonicParsing="false" onAction="#actionSort" text="Sort">
-                    <items>
-                        <RadioMenuItem fx:id="rmSurInc" mnemonicParsing="false" text="By Surname A-Z" />
-                        <RadioMenuItem fx:id="rmSurDec" mnemonicParsing="false" text="By Sognome Z-A" />
-                        <RadioMenuItem fx:id="rmNameInc" mnemonicParsing="false" text="By Name A-Z" />
-                        <RadioMenuItem fx:id="rmNameDec" mnemonicParsing="false" text="By Name Z-A" />
-                    </items>
-                  </MenuButton>
                   <MenuButton fx:id="mbtnFilter" mnemonicParsing="false" onAction="#actionFilter" text="Filter">
                      <items>
                         <CheckMenuItem fx:id="chkmHome" mnemonicParsing="false" text="Home" />

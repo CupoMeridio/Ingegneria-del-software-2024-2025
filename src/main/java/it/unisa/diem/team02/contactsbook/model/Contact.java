@@ -19,9 +19,9 @@ public class Contact extends Person{
     
    public Contact(String name, String surname) {
         super(name, surname);
-        number = new ArrayList<String>();
-        email = new ArrayList<String>();
-        this.tag= new ArrayList<Tag>();
+        number = new ArrayList<String>(3);
+        email = new ArrayList<String>(3);
+        this.tag= new ArrayList<Tag>(3);
         this.ID = contatore;
          contatore++;
         
@@ -35,59 +35,42 @@ public class Contact extends Person{
     }
     
     public String getNumber(){
-        if(number[1]==null) return number[0];
-        if (number[2]==null) return number[0]+"\n"+number[1];
-        return number[0]+"\n"+number[1]+"\n"+number[2];
+        if(number.size()==0) return null;
+        if(number.size()==1) return number.get(0);
+        if(number.size()==2) return number.get(0)+"\n"+number.get(1);
+        return number.get(0)+"\n"+number.get(1)+"\n"+number.get(2);
     }
 
     public String getEmail() {
-        if(email[1]==null) return email[0];
-        if (email[2]==null) return email[0]+"\n"+email[1];
-        return email[0]+"\n"+email[1]+"\n"+email[2];
+        if(email.size()==0) return null;
+        if(email.size()==1) return email.get(0);
+        if(email.size()==2) return email.get(0)+"\n"+email.get(1);
+        return email.get(0)+"\n"+email.get(1)+"\n"+email.get(2);
+    }
+    
+    public String getTag(){
+        return "";
     }
 
     public void addTag(Tag tag) {
-        /* Vittorio: eh? lenght è sempre 3...
-        if(this.tag.length<3)
-            this.tag[this.tag.length] = tag;
-        //gestire l' else
-        */
-        
-        //Questa implementazione mancava
-        if (this.tag[0]==null) this.tag[0]=tag;
-        else 
-            if (this.tag[1]==null) this.tag[1]=tag;
-            else 
-                if (this.tag[2]==null) this.tag[2]=tag;
+        if (this.tag.size()>=3){
+            //gestire
+        }
+        else this.tag.add(tag);
     }
     
     public void addNumber(String number) {
-        /*
-        Vittorio: ma wtf? lenght è sempre 3
-        if (this.number.length>=3){
+        if (this.number.size()>=3){
             //gestire
-       
-        }*/
-        
-        if (this.number[0]==null) this.number[0]=number;
-        else 
-            if (this.number[1]==null) this.number[1]=number;
-            else 
-                if (this.number[2]==null) this.number[2]=number;
+        }
+        else this.number.add(number);
     }
     
     public void addEmail(String email){
-        /*
-        Vittorio: stesso problema...
-        if (this.email.length>=3){
+        if (this.email.size()>=3){
             //gestire
         }
-        */
-              if (this.email[0]==null) this.email[0]=email;
-        else 
-            if (this.email[1]==null) this.email[1]=email;
-            else 
-                if (this.email[2]==null) this.email[2]=email;
+        else this.email.add(email);
     }
     
      public void setNumber(ArrayList<String> number) {
@@ -124,9 +107,9 @@ public class Contact extends Person{
     public String toString(){
         StringBuffer sb=new StringBuffer(this.getRole()+" "+super.toString());
         for (int i=0; i<this.number.size();i++)
-            sb=sb.append(" Phone number: ").append(number[i]);
-        for (int i=0; i<this.email.length;i++)
-            sb=sb.append(" Email: ").append(email[i]);
+            sb=sb.append(" Phone number: ").append(number.get(i));
+        for (int i=0; i<this.email.size();i++)
+            sb=sb.append(" Email: ").append(email.get(i));
         return sb.toString();
     }
 }

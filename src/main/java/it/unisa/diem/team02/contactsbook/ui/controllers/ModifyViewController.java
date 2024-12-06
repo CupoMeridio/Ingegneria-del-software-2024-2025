@@ -7,6 +7,7 @@ package it.unisa.diem.team02.contactsbook.ui.controllers;
 import it.unisa.diem.team02.contactsbook.model.Contact;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
@@ -109,6 +110,10 @@ public class ModifyViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         btnModify.disableProperty().bind(Bindings.and(txtName.textProperty().isEmpty(), txtSur.textProperty().isEmpty()));
+        txtNumber2.disableProperty().bind(Bindings.isEmpty(txtNumber1.textProperty()));
+        txtNumber3.disableProperty().bind(Bindings.isEmpty(txtNumber2.textProperty()));
+        txtEmail2.disableProperty().bind(Bindings.isEmpty(txtEmail1.textProperty()));
+        txtEmail3.disableProperty().bind(Bindings.isEmpty(txtEmail2.textProperty()));
     }    
 
     /**
@@ -208,21 +213,21 @@ public class ModifyViewController implements Initializable {
     private void actionModify(ActionEvent event) throws IOException {
         newContact.setName(txtName.getText());
         newContact.setSurname(txtSur.getText());
-        String [] numbers=new String[3];
-        String [] emails=new String [3];
-        if (!txtNumber1.getText().isEmpty()) numbers[0]=txtNumber1.getText();
-        else numbers[0]=null;
-        if (!txtNumber2.getText().isEmpty()) numbers[1]=txtNumber2.getText();
-        else numbers[1]=null;
-        if (!txtNumber3.getText().isEmpty()) numbers[2]=txtNumber3.getText();
-        else numbers[2]=null;
+        ArrayList<String> numbers=new ArrayList<>(3);
+        ArrayList<String> emails=new ArrayList<>(3);
+        if (!txtNumber1.getText().isEmpty())
+            numbers.add(txtNumber1.getText());
+        if (!txtNumber2.getText().isEmpty())
+            numbers.add(txtNumber2.getText());
+        if (!txtNumber3.getText().isEmpty())
+            numbers.add(txtNumber3.getText());
 
-        if(!txtEmail1.getText().isEmpty()) emails[0]=txtEmail1.getText();
-        else emails[0]=null;
-        if(!txtEmail2.getText().isEmpty()) emails[1]=txtEmail2.getText();
-        else emails[1]=null;
-        if(!txtEmail3.getText().isEmpty()) emails[2]=txtEmail3.getText();
-        else emails[2]=null;
+        if (!txtEmail1.getText().isEmpty())
+            emails.add(txtEmail1.getText());
+        if (!txtEmail2.getText().isEmpty())
+            emails.add(txtEmail2.getText());
+        if (!txtEmail3.getText().isEmpty())
+            emails.add(txtEmail3.getText());
 
         newContact.setNumber(numbers);
         newContact.setEmail(emails);
