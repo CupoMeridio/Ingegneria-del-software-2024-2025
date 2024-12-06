@@ -20,11 +20,31 @@ public class User extends Person{
         this.password = password;
         this.email = email;
     }
-
+    
+    /*
+    * @lang it
+    * Imposta la password of the current object.
+    * 
+    * @param {@code String} password.
+    *
+    * lang en
+    * Sets the password of the current object.
+    *
+    * @param {@code String} password.
+    */
     public void setPassword(String password) {
         this.password = password;
     }
-
+    
+    /*
+    * @lang it
+    * Restituisce l'email dell'oggetto corrente.
+    * 
+    * lang en
+    * Return the email of the current object
+    *
+    * @param {@code String} password..
+    */
     public String getEmail() {
         return email;
     }
