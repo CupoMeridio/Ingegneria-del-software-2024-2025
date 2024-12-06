@@ -95,7 +95,7 @@ public class ModifyViewController implements Initializable {
      * 
      * @lang en
      * Initializes the controller.
-     * Calls the methods that initialize the various components.
+     * Handles the deactivation of various buttons.
      * 
      * @param url URL used to resolve the FXML file path.
      * @param rb Resource containing localization data.
