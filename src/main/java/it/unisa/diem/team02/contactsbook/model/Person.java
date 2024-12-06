@@ -80,7 +80,7 @@ public abstract class Person {
     * @lang it
     * Restituisce le informazioni di un oggetto {@code Person} nel seguente formato:
     * {@code Name: <nome> Surname: <cognome>}
-    *
+    * 
     * @lang en
     * Returns the information of a {@code Person} object in the format:
     * {@code Name: <name> Surname: <surname>}
@@ -94,7 +94,7 @@ public abstract class Person {
     
     /**
     * @lang it
-    * Confronta l'oggetto Person corrente con un altro oggetto per verificarne l'uguaglianza.
+    * @brief Confronta l'oggetto Person corrente con un altro oggetto per verificarne l'uguaglianza.
     * L'uguaglianza è determinata confrontando il nome e il cognome. 
     * Se uno o entrambi i campi sono {@code null}, vengono gestiti casi specifici:
     * - Se entrambi i nomi sono {@code null}, confronta solo i cognomi.
@@ -106,7 +106,7 @@ public abstract class Person {
     * @return {@code true} se gli oggetti sono considerati uguali, {@code false} altrimenti.
     * 
     * @lang en
-    * Compares the current object with another object to check for equality.
+    * @brief Compares the current object with another object to check for equality.
     * Equality is determined by comparing the name and surname with those of the current object. 
     * If one or both fields are {@code null}, specific cases are handled:
     * - If both names are {@code null}, only surnames are compared.
