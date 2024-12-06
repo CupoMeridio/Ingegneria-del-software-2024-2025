@@ -31,7 +31,7 @@ LoginViewController -> App: setRoot("ContactsbookView")
 activate App
 deactivate App
 else else
-LoginViewController --> user: messageError()
+LoginViewController --> user: messageError
 deactivate 
 end
 
