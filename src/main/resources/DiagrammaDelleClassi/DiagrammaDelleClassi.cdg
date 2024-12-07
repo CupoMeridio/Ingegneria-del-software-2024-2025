@@ -8,16 +8,16 @@
       </Fields>
       <Constructors/>
       <Methods>
-        <Method name="start" returnType="Stage" visibility="public">
+        <Method name="start" returnType="void" visibility="public">
           <Argument type="Stage" name="stage"/>
         </Method>
-        <Method name="setRoot" returnType="String" visibility="public" isStatic="true">
+        <Method name="setRoot" returnType="void" visibility="public" isStatic="true">
           <Argument type="String" name="fxml"/>
         </Method>
-        <Method name="loadFXML" returnType="String" visibility="private" isStatic="true">
+        <Method name="loadFXML" returnType="Parent" visibility="private" isStatic="true">
           <Argument type="String" name="fxml"/>
         </Method>
-        <Method name="main" returnType="String[]" visibility="public" isStatic="true">
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
           <Argument type="String[]" name="args"/>
         </Method>
       </Methods>
@@ -162,13 +162,13 @@
           <Argument type="String" name="surname"/>
         </Method>
         <Method name="toString" returnType="String" visibility="public"/>
-        <Method name="equals" returnType="Object" visibility="public">
+        <Method name="equals" returnType="boolean" visibility="public">
           <Argument type="Object" name="o"/>
         </Method>
         <Method name="getRole" returnType="String" visibility="public" isAbstract="true"/>
       </Methods>
     </Class>
-    <Class name="User" package="it.unisa.diem.team02.contactsbook.model" visibility="public" xPosition="1776.0" yPosition="14.0">
+    <Class name="User" package="it.unisa.diem.team02.contactsbook.model" visibility="public" xPosition="1776.0" yPosition="52.0">
       <Fields>
         <Field name="password" type="String" visibility="private"/>
         <Field name="email" type="String" visibility="private" isFinal="true"/>
@@ -190,7 +190,7 @@
         <Method name="toString" returnType="String" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="AddViewController" package="it.unisa.diem.team02.contactsbook.ui.controllers" visibility="public" xPosition="640.0" yPosition="22.0">
+    <Class name="AddViewController" package="it.unisa.diem.team02.contactsbook.ui.controllers" visibility="public" xPosition="643.0" yPosition="14.0">
       <Fields>
         <Field name="add" type="AnchorPane" visibility="private"/>
         <Field name="hboxInsertInfo" type="HBox" visibility="private"/>
@@ -217,21 +217,21 @@
         <Field name="btnCanc" type="Button" visibility="private"/>
         <Field name="txtNumber3" type="TextField" visibility="private"/>
         <Field name="btnAdd" type="Button" visibility="private"/>
-        <Field name="contacts" type="ObservableList" visibility="private"/>
+        <Field name="contacts" type="ObservableList&lt;Contact&gt;" visibility="private"/>
       </Fields>
       <Constructors/>
       <Methods>
-        <Method name="initialize" returnType="ResourceBundle" visibility="public">
+        <Method name="initialize" returnType="void" visibility="public">
           <Argument type="URL" name="url"/>
           <Argument type="ResourceBundle" name="rb"/>
         </Method>
-        <Method name="setObservableList" returnType="ObservableList&lt;Contact&gt;" visibility="public">
+        <Method name="setObservableList" returnType="void" visibility="public">
           <Argument type="ObservableList&lt;Contact&gt;" name="contacts"/>
         </Method>
-        <Method name="actionAdd" returnType="ActionEvent" visibility="public">
+        <Method name="actionAdd" returnType="void" visibility="public">
           <Argument type="ActionEvent" name="event"/>
         </Method>
-        <Method name="actionCancel" returnType="ActionEvent" visibility="public">
+        <Method name="actionCancel" returnType="void" visibility="public">
           <Argument type="ActionEvent" name="event"/>
         </Method>
       </Methods>
@@ -264,7 +264,7 @@
         <Field name="clmSur" type="TableColumn&lt;Contact1, String&gt;" visibility="private"/>
         <Field name="interfacciaRubrica" type="SplitPane" visibility="private"/>
         <Field name="btnLogout" type="Button" visibility="private"/>
-        <Field name="contacts" type="ObservableList&lt;Contact1&gt;" visibility="private"/>
+        <Field name="contacts" type="ObservableList&lt;Contact&gt;" visibility="private"/>
       </Fields>
       <Constructors/>
       <Methods>
@@ -302,7 +302,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="DuplicateContactViewController" package="it.unisa.diem.team02.contactsbook.ui.controllers" visibility="public" xPosition="691.0" yPosition="709.0">
+    <Class name="DuplicateContactViewController" package="it.unisa.diem.team02.contactsbook.ui.controllers" visibility="public" xPosition="673.0" yPosition="738.0">
       <Fields>
         <Field name="lblMessage" type="Label" visibility="private"/>
         <Field name="btnYes" type="Button" visibility="private"/>
@@ -311,14 +311,14 @@
       </Fields>
       <Constructors/>
       <Methods>
-        <Method name="initialize" returnType="ResourceBundle" visibility="public">
+        <Method name="initialize" returnType="void" visibility="public">
           <Argument type="URL" name="url"/>
           <Argument type="ResourceBundle" name="rb"/>
         </Method>
-        <Method name="actionYes" returnType="ActionEvent" visibility="private">
+        <Method name="actionYes" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
-        <Method name="actionNo" returnType="ActionEvent" visibility="private">
+        <Method name="actionNo" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
         <Method name="set" returnType="Contact" visibility="public">
@@ -334,13 +334,13 @@
       </Fields>
       <Constructors/>
       <Methods>
-        <Method name="initialize" returnType="ResourceBundle" visibility="public">
+        <Method name="initialize" returnType="void" visibility="public">
           <Argument type="URL" name="url"/>
           <Argument type="ResourceBundle" name="rb"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="LoginViewController" package="it.unisa.diem.team02.contactsbook.ui.controllers" visibility="public" xPosition="167.0" yPosition="625.0">
+    <Class name="LoginViewController" package="it.unisa.diem.team02.contactsbook.ui.controllers" visibility="public" xPosition="166.0" yPosition="625.0">
       <Fields>
         <Field name="login" type="AnchorPane" visibility="private"/>
         <Field name="vBoxLogin" type="VBox" visibility="private"/>
@@ -365,26 +365,26 @@
       </Fields>
       <Constructors/>
       <Methods>
-        <Method name="initialize" returnType="ResourceBundle" visibility="public">
+        <Method name="initialize" returnType="void" visibility="public">
           <Argument type="URL" name="url"/>
           <Argument type="ResourceBundle" name="rb"/>
         </Method>
         <Method name="txtSignMailInitialize" returnType="BooleanProperty" visibility="private"/>
         <Method name="txtSignPassInitialize" returnType="BooleanProperty" visibility="private"/>
         <Method name="txtConfirmPassInitialize" returnType="BooleanProperty" visibility="private"/>
-        <Method name="isValidEmail" returnType="String" visibility="private">
+        <Method name="isValidEmail" returnType="boolean" visibility="private">
           <Argument type="String" name="email"/>
         </Method>
-        <Method name="isValidPassword" returnType="String" visibility="private">
+        <Method name="isValidPassword" returnType="boolean" visibility="private">
           <Argument type="String" name="password"/>
         </Method>
-        <Method name="actionLogin" returnType="ActionEvent" visibility="private">
+        <Method name="actionLogin" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
-        <Method name="actionSignin" returnType="ActionEvent" visibility="private">
+        <Method name="actionSignin" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
-        <Method name="actionLoginLocal" returnType="ActionEvent" visibility="private">
+        <Method name="actionLoginLocal" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
       </Methods>
@@ -416,26 +416,25 @@
         <Field name="hboxButton" type="HBox" visibility="private"/>
         <Field name="btnCanc" type="Button" visibility="private"/>
         <Field name="btnModify" type="Button" visibility="private"/>
-        <Field name="contacts" type="ObservableList&lt;Contact1&gt;" visibility="private"/>
-        <Field name="oldContact" type="Contact1" visibility="private"/>
-        <Field name="newContact" type="Contact1" visibility="private"/>
+        <Field name="contacts" type="ObservableList&lt;Contact&gt;" visibility="private"/>
+        <Field name="oldContact" type="Contact" visibility="private"/>
       </Fields>
       <Constructors/>
       <Methods>
-        <Method name="initialize" returnType="ResourceBundle" visibility="public">
+        <Method name="initialize" returnType="void" visibility="public">
           <Argument type="URL" name="url"/>
           <Argument type="ResourceBundle" name="rb"/>
         </Method>
-        <Method name="actionCancel" returnType="ActionEvent" visibility="private">
+        <Method name="actionCancel" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
-        <Method name="setObservableList" returnType="ObservableList&lt;Contact&gt;" visibility="public">
+        <Method name="setObservableList" returnType="void" visibility="public">
           <Argument type="ObservableList&lt;Contact&gt;" name="contacts"/>
         </Method>
-        <Method name="setContact" returnType="Contact" visibility="public">
+        <Method name="setContact" returnType="void" visibility="public">
           <Argument type="Contact" name="contact"/>
         </Method>
-        <Method name="actionModify" returnType="ActionEvent" visibility="private">
+        <Method name="actionModify" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
       </Methods>
@@ -449,23 +448,23 @@
     </Enum>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <HasRelation name="clmSur" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="clmName" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="contacts" source="it.unisa.diem.team02.contactsbook.ui.controllers.ModifyViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;Contact&gt;"/>
     <HasRelation name="contact" source="it.unisa.diem.team02.contactsbook.ui.controllers.DuplicateContactViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="contacts" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;Contact&gt;"/>
-    <HasRelation name="newContact" source="it.unisa.diem.team02.contactsbook.ui.controllers.ModifyViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="clmName" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="tblvRubrica" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="tag" source="it.unisa.diem.team02.contactsbook.model.Contact" target="it.unisa.diem.team02.contactsbook.model.Tag" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Tag&gt;"/>
-    <HasRelation name="clmTag" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Tag" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <IsRelation name="is" source="it.unisa.diem.team02.contactsbook.model.Contact" target="it.unisa.diem.team02.contactsbook.model.Person"/>
-    <UseRelation source="it.unisa.diem.team02.contactsbook.model.Contact" target="it.unisa.diem.team02.contactsbook.model.Tag" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <IsRelation name="is" source="it.unisa.diem.team02.contactsbook.model.User" target="it.unisa.diem.team02.contactsbook.model.Person"/>
-    <UseRelation source="it.unisa.diem.team02.contactsbook.ui.controllers.AddViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="clmEmail" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="clmNum" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="oldContact" source="it.unisa.diem.team02.contactsbook.ui.controllers.ModifyViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="it.unisa.diem.team02.contactsbook.ui.controllers.DuplicateContactViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="clmNum" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="clmSur" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="it.unisa.diem.team02.contactsbook.ui.controllers.ModifyViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="newContact" source="it.unisa.diem.team02.contactsbook.ui.controllers.ModifyViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="it.unisa.diem.team02.contactsbook.ui.controllers.AddViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="contacts" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;Contact&gt;"/>
+    <HasRelation name="clmEmail" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="tag" source="it.unisa.diem.team02.contactsbook.model.Contact" target="it.unisa.diem.team02.contactsbook.model.Tag" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Tag&gt;"/>
+    <IsRelation name="is" source="it.unisa.diem.team02.contactsbook.model.User" target="it.unisa.diem.team02.contactsbook.model.Person"/>
+    <HasRelation name="clmTag" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Tag" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="contacts" source="it.unisa.diem.team02.contactsbook.ui.controllers.ModifyViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;Contact&gt;"/>
+    <UseRelation source="it.unisa.diem.team02.contactsbook.model.Contact" target="it.unisa.diem.team02.contactsbook.model.Tag" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="oldContact" source="it.unisa.diem.team02.contactsbook.ui.controllers.ModifyViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="it.unisa.diem.team02.contactsbook.model.Contact" target="it.unisa.diem.team02.contactsbook.model.Person"/>
   </ClassDiagramRelations>
 </ClassDiagram>
