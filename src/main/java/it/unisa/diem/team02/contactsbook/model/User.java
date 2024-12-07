@@ -2,14 +2,9 @@
 package it.unisa.diem.team02.contactsbook.model;
 
 /**
- * @lang it
- * Classe che estende la classe astratta {@code Person}. Definisce degli ulteriori attributi e metodi
- * per effettuare specifiche operazioni sugli oggetti {@code User}.
  * 
- * @lang en
- * Class that extends the abstract class {@code Person}. It defines additional attributes and methods
- * to perform specific operations on {@code User} objects.
- * 
+ * Classe che estende la classe astratta Person. Definisce degli ulteriori attributi e metodi
+ * per effettuare specifiche operazioni sugli oggetti User.
  */
 public class User extends Person{
     private String password;
@@ -22,15 +17,10 @@ public class User extends Person{
     }
     
     /*
-    * @lang it
+    * 
     * Imposta la password of the current object.
     * 
-    * @param {@code String} password.
-    *
-    * lang en
-    * Sets the password of the current object.
-    *
-    * @param {@code String} password.
+    * @param String password.
     *
     * @author team02
     */
@@ -39,13 +29,9 @@ public class User extends Person{
     }
     
     /*
-    * @lang it
-    * Restituisce l'email dell'oggetto corrente.
     * 
-    * lang en
-    * Return the email of the current object
-    *
-    * @param {@code String} password..
+    * Restituisce l'email dell'oggetto corrente.
+    * @param String password..
     */
     public String getEmail() {
         return email;
@@ -57,14 +43,9 @@ public class User extends Person{
     }
     
     /*
-    * @lang it
-    * Restituisce le informazioni di un oggetto {@code Person} nel seguente formato:
-    * {@code Ruolo Name: <nome> Surname: <cognome> Email: <email>}
-    *
-    * @lang en
-    * Returns the information of a {@code Person} object in the format:
-    * {@code Role Name: <name> Surname: <surname> Email: <email>}
-    *
+    * 
+    * Restituisce le informazioni di un oggetto Person nel seguente formato:
+    * Ruolo Name: <nome> Surname: <cognome> Email: <email>
     *
     */
     @Override
