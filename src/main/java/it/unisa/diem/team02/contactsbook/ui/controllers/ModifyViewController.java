@@ -87,7 +87,6 @@ public class ModifyViewController implements Initializable {
     
     private ObservableList<Contact> contacts;
     private Contact oldContact;
-    private Contact newContact=new Contact("", "");
 
     /**
      * 
@@ -179,8 +178,7 @@ public class ModifyViewController implements Initializable {
      */
     @FXML
     private void actionModify(ActionEvent event) throws IOException {
-        newContact.setName(txtName.getText());
-        newContact.setSurname(txtSur.getText());
+        Contact newContact=new Contact(txtName.getText(), txtSur.getText(), oldContact.getID());
         ArrayList<String> numbers=new ArrayList<>(3);
         ArrayList<String> emails=new ArrayList<>(3);
         if (!txtNumber1.getText().isEmpty())
