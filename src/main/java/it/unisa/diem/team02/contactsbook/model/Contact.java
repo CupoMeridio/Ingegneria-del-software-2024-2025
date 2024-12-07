@@ -7,16 +7,10 @@ package it.unisa.diem.team02.contactsbook.model;
 import java.util.ArrayList;
 
 /**
- * @lang it
- * Classe che estende la classe astratta {@code Person}. Definisce degli ulteriori attributi e metodi
- * per effettuare specifiche operazioni sugli oggetti {@code Contact}. Gli attributi
- * {@code number}, {@code email} e {@code tag} sono implementati tramite un
- * {@code ArrayList}
  * 
- * @lang en
- * Class that extends the abstract class {@code Person}. It defines additional attributes and methods
- * to perform specific operations on {@code Contact} objects. The attributes {@code number},
- * {@code email} e {@code tag} are implemented by an {@code ArrayList}
+ * Classe che estende la classe astratta Person. Definisce degli ulteriori attributi e metodi
+ * per effettuare specifiche operazioni sugli oggetti Contact. Gli attributi
+ * number, email e tag sono implementati tramite un ArrayList
  * 
  * @author team02
  */
@@ -28,7 +22,17 @@ public class Contact extends Person{
     private final int ID;
     
     
-    
+/**
+ * 
+ * @brief Costruttore della classe Conatct
+ * Inizializza un nuovo oggetto `Contact` con il nome e il cognome forniti, 
+ * inizializzando anche le liste `number`, `email` e `tag` con una capacità iniziale 
+ * di 3 elementi ciascuna. Assegna inoltre un ID univoco al contatto basato su un 
+ * contatore statico incrementale.
+ * 
+ * @param name Nome del conatto
+ * @param surname Cognome del contatto
+ */    
     public Contact(String name, String surname) {
         super(name, surname);
         number = new ArrayList<String>(3);
@@ -38,6 +42,22 @@ public class Contact extends Person{
          contatore++;
         
     }
+    
+  /**
+  * lang it
+  * @brief Costruttore della classe Contact con ID specificato.
+  * 
+  * Inizializza un nuovo oggetto `Contact` con il nome, il cognome e un ID specificato. 
+  * Inoltre, inizializza le liste `number`, `email` e `tag` come vuote.
+  * 
+  * @param name Nome del contatto.
+  * @param surname Cognome del contatto.
+  * @param ID Identificatore univoco del contatto.
+  * 
+  * @note Questo costruttore consente di specificare manualmente l'ID del contatto, 
+  *       rendendolo utile in scenari come il caricamento di dati da un database o da file.
+  * 
+  */
     public Contact(String name, String surname, int ID) {
         super(name, surname);
         number = new ArrayList<String>();
@@ -46,26 +66,46 @@ public class Contact extends Person{
         this.ID = ID;  
     }
     
-   /*
-   * @lang it
-   * Restituisce tutti i numeri di telefono dell'oggetto corrente.
-   * 
-   * lang en
-   * Returns all the phone number of the current object.
-   */  
+ /**
+ * 
+ * @brief Restituisce i numeri di telefono del contatto in formato leggibile.
+ * 
+ * Questo metodo restituisce i numeri di telefono associati al contatto in base alla 
+ * quantità presente nella lista `number`. Se ci sono:
+ * - Nessun numero: restituisce `null`.
+ * - Un numero: restituisce il numero.
+ * - Due numeri: restituisce i due numeri separati da una nuova riga (`\n`).
+ * - Tre o più numeri: restituisce i primi tre numeri separati da nuove righe.
+ * 
+ * @return Una stringa contenente i numeri di telefono formattati o `null` se 
+ *         la lista è vuota.
+ * 
+ */
     public String getNumber(){
         if(number.size()==0) return null;
         if(number.size()==1) return number.get(0);
         if(number.size()==2) return number.get(0)+"\n"+number.get(1);
         return number.get(0)+"\n"+number.get(1)+"\n"+number.get(2);
     }
-    /*
-    * @lang it
-    * Restituisce tutti gli indirizzi email dell'oggetto corrente.
-    * 
-    * @lang en
-    * Returns all the email address of the current object.
-    */
+ /**
+ *
+ * @brief Restituisce gli indirizzi email del contatto in formato leggibile.
+ * 
+ * Questo metodo restituisce gli indirizzi email associati al contatto in base alla 
+ * quantità presente nella lista `email`.
+ * Se ci sono:
+ * - Nessun indirizzo: restituisce `null`.
+ * - Un indirizzo: restituisce l'indirizzo.
+ * - Due indirizzi: restituisce i due indirizzi separati da una nuova riga (`\n`).
+ * - Tre o più indirizzi: restituisce i primi tre indirizzi separati da nuove righe.
+ * 
+ * @return Una stringa contenente gli indirizzi email formattati o `null` se 
+ *         la lista è vuota.
+ * 
+ * @note Il metodo restituisce al massimo tre indirizzi, anche se la lista `email` 
+ *       contiene più di tre elementi.
+ * 
+ */
     public String getEmail() {
         if(email.size()==0) return null;
         if(email.size()==1) return email.get(0);
@@ -74,24 +114,16 @@ public class Contact extends Person{
     }
     
     /*
-    * @lang it
+    * 
     * Restituisce tutti i tag dell'oggetto corrente.
-    *
-    * @lang en
-    * Returns all the tags of the current object.
     */
     public String getTag(){
         return "";
     }
     
     /*
-    * @lang it
+    * 
     * Inserisce un tag tra {Home, University, Job}, per un massimo di tre tag.
-    * 
-    * 
-    * @lang en
-    * Inserts a tag from {Home, University, Job}, with a maximum of three tags.
-    *
     */
     public void addTag(Tag tag) {
         if (this.tag.size()>=3){
@@ -101,13 +133,8 @@ public class Contact extends Person{
     }
     
     /*
-    * @lang it
+    * 
     * Inserisce un numero di telefono per un massimo di tre.
-    * 
-    * 
-    * @lang en
-    * Inserts a phone number with a maximum of three number.
-    *
     */
     
     public void addNumber(String number) {
@@ -117,15 +144,10 @@ public class Contact extends Person{
         else this.number.add(number);
     }
     
-     /*
+    /*
     * @brief Non ancora implementata
-    * @lang it
+    * 
     * Inserisce un indirizzo email per un massimo di tre.
-    * 
-    * 
-    * @lang en
-    * Inserts a email adress with a maximum of three number.
-    *
     */
     public void addEmail(String email){
         if (this.email.size()>=3){
@@ -135,96 +157,78 @@ public class Contact extends Person{
     }
     
    /**
-    * @lang it
     * Imposta la lista dei numeri di telefono.
-    * 
-    * @param {@code ArrayList<String>} number.
-    * 
-    * @lang en
-    * Sets the list of phone numbers.
-    * 
-    * @param {@code ArrayList<String>} number.
+    * @param number
     */
     public void setNumber(ArrayList<String> number) {
         this.number = number;
     }
     
     /**
-    * @lang it
+    * 
     * Imposta la lista degli indirizzi email.
-    * 
-    * @param {@code ArrayList<String>} email.
-    * 
-    * @lang en
-    * Sets the list of email addresses.
-    * 
-    * @param {@code ArrayList<String>} email
+    * @param email
     */
     public void setEmail(ArrayList<String> email) {
         this.email = email;
     }
     
     /**
-     * @lang it
      * Imposta la lista dei tag associati.
-     * 
-     * @param {@code ArrayList<String>} tag.
-     * 
-     * @lang en
-     * Sets the list of associated tags.
-     * 
-     * @param {@code ArrayList<String>} tag.
+     * @param tag
      */
     public void setTag(ArrayList<Tag> tag) {
         this.tag = tag;
     }
     
     /**
-    * @lang it
     * Restituisce la lista dei tag associati.
-    * 
-    * @lang en
-    * Returns the list of associated tags.
     */
      public ArrayList<Tag> getTagList() {
         return tag;
     }
      
     /**
-    * @lang it
+    * 
     * Restituisce la lista dei numeri di telefono.
     * 
-    * @lang en
-    * Returns the list of phone numbers.
     */ 
     public ArrayList<String> getNumberList(){
         return this.number ;
     }
     
     /**
-    * @lang it
+    * 
     * Restituisce la lista degli indirizzi email.
     * 
-    * @lang en
-    * Returns the list of email addresses.
     */
     public ArrayList<String> getEmailList() {
         return email;
     }
     
-    /*
-    * @lang it
-    * Restitusce il campo id del contatto
-    *
-    * @lang en
-    * Returns the id of the contact.
-    *
-    */
+ /**
+ * 
+ * @brief Restituisce l'ID del contatto.
+ * Questo metodo restituisce l'identificatore univoco (ID) associato al contatto.
+ * 
+ * @return L'ID del contatto come valore intero.
+ * 
+ * @return The contact ID as an integer value.
+ */
      public int getID() {
         return ID;
     }
     
-   
+ /**
+ * 
+ * @brief Restituisce il ruolo della classe corrente.
+ * Questo metodo sovrascrive il metodo `getRole` della classe base. 
+ * Restituisce il nome completo della classe corrente come stringa, utilizzando 
+ * il metodo `toString` dell'oggetto `Class`.
+ * 
+ * @return Una stringa che rappresenta il nome completo della classe corrente.
+ * 
+ */
     @Override
     public String getRole() {
         return this.getClass().toString();
@@ -232,23 +236,14 @@ public class Contact extends Person{
     
     
     /**
-    * @lang it
+    * 
     * Restituisce una rappresentazione dell'oggetto corrente sotto forma di stringa, 
     * includendo il ruolo, le informazioni della classe padre e i numeri di telefono ed email associati.
-    * Utilizza un {@code StringBuffer} per concatenare le informazioni:
-    * - Il ruolo dell'oggetto (ottenuto tramite {@code getRole()}).
-    * - Le informazioni dell'oggetto della classe padre (ottenute tramite {@code super.toString()}).
+    * Utilizza un StringBuffer per concatenare le informazioni:
+    * - Il ruolo dell'oggetto (ottenuto tramite getRole()).
+    * - Le informazioni dell'oggetto della classe padre (ottenute tramite super.toString()).
     * - I numeri di telefono associati all'oggetto, se presenti.
     * - Gli indirizzi email associati all'oggetto, se presenti.
-    * 
-    * @lang en
-    * Returns a string representation of the current object, including the role, 
-    * parent class information, and associated phone numbers and emails.
-    * It uses a {@code StringBuffer} to concatenate the information:
-    * - The object's role (obtained through {@code getRole()}).
-    * - The information from the parent class (obtained through {@code super.toString()}).
-    * - The phone numbers associated with the object, if any.
-    * - The email addresses associated with the object, if any.
     * 
     */
 

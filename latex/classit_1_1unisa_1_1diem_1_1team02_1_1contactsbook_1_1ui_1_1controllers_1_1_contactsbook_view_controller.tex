@@ -1,0 +1,125 @@
+\doxysection{Riferimenti per la classe it.\+unisa.\+diem.\+team02.\+contactsbook.\+ui.\+controllers.\+Contactsbook\+View\+Controller}
+\hypertarget{classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_contactsbook_view_controller}{}\label{classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_contactsbook_view_controller}\index{it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController@{it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController}}
+Diagramma delle classi per it.\+unisa.\+diem.\+team02.\+contactsbook.\+ui.\+controllers.\+Contactsbook\+View\+Controller\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_contactsbook_view_controller}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Membri pubblici}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_contactsbook_view_controller_abe5ddbeed2a0b30cb9db11d6963c4d34}{initialize}} (URL url, Resource\+Bundle rb)
+\item 
+void \mbox{\hyperlink{classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_contactsbook_view_controller_acbd9d16a21a95d2730f6335889e4e278}{create\+List}} ()
+\item 
+void \mbox{\hyperlink{classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_contactsbook_view_controller_a804ece2d3fce684219f918f6d2c33f2e}{initialize\+List}} ()
+\item 
+void \mbox{\hyperlink{classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_contactsbook_view_controller_ab247fe281a40dd04fdde4ee2a2b0762a}{action\+Add}} (Action\+Event event)  throws IOException
+\begin{DoxyCompactList}\small\item\em Gestisce l\textquotesingle{}evento di aggiunta di un nuovo contatto. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_contactsbook_view_controller_a1973fd32efb0dbc5add3cf2c6eb35262}{action\+Modify}} (Action\+Event event)  throws IOException
+\item 
+void \mbox{\hyperlink{classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_contactsbook_view_controller_a3fc4b6cb5480398fc607b2925b9397b7}{btn\+Mofidy\+Initialize}} ()
+\item 
+void \mbox{\hyperlink{classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_contactsbook_view_controller_a5466aa05658b266c66f6c53f75387e08}{btn\+Delete\+Initialize}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrizione dettagliata}
+Controller per la gestione della schermata principale della rubrica.
+
+\begin{DoxyAuthor}{Autore}
+\doxylink{namespaceit_1_1unisa_1_1diem_1_1team02}{team02} 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Documentazione delle funzioni membro}
+\Hypertarget{classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_contactsbook_view_controller_ab247fe281a40dd04fdde4ee2a2b0762a}\index{it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController@{it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController}!actionAdd@{actionAdd}}
+\index{actionAdd@{actionAdd}!it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController@{it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController}}
+\doxysubsubsection{\texorpdfstring{actionAdd()}{actionAdd()}}
+{\footnotesize\ttfamily \label{classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_contactsbook_view_controller_ab247fe281a40dd04fdde4ee2a2b0762a} 
+void it.\+unisa.\+diem.\+team02.\+contactsbook.\+ui.\+controllers.\+Contactsbook\+View\+Controller.\+action\+Add (\begin{DoxyParamCaption}\item[{Action\+Event}]{event}{}\end{DoxyParamCaption}) throws IOException}
+
+
+
+Gestisce l\textquotesingle{}evento di aggiunta di un nuovo contatto. 
+
+lang it 
+
+Questo metodo viene invocato quando si verifica un evento di tipo {\ttfamily Action\+Event}, come il clic su un pulsante per aggiungere un nuovo contatto. Carica la vista FXML per l\textquotesingle{}aggiunta di un contatto, imposta un controller con una lista osservabile di contatti e mostra la finestra modale per l\textquotesingle{}inserimento di un nuovo contatto.
+
+
+\begin{DoxyParams}{Parametri}
+{\em event} & L\textquotesingle{}evento che ha scatenato l\textquotesingle{}azione.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Eccezioni}
+{\em IOException} & Se c\textquotesingle{}è un errore nel caricamento del file FXML.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyNote}{Nota}
+La finestra di dialogo viene aperta come finestra modale, impedendo l\textquotesingle{}interazione con altre finestre finché non viene chiusa. 
+\end{DoxyNote}
+\Hypertarget{classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_contactsbook_view_controller_a1973fd32efb0dbc5add3cf2c6eb35262}\index{it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController@{it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController}!actionModify@{actionModify}}
+\index{actionModify@{actionModify}!it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController@{it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController}}
+\doxysubsubsection{\texorpdfstring{actionModify()}{actionModify()}}
+{\footnotesize\ttfamily \label{classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_contactsbook_view_controller_a1973fd32efb0dbc5add3cf2c6eb35262} 
+void it.\+unisa.\+diem.\+team02.\+contactsbook.\+ui.\+controllers.\+Contactsbook\+View\+Controller.\+action\+Modify (\begin{DoxyParamCaption}\item[{Action\+Event}]{event}{}\end{DoxyParamCaption}) throws IOException}
+
+Implementa l\textquotesingle{}azione associcata al tasto modify\+: si apre una schermata per modificare il contatto selezionato e la lista osservabile viene passata al controller.
+
+
+\begin{DoxyParams}{Parametri}
+{\em event} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Eccezioni}
+{\em IOException} & \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_contactsbook_view_controller_a5466aa05658b266c66f6c53f75387e08}\index{it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController@{it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController}!btnDeleteInitialize@{btnDeleteInitialize}}
+\index{btnDeleteInitialize@{btnDeleteInitialize}!it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController@{it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController}}
+\doxysubsubsection{\texorpdfstring{btnDeleteInitialize()}{btnDeleteInitialize()}}
+{\footnotesize\ttfamily \label{classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_contactsbook_view_controller_a5466aa05658b266c66f6c53f75387e08} 
+void it.\+unisa.\+diem.\+team02.\+contactsbook.\+ui.\+controllers.\+Contactsbook\+View\+Controller.\+btn\+Delete\+Initialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Il bottone Delete non può essere premuto se non è stato selezionato alcun contatto. \Hypertarget{classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_contactsbook_view_controller_a3fc4b6cb5480398fc607b2925b9397b7}\index{it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController@{it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController}!btnMofidyInitialize@{btnMofidyInitialize}}
+\index{btnMofidyInitialize@{btnMofidyInitialize}!it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController@{it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController}}
+\doxysubsubsection{\texorpdfstring{btnMofidyInitialize()}{btnMofidyInitialize()}}
+{\footnotesize\ttfamily \label{classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_contactsbook_view_controller_a3fc4b6cb5480398fc607b2925b9397b7} 
+void it.\+unisa.\+diem.\+team02.\+contactsbook.\+ui.\+controllers.\+Contactsbook\+View\+Controller.\+btn\+Mofidy\+Initialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Il bottone Modify non può essere premuto se non è stato selezionato alcun contatto. Per \Hypertarget{classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_contactsbook_view_controller_acbd9d16a21a95d2730f6335889e4e278}\index{it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController@{it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController}!createList@{createList}}
+\index{createList@{createList}!it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController@{it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController}}
+\doxysubsubsection{\texorpdfstring{createList()}{createList()}}
+{\footnotesize\ttfamily \label{classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_contactsbook_view_controller_acbd9d16a21a95d2730f6335889e4e278} 
+void it.\+unisa.\+diem.\+team02.\+contactsbook.\+ui.\+controllers.\+Contactsbook\+View\+Controller.\+create\+List (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Crea una lista osservabile con campi\+: Name, Surname, Number, Email e la associa alla tabella dell\textquotesingle{}interfaccia grafica. \Hypertarget{classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_contactsbook_view_controller_abe5ddbeed2a0b30cb9db11d6963c4d34}\index{it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController@{it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController}!initialize@{initialize}}
+\index{initialize@{initialize}!it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController@{it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController}}
+\doxysubsubsection{\texorpdfstring{initialize()}{initialize()}}
+{\footnotesize\ttfamily \label{classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_contactsbook_view_controller_abe5ddbeed2a0b30cb9db11d6963c4d34} 
+void it.\+unisa.\+diem.\+team02.\+contactsbook.\+ui.\+controllers.\+Contactsbook\+View\+Controller.\+initialize (\begin{DoxyParamCaption}\item[{URL}]{url}{, }\item[{Resource\+Bundle}]{rb}{}\end{DoxyParamCaption})}
+
+Metodo di inizializzazione del controller. Chiama i metodi che inizializzano i vari componenti.
+
+
+\begin{DoxyParams}{Parametri}
+{\em url} & URL utilizzato per risolvere il percorso del file FXML. \\
+\hline
+{\em rb} & Risorsa contenente dati di localizzazione. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_contactsbook_view_controller_a804ece2d3fce684219f918f6d2c33f2e}\index{it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController@{it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController}!initializeList@{initializeList}}
+\index{initializeList@{initializeList}!it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController@{it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController}}
+\doxysubsubsection{\texorpdfstring{initializeList()}{initializeList()}}
+{\footnotesize\ttfamily \label{classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1ui_1_1controllers_1_1_contactsbook_view_controller_a804ece2d3fce684219f918f6d2c33f2e} 
+void it.\+unisa.\+diem.\+team02.\+contactsbook.\+ui.\+controllers.\+Contactsbook\+View\+Controller.\+initialize\+List (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Inizializza la lista osservabile con i contatti presenti nel database/file locale. 
+
+La documentazione per questa classe è stata generata a partire dal seguente file\+:\begin{DoxyCompactItemize}
+\item 
+src/main/java/it/unisa/diem/team02/contactsbook/ui/controllers/\mbox{\hyperlink{_contactsbook_view_controller_8java}{Contactsbook\+View\+Controller.\+java}}\end{DoxyCompactItemize}

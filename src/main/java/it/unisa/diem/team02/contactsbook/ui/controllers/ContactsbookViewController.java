@@ -33,11 +33,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- * @lang it
+ * 
  * Controller per la gestione della schermata principale della rubrica.
  * 
- * @lang en
- * Controller for handling the contactbook main screen.
  * 
  * @author team02
  */
@@ -99,19 +97,13 @@ public class ContactsbookViewController implements Initializable {
     private ObservableList<Contact> contacts;
 
     /**
-     * @lang it
+     * 
      * Metodo di inizializzazione del controller.
      * Chiama i metodi che inizializzano i vari componenti.
      * 
      * @param url URL utilizzato per risolvere il percorso del file FXML.
      * @param rb Risorsa contenente dati di localizzazione.
      * 
-     * @lang en
-     * Initializes the controller.
-     * Calls the methods that initialize the various components.
-     * 
-     * @param url URL used to resolve the FXML file path.
-     * @param rb Resource containing localization data.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -122,13 +114,10 @@ public class ContactsbookViewController implements Initializable {
     }    
     
     /**
-     * @lang it
+     * 
      * Crea una lista osservabile con campi: Name, Surname, Number, Email e la associa alla tabella 
      * dell'interfaccia grafica.
      * 
-     * @lang en
-     * Creates an observable list with the fields: Name, Surname, Number, Email and it associate it to the 
-     * table af the graphical interface.
      */
     public void createList(){
         contacts = FXCollections.observableArrayList();
@@ -140,32 +129,34 @@ public class ContactsbookViewController implements Initializable {
     }
     
     /**
-     * @lang it
+     * 
      * Inizializza la lista osservabile con i contatti presenti nel database/file locale.
      * 
-     * @lang en
-     * Initialize the observable list with the contacts present in the database/local file.
      */
     public void initializeList(){
         
     }
     
-    
-    @FXML
     /**
-     * @lang it
-     * Implementa l'azione associcata al tasto add: si apre una schermata per aggiungere un contatto e la 
-     * lista osservabile viene passata al controller.
-     * 
-     * @param {@code ActionEvent} event
-     * 
-     * @lang en
-     * Implements the action associated with the add button: a screen opens to add a contact, and the 
-     * observable list is passed to the controller.
-     * 
-     * @param [@code ActionEvent} event
-     * @throws IOException
-     */
+ * lang it
+ * @brief Gestisce l'evento di aggiunta di un nuovo contatto.
+ * 
+ * Questo metodo viene invocato quando si verifica un evento di tipo `ActionEvent`, 
+ * come il clic su un pulsante per aggiungere un nuovo contatto. Carica la vista FXML 
+ * per l'aggiunta di un contatto, imposta un controller con una lista osservabile di 
+ * contatti e mostra la finestra modale per l'inserimento di un nuovo contatto.
+ * 
+ * @param event L'evento che ha scatenato l'azione.
+ * 
+ * @throws IOException Se c'è un errore nel caricamento del file FXML.
+ * 
+ * @note La finestra di dialogo viene aperta come finestra modale, impedendo l'interazione 
+ *       con altre finestre finché non viene chiusa.
+ * 
+ * 
+ */
+    @FXML
+
     public void actionAdd(ActionEvent event) throws IOException{
               FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AddView.fxml"));
               Parent root = loader.load();
@@ -186,17 +177,12 @@ public class ContactsbookViewController implements Initializable {
     }
     
     /**
-     * @lang it
+     * 
      * Implementa l'azione associcata al tasto modify: si apre una schermata per modificare il contatto 
      * selezionato e la lista osservabile viene passata al controller.
      * 
-     * @param {@code ActionEvent} event
+     * @param event
      * 
-     * @lang en
-     * Implements the action associated with the modify button: a screen opens to modify the selected 
-     * contact, and the observable list is passed to the controller.
-     * 
-     * @param {@code ActionEvent} event
      * @throws IOException
      */
     @FXML
@@ -222,15 +208,10 @@ public class ContactsbookViewController implements Initializable {
     }
     
     /**
-     * @lang it
+     * 
      * Il bottone Modify non può essere premuto se non è stato selezionato alcun contatto. Per
      * 
-     * @param [@code ActionEvent} event
      * 
-     * @lang en
-     * The Modify button cannot be pressed if no contact has been selected.
-     * 
-     * @param [@code ActionEvent} event
      */
     public void btnMofidyInitialize(){
         btnModify.setDisable(true);
@@ -244,16 +225,9 @@ public class ContactsbookViewController implements Initializable {
     }
     
     /**
-     * @lang it
+     * 
      * Il bottone Delete non può essere premuto se non è stato selezionato alcun contatto. 
      * 
-     * 
-     * @param {@code ActionEvent} event
-     * 
-     * @lang en
-     * The Delete button cannot be pressed if no contact has been selected.
-     * 
-     * @param {@code ActionEvent} event
      */
     public void btnDeleteInitialize(){
         btnDelete.setDisable(true);
@@ -267,16 +241,8 @@ public class ContactsbookViewController implements Initializable {
     }
 
     /**
-     * @lang it
      * Implementa l'azione associcata al tasto delete: il contatto selezionato viene eliminato dalla rubrica.
-     * 
-     * @param {@code ActionEvent} event
-     * 
-     * @lang en
-     * Implements the action associated with the delete button: the selected contact is deleted from the 
-     * contactbook.
-     * 
-     * @param {@code ActionEvent} event
+     * @param event
      */
     @FXML
     private void actionDelete(ActionEvent event) {
@@ -285,85 +251,60 @@ public class ContactsbookViewController implements Initializable {
     }
     
     /**
-     * @lang it
+     * 
      * Implementa l'azione associcata al menu button Filter: vengono visualizzati solo i contatti associati
      * al tag selezionato.
      * 
-     * @param {@code ActionEvent} event
+     * @param event
      * 
-     * @lang en
-     * Implements the action associated with the Filter menu button: only the contacts associated with 
-     * the selected tag are displayed.
-     * 
-     * @param {@code ActionEvent} event
      */
     @FXML
     private void actionFilter(ActionEvent event) {
     }
 
     /**
-     * @lang it
+     * 
      * Implementa l'azione associcata al tasto Import: tutti i contatti di un file indicato sono aggiunti
      * nella rubrica.
      * 
-     * @param {@code ActionEvent} event
+     * @param event
      * 
-     * @lang en
-     * Implements the action associated with the Import button: all contacts from a specified file are 
-     * added to the contactbook. 
-     * 
-     * @param {@code ActionEvent} event
      */
     @FXML
     private void actionImport(ActionEvent event) {
     }
 
     /**
-     * @lang it
+     * 
      * Implementa l'azione associcata al tasto Export: tutti i contatti della rubrica sono esportati in 
      * un file specificato.
      * 
-     * @param {@code ActionEvent} event
+     * @param event
      * 
-     * @lang en
-     * Implements the action associated with the Export button: all contacts in the contactbook are 
-     * exported in a specified file.
-     * 
-     * @param {@code ActionEvent} event
      */
     @FXML
     private void actionExport(ActionEvent event) {
     }
     
     /**
-     * @lang it
+     * 
      * Vengono visualizzati solo i contatti della rubrica contenenti la sottostringa inserita nella barra
      * di ricarca
      * 
-     * @param {@code ActionEvent} event
+     * @param event
      * 
-     * @lang en
-     * Only the contacts in the contactbook containing the substring entered in the search bar are 
-     * displayed.
-     * 
-     * @param {@code ActionEvent} event
      */
     @FXML
     private void actionSearch(ActionEvent event) {
     }
     
     /**
-     * @lang it
+     * 
      * Implementa l'azione associcata al tasto Logout: l'account viene disconnesso e si torna alla schermata
      * di login/sign in.
      * 
-     * @param {@code ActionEvent} event
+     * @param event
      * 
-     * @lang en
-     * Implements the action associated with the Logout button: The account is logged out, and the system
-     * returns to the login/sign-in screen.
-     * 
-     * @param {@code ActionEvent} event
      */
     @FXML
     private void actionLogout(ActionEvent event) {
