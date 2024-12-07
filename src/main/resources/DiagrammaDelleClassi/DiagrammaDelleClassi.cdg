@@ -8,40 +8,40 @@
       </Fields>
       <Constructors/>
       <Methods>
-        <Method name="start" returnType="Stage" visibility="public">
+        <Method name="start" returnType="void" visibility="public">
           <Argument type="Stage" name="stage"/>
         </Method>
-        <Method name="setRoot" returnType="String" visibility="public" isStatic="true">
+        <Method name="setRoot" returnType="void" visibility="public" isStatic="true">
           <Argument type="String" name="fxml"/>
         </Method>
-        <Method name="loadFXML" returnType="String" visibility="private" isStatic="true">
+        <Method name="loadFXML" returnType="Parent" visibility="private" isStatic="true">
           <Argument type="String" name="fxml"/>
         </Method>
-        <Method name="main" returnType="String[]" visibility="public" isStatic="true">
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
           <Argument type="String[]" name="args"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="Database" package="it.unisa.diem.team02.contactsbook.database" visibility="public" xPosition="43.0" yPosition="259.0">
+    <Class name="Database" package="it.unisa.diem.team02.contactsbook.database" visibility="public" xPosition="13.0" yPosition="356.0">
       <Fields/>
       <Constructors/>
       <Methods>
-        <Method name="ConnectionDB" returnType="String" visibility="public">
+        <Method name="ConnectionDB" returnType="Connection" visibility="public">
           <Argument type="String" name="dbname"/>
           <Argument type="String" name="user"/>
           <Argument type="String" name="password"/>
         </Method>
-        <Method name="insertUser" returnType="String" visibility="public">
+        <Method name="insertUser" returnType="void" visibility="public">
           <Argument type="Connection" name="conn"/>
           <Argument type="String" name="tableName"/>
           <Argument type="String" name="email"/>
           <Argument type="String" name="password"/>
         </Method>
-        <Method name="getUser" returnType="String" visibility="public">
+        <Method name="getUser" returnType="HashMap" visibility="public">
           <Argument type="Connection" name="conn"/>
           <Argument type="String" name="tableName"/>
         </Method>
-        <Method name="checkLogin" returnType="String" visibility="public">
+        <Method name="checkLogin" returnType="int" visibility="public">
           <Argument type="Connection" name="conn"/>
           <Argument type="String" name="tableName"/>
           <Argument type="String" name="email"/>
@@ -50,16 +50,16 @@
         <Method name="hashPassword" returnType="String" visibility="private" isStatic="true">
           <Argument type="String" name="password"/>
         </Method>
-        <Method name="checkPassword" returnType="String" visibility="private" isStatic="true">
+        <Method name="checkPassword" returnType="boolean" visibility="private" isStatic="true">
           <Argument type="String" name="password"/>
           <Argument type="String" name="hashed"/>
         </Method>
-        <Method name="getContact" returnType="String" visibility="public">
+        <Method name="getContact" returnType="HashMap" visibility="public">
           <Argument type="Connection" name="conn"/>
           <Argument type="String" name="tableName"/>
           <Argument type="String" name="email"/>
         </Method>
-        <Method name="createContact" returnType="String" visibility="private">
+        <Method name="createContact" returnType="Contact" visibility="private">
           <Argument type="String" name="name"/>
           <Argument type="String" name="surname"/>
           <Argument type="String" name="numeri"/>
@@ -67,27 +67,27 @@
           <Argument type="String" name="em_cont"/>
           <Argument type="String" name="ID"/>
         </Method>
-        <Method name="insertContact" returnType="String" visibility="public">
+        <Method name="insertContact" returnType="void" visibility="public">
           <Argument type="Connection" name="conn"/>
           <Argument type="String" name="tableName"/>
           <Argument type="Contact" name="cont"/>
           <Argument type="String" name="email_Utente"/>
         </Method>
-        <Method name="formattaOut" returnType="ArrayList&lt;String&gt;" visibility="private">
+        <Method name="formattaOut" returnType="String" visibility="private">
           <Argument type="ArrayList&lt;String&gt;" name="s"/>
         </Method>
-        <Method name="modifyContact" returnType="String" visibility="public">
+        <Method name="modifyContact" returnType="void" visibility="public">
           <Argument type="Connection" name="conn"/>
           <Argument type="String" name="tableName"/>
           <Argument type="Contact" name="cont"/>
           <Argument type="String" name="email_Utente"/>
         </Method>
-        <Method name="removeContactByID" returnType="String" visibility="public">
+        <Method name="removeContactByID" returnType="void" visibility="public">
           <Argument type="Connection" name="conn"/>
           <Argument type="String" name="tableName"/>
           <Argument type="String" name="ID"/>
         </Method>
-        <Method name="CloseConnection" returnType="Connection" visibility="public">
+        <Method name="CloseConnection" returnType="void" visibility="public">
           <Argument type="Connection" name="conn"/>
         </Method>
       </Methods>
@@ -115,22 +115,22 @@
         <Method name="getNumber" returnType="String" visibility="public"/>
         <Method name="getEmail" returnType="String" visibility="public"/>
         <Method name="getTag" returnType="String" visibility="public"/>
-        <Method name="addTag" returnType="Tag" visibility="public">
+        <Method name="addTag" returnType="void" visibility="public">
           <Argument type="Tag" name="tag"/>
         </Method>
-        <Method name="addNumber" returnType="String" visibility="public">
+        <Method name="addNumber" returnType="void" visibility="public">
           <Argument type="String" name="number"/>
         </Method>
-        <Method name="addEmail" returnType="String" visibility="public">
+        <Method name="addEmail" returnType="void" visibility="public">
           <Argument type="String" name="email"/>
         </Method>
-        <Method name="setNumber" returnType="ArrayList&lt;String&gt;" visibility="public">
+        <Method name="setNumber" returnType="void" visibility="public">
           <Argument type="ArrayList&lt;String&gt;" name="number"/>
         </Method>
-        <Method name="setEmail" returnType="ArrayList&lt;String&gt;" visibility="public">
+        <Method name="setEmail" returnType="void" visibility="public">
           <Argument type="ArrayList&lt;String&gt;" name="email"/>
         </Method>
-        <Method name="setTag" returnType="ArrayList&lt;Tag&gt;" visibility="public">
+        <Method name="setTag" returnType="void" visibility="public">
           <Argument type="ArrayList&lt;Tag&gt;" name="tag"/>
         </Method>
         <Method name="getTagList" returnType="ArrayList&lt;Tag&gt;" visibility="public"/>
@@ -155,14 +155,14 @@
       <Methods>
         <Method name="getName" returnType="String" visibility="public"/>
         <Method name="getSurname" returnType="String" visibility="public"/>
-        <Method name="setName" returnType="String" visibility="public">
+        <Method name="setName" returnType="void" visibility="public">
           <Argument type="String" name="name"/>
         </Method>
-        <Method name="setSurname" returnType="String" visibility="public">
+        <Method name="setSurname" returnType="void" visibility="public">
           <Argument type="String" name="surname"/>
         </Method>
         <Method name="toString" returnType="String" visibility="public"/>
-        <Method name="equals" returnType="Object" visibility="public">
+        <Method name="equals" returnType="boolean" visibility="public">
           <Argument type="Object" name="o"/>
         </Method>
         <Method name="getRole" returnType="String" visibility="public" isAbstract="true"/>
@@ -182,7 +182,7 @@
         </Constructor>
       </Constructors>
       <Methods>
-        <Method name="setPassword" returnType="String" visibility="public">
+        <Method name="setPassword" returnType="void" visibility="public">
           <Argument type="String" name="password"/>
         </Method>
         <Method name="getEmail" returnType="String" visibility="public"/>
@@ -221,17 +221,17 @@
       </Fields>
       <Constructors/>
       <Methods>
-        <Method name="initialize" returnType="ResourceBundle" visibility="public">
+        <Method name="initialize" returnType="void" visibility="public">
           <Argument type="URL" name="url"/>
           <Argument type="ResourceBundle" name="rb"/>
         </Method>
-        <Method name="setObservableList" returnType="ObservableList&lt;Contact&gt;" visibility="public">
+        <Method name="setObservableList" returnType="void" visibility="public">
           <Argument type="ObservableList&lt;Contact&gt;" name="contacts"/>
         </Method>
-        <Method name="actionAdd" returnType="ActionEvent" visibility="public">
+        <Method name="actionAdd" returnType="void" visibility="public">
           <Argument type="ActionEvent" name="event"/>
         </Method>
-        <Method name="actionCancel" returnType="ActionEvent" visibility="public">
+        <Method name="actionCancel" returnType="void" visibility="public">
           <Argument type="ActionEvent" name="event"/>
         </Method>
       </Methods>
@@ -268,36 +268,36 @@
       </Fields>
       <Constructors/>
       <Methods>
-        <Method name="initialize" returnType="ResourceBundle" visibility="public">
+        <Method name="initialize" returnType="void" visibility="public">
           <Argument type="URL" name="url"/>
           <Argument type="ResourceBundle" name="rb"/>
         </Method>
         <Method name="createList" returnType="void" visibility="public"/>
         <Method name="initializeList" returnType="void" visibility="public"/>
-        <Method name="actionAdd" returnType="ActionEvent" visibility="public">
+        <Method name="actionAdd" returnType="void" visibility="public">
           <Argument type="ActionEvent" name="event"/>
         </Method>
-        <Method name="actionModify" returnType="ActionEvent" visibility="public">
+        <Method name="actionModify" returnType="void" visibility="public">
           <Argument type="ActionEvent" name="event"/>
         </Method>
         <Method name="btnMofidyInitialize" returnType="void" visibility="public"/>
         <Method name="btnDeleteInitialize" returnType="void" visibility="public"/>
-        <Method name="actionDelete" returnType="ActionEvent" visibility="private">
+        <Method name="actionDelete" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
-        <Method name="actionFilter" returnType="ActionEvent" visibility="private">
+        <Method name="actionFilter" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
-        <Method name="actionImport" returnType="ActionEvent" visibility="private">
+        <Method name="actionImport" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
-        <Method name="actionExport" returnType="ActionEvent" visibility="private">
+        <Method name="actionExport" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
-        <Method name="actionSearch" returnType="ActionEvent" visibility="private">
+        <Method name="actionSearch" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
-        <Method name="actionLogout" returnType="ActionEvent" visibility="private">
+        <Method name="actionLogout" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
       </Methods>
@@ -311,17 +311,17 @@
       </Fields>
       <Constructors/>
       <Methods>
-        <Method name="initialize" returnType="ResourceBundle" visibility="public">
+        <Method name="initialize" returnType="void" visibility="public">
           <Argument type="URL" name="url"/>
           <Argument type="ResourceBundle" name="rb"/>
         </Method>
-        <Method name="actionYes" returnType="ActionEvent" visibility="private">
+        <Method name="actionYes" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
-        <Method name="actionNo" returnType="ActionEvent" visibility="private">
+        <Method name="actionNo" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
-        <Method name="set" returnType="Contact" visibility="public">
+        <Method name="set" returnType="void" visibility="public">
           <Argument type="Contact" name="c1"/>
         </Method>
       </Methods>
@@ -334,13 +334,13 @@
       </Fields>
       <Constructors/>
       <Methods>
-        <Method name="initialize" returnType="ResourceBundle" visibility="public">
+        <Method name="initialize" returnType="void" visibility="public">
           <Argument type="URL" name="url"/>
           <Argument type="ResourceBundle" name="rb"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="LoginViewController" package="it.unisa.diem.team02.contactsbook.ui.controllers" visibility="public" xPosition="166.0" yPosition="625.0">
+    <Class name="LoginViewController" package="it.unisa.diem.team02.contactsbook.ui.controllers" visibility="public" xPosition="174.0" yPosition="771.0">
       <Fields>
         <Field name="login" type="AnchorPane" visibility="private"/>
         <Field name="vBoxLogin" type="VBox" visibility="private"/>
@@ -365,26 +365,26 @@
       </Fields>
       <Constructors/>
       <Methods>
-        <Method name="initialize" returnType="ResourceBundle" visibility="public">
+        <Method name="initialize" returnType="void" visibility="public">
           <Argument type="URL" name="url"/>
           <Argument type="ResourceBundle" name="rb"/>
         </Method>
         <Method name="txtSignMailInitialize" returnType="BooleanProperty" visibility="private"/>
         <Method name="txtSignPassInitialize" returnType="BooleanProperty" visibility="private"/>
         <Method name="txtConfirmPassInitialize" returnType="BooleanProperty" visibility="private"/>
-        <Method name="isValidEmail" returnType="String" visibility="private">
+        <Method name="isValidEmail" returnType="boolean" visibility="private">
           <Argument type="String" name="email"/>
         </Method>
-        <Method name="isValidPassword" returnType="String" visibility="private">
+        <Method name="isValidPassword" returnType="boolean" visibility="private">
           <Argument type="String" name="password"/>
         </Method>
-        <Method name="actionLogin" returnType="ActionEvent" visibility="private">
+        <Method name="actionLogin" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
-        <Method name="actionSignin" returnType="ActionEvent" visibility="private">
+        <Method name="actionSignin" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
-        <Method name="actionLoginLocal" returnType="ActionEvent" visibility="private">
+        <Method name="actionLoginLocal" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
       </Methods>
@@ -421,20 +421,20 @@
       </Fields>
       <Constructors/>
       <Methods>
-        <Method name="initialize" returnType="ResourceBundle" visibility="public">
+        <Method name="initialize" returnType="void" visibility="public">
           <Argument type="URL" name="url"/>
           <Argument type="ResourceBundle" name="rb"/>
         </Method>
-        <Method name="actionCancel" returnType="ActionEvent" visibility="private">
+        <Method name="actionCancel" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
-        <Method name="setObservableList" returnType="ObservableList&lt;Contact&gt;" visibility="public">
+        <Method name="setObservableList" returnType="void" visibility="public">
           <Argument type="ObservableList&lt;Contact&gt;" name="contacts"/>
         </Method>
-        <Method name="setContact" returnType="Contact" visibility="public">
+        <Method name="setContact" returnType="void" visibility="public">
           <Argument type="Contact" name="contact"/>
         </Method>
-        <Method name="actionModify" returnType="ActionEvent" visibility="private">
+        <Method name="actionModify" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
       </Methods>
@@ -448,22 +448,24 @@
     </Enum>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <HasRelation name="contact" source="it.unisa.diem.team02.contactsbook.ui.controllers.DuplicateContactViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="clmName" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="tblvRubrica" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="it.unisa.diem.team02.contactsbook.ui.controllers.DuplicateContactViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="clmNum" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="clmSur" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="it.unisa.diem.team02.contactsbook.ui.controllers.ModifyViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="it.unisa.diem.team02.contactsbook.ui.controllers.AddViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="contacts" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;Contact&gt;"/>
-    <HasRelation name="clmEmail" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="tag" source="it.unisa.diem.team02.contactsbook.model.Contact" target="it.unisa.diem.team02.contactsbook.model.Tag" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Tag&gt;"/>
-    <IsRelation name="is" source="it.unisa.diem.team02.contactsbook.model.User" target="it.unisa.diem.team02.contactsbook.model.Person"/>
-    <HasRelation name="clmTag" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Tag" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="contacts" source="it.unisa.diem.team02.contactsbook.ui.controllers.ModifyViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;Contact&gt;"/>
     <UseRelation source="it.unisa.diem.team02.contactsbook.model.Contact" target="it.unisa.diem.team02.contactsbook.model.Tag" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="oldContact" source="it.unisa.diem.team02.contactsbook.ui.controllers.ModifyViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="it.unisa.diem.team02.contactsbook.ui.controllers.ModifyViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" sourceCardinality="1..1" targetCardinality="1..1"/>
     <IsRelation name="is" source="it.unisa.diem.team02.contactsbook.model.Contact" target="it.unisa.diem.team02.contactsbook.model.Person"/>
+    <HasRelation name="clmName" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="tblvRubrica" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="clmSur" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="clmTag" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Tag" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="contacts" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;Contact&gt;"/>
+    <HasRelation name="tag" source="it.unisa.diem.team02.contactsbook.model.Contact" target="it.unisa.diem.team02.contactsbook.model.Tag" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Tag&gt;"/>
+    <HasRelation name="contact" source="it.unisa.diem.team02.contactsbook.ui.controllers.DuplicateContactViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="clmNum" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="it.unisa.diem.team02.contactsbook.ui.controllers.LoginViewController" target="it.unisa.diem.team02.contactsbook.database.Database" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="it.unisa.diem.team02.contactsbook.model.User" target="it.unisa.diem.team02.contactsbook.model.Person"/>
+    <UseRelation source="it.unisa.diem.team02.contactsbook.ui.controllers.DuplicateContactViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="it.unisa.diem.team02.contactsbook.ui.controllers.AddViewController" target="it.unisa.diem.team02.contactsbook.ui.controllers.ErrorMessageViewController" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="clmEmail" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="it.unisa.diem.team02.contactsbook.ui.controllers.AddViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="contacts" source="it.unisa.diem.team02.contactsbook.ui.controllers.ModifyViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;Contact&gt;"/>
   </ClassDiagramRelations>
 </ClassDiagram>
