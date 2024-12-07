@@ -22,16 +22,16 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Database" package="it.unisa.diem.team02.contactsbook.database" visibility="public" xPosition="43.0" yPosition="259.0">
+    <Class name="Database" package="it.unisa.diem.team02.contactsbook.database" visibility="public" xPosition="27.0" yPosition="248.0">
       <Fields/>
       <Constructors/>
       <Methods>
-        <Method name="ConnectionDB" returnType="String" visibility="public">
+        <Method name="ConnectionDB" returnType="Connection" visibility="public">
           <Argument type="String" name="dbname"/>
           <Argument type="String" name="user"/>
           <Argument type="String" name="password"/>
         </Method>
-        <Method name="insertUser" returnType="String" visibility="public">
+        <Method name="insertUser" returnType="HashMap" visibility="public">
           <Argument type="Connection" name="conn"/>
           <Argument type="String" name="tableName"/>
           <Argument type="String" name="email"/>
@@ -41,7 +41,7 @@
           <Argument type="Connection" name="conn"/>
           <Argument type="String" name="tableName"/>
         </Method>
-        <Method name="checkLogin" returnType="String" visibility="public">
+        <Method name="checkLogin" returnType="int" visibility="public">
           <Argument type="Connection" name="conn"/>
           <Argument type="String" name="tableName"/>
           <Argument type="String" name="email"/>
@@ -54,12 +54,12 @@
           <Argument type="String" name="password"/>
           <Argument type="String" name="hashed"/>
         </Method>
-        <Method name="getContact" returnType="String" visibility="public">
+        <Method name="getContact" returnType="HashMap" visibility="public">
           <Argument type="Connection" name="conn"/>
           <Argument type="String" name="tableName"/>
           <Argument type="String" name="email"/>
         </Method>
-        <Method name="createContact" returnType="String" visibility="private">
+        <Method name="createContact" returnType="Contact" visibility="private">
           <Argument type="String" name="name"/>
           <Argument type="String" name="surname"/>
           <Argument type="String" name="numeri"/>
@@ -67,27 +67,27 @@
           <Argument type="String" name="em_cont"/>
           <Argument type="String" name="ID"/>
         </Method>
-        <Method name="insertContact" returnType="String" visibility="public">
+        <Method name="insertContact" returnType="Void" visibility="public">
           <Argument type="Connection" name="conn"/>
           <Argument type="String" name="tableName"/>
           <Argument type="Contact" name="cont"/>
           <Argument type="String" name="email_Utente"/>
         </Method>
-        <Method name="formattaOut" returnType="ArrayList&lt;String&gt;" visibility="private">
+        <Method name="formattaOut" returnType="String" visibility="private">
           <Argument type="ArrayList&lt;String&gt;" name="s"/>
         </Method>
-        <Method name="modifyContact" returnType="String" visibility="public">
+        <Method name="modifyContact" returnType="void" visibility="public">
           <Argument type="Connection" name="conn"/>
           <Argument type="String" name="tableName"/>
           <Argument type="Contact" name="cont"/>
           <Argument type="String" name="email_Utente"/>
         </Method>
-        <Method name="removeContactByID" returnType="String" visibility="public">
+        <Method name="removeContactByID" returnType="void" visibility="public">
           <Argument type="Connection" name="conn"/>
           <Argument type="String" name="tableName"/>
           <Argument type="String" name="ID"/>
         </Method>
-        <Method name="CloseConnection" returnType="Connection" visibility="public">
+        <Method name="CloseConnection" returnType="void" visibility="public">
           <Argument type="Connection" name="conn"/>
         </Method>
       </Methods>
@@ -182,7 +182,7 @@
         </Constructor>
       </Constructors>
       <Methods>
-        <Method name="setPassword" returnType="String" visibility="public">
+        <Method name="setPassword" returnType="void" visibility="public">
           <Argument type="String" name="password"/>
         </Method>
         <Method name="getEmail" returnType="String" visibility="public"/>
@@ -236,7 +236,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="ContactsbookViewController" package="it.unisa.diem.team02.contactsbook.ui.controllers" visibility="public" xPosition="1776.0" yPosition="380.0">
+    <Class name="ContactsbookViewController" package="it.unisa.diem.team02.contactsbook.ui.controllers" visibility="public" xPosition="1776.0" yPosition="379.0">
       <Fields>
         <Field name="anchorUp" type="AnchorPane" visibility="private"/>
         <Field name="hboxButton" type="HBox" visibility="private"/>
@@ -274,30 +274,30 @@
         </Method>
         <Method name="createList" returnType="void" visibility="public"/>
         <Method name="initializeList" returnType="void" visibility="public"/>
-        <Method name="actionAdd" returnType="ActionEvent" visibility="public">
+        <Method name="actionAdd" returnType="void" visibility="public">
           <Argument type="ActionEvent" name="event"/>
         </Method>
-        <Method name="actionModify" returnType="ActionEvent" visibility="public">
+        <Method name="actionModify" returnType="void" visibility="public">
           <Argument type="ActionEvent" name="event"/>
         </Method>
         <Method name="btnMofidyInitialize" returnType="void" visibility="public"/>
         <Method name="btnDeleteInitialize" returnType="void" visibility="public"/>
-        <Method name="actionDelete" returnType="ActionEvent" visibility="private">
+        <Method name="actionDelete" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
-        <Method name="actionFilter" returnType="ActionEvent" visibility="private">
+        <Method name="actionFilter" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
-        <Method name="actionImport" returnType="ActionEvent" visibility="private">
+        <Method name="actionImport" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
-        <Method name="actionExport" returnType="ActionEvent" visibility="private">
+        <Method name="actionExport" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
-        <Method name="actionSearch" returnType="ActionEvent" visibility="private">
+        <Method name="actionSearch" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
-        <Method name="actionLogout" returnType="ActionEvent" visibility="private">
+        <Method name="actionLogout" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
       </Methods>
@@ -449,23 +449,23 @@
     </Enum>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <HasRelation name="clmSur" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="it.unisa.diem.team02.contactsbook.model.Contact" target="it.unisa.diem.team02.contactsbook.model.Person"/>
+    <HasRelation name="oldContact" source="it.unisa.diem.team02.contactsbook.ui.controllers.ModifyViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="it.unisa.diem.team02.contactsbook.model.Contact" target="it.unisa.diem.team02.contactsbook.model.Tag" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="clmNum" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="it.unisa.diem.team02.contactsbook.ui.controllers.AddViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="it.unisa.diem.team02.contactsbook.ui.controllers.DuplicateContactViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="tag" source="it.unisa.diem.team02.contactsbook.model.Contact" target="it.unisa.diem.team02.contactsbook.model.Tag" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Tag&gt;"/>
+    <HasRelation name="clmEmail" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="contact" source="it.unisa.diem.team02.contactsbook.ui.controllers.DuplicateContactViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="it.unisa.diem.team02.contactsbook.ui.controllers.ModifyViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="clmName" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="contacts" source="it.unisa.diem.team02.contactsbook.ui.controllers.ModifyViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;Contact&gt;"/>
-    <HasRelation name="contact" source="it.unisa.diem.team02.contactsbook.ui.controllers.DuplicateContactViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="contacts" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;Contact&gt;"/>
     <HasRelation name="newContact" source="it.unisa.diem.team02.contactsbook.ui.controllers.ModifyViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="tblvRubrica" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="tag" source="it.unisa.diem.team02.contactsbook.model.Contact" target="it.unisa.diem.team02.contactsbook.model.Tag" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Tag&gt;"/>
     <HasRelation name="clmTag" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Tag" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <IsRelation name="is" source="it.unisa.diem.team02.contactsbook.model.Contact" target="it.unisa.diem.team02.contactsbook.model.Person"/>
-    <UseRelation source="it.unisa.diem.team02.contactsbook.model.Contact" target="it.unisa.diem.team02.contactsbook.model.Tag" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="contacts" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;Contact&gt;"/>
     <IsRelation name="is" source="it.unisa.diem.team02.contactsbook.model.User" target="it.unisa.diem.team02.contactsbook.model.Person"/>
-    <UseRelation source="it.unisa.diem.team02.contactsbook.ui.controllers.AddViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="clmEmail" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="clmNum" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="oldContact" source="it.unisa.diem.team02.contactsbook.ui.controllers.ModifyViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="it.unisa.diem.team02.contactsbook.ui.controllers.DuplicateContactViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="it.unisa.diem.team02.contactsbook.ui.controllers.ModifyViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="clmSur" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
   </ClassDiagramRelations>
 </ClassDiagram>
