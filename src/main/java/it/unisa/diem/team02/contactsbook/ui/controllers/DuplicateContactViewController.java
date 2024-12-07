@@ -16,11 +16,9 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
- * @lang it
+ * 
  * Controller per la gestione dei contatti duplicati.
  * 
- * @lang en
- * Controller for handling duplicate contacts.
  * 
  * @author team02
  */
@@ -36,19 +34,13 @@ public class DuplicateContactViewController implements Initializable {
     private Contact contact;
 
     /**
-     * @lang it
+     * 
      * Metodo di inizializzazione del controller.
      * Chiama i metodi che inizializzano i vari componenti.
      * 
-     * @param {@code URL} url utilizzato per risolvere il percorso del file FXML.
-     * @param {@code ResourceBundle} rb contenente dati di localizzazione.
+     * @param url utilizzato per risolvere il percorso del file FXML.
+     * @param rb contenente dati di localizzazione.
      * 
-     * @lang en
-     * Initializes the controller.
-     * Calls the methods that initialize the various components.
-     * 
-     * @param {@code URL} url used to resolve the FXML file path.
-     * @param {@code ResourceBundle} rb containing localization data.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -56,17 +48,12 @@ public class DuplicateContactViewController implements Initializable {
     }    
     
     /**
-     * @lang it
+     * 
      * Implementa l'azione associcata al tasto Add: un campo del contatto viene usato come flag per indicare
      * che l'utente desidera aggiungere il contatto.
      * 
-     * @param {@code ActionEvent} event
+     * @param event
      * 
-     * @lang en
-     * Implements the action associated with the Add button: a contact field is used as a flag to indicate
-     * that the user wants to add the contact.
-     * 
-     * @param {@code ActionEvent} event
      */
     @FXML
     private void actionYes(ActionEvent event){
@@ -76,17 +63,12 @@ public class DuplicateContactViewController implements Initializable {
     }
     
     /**
-     * @lang it
+     * 
      * Implementa l'azione associcata al tasto Modify: il contatto/flag non viene modificato e si torna alla
      * schermata di modifica/aggiunta.
      * 
-     * @param {@code ActionEvent} event
+     * @param event
      * 
-     * @lang en
-     * Implements the action associated with the Modify button: the contact/field is not modified and the
-     * systems returns to the modify/add screen.
-     * 
-     * @param {@code ActionEvent} event
      */
     @FXML
     private void actionNo(ActionEvent event){
@@ -95,15 +77,11 @@ public class DuplicateContactViewController implements Initializable {
     }
     
     /**
-     * @lang it
+     * 
      * Setta il campo contatto con il contatto passato come parametro.
      * 
-     * @param {@code Contact} c1 è il contatto da usare come flag.
+     * @param c1 è il contatto da usare come flag.
      * 
-     * @lang en
-     * Sets the contact field with the contact passed as a parameter.
-     * 
-     * @param {@code Contact} c1 is the contacted used as flag.
      */
     public void set(Contact c1){
         this.contact=c1;

@@ -1,0 +1,13 @@
+@startuml
+participant ModifyViewController
+participant  Database
+
+activate Database
+ModifyViewController -> Database: modifyContact 
+
+loop 3
+ Database -> Database: formattaOut
+end 
+Database -> Database: executeUpdate
+Database --> ModifyViewController
+@enduml

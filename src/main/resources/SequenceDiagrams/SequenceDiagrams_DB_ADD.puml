@@ -1,0 +1,13 @@
+@startuml
+participant AddViewController
+participant  Database
+
+activate Database
+AddViewController -> Database: insertContact 
+
+loop 3
+ Database -> Database: formattaOut
+end 
+Database -> Database: executeUpdate
+Database --> AddViewController
+@enduml
