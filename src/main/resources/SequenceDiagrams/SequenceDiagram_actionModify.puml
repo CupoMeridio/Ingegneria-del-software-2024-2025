@@ -9,8 +9,9 @@ participant UserInteractionDataInterface
 
 Utente -> ContactsbookViewController: actionModify
 activate ContactsbookViewController
-ContactsbookViewController->ModifyViewController: setContact
+ContactsbookViewController->ModifyViewController: setObservableList
 activate ModifyViewController
+ContactsbookViewController->ModifyViewController: setContact
 ModifyViewController -> ModifyViewController: actionModify
 ModifyViewController->Contact: new
 activate Contact

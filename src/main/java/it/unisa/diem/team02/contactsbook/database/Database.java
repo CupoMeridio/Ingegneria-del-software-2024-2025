@@ -408,7 +408,7 @@ public class Database  {
     * 
     */
 
-    public void RemuveContactByID(Connection conn, String tableName, String ID) throws SQLException{
+    public void remuveContactByID(Connection conn, String tableName, String ID) throws SQLException{
     
        Statement statment;
        
