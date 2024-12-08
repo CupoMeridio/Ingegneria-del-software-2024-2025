@@ -4,7 +4,7 @@ participant ContactsbookViewController
 participant AddViewController
 participant "Contatto" as Contact
 participant DuplicateContactViewController
-participant UserInteractionDataInterface
+participant Database
 
 Utente_registrato -> ContactsbookViewController: actionAdd
 activate ContactsbookViewController
@@ -32,13 +32,20 @@ alt Contatto duplicato
     deactivate DuplicateContactViewController 
         alt Aggiungi
             AddViewController->AddViewController:add
-            AddViewController-->UserInteractionDataInterface: insertContact
+            AddViewController-->Database: insertContact
+            activate Database
+            loop 3
+             Database -> Database: formattaOut
+            end 
+            Database -> Database: executeUpdate
+            Database --> AddViewController
+            deactivate Database
         else Modifica
             AddViewController->AddViewController:show
         end
 else Contatto non duplicato
 AddViewController->AddViewController: add
-AddViewController-->UserInteractionDataInterface: insertContact
+AddViewController-->Database: insertContact
 end
 deactivate Contact
 AddViewController-->ContactsbookViewController
