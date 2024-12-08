@@ -3,10 +3,10 @@ actor Utente
 participant LoginViewController
 participant  Database
 
-Utente->LoginViewController:run()
+Utente->LoginViewController:run
 activate LoginViewController
-LoginViewController -> Database: new()
-LoginViewController -> Database: ConnectionDB()
+LoginViewController -> Database: new
+LoginViewController -> Database: ConnectionDB
 Database --> LoginViewController: Connection
 
 activate Database
