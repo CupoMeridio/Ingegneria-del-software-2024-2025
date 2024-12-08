@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['user_2ejava_0',['User.java',['../_user_8java.html',1,'']]]
+  ['tag_2ejava_0',['Tag.java',['../_tag_8java.html',1,'']]]
 ];

@@ -1,9 +1,5 @@
-package it.unisa.diem.team02.contactsbook.ui.controllers;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
+package it.unisa.diem.team02.contactsbook.ui.controllers;
 
 import it.unisa.diem.team02.contactsbook.model.Contact;
 import java.net.URL;
@@ -16,10 +12,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
- * 
  * Controller per la gestione dei contatti duplicati.
- * 
- * 
  * @author team02
  */
 public class DuplicateContactViewController implements Initializable {
@@ -47,14 +40,17 @@ public class DuplicateContactViewController implements Initializable {
         
     }    
     
-    /**
-     * 
-     * Implementa l'azione associcata al tasto Add: un campo del contatto viene usato come flag per indicare
-     * che l'utente desidera aggiungere il contatto.
-     * 
-     * @param event
-     * 
-     */
+/**
+ * @brief Gestisce l'azione di conferma per il reset del nome del contatto.
+ * 
+ * Questo metodo viene chiamato quando l'utente clicca sul pulsante "Yes". Il metodo resetta il nome del contatto
+ * a una stringa vuota e chiude la finestra corrente.
+ * 
+ * @param event L'evento generato dal clic sul pulsante "Yes".
+ * 
+ * @see Stage#close()
+ * @see Button
+ */
     @FXML
     private void actionYes(ActionEvent event){
         contact.setName("");
@@ -62,27 +58,31 @@ public class DuplicateContactViewController implements Initializable {
         stage.close();
     }
     
-    /**
-     * 
-     * Implementa l'azione associcata al tasto Modify: il contatto/flag non viene modificato e si torna alla
-     * schermata di modifica/aggiunta.
-     * 
-     * @param event
-     * 
-     */
+/**
+ * @brief Gestisce l'azione di annullamento, chiudendo la finestra senza apportare modifiche.
+ * 
+ * Questo metodo viene chiamato quando l'utente clicca sul pulsante "No". Il metodo chiude semplicemente la finestra
+ * corrente senza eseguire alcuna modifica ai dati.
+ * 
+ * @param event L'evento generato dal clic sul pulsante "No".
+ * 
+ * @see Stage#close()
+ * @see Button
+ */
     @FXML
     private void actionNo(ActionEvent event){
         Stage stage = (Stage) btnNo.getScene().getWindow();
         stage.close();
     }
     
-    /**
-     * 
-     * Setta il campo contatto con il contatto passato come parametro.
-     * 
-     * @param c1 è il contatto da usare come flag.
-     * 
-     */
+/**
+ * @brief Imposta il contatto da gestire.
+ * 
+ * Questo metodo assegna un oggetto `Contact` alla variabile `contact`, che rappresenta il contatto da gestire
+ * all'interno del controller.
+ * 
+ * @param c1 Il contatto da assegnare.
+ */
     public void set(Contact c1){
         this.contact=c1;
     }

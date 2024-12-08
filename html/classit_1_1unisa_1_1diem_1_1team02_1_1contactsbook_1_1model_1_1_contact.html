@@ -107,7 +107,7 @@ Diagramma delle classi per it.unisa.diem.team02.contactsbook.model.Contact</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Membri pubblici</h2></td></tr>
 <tr class="memitem:aba849008ef29a7982394a45a0e30edb7" id="r_aba849008ef29a7982394a45a0e30edb7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aba849008ef29a7982394a45a0e30edb7">Contact</a> (String name, String surname)</td></tr>
-<tr class="memdesc:aba849008ef29a7982394a45a0e30edb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Costruttore della classe Conatct Inizializza un nuovo oggetto <code><a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html">Contact</a></code> con il nome e il cognome forniti, inizializzando anche le liste <code>number</code>, <code>email</code> e <code>tag</code> con una capacità iniziale di 3 elementi ciascuna. Assegna inoltre un ID univoco al contatto basato su un contatore statico incrementale.  <br /></td></tr>
+<tr class="memdesc:aba849008ef29a7982394a45a0e30edb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Costruttore della classe <code><a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html">Contact</a></code>.  <br /></td></tr>
 <tr class="separator:aba849008ef29a7982394a45a0e30edb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09bd612a950155f70f4a8fd76a7f8052" id="r_a09bd612a950155f70f4a8fd76a7f8052"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a09bd612a950155f70f4a8fd76a7f8052">Contact</a> (String name, String surname, int ID)</td></tr>
 <tr class="memdesc:a09bd612a950155f70f4a8fd76a7f8052"><td class="mdescLeft">&#160;</td><td class="mdescRight">Costruttore della classe <a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html">Contact</a> con ID specificato.  <br /></td></tr>
@@ -121,41 +121,56 @@ Membri pubblici</h2></td></tr>
 <tr class="memitem:ad0586bf478c27a2815882f3fabcc9e78" id="r_ad0586bf478c27a2815882f3fabcc9e78"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad0586bf478c27a2815882f3fabcc9e78">getTag</a> ()</td></tr>
 <tr class="separator:ad0586bf478c27a2815882f3fabcc9e78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5971c5ca06742b2d15c3012f6957fa4b" id="r_a5971c5ca06742b2d15c3012f6957fa4b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5971c5ca06742b2d15c3012f6957fa4b">addTag</a> (<a class="el" href="enumit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_tag.html">Tag</a> tag)</td></tr>
+<tr class="memdesc:a5971c5ca06742b2d15c3012f6957fa4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aggiunge un tag alla lista di tag del contatto.  <br /></td></tr>
 <tr class="separator:a5971c5ca06742b2d15c3012f6957fa4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac09063384da4442df6d21bc92cedcb48" id="r_ac09063384da4442df6d21bc92cedcb48"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac09063384da4442df6d21bc92cedcb48">addNumber</a> (String number)</td></tr>
+<tr class="memdesc:ac09063384da4442df6d21bc92cedcb48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aggiunge un numero alla lista di numeri del contatto.  <br /></td></tr>
 <tr class="separator:ac09063384da4442df6d21bc92cedcb48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6dcfdea06d5d03e9cfab8b2dbb4113a" id="r_ab6dcfdea06d5d03e9cfab8b2dbb4113a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab6dcfdea06d5d03e9cfab8b2dbb4113a">addEmail</a> (String email)</td></tr>
+<tr class="memdesc:ab6dcfdea06d5d03e9cfab8b2dbb4113a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aggiunge un indirizzo email alla lista di email del contatto.  <br /></td></tr>
 <tr class="separator:ab6dcfdea06d5d03e9cfab8b2dbb4113a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a260e8b70212c2017665223b27e0b1c" id="r_a1a260e8b70212c2017665223b27e0b1c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1a260e8b70212c2017665223b27e0b1c">setNumber</a> (ArrayList&lt; String &gt; number)</td></tr>
+<tr class="memdesc:a1a260e8b70212c2017665223b27e0b1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Imposta la lista di numeri del contatto.  <br /></td></tr>
 <tr class="separator:a1a260e8b70212c2017665223b27e0b1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab12d018b9db83a653dc42add44cbf597" id="r_ab12d018b9db83a653dc42add44cbf597"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab12d018b9db83a653dc42add44cbf597">setEmail</a> (ArrayList&lt; String &gt; email)</td></tr>
+<tr class="memdesc:ab12d018b9db83a653dc42add44cbf597"><td class="mdescLeft">&#160;</td><td class="mdescRight">Imposta la lista di indirizzi email del contatto.  <br /></td></tr>
 <tr class="separator:ab12d018b9db83a653dc42add44cbf597"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af42116006dbf8d2e8d000059dec3eea2" id="r_af42116006dbf8d2e8d000059dec3eea2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af42116006dbf8d2e8d000059dec3eea2">setTag</a> (ArrayList&lt; <a class="el" href="enumit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_tag.html">Tag</a> &gt; tag)</td></tr>
+<tr class="memdesc:af42116006dbf8d2e8d000059dec3eea2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Imposta la lista di tag del contatto.  <br /></td></tr>
 <tr class="separator:af42116006dbf8d2e8d000059dec3eea2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9cfb4a47fb7141f9f166107b010d0e1" id="r_ab9cfb4a47fb7141f9f166107b010d0e1"><td class="memItemLeft" align="right" valign="top">ArrayList&lt; <a class="el" href="enumit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_tag.html">Tag</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab9cfb4a47fb7141f9f166107b010d0e1">getTagList</a> ()</td></tr>
+<tr class="memdesc:ab9cfb4a47fb7141f9f166107b010d0e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restituisce la lista di tag del contatto.  <br /></td></tr>
 <tr class="separator:ab9cfb4a47fb7141f9f166107b010d0e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44e0de09654ac80e916e01f5734196e2" id="r_a44e0de09654ac80e916e01f5734196e2"><td class="memItemLeft" align="right" valign="top">ArrayList&lt; String &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a44e0de09654ac80e916e01f5734196e2">getNumberList</a> ()</td></tr>
+<tr class="memdesc:a44e0de09654ac80e916e01f5734196e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restituisce la lista di numeri di telefono del contatto.  <br /></td></tr>
 <tr class="separator:a44e0de09654ac80e916e01f5734196e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30abb7bd431a058b4a08777b44d53407" id="r_a30abb7bd431a058b4a08777b44d53407"><td class="memItemLeft" align="right" valign="top">ArrayList&lt; String &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a30abb7bd431a058b4a08777b44d53407">getEmailList</a> ()</td></tr>
+<tr class="memdesc:a30abb7bd431a058b4a08777b44d53407"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restituisce la lista di indirizzi email del contatto.  <br /></td></tr>
 <tr class="separator:a30abb7bd431a058b4a08777b44d53407"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8576eb1dc70b9739f08ebd07b8f1779" id="r_ab8576eb1dc70b9739f08ebd07b8f1779"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab8576eb1dc70b9739f08ebd07b8f1779">getID</a> ()</td></tr>
-<tr class="memdesc:ab8576eb1dc70b9739f08ebd07b8f1779"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restituisce l'ID del contatto. Questo metodo restituisce l'identificatore univoco (ID) associato al contatto.  <br /></td></tr>
+<tr class="memdesc:ab8576eb1dc70b9739f08ebd07b8f1779"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restituisce l'ID del contatto.  <br /></td></tr>
 <tr class="separator:ab8576eb1dc70b9739f08ebd07b8f1779"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6c67c3ed128cafd941f44ecbca120ce" id="r_ae6c67c3ed128cafd941f44ecbca120ce"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae6c67c3ed128cafd941f44ecbca120ce">getRole</a> ()</td></tr>
 <tr class="memdesc:ae6c67c3ed128cafd941f44ecbca120ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restituisce il ruolo della classe corrente. Questo metodo sovrascrive il metodo <code>getRole</code> della classe base. Restituisce il nome completo della classe corrente come stringa, utilizzando il metodo <code>toString</code> dell'oggetto <code>Class</code>.  <br /></td></tr>
 <tr class="separator:ae6c67c3ed128cafd941f44ecbca120ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae06df28320c42807535c17a6d1870da8" id="r_ae06df28320c42807535c17a6d1870da8"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae06df28320c42807535c17a6d1870da8">toString</a> ()</td></tr>
+<tr class="memdesc:ae06df28320c42807535c17a6d1870da8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restituisce una rappresentazione testuale del contatto.  <br /></td></tr>
 <tr class="separator:ae06df28320c42807535c17a6d1870da8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person')"><img src="closed.png" alt="-"/>&#160;Membri pubblici ereditati da <a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person.html">it.unisa.diem.team02.contactsbook.model.Person</a></td></tr>
 <tr class="memitem:a56167ebe3f5adf89bed012d93874a417 inherit pub_methods_classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person" id="r_a56167ebe3f5adf89bed012d93874a417"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person.html#a56167ebe3f5adf89bed012d93874a417">Person</a> (String name, String surname)</td></tr>
+<tr class="memdesc:a56167ebe3f5adf89bed012d93874a417 inherit pub_methods_classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person"><td class="mdescLeft">&#160;</td><td class="mdescRight">Costruttore per creare un oggetto <code><a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person.html">Person</a></code> con nome e cognome.  <br /></td></tr>
 <tr class="separator:a56167ebe3f5adf89bed012d93874a417 inherit pub_methods_classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8811a4a23bc41b1609228b1c70174b61 inherit pub_methods_classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person" id="r_a8811a4a23bc41b1609228b1c70174b61"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person.html#a8811a4a23bc41b1609228b1c70174b61">getName</a> ()</td></tr>
+<tr class="memdesc:a8811a4a23bc41b1609228b1c70174b61 inherit pub_methods_classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restituisce il nome della persona.  <br /></td></tr>
 <tr class="separator:a8811a4a23bc41b1609228b1c70174b61 inherit pub_methods_classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f48262bec224c3fd47b74edbd5585df inherit pub_methods_classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person" id="r_a4f48262bec224c3fd47b74edbd5585df"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person.html#a4f48262bec224c3fd47b74edbd5585df">getSurname</a> ()</td></tr>
+<tr class="memdesc:a4f48262bec224c3fd47b74edbd5585df inherit pub_methods_classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restituisce il cognome della persona.  <br /></td></tr>
 <tr class="separator:a4f48262bec224c3fd47b74edbd5585df inherit pub_methods_classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b43a399ddc7eb30ecdb82b89fbea5f6 inherit pub_methods_classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person" id="r_a0b43a399ddc7eb30ecdb82b89fbea5f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person.html#a0b43a399ddc7eb30ecdb82b89fbea5f6">setName</a> (String name)</td></tr>
+<tr class="memdesc:a0b43a399ddc7eb30ecdb82b89fbea5f6 inherit pub_methods_classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person"><td class="mdescLeft">&#160;</td><td class="mdescRight">Imposta il nome della persona.  <br /></td></tr>
 <tr class="separator:a0b43a399ddc7eb30ecdb82b89fbea5f6 inherit pub_methods_classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9cd56248759d353f6447990dacab850f inherit pub_methods_classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person" id="r_a9cd56248759d353f6447990dacab850f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person.html#a9cd56248759d353f6447990dacab850f">setSurname</a> (String surname)</td></tr>
+<tr class="memdesc:a9cd56248759d353f6447990dacab850f inherit pub_methods_classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person"><td class="mdescLeft">&#160;</td><td class="mdescRight">Imposta il cognome della persona.  <br /></td></tr>
 <tr class="separator:a9cd56248759d353f6447990dacab850f inherit pub_methods_classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44892e8e4c4feab3f1a764189d0c6f8e inherit pub_methods_classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person" id="r_a44892e8e4c4feab3f1a764189d0c6f8e"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person.html#a44892e8e4c4feab3f1a764189d0c6f8e">equals</a> (Object o)</td></tr>
 <tr class="memdesc:a44892e8e4c4feab3f1a764189d0c6f8e inherit pub_methods_classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person"><td class="mdescLeft">&#160;</td><td class="mdescRight">Confronta l'oggetto <a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person.html">Person</a> corrente con un altro oggetto per verificarne l'uguaglianza. L'uguaglianza è determinata confrontando il nome e il cognome. Se uno o entrambi i campi sono null, vengono gestiti casi specifici:  <br /></td></tr>
@@ -184,14 +199,21 @@ Membri pubblici</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Costruttore della classe Conatct Inizializza un nuovo oggetto <code><a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html">Contact</a></code> con il nome e il cognome forniti, inizializzando anche le liste <code>number</code>, <code>email</code> e <code>tag</code> con una capacità iniziale di 3 elementi ciascuna. Assegna inoltre un ID univoco al contatto basato su un contatore statico incrementale. </p>
+<p>Costruttore della classe <code><a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html">Contact</a></code>. </p>
+<p>Inizializza un nuovo oggetto <code><a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html">Contact</a></code> con il nome, il cognome e i campi predefiniti per numeri di telefono, email e tag.</p>
 <dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
-    <tr><td class="paramname">name</td><td>Nome del conatto </td></tr>
-    <tr><td class="paramname">surname</td><td>Cognome del contatto </td></tr>
+    <tr><td class="paramname">name</td><td>Il nome del contatto. </td></tr>
+    <tr><td class="paramname">surname</td><td>Il cognome del contatto.</td></tr>
   </table>
   </dd>
 </dl>
+<ul>
+<li>Il costruttore chiama il costruttore della superclasse per inizializzare il nome e il cognome.</li>
+<li>Inizializza i campi <code>number</code>, <code>email</code> e <code>tag</code> come liste vuote con una capacità iniziale di 3 elementi.</li>
+<li>Assegna un identificativo unico al contatto (<code>ID</code>) utilizzando un contatore statico.</li>
+<li>Incrementa il contatore statico dopo aver assegnato l'ID. </li>
+</ul>
 
 </div>
 </div>
@@ -250,6 +272,19 @@ Membri pubblici</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Aggiunge un indirizzo email alla lista di email del contatto. </p>
+<p>Questo metodo consente di aggiungere un nuovo indirizzo email alla lista di email del contatto.</p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">email</td><td>L'indirizzo email da aggiungere alla lista.</td></tr>
+  </table>
+  </dd>
+</dl>
+<ul>
+<li>L'indirizzo email fornito viene aggiunto alla lista <code>email</code> del contatto.</li>
+<li>Non sono presenti controlli per la validità o unicità dell'email, che potrebbero essere aggiunti se necessario. </li>
+</ul>
+
 </div>
 </div>
 <a id="ac09063384da4442df6d21bc92cedcb48" name="ac09063384da4442df6d21bc92cedcb48"></a>
@@ -267,6 +302,19 @@ Membri pubblici</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Aggiunge un numero alla lista di numeri del contatto. </p>
+<p>Questo metodo consente di aggiungere un nuovo numero alla lista dei numeri di telefono del contatto.</p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">number</td><td>Il numero di telefono da aggiungere alla lista.</td></tr>
+  </table>
+  </dd>
+</dl>
+<ul>
+<li>Il numero fornito viene aggiunto alla lista <code>number</code> del contatto.</li>
+<li>Non sono presenti controlli per la validità o unicità del numero, che potrebbero essere aggiunti se necessario. </li>
+</ul>
+
 </div>
 </div>
 <a id="a5971c5ca06742b2d15c3012f6957fa4b" name="a5971c5ca06742b2d15c3012f6957fa4b"></a>
@@ -283,6 +331,26 @@ Membri pubblici</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Aggiunge un tag alla lista di tag del contatto. </p>
+<p>Questo metodo consente di associare un nuovo tag al contatto, assicurandosi che non vengano aggiunti valori null o tag duplicati.</p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tag</td><td>L'oggetto <code><a class="el" href="enumit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_tag.html">Tag</a></code> da aggiungere alla lista.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Eccezioni</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">IllegalArgumentException</td><td>Se il parametro <code>tag</code> è null.</td></tr>
+  </table>
+  </dd>
+</dl>
+<ul>
+<li>Se il tag fornito non è già presente nella lista, viene aggiunto.</li>
+<li>Il metodo utilizza il metodo <code>contains</code> della lista per verificare la presenza del tag.</li>
+<li>I tag duplicati non vengono aggiunti. </li>
+</ul>
 
 </div>
 </div>
@@ -327,7 +395,14 @@ Membri pubblici</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Restituisce la lista degli indirizzi email. </p>
+
+<p>Restituisce la lista di indirizzi email del contatto. </p>
+<p>Questo metodo restituisce la lista di indirizzi email associata al contatto.</p>
+<dl class="section return"><dt>Restituisce</dt><dd>La lista di indirizzi email del contatto</dd></dl>
+<ul>
+<li>Il metodo restituisce direttamente la lista degli indirizzi email, consentendo l'accesso agli indirizzi associati al contatto.</li>
+<li>La lista restituita è la stessa utilizzata internamente per memorizzare gli indirizzi email del contatto. </li>
+</ul>
 
 </div>
 </div>
@@ -346,10 +421,13 @@ Membri pubblici</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Restituisce l'ID del contatto. Questo metodo restituisce l'identificatore univoco (ID) associato al contatto. </p>
-<dl class="section return"><dt>Restituisce</dt><dd>L'ID del contatto come valore intero.</dd>
-<dd>
-The contact ID as an integer value. </dd></dl>
+<p>Restituisce l'ID del contatto. </p>
+<p>Questo metodo restituisce l'identificativo unico del contatto.</p>
+<dl class="section return"><dt>Restituisce</dt><dd>L'ID del contatto come valore intero (<code>int</code>).</dd></dl>
+<ul>
+<li>L'ID è un valore numerico univoco assegnato al contatto.</li>
+<li>Questo metodo fornisce un accesso diretto all'ID, che potrebbe essere utilizzato per identificare il contatto in modo univoco all'interno di un sistema. </li>
+</ul>
 
 </div>
 </div>
@@ -393,7 +471,14 @@ The contact ID as an integer value. </dd></dl>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Restituisce la lista dei numeri di telefono. </p>
+
+<p>Restituisce la lista di numeri di telefono del contatto. </p>
+<p>Questo metodo restituisce la lista di numeri di telefono associata al contatto.</p>
+<dl class="section return"><dt>Restituisce</dt><dd>La lista di numeri di telefono del contatto</dd></dl>
+<ul>
+<li>Il metodo restituisce direttamente la lista dei numeri di telefono, consentendo l'accesso ai numeri associati al contatto.</li>
+<li>La lista restituita è la stessa utilizzata internamente per memorizzare i numeri di telefono del contatto. </li>
+</ul>
 
 </div>
 </div>
@@ -450,7 +535,14 @@ The contact ID as an integer value. </dd></dl>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Restituisce la lista dei tag associati. </p>
+
+<p>Restituisce la lista di tag del contatto. </p>
+<p>Questo metodo restituisce la lista di tag associata al contatto.</p>
+<dl class="section return"><dt>Restituisce</dt><dd>La lista di tag del contatto.</dd></dl>
+<ul>
+<li>Il metodo restituisce direttamente la lista di tag, consentendo l'accesso ai tag associati al contatto.</li>
+<li>La lista restituita è la stessa utilizzata internamente per memorizzare i tag del contatto. </li>
+</ul>
 
 </div>
 </div>
@@ -468,12 +560,19 @@ The contact ID as an integer value. </dd></dl>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Imposta la lista degli indirizzi email. </p><dl class="params"><dt>Parametri</dt><dd>
+
+<p>Imposta la lista di indirizzi email del contatto. </p>
+<p>Questo metodo consente di assegnare una nuova lista di indirizzi email al contatto.</p>
+<dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
-    <tr><td class="paramname">email</td><td></td></tr>
+    <tr><td class="paramname">email</td><td>La lista di indirizzi email da associare al contatto.</td></tr>
   </table>
   </dd>
 </dl>
+<ul>
+<li>Il parametro <code>email</code> è un oggetto <code>ArrayList</code> contenente gli indirizzi email da assegnare al contatto.</li>
+<li>Il metodo sostituisce la lista di indirizzi email esistente con la nuova lista fornita. </li>
+</ul>
 
 </div>
 </div>
@@ -491,12 +590,19 @@ The contact ID as an integer value. </dd></dl>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Imposta la lista dei numeri di telefono. </p><dl class="params"><dt>Parametri</dt><dd>
+
+<p>Imposta la lista di numeri del contatto. </p>
+<p>Questo metodo consente di assegnare una nuova lista di numeri di telefono al contatto.</p>
+<dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
-    <tr><td class="paramname">number</td><td></td></tr>
+    <tr><td class="paramname">number</td><td>La lista di numeri di telefono da associare al contatto.</td></tr>
   </table>
   </dd>
 </dl>
+<ul>
+<li>Il parametro <code>number</code> è un oggetto <code>ArrayList</code> contenente i numeri di telefono che si desidera assegnare al contatto.</li>
+<li>Il metodo sostituisce la lista di numeri esistente con la nuova lista fornita. </li>
+</ul>
 
 </div>
 </div>
@@ -514,12 +620,19 @@ The contact ID as an integer value. </dd></dl>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Imposta la lista dei tag associati. </p><dl class="params"><dt>Parametri</dt><dd>
+
+<p>Imposta la lista di tag del contatto. </p>
+<p>Questo metodo consente di assegnare una nuova lista di tag al contatto.</p>
+<dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
-    <tr><td class="paramname">tag</td><td></td></tr>
+    <tr><td class="paramname">tag</td><td>La lista di tag da associare al contatto.</td></tr>
   </table>
   </dd>
 </dl>
+<ul>
+<li>Il parametro <code>tag</code> è un oggetto <code>ArrayList</code> contenente i tag da assegnare al contatto.</li>
+<li>Il metodo sostituisce la lista di tag esistente con la nuova lista fornita. </li>
+</ul>
 
 </div>
 </div>
@@ -537,11 +650,15 @@ The contact ID as an integer value. </dd></dl>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Restituisce una rappresentazione dell'oggetto corrente sotto forma di stringa, includendo il ruolo, le informazioni della classe padre e i numeri di telefono ed email associati. Utilizza un StringBuffer per concatenare le informazioni:</p><ul>
-<li>Il ruolo dell'oggetto (ottenuto tramite <a class="el" href="#ae6c67c3ed128cafd941f44ecbca120ce" title="Restituisce il ruolo della classe corrente. Questo metodo sovrascrive il metodo getRole della classe ...">getRole()</a>).</li>
-<li>Le informazioni dell'oggetto della classe padre (ottenute tramite super.toString()).</li>
-<li>I numeri di telefono associati all'oggetto, se presenti.</li>
-<li>Gli indirizzi email associati all'oggetto, se presenti. </li>
+
+<p>Restituisce una rappresentazione testuale del contatto. </p>
+<p>Questo metodo sovrascrive il metodo <code>toString</code> della classe <code>Object</code> per fornire una descrizione dettagliata del contatto, inclusi il ruolo, i numeri di telefono e gli indirizzi email associati.</p>
+<dl class="section return"><dt>Restituisce</dt><dd>Una stringa contenente la rappresentazione del contatto.</dd></dl>
+<ul>
+<li>La rappresentazione include il ruolo del contatto, che viene recuperato tramite il metodo <code><a class="el" href="#ae6c67c3ed128cafd941f44ecbca120ce" title="Restituisce il ruolo della classe corrente. Questo metodo sovrascrive il metodo getRole della classe ...">getRole()</a></code>.</li>
+<li>Vengono poi aggiunti i numeri di telefono e gli indirizzi email associati al contatto.</li>
+<li>Ogni numero di telefono è preceduto dalla stringa "Phone number: ", mentre ogni indirizzo email è preceduto da "Email: ".</li>
+<li>La rappresentazione è costruita utilizzando un oggetto <code>StringBuffer</code> per migliorare le performance durante la concatenazione delle stringhe. </li>
 </ul>
 
 <p>Reimplementa <a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_person.html#aa6cf902603f6a947cc9a55321350aa3d">it.unisa.diem.team02.contactsbook.model.Person</a>.</p>
