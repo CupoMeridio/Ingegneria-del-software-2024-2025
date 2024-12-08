@@ -1,16 +1,12 @@
 @startuml
-actor Utente
+actor Utente_registrato
 participant "LoginViewController" as LoginViewController
 participant "App" as App 
 participant "Database" as db
 
-Utente -> LoginViewController: run()
+Utente_registrato -> LoginViewController: run()
 
-alt actionLoginLocal()
-LoginViewController -> App: setRoot("ContactsbookView")
-activate App
-deactivate App
-else actionLogin()
+
 
 activate db
 activate LoginViewController
@@ -26,10 +22,6 @@ LoginViewController -> App: setRoot("ContactsbookView")
 activate App
 deactivate App
 deactivate LoginViewController
-end
-
-
-
 end
 
 

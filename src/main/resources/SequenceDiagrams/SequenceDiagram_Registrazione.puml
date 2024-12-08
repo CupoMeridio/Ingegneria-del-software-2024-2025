@@ -1,17 +1,17 @@
 @startuml
-actor Utente_non_registrato
+actor Utente
 participant LoginViewController
 participant  Database
 
-Utente_non_registrato->LoginViewController:run()
+Utente->LoginViewController:run()
 activate LoginViewController
 LoginViewController -> Database: new()
 LoginViewController -> Database: ConnectionDB()
 Database --> LoginViewController: Connection
 
 activate Database
-alt btnSingin is abilitato
-Utente_non_registrato->LoginViewController:actionSignin
+opt btnSignIn is abilitato
+Utente->LoginViewController:actionSignin
 LoginViewController -> Database: insertUser 
 
 

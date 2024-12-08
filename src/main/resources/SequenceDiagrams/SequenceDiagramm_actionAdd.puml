@@ -1,12 +1,12 @@
 @startuml
-actor Utente
+actor Utente_registrato
 participant ContactsbookViewController
 participant AddViewController
 participant "Contatto" as Contact
 participant DuplicateContactViewController
 participant UserInteractionDataInterface
 
-Utente -> ContactsbookViewController: actionAdd
+Utente_registrato -> ContactsbookViewController: actionAdd
 activate ContactsbookViewController
 ContactsbookViewController->AddViewController: setObservableList
 activate AddViewController
