@@ -104,6 +104,7 @@ Diagramma delle classi per it.unisa.diem.team02.contactsbook.ui.controllers.Logi
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Membri pubblici</h2></td></tr>
 <tr class="memitem:a4a71f3a60e6ac63e8eebbb30ffa68263" id="r_a4a71f3a60e6ac63e8eebbb30ffa68263"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4a71f3a60e6ac63e8eebbb30ffa68263">initialize</a> (URL url, ResourceBundle rb)</td></tr>
+<tr class="memdesc:a4a71f3a60e6ac63e8eebbb30ffa68263"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inizializza il controller, configurando il binding dei bottoni e dei campi di input.  <br /></td></tr>
 <tr class="separator:a4a71f3a60e6ac63e8eebbb30ffa68263"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descrizione dettagliata</h2>
@@ -128,14 +129,17 @@ Membri pubblici</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Metodo di inizializzazione del controller. Richiama i metodi che inizializzano i vari componenti.</p>
+
+<p>Inizializza il controller, configurando il binding dei bottoni e dei campi di input. </p>
+<p>Questo metodo viene invocato al momento dell'inizializzazione del controller. Imposta i binding per il pulsante di registrazione (<code>btnSign</code>), disabilitandolo finché uno dei campi di input non è correttamente compilato. I campi monitorati sono: la conferma della password, la mail di registrazione e la password.</p>
 <dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
-    <tr><td class="paramname">url</td><td>utilizzato per risolvere il percorso del file FXML. </td></tr>
-    <tr><td class="paramname">rb</td><td>contenente dati di localizzazione. </td></tr>
+    <tr><td class="paramname">url</td><td>Il percorso del file FXML, utilizzato per risolvere il percorso del file di configurazione. </td></tr>
+    <tr><td class="paramname">rb</td><td>Un oggetto <code>ResourceBundle</code> contenente i dati di localizzazione per l'internazionalizzazione dell'applicazione.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section see"><dt>Si veda anche</dt><dd>Bindings#or(javafx.beans.binding.BooleanBinding, javafx.beans.binding.BooleanBinding) </dd></dl>
 
 </div>
 </div>

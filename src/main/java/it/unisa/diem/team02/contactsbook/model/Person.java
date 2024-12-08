@@ -1,71 +1,102 @@
+
 package it.unisa.diem.team02.contactsbook.model;
 
-import java.util.Objects;
-
 /**
- * 
  * Classe astratta che definisce gli attributi e i metodi di una Persona generica.
- * 
  * @author team02
  */
 public abstract class Person {
     private String name;
     private String surname;
     
-    
+/**
+ * @brief Costruttore per creare un oggetto `Person` con nome e cognome.
+ * 
+ * Questo costruttore inizializza un oggetto `Person` con i valori di nome e cognome forniti.
+ * 
+ * @param name Il nome della persona.
+ * @param surname Il cognome della persona.
+ * 
+ * @details 
+ * - Il costruttore accetta due parametri, `name` e `surname`, che vengono utilizzati per inizializzare le rispettive variabili d'istanza.
+ */
     public Person(String name, String surname){
         this.name=name;
         this.surname=surname;
     }
     
-    /**
-     * 
-     * Restituisce il nome.
-     */
+/**
+ * @brief Restituisce il nome della persona.
+ * 
+ * Questo metodo restituisce il nome associato all'oggetto `Person`.
+ * 
+ * @return Il nome della persona come stringa.
+ * 
+ * @details 
+ * - Il metodo restituisce la variabile d'istanza `name`, che contiene il nome della persona.
+ */
     public String getName() {
         return name;
     }
     
-     /**
-     * 
-     * Restituisce il cognome.
-     * 
-     */
+/**
+ * @brief Restituisce il cognome della persona.
+ * 
+ * Questo metodo restituisce il cognome associato all'oggetto `Person`.
+ * 
+ * @return Il cognome della persona come stringa.
+ * 
+ * @details 
+ * - Il metodo restituisce la variabile d'istanza `surname`, che contiene il cognome della persona.
+ */
     public String getSurname() {
         return surname;
     }
 
     
     
-    /**
-     * 
-     * Imposta il nome.
-     * 
-     * @param name Il nuovo nome da impostare.
-     * 
-     */
+/**
+ * @brief Imposta il nome della persona.
+ * 
+ * Questo metodo consente di assegnare un nuovo nome all'oggetto `Person`.
+ * 
+ * @param name Il nuovo nome da associare alla persona.
+ * 
+ * @details 
+ * - Il parametro `name` viene utilizzato per aggiornare la variabile d'istanza `name`.
+ * - Il nuovo valore di `name` sostituirà quello precedente.
+ */
     public void setName(String name) {
         this.name = name;
     }
     
-    /**
-     * 
-     * Imposta il cognome.
-     * 
-     * @param surname Il nuovo cognome da impostare.
-     * 
-     */
+/**
+ * @brief Imposta il cognome della persona.
+ * 
+ * Questo metodo consente di assegnare un nuovo cognome all'oggetto `Person`.
+ * 
+ * @param surname Il nuovo cognome da associare alla persona.
+ * 
+ * @details 
+ * - Il parametro `surname` viene utilizzato per aggiornare la variabile d'istanza `surname`.
+ * - Il nuovo valore di `surname` sostituirà quello precedente.
+ */
     public void setSurname(String surname) {
         this.surname = surname;
     }
     
     
-    /*
-    * 
-    * Restituisce le informazioni di un oggetto Person nel seguente formato:
-    * Name: <nome> Surname: <cognome>
-    * 
-    */
+/**
+ * @brief Restituisce una rappresentazione testuale della persona.
+ * 
+ * Questo metodo sovrascrive il metodo `toString` della classe `Object` per fornire una descrizione testuale
+ * contenente il nome e il cognome della persona.
+ * 
+ * @return Una stringa che rappresenta la persona, includendo il nome e il cognome.
+ * 
+ * @details 
+ * - La stringa restituita è nel formato: `"Name: nome Surname: cognome"`.
+ */
     @Override
     public String toString(){
         return "Name: "+name+" Surname: "+surname+"\n";

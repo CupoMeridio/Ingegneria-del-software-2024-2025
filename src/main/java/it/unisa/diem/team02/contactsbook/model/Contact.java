@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package it.unisa.diem.team02.contactsbook.model;
 
 import java.util.ArrayList;
@@ -23,21 +20,24 @@ public class Contact extends Person{
     
     
 /**
+ * @brief Costruttore della classe `Contact`.
  * 
- * @brief Costruttore della classe Conatct
- * Inizializza un nuovo oggetto `Contact` con il nome e il cognome forniti, 
- * inizializzando anche le liste `number`, `email` e `tag` con una capacità iniziale 
- * di 3 elementi ciascuna. Assegna inoltre un ID univoco al contatto basato su un 
- * contatore statico incrementale.
+ * Inizializza un nuovo oggetto `Contact` con il nome, il cognome e i campi predefiniti per numeri di telefono, email e tag.
  * 
- * @param name Nome del conatto
- * @param surname Cognome del contatto
- */    
+ * @param name Il nome del contatto.
+ * @param surname Il cognome del contatto.
+ * 
+ * @details 
+ * - Il costruttore chiama il costruttore della superclasse per inizializzare il nome e il cognome.
+ * - Inizializza i campi `number`, `email` e `tag` come liste vuote con una capacità iniziale di 3 elementi.
+ * - Assegna un identificativo unico al contatto (`ID`) utilizzando un contatore statico.
+ * - Incrementa il contatore statico dopo aver assegnato l'ID.
+ */
     public Contact(String name, String surname) {
         super(name, surname);
-        number = new ArrayList<String>(3);
-        email = new ArrayList<String>(3);
-        this.tag= new ArrayList<Tag>(3);
+        number = new ArrayList<>(3);
+        email = new ArrayList<>(3);
+        this.tag= new ArrayList<>(3);
         this.ID = contatore;
          contatore++;
         
@@ -60,9 +60,9 @@ public class Contact extends Person{
   */
     public Contact(String name, String surname, int ID) {
         super(name, surname);
-        number = new ArrayList<String>();
-        email = new ArrayList<String>();
-        this.tag= new ArrayList<Tag>();
+        number = new ArrayList<>();
+        email = new ArrayList<>();
+        this.tag= new ArrayList<>();
         this.ID = ID;  
     }
     
@@ -82,7 +82,7 @@ public class Contact extends Person{
  * 
  */
     public String getNumber(){
-        if(number.size()==0) return null;
+        if(number.isEmpty()) return null;
         if(number.size()==1) return number.get(0);
         if(number.size()==2) return number.get(0)+"\n"+number.get(1);
         return number.get(0)+"\n"+number.get(1)+"\n"+number.get(2);
@@ -107,7 +107,7 @@ public class Contact extends Person{
  * 
  */
     public String getEmail() {
-        if(email.size()==0) return null;
+        if(email.isEmpty()) return null;
         if(email.size()==1) return email.get(0);
         if(email.size()==2) return email.get(0)+"\n"+email.get(1);
         return email.get(0)+"\n"+email.get(1)+"\n"+email.get(2);
@@ -121,99 +121,161 @@ public class Contact extends Person{
         return "";
     }
     
-    /*
+    /**
+    * @brief Aggiunge un tag alla lista di tag del contatto.
     * 
-    * Inserisce un tag tra {Home, University, Job}, per un massimo di tre tag.
+    * Questo metodo consente di associare un nuovo tag al contatto, assicurandosi che 
+    * non vengano aggiunti valori null o tag duplicati.
+    * 
+    * @param tag L'oggetto `Tag` da aggiungere alla lista.
+    * 
+    * @throws IllegalArgumentException Se il parametro `tag` è null.
+    * 
+    * @details 
+    * - Se il tag fornito non è già presente nella lista, viene aggiunto.
+    * - Il metodo utilizza il metodo `contains` della lista per verificare la presenza del tag.
+    * - I tag duplicati non vengono aggiunti.
+    * 
     */
     public void addTag(Tag tag) {
-        if (this.tag.size()>=3){
-            //gestire
+        if (tag == null) {
+            throw new IllegalArgumentException("Il tag non può essere null.");
         }
-        else this.tag.add(tag);
-    }
-    
-    /*
-    * 
-    * Inserisce un numero di telefono per un massimo di tre.
-    */
-    
-    public void addNumber(String number) {
-        if (this.number.size()>=3){
-            //gestire
+        if (!this.tag.contains(tag)) {
+            this.tag.add(tag);
         }
-        else this.number.add(number);
-    }
-    
-    /*
-    * @brief Non ancora implementata
-    * 
-    * Inserisce un indirizzo email per un massimo di tre.
-    */
-    public void addEmail(String email){
-        if (this.email.size()>=3){
-            //gestire
-        }
-        else this.email.add(email);
     }
     
    /**
-    * Imposta la lista dei numeri di telefono.
-    * @param number
+    * @brief Aggiunge un numero alla lista di numeri del contatto.
+    * 
+    * Questo metodo consente di aggiungere un nuovo numero alla lista dei numeri di telefono del contatto.
+    * 
+    * @param number Il numero di telefono da aggiungere alla lista.
+    * 
+    * @details 
+    * - Il numero fornito viene aggiunto alla lista `number` del contatto.
+    * - Non sono presenti controlli per la validità o unicità del numero, che potrebbero essere aggiunti se necessario.
+    */
+    public void addNumber(String number) {
+        this.number.add(number);
+    }
+    
+    /**
+    * @brief Aggiunge un indirizzo email alla lista di email del contatto.
+    * 
+    * Questo metodo consente di aggiungere un nuovo indirizzo email alla lista di email del contatto.
+    * 
+    * @param email L'indirizzo email da aggiungere alla lista.
+    * 
+    * @details 
+    * - L'indirizzo email fornito viene aggiunto alla lista `email` del contatto.
+    * - Non sono presenti controlli per la validità o unicità dell'email, che potrebbero essere aggiunti se necessario.
+    */
+    public void addEmail(String email){
+        this.email.add(email);
+    }
+    
+   /**
+    * @brief Imposta la lista di numeri del contatto.
+    * 
+    * Questo metodo consente di assegnare una nuova lista di numeri di telefono al contatto.
+    * 
+    * @param number La lista di numeri di telefono da associare al contatto.
+    * 
+    * @details 
+    * - Il parametro `number` è un oggetto `ArrayList` contenente i numeri di telefono che si desidera assegnare al contatto.
+    * - Il metodo sostituisce la lista di numeri esistente con la nuova lista fornita.
     */
     public void setNumber(ArrayList<String> number) {
         this.number = number;
     }
     
     /**
+    * @brief Imposta la lista di indirizzi email del contatto.
     * 
-    * Imposta la lista degli indirizzi email.
-    * @param email
+    * Questo metodo consente di assegnare una nuova lista di indirizzi email al contatto.
+    * 
+    * @param email La lista di indirizzi email da associare al contatto.
+    * 
+    * @details 
+    * - Il parametro `email` è un oggetto `ArrayList` contenente gli indirizzi email da assegnare al contatto.
+    * - Il metodo sostituisce la lista di indirizzi email esistente con la nuova lista fornita.
     */
     public void setEmail(ArrayList<String> email) {
         this.email = email;
     }
     
-    /**
-     * Imposta la lista dei tag associati.
-     * @param tag
-     */
+/**
+ * @brief Imposta la lista di tag del contatto.
+ * 
+ * Questo metodo consente di assegnare una nuova lista di tag al contatto.
+ * 
+ * @param tag La lista di tag da associare al contatto.
+ * 
+ * @details 
+ * - Il parametro `tag` è un oggetto `ArrayList` contenente i tag da assegnare al contatto.
+ * - Il metodo sostituisce la lista di tag esistente con la nuova lista fornita.
+ */
     public void setTag(ArrayList<Tag> tag) {
         this.tag = tag;
     }
     
-    /**
-    * Restituisce la lista dei tag associati.
-    */
+/**
+ * @brief Restituisce la lista di tag del contatto.
+ * 
+ * Questo metodo restituisce la lista di tag associata al contatto.
+ * 
+ * @return La lista di tag del contatto.
+ * 
+ * @details 
+ * - Il metodo restituisce direttamente la lista di tag, consentendo l'accesso ai tag associati al contatto.
+ * - La lista restituita è la stessa utilizzata internamente per memorizzare i tag del contatto.
+ */
      public ArrayList<Tag> getTagList() {
         return tag;
     }
      
-    /**
-    * 
-    * Restituisce la lista dei numeri di telefono.
-    * 
-    */ 
+/**
+ * @brief Restituisce la lista di numeri di telefono del contatto.
+ * 
+ * Questo metodo restituisce la lista di numeri di telefono associata al contatto.
+ * 
+ * @return La lista di numeri di telefono del contatto
+ * 
+ * @details 
+ * - Il metodo restituisce direttamente la lista dei numeri di telefono, consentendo l'accesso ai numeri associati al contatto.
+ * - La lista restituita è la stessa utilizzata internamente per memorizzare i numeri di telefono del contatto.
+ */
     public ArrayList<String> getNumberList(){
         return this.number ;
     }
     
-    /**
-    * 
-    * Restituisce la lista degli indirizzi email.
-    * 
-    */
+/**
+ * @brief Restituisce la lista di indirizzi email del contatto.
+ * 
+ * Questo metodo restituisce la lista di indirizzi email associata al contatto.
+ * 
+ * @return La lista di indirizzi email del contatto
+ * 
+ * @details 
+ * - Il metodo restituisce direttamente la lista degli indirizzi email, consentendo l'accesso agli indirizzi associati al contatto.
+ * - La lista restituita è la stessa utilizzata internamente per memorizzare gli indirizzi email del contatto.
+ */
     public ArrayList<String> getEmailList() {
         return email;
     }
     
- /**
- * 
+/**
  * @brief Restituisce l'ID del contatto.
- * Questo metodo restituisce l'identificatore univoco (ID) associato al contatto.
  * 
- * @return L'ID del contatto come valore intero.
+ * Questo metodo restituisce l'identificativo unico del contatto.
  * 
- * @return The contact ID as an integer value.
+ * @return L'ID del contatto come valore intero (`int`).
+ * 
+ * @details 
+ * - L'ID è un valore numerico univoco assegnato al contatto.
+ * - Questo metodo fornisce un accesso diretto all'ID, che potrebbe essere utilizzato per identificare il contatto in modo univoco all'interno di un sistema.
  */
      public int getID() {
         return ID;
@@ -235,18 +297,21 @@ public class Contact extends Person{
     }
     
     
-    /**
-    * 
-    * Restituisce una rappresentazione dell'oggetto corrente sotto forma di stringa, 
-    * includendo il ruolo, le informazioni della classe padre e i numeri di telefono ed email associati.
-    * Utilizza un StringBuffer per concatenare le informazioni:
-    * - Il ruolo dell'oggetto (ottenuto tramite getRole()).
-    * - Le informazioni dell'oggetto della classe padre (ottenute tramite super.toString()).
-    * - I numeri di telefono associati all'oggetto, se presenti.
-    * - Gli indirizzi email associati all'oggetto, se presenti.
-    * 
-    */
-
+/**
+ * @brief Restituisce una rappresentazione testuale del contatto.
+ * 
+ * Questo metodo sovrascrive il metodo `toString` della classe `Object` per fornire una descrizione dettagliata
+ * del contatto, inclusi il ruolo, i numeri di telefono e gli indirizzi email associati.
+ * 
+ * @return Una stringa contenente la rappresentazione del contatto.
+ * 
+ * @details 
+ * - La rappresentazione include il ruolo del contatto, che viene recuperato tramite il metodo `getRole()`.
+ * - Vengono poi aggiunti i numeri di telefono e gli indirizzi email associati al contatto.
+ * - Ogni numero di telefono è preceduto dalla stringa "Phone number: ", mentre ogni indirizzo email è preceduto da "Email: ".
+ * - La rappresentazione è costruita utilizzando un oggetto `StringBuffer` per migliorare le performance durante
+ *   la concatenazione delle stringhe.
+ */
     @Override
     public String toString(){
         StringBuffer sb=new StringBuffer(this.getRole()+" "+super.toString());

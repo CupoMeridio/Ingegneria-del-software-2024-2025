@@ -1,3 +1,4 @@
+
 package it.unisa.diem.team02.contactsbook.ui.controllers;
 
 import java.net.URL;
@@ -25,7 +26,6 @@ import java.io.IOException;
 
 
 /**
- * 
  * Controller per la gestione della schermata di login e registrazione.
  * Questo controller gestisce la validazione dei campi email e password.
  * 
@@ -94,29 +94,35 @@ public class LoginViewController implements Initializable {
     @FXML
     private Label lblLogErr;
 
-    /**
-     * 
-     * Metodo di inizializzazione del controller.
-     * Richiama i metodi che inizializzano i vari componenti.
-     * 
-     * @param url utilizzato per risolvere il percorso del file FXML.
-     * @param rb contenente dati di localizzazione.
-     * 
-     */
+/**
+ * @brief Inizializza il controller, configurando il binding dei bottoni e dei campi di input.
+ * 
+ * Questo metodo viene invocato al momento dell'inizializzazione del controller. Imposta i binding per il pulsante di registrazione
+ * (`btnSign`), disabilitandolo finché uno dei campi di input non è correttamente compilato. I campi monitorati sono: 
+ * la conferma della password, la mail di registrazione e la password.
+ * 
+ * @param url Il percorso del file FXML, utilizzato per risolvere il percorso del file di configurazione.
+ * @param rb Un oggetto `ResourceBundle` contenente i dati di localizzazione per l'internazionalizzazione dell'applicazione.
+ * 
+ * @see Bindings#or(javafx.beans.binding.BooleanBinding, javafx.beans.binding.BooleanBinding)
+ */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         btnSign.disableProperty().bind(Bindings.or(txtConfirmPassInitialize(), txtSignMailInitialize()).or(txtSignPassInitialize()));
     }
     
     
-    /**
-     * 
-     * Configura il listener per la validazione del campo email nella registrazione.
-     * Restituisce un BooleanProperty:
-     *  -false se l'email è valida
-     *  -true se l'email non è valida
-     * 
-     */
+/**
+ * @brief Inizializza il campo di input per l'email di registrazione, impostando il binding e la validazione.
+ * 
+ * Questo metodo crea un `BooleanProperty` che monitora il valore del campo di input per l'email di registrazione (`txtSignMail`).
+ * Aggiunge un listener che valida il formato dell'email ogni volta che il valore cambia. Se l'email è valida, il bordo del campo 
+ * viene colorato di verde e l'errore viene rimosso. In caso contrario, il bordo diventa rosso e viene mostrato un messaggio di errore.
+ * 
+ * @return Una proprietà booleana che indica se l'email è valida o meno (false se valida, true se non valida).
+ * 
+ * @see isValidEmail(String)
+ */
     private BooleanProperty txtSignMailInitialize(){
         BooleanProperty observableBoolean = new SimpleBooleanProperty(true);
         txtSignMail.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -136,14 +142,19 @@ public class LoginViewController implements Initializable {
      return observableBoolean;   
     }
     
-    /**
-     * 
-     * Configura il listener per la validazione del campo password nella registrazione.
-     * Restituisce un BooleanProperty:
-     *  -false se la password è valida
-     *  -true se la password non è valida
-     * 
-     */
+/**
+ * @brief Inizializza il campo di input per la password di registrazione, impostando il binding e la validazione.
+ * 
+ * Questo metodo crea un `BooleanProperty` che monitora il valore del campo di input per la password di registrazione (`txtSignPass`).
+ * Aggiunge un listener che valida la password ogni volta che il valore cambia. Se la password è valida, il bordo del campo 
+ * viene colorato di verde e l'errore viene rimosso. In caso contrario, il bordo diventa rosso e viene mostrato un messaggio di errore.
+ * La password è considerata valida se ha una lunghezza di almeno 8 caratteri e contiene almeno un carattere speciale, 
+ * una lettera maiuscola, una lettera minuscola e un numero.
+ * 
+ * @return Una proprietà booleana che indica se la password è valida o meno (false se valida, true se non valida).
+ * 
+ * @see isValidPassword(String)
+ */
     private BooleanProperty txtSignPassInitialize(){
         BooleanProperty observableBoolean = new SimpleBooleanProperty(true);
         txtSignPass.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -163,14 +174,16 @@ public class LoginViewController implements Initializable {
         return observableBoolean;
     }
     
-    /**
-     * 
-     * Configura il listener per verificare che la password di conferma corrisponda alla password principale.
-     * Restituisce un BooleanProperty:
-     *  -false se le password coincidono
-     *  -true se le password non coincidono
-     * 
-     */
+/**
+ * @brief Inizializza il campo di input per la conferma della password di registrazione, impostando il binding e la validazione.
+ * 
+ * Questo metodo crea una `BooleanProperty` che monitora il valore del campo di input per la conferma della password (`txtConfirmPass`).
+ * Aggiunge un listener che verifica se il valore inserito nel campo di conferma della password corrisponde al valore della password principale (`txtSignPass`).
+ * Se le password corrispondono, il bordo del campo di conferma viene colorato di verde e il messaggio di errore viene rimosso. In caso contrario, il bordo 
+ * diventa rosso e viene mostrato un messaggio di errore che indica che le password non corrispondono.
+ * 
+ * @return Una proprietà booleana che indica se le password corrispondono o meno (false se corrispondono, true se non corrispondono).
+ */
     private BooleanProperty txtConfirmPassInitialize(){
         BooleanProperty b=new SimpleBooleanProperty(true);
         txtConfirmPass.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -189,33 +202,40 @@ public class LoginViewController implements Initializable {
     
     
     
-    /**
-     * 
-     * Valida un indirizzo email.
-     * Questo metodo controlla se l'indirizzo email è valido seguendo una espressione regolare, verificando che:
-     * - Inizia con una parte locale che può contenere lettere, numeri, punti, trattini e il carattere di sottolineatura (_).
-     * - È seguito dal simbolo @.
-     * - La parte del dominio (dopo @) può contenere lettere, numeri, punti e trattini.
-     * - Termina con un dominio di primo livello (TLD) composto solo da lettere, con una lunghezza compresa tra 2 e 6 caratteri.
-     * 
-     * @param email L'email da validare.
-     * @return true se l'email è valida, false altrimenti.
-     * 
-     */
+/**
+ * 
+ * Valida un indirizzo email.
+ * Questo metodo controlla se l'indirizzo email è valido seguendo una espressione regolare, verificando che:
+ * - Inizia con una parte locale che può contenere lettere, numeri, punti, trattini e il carattere di sottolineatura (_).
+ * - È seguito dal simbolo @.
+ * - La parte del dominio (dopo @) può contenere lettere, numeri, punti e trattini.
+ * - Termina con un dominio di primo livello (TLD) composto solo da lettere, con una lunghezza compresa tra 2 e 6 caratteri.
+ * 
+ * @param email L'email da validare.
+ * @return true se l'email è valida, false altrimenti.
+ * 
+ */
     private boolean isValidEmail(String email) {
         String emailRegex = "^[\\w.-]+@[a-zA-Z\\d.-]+\\.[a-zA-Z]{2,6}$";
         return email.matches(emailRegex);
     }
     
-    /**
-     * 
-     * Valida una password in base ai requisiti di sicurezza.
-     * La password deve contenere almeno una lettera maiuscola, un numero e un carattere speciale, con una lunghezza minima di 8 caratteri.
-     * 
-     * @param password La password da validare.
-     * @return true se la password è valida, false altrimenti.
-     * 
-     */
+/**
+ * @brief Verifica la validità della password in base ai criteri di sicurezza.
+ * 
+ * Questo metodo utilizza una espressione regolare per verificare che la password soddisfi determinati criteri di sicurezza:
+ * - Contiene almeno una lettera maiuscola.
+ * - Contiene almeno un numero.
+ * - Contiene almeno un carattere speciale (come !, @, #, $, %, ecc.).
+ * - Ha una lunghezza minima di 8 caratteri.
+ * 
+ * @param password La password da validare.
+ * 
+ * @return `true` se la password soddisfa i criteri di sicurezza, altrimenti `false`.
+ * 
+ * @note L'espressione regolare utilizzata è: 
+ *        ^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\",.<>?/]).{8,}$
+ */
     private boolean isValidPassword(String password) {
         // Espressione regolare per la validazione della password
         //  Espressione regolare per validare la password
@@ -274,10 +294,8 @@ public class LoginViewController implements Initializable {
     }
     
     /*
-    * 
     * Implementa l'azione associata al pulsante Sign-In. Se le credenziali inserite
     * non sono già presenti nel database permette all'utente di registrarsi
-    *
     */
     
     @FXML
@@ -285,13 +303,15 @@ public class LoginViewController implements Initializable {
         
     }
     
-    /**
-     * 
-     * Permette il solo accesso locale alle operazioni sulla rubrica. Non viene 
-     * effettuata la connessione con il database.
-     * 
-     * @param event
-     */
+/**
+ * Gestisce l'azione di login locale.
+ * 
+ * Questo metodo viene chiamato quando l'utente interagisce con il componente di login per accedere all'applicazione. 
+ * Dopo una validazione, se il login è riuscito, il metodo carica la vista dei contatti.
+ * 
+ * @param event L'evento che ha attivato il metodo, tipicamente un'azione di clic su un pulsante.
+ * @throws IOException Se si verifica un errore durante il caricamento della vista dei contatti.
+ */
     
     @FXML
     private void actionLoginLocal(ActionEvent event){

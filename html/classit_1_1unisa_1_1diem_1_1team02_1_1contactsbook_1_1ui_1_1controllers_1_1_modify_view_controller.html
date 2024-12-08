@@ -108,6 +108,7 @@ Membri pubblici</h2></td></tr>
 <tr class="memitem:ad373243afbf3dab6a2ccccb84b0e1be1" id="r_ad373243afbf3dab6a2ccccb84b0e1be1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad373243afbf3dab6a2ccccb84b0e1be1">setObservableList</a> (ObservableList&lt; <a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html">Contact</a> &gt; contacts)</td></tr>
 <tr class="separator:ad373243afbf3dab6a2ccccb84b0e1be1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52e9e3b3e37d7e9f6fc2be23feb8e5f5" id="r_a52e9e3b3e37d7e9f6fc2be23feb8e5f5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a52e9e3b3e37d7e9f6fc2be23feb8e5f5">setContact</a> (<a class="el" href="classit_1_1unisa_1_1diem_1_1team02_1_1contactsbook_1_1model_1_1_contact.html">Contact</a> contact)</td></tr>
+<tr class="memdesc:a52e9e3b3e37d7e9f6fc2be23feb8e5f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Imposta i dettagli di un contatto esistente nei campi di input.  <br /></td></tr>
 <tr class="separator:a52e9e3b3e37d7e9f6fc2be23feb8e5f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descrizione dettagliata</h2>
@@ -132,11 +133,19 @@ Membri pubblici</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Metodo di inizializzazione del controller. Gestisce la disattivazione dei vari bottoni.</p>
+<p>Inizializza il controller, definendo i comportamenti dei bottoni e dei campi di input. Questo metodo viene chiamato automaticamente durante la fase di inizializzazione della scena.</p>
+<p>Le seguenti proprietà sono legate tramite binding:</p>
+<ul>
+<li>Il bottone "btnModify" è disabilitato se i campi "txtName" e "txtSur" sono vuoti.</li>
+<li>Il campo "txtNumber2" è disabilitato se il campo "txtNumber1" è vuoto.</li>
+<li>Il campo "txtNumber3" è disabilitato se il campo "txtNumber2" è vuoto.</li>
+<li>Il campo "txtEmail2" è disabilitato se il campo "txtEmail1" è vuoto.</li>
+<li>Il campo "txtEmail3" è disabilitato se il campo "txtEmail2" è vuoto.</li>
+</ul>
 <dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
-    <tr><td class="paramname">url</td><td>utilizzato per risolvere il percorso del file FXML. </td></tr>
-    <tr><td class="paramname">rb</td><td>contenente dati di localizzazione. </td></tr>
+    <tr><td class="paramname">url</td><td>L'URL utilizzato per caricare il file FXML (se presente). </td></tr>
+    <tr><td class="paramname">rb</td><td>Il ResourceBundle utilizzato per internazionalizzare il contenuto. </td></tr>
   </table>
   </dd>
 </dl>
@@ -157,10 +166,12 @@ Membri pubblici</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Setta il campo c con il contatto passato come parametro.</p>
+
+<p>Imposta i dettagli di un contatto esistente nei campi di input. </p>
+<p>Questo metodo aggiorna i vari campi di testo (nome, cognome, numeri di telefono, email) con i valori del contatto passato come parametro. Gestisce il caso in cui il contatto abbia più di un numero di telefono o più di un'email, separandoli tramite il carattere di newline ("\n").</p>
 <dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
-    <tr><td class="paramname">contact</td><td>è il contatto da modificare. </td></tr>
+    <tr><td class="paramname">contact</td><td>Il contatto da impostare nei campi di input. </td></tr>
   </table>
   </dd>
 </dl>
@@ -181,10 +192,10 @@ Membri pubblici</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Setta il campo contacts con la lista passata come parametro.</p>
+<p>Imposta la lista osservabile di contatti. Questo metodo viene utilizzato per aggiornare l'elenco dei contatti nella vista.</p>
 <dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
-    <tr><td class="paramname">contacts</td><td>è la lista osservabile che rappresenta la rubrica. </td></tr>
+    <tr><td class="paramname">contacts</td><td>La lista osservabile di contatti da impostare. </td></tr>
   </table>
   </dd>
 </dl>

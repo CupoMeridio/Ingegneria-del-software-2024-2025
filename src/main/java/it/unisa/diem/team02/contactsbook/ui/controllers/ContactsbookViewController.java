@@ -1,3 +1,4 @@
+
 package it.unisa.diem.team02.contactsbook.ui.controllers;
 
 import it.unisa.diem.team02.App;
@@ -33,10 +34,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- * 
  * Controller per la gestione della schermata principale della rubrica.
- * 
- * 
  * @author team02
  */
 public class ContactsbookViewController implements Initializable {
@@ -96,15 +94,21 @@ public class ContactsbookViewController implements Initializable {
     
     private ObservableList<Contact> contacts;
 
-    /**
-     * 
-     * Metodo di inizializzazione del controller.
-     * Chiama i metodi che inizializzano i vari componenti.
-     * 
-     * @param url URL utilizzato per risolvere il percorso del file FXML.
-     * @param rb Risorsa contenente dati di localizzazione.
-     * 
-     */
+/**
+ * @brief Metodo di inizializzazione del controller.
+ * 
+ * Questo metodo viene eseguito automaticamente all'avvio del controller associato alla vista. 
+ * Inizializza i componenti e configura il comportamento dei pulsanti e della lista.
+ * 
+ * @param url URL utilizzato per risolvere il percorso del file FXML.
+ * @param rb Oggetto `ResourceBundle` contenente dati di localizzazione.
+ * 
+ * @details 
+ * - Richiama il metodo `createList` per configurare la lista principale.
+ * - Richiama il metodo `initializeList` per inizializzare e popolare la lista.
+ * - Configura i pulsanti di modifica e cancellazione invocando i metodi `btnMofidyInitialize` 
+ *   e `btnDeleteInitialize`.
+ */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         createList();
@@ -113,12 +117,25 @@ public class ContactsbookViewController implements Initializable {
         btnDeleteInitialize();
     }    
     
-    /**
-     * 
-     * Crea una lista osservabile con campi: Name, Surname, Number, Email e la associa alla tabella 
-     * dell'interfaccia grafica.
-     * 
-     */
+/**
+ * @brief Crea e configura la lista dei contatti per la visualizzazione.
+ * 
+ * Questo metodo inizializza l'elenco dei contatti come una lista osservabile (`ObservableList`) e 
+ * configura le colonne della tabella per associare i dati dei contatti ai rispettivi campi.
+ * 
+ * @details
+ * - Inizializza la lista `contacts` come un'istanza di `FXCollections.observableArrayList`.
+ * - Configura le colonne della tabella (`clmName`, `clmSur`, `clmNum`, `clmEmail`) 
+ *   utilizzando il meccanismo di associazione tramite `PropertyValueFactory`.
+ * - Associa la lista `contacts` al componente `TableView` (`tblvRubrica`) per visualizzarla nella UI.
+ * 
+ * @note È necessario che i nomi delle proprietà utilizzati in `PropertyValueFactory` corrispondano 
+ *       esattamente ai nomi delle variabili nei modelli dei dati (ad esempio, `name`, `surname`).
+ * 
+ * @see FXCollections.observableArrayList()
+ * @see PropertyValueFactory
+ * @see TableView
+ */
     public void createList(){
         contacts = FXCollections.observableArrayList();
         clmName.setCellValueFactory(new PropertyValueFactory("name"));
@@ -129,15 +146,13 @@ public class ContactsbookViewController implements Initializable {
     }
     
     /**
-     * 
      * Inizializza la lista osservabile con i contatti presenti nel database/file locale.
-     * 
      */
     public void initializeList(){
         
     }
     
-    /**
+/**
  * lang it
  * @brief Gestisce l'evento di aggiunta di un nuovo contatto.
  * 
@@ -152,8 +167,6 @@ public class ContactsbookViewController implements Initializable {
  * 
  * @note La finestra di dialogo viene aperta come finestra modale, impedendo l'interazione 
  *       con altre finestre finché non viene chiusa.
- * 
- * 
  */
     @FXML
 
@@ -176,15 +189,31 @@ public class ContactsbookViewController implements Initializable {
               
     }
     
-    /**
-     * 
-     * Implementa l'azione associcata al tasto modify: si apre una schermata per modificare il contatto 
-     * selezionato e la lista osservabile viene passata al controller.
-     * 
-     * @param event
-     * 
-     * @throws IOException
-     */
+/**
+ * @brief Gestisce l'azione di modifica di un contatto selezionato.
+ * 
+ * Questo metodo apre una nuova finestra per consentire la modifica delle informazioni relative al 
+ * contatto selezionato dalla tabella dei contatti.
+ * 
+ * @param event L'evento che ha scatenato l'azione, tipicamente un clic sul bottone di modifica.
+ * 
+ * @throws IOException Se si verifica un errore durante il caricamento del file FXML della vista di modifica.
+ * 
+ * @details 
+ * - Carica la vista di modifica da un file FXML (`ModifyView.fxml`) utilizzando un `FXMLLoader`.
+ * - Crea una nuova scena e associa il controller `ModifyViewController` per gestire la logica della modifica.
+ * - Configura una nuova finestra (`Stage`) con modalità modale (`WINDOW_MODAL`) per bloccare l'interazione con 
+ *   la finestra principale finché la finestra di modifica non viene chiusa.
+ * - Recupera il contatto selezionato nella tabella dei contatti e lo passa al controller della vista di modifica 
+ *   tramite il metodo `setContact`.
+ * - Passa anche la lista dei contatti al controller tramite il metodo `setObservableList`.
+ * 
+ * @note Il metodo presuppone che un contatto sia selezionato nella tabella.
+ * 
+ * @see ModifyViewController#setContact(Contact)
+ * @see ModifyViewController#setObservableList(ObservableList)
+ * @see FXMLLoader
+ */
     @FXML
     public void actionModify(ActionEvent event) throws IOException{
               FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ModifyView.fxml"));
@@ -207,12 +236,22 @@ public class ContactsbookViewController implements Initializable {
               modifyC.setContact(selectedContact);
     }
     
-    /**
-     * 
-     * Il bottone Modify non può essere premuto se non è stato selezionato alcun contatto. Per
-     * 
-     * 
-     */
+/**
+ * @brief Inizializza il comportamento del pulsante di modifica.
+ * 
+ * Questo metodo disabilita inizialmente il pulsante di modifica e aggiunge un listener alla selezione della tabella
+ * per abilitare o disabilitare il pulsante a seconda che un contatto sia selezionato o meno.
+ * 
+ * @details
+ * - Inizialmente, il pulsante `btnModify` è disabilitato (non cliccabile).
+ * - Aggiunge un listener alla proprietà di selezione della tabella (`tblvRubrica`). Ogni volta che la selezione cambia,
+ *   il listener verifica se un contatto è stato selezionato. Se un contatto è selezionato, il pulsante viene abilitato,
+ *   altrimenti rimane disabilitato.
+ * 
+ * @see ChangeListener
+ * @see ObservableValue
+ * @see TableView
+ */
     public void btnMofidyInitialize(){
         btnModify.setDisable(true);
 
@@ -224,11 +263,22 @@ public class ContactsbookViewController implements Initializable {
         });
     }
     
-    /**
-     * 
-     * Il bottone Delete non può essere premuto se non è stato selezionato alcun contatto. 
-     * 
-     */
+/**
+ * @brief Inizializza il comportamento del pulsante di eliminazione.
+ * 
+ * Questo metodo disabilita inizialmente il pulsante di eliminazione e aggiunge un listener alla selezione della tabella
+ * per abilitare o disabilitare il pulsante a seconda che un contatto sia selezionato o meno.
+ * 
+ * @details
+ * - Inizialmente, il pulsante `btnDelete` è disabilitato (non cliccabile).
+ * - Aggiunge un listener alla proprietà di selezione della tabella (`tblvRubrica`). Ogni volta che la selezione cambia,
+ *   il listener verifica se un contatto è stato selezionato. Se un contatto è selezionato, il pulsante viene abilitato,
+ *   altrimenti rimane disabilitato.
+ * 
+ * @see ChangeListener
+ * @see ObservableValue
+ * @see TableView
+ */
     public void btnDeleteInitialize(){
         btnDelete.setDisable(true);
 
@@ -240,10 +290,17 @@ public class ContactsbookViewController implements Initializable {
         });
     }
 
-    /**
-     * Implementa l'azione associcata al tasto delete: il contatto selezionato viene eliminato dalla rubrica.
-     * @param event
-     */
+/**
+ * @brief Gestisce l'azione di eliminazione di un contatto selezionato.
+ * 
+ * Questo metodo viene chiamato quando l'utente seleziona un contatto dalla tabella e clicca sul pulsante di eliminazione.
+ * Il contatto selezionato viene rimosso dalla lista dei contatti.
+ * 
+ * @param event L'evento generato dal clic sul pulsante di eliminazione.
+ * 
+ * @see Contact
+ * @see TableView
+ */
     @FXML
     private void actionDelete(ActionEvent event) {
         Contact selectedContact = tblvRubrica.getSelectionModel().getSelectedItem();
@@ -298,20 +355,23 @@ public class ContactsbookViewController implements Initializable {
     private void actionSearch(ActionEvent event) {
     }
     
-    /**
-     * 
-     * Implementa l'azione associcata al tasto Logout: l'account viene disconnesso e si torna alla schermata
-     * di login/sign in.
-     * 
-     * @param event
-     * 
-     */
+/**
+ * @brief Gestisce l'azione di logout e il ritorno alla schermata di login.
+ * 
+ * Questo metodo viene chiamato quando l'utente clicca sul pulsante di logout. Se l'accesso è stato effettuato tramite database,
+ * il metodo si occupa prima di disconnettere l'utente dal database e poi cambia la vista per tornare alla schermata di login.
+ * Il controllo del tipo di accesso viene gestito tramite una variabile statica booleana nella classe `LoginViewController`.
+ * 
+ * @param event L'evento generato dal clic sul pulsante di logout.
+ * 
+ * @note Se l'accesso è stato effettuato tramite il database, è necessario prima disconnettersi prima di tornare alla schermata di login.
+ *       Se l'accesso non è stato tramite database, la disconnessione non è necessaria.
+ * 
+ * @see App#setRoot(String)
+ * @see LoginViewController
+ */
     @FXML
     private void actionLogout(ActionEvent event) {
-        //Se l'accesso è stato effettuato con il database bisogna prima disconnettersi e poi si può tornare alla schermata di login.
-        //Il controllo del tipo di accesso si può realizzare con una variabile statica booleana di LoginViewController.
-        //Se è vera è stato fatto l'acceso con il database, altrimenti no
-        
         try{
             App.setRoot("LoginView");} 
         catch (IOException ex) {

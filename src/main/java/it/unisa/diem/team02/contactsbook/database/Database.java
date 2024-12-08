@@ -1,11 +1,6 @@
-/**
- * @brief Gestisce la connessione al database e le operazioni CRUD relative agli utenti e ai contatti.
- * 
- * Questa classe fornisce metodi per connettersi a un database PostgreSQL, inserire e recuperare utenti,
- * verificare il login e ottenere contatti. Utilizza la libreria BCrypt per la gestione sicura delle password.
- * 
- */
+
 package it.unisa.diem.team02.contactsbook.database;
+
 import it.unisa.diem.team02.contactsbook.model.Contact;
 import it.unisa.diem.team02.contactsbook.model.Tag;
 

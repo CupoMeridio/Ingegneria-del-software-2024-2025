@@ -95,6 +95,9 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">Riferimenti per la classe it.unisa.diem.team02.App</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Classe principale dell'applicazione JavaFX.  
+ <a href="#details">Continua...</a></p>
 <div class="dynheader">
 Diagramma delle classi per it.unisa.diem.team02.App</div>
 <div class="dyncontent">
@@ -105,17 +108,21 @@ Diagramma delle classi per it.unisa.diem.team02.App</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Membri pubblici</h2></td></tr>
 <tr class="memitem:a2c4343defa5e2ab38937053e72b33b01" id="r_a2c4343defa5e2ab38937053e72b33b01"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2c4343defa5e2ab38937053e72b33b01">start</a> (Stage stage)  throws IOException </td></tr>
+<tr class="memdesc:a2c4343defa5e2ab38937053e72b33b01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Metodo principale che avvia l'applicazione JavaFX.  <br /></td></tr>
 <tr class="separator:a2c4343defa5e2ab38937053e72b33b01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Membri pubblici statici</h2></td></tr>
 <tr class="memitem:ac7b31cf82ad6bf446cd153f5185411fd" id="r_ac7b31cf82ad6bf446cd153f5185411fd"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac7b31cf82ad6bf446cd153f5185411fd">setRoot</a> (String fxml)  throws IOException </td></tr>
+<tr class="memdesc:ac7b31cf82ad6bf446cd153f5185411fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cambia la radice della scena corrente.  <br /></td></tr>
 <tr class="separator:ac7b31cf82ad6bf446cd153f5185411fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3c28fcac89c8e408601ebf9df40f9ff" id="r_ad3c28fcac89c8e408601ebf9df40f9ff"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad3c28fcac89c8e408601ebf9df40f9ff">main</a> (String[] args)</td></tr>
+<tr class="memdesc:ad3c28fcac89c8e408601ebf9df40f9ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Metodo principale dell'applicazione.  <br /></td></tr>
 <tr class="separator:ad3c28fcac89c8e408601ebf9df40f9ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descrizione dettagliata</h2>
-<div class="textblock"><dl class="section author"><dt>Autore</dt><dd><a class="el" href="namespaceit_1_1unisa_1_1diem_1_1team02.html">team02</a> Classe principale dell'applicazione JavaFX che gestisce il caricamento delle viste FXML e l'avvio dell'interfaccia utente. </dd></dl>
+<div class="textblock"><p>Classe principale dell'applicazione JavaFX. </p>
+<p>Gestisce il caricamento delle viste FXML e l'avvio dell'interfaccia utente. </p><dl class="section author"><dt>Autore</dt><dd><a class="el" href="namespaceit_1_1unisa_1_1diem_1_1team02.html">team02</a> </dd></dl>
 </div><h2 class="groupheader">Documentazione delle funzioni membro</h2>
 <a id="ad3c28fcac89c8e408601ebf9df40f9ff" name="ad3c28fcac89c8e408601ebf9df40f9ff"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad3c28fcac89c8e408601ebf9df40f9ff">&#9670;&#160;</a></span>main()</h2>
@@ -139,13 +146,18 @@ Membri pubblici statici</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Metodo principale che avvia l'applicazione JavaFX.</p>
+
+<p>Metodo principale dell'applicazione. </p>
+<p>Questo metodo avvia l'applicazione JavaFX chiamando il metodo <code>launch()</code>.</p>
 <dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
-    <tr><td class="paramname">args</td><td>Argomenti della riga di comando. </td></tr>
+    <tr><td class="paramname">args</td><td>Gli argomenti della riga di comando. Non vengono utilizzati in questa implementazione.</td></tr>
   </table>
   </dd>
 </dl>
+<ul>
+<li>Il metodo <code>launch()</code> avvia il ciclo di vita di JavaFX, che gestisce la creazione dello stage principale e l'invocazione del metodo <code><a class="el" href="#a2c4343defa5e2ab38937053e72b33b01" title="Metodo principale che avvia l&#39;applicazione JavaFX.">start(Stage stage)</a></code>. </li>
+</ul>
 
 </div>
 </div>
@@ -171,19 +183,25 @@ Membri pubblici statici</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Cambia la radice della scena con un nuovo file FXML.</p>
+
+<p>Cambia la radice della scena corrente. </p>
+<p>Questo metodo permette di aggiornare il contenuto della scena attuale caricando un nuovo layout da un file FXML specificato.</p>
 <dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
-    <tr><td class="paramname">fxml</td><td>Il nome del file FXML da caricare (senza estensione). </td></tr>
+    <tr><td class="paramname">fxml</td><td>Il nome del file FXML da caricare come nuova radice della scena. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="exception"><dt>Eccezioni</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">IOException</td><td>Se il file FXML non può essere caricato. </td></tr>
+    <tr><td class="paramname">IOException</td><td>Se si verifica un errore durante il caricamento del file FXML.</td></tr>
   </table>
   </dd>
 </dl>
+<ul>
+<li>Il metodo utilizza il file FXML specificato per aggiornare la struttura visiva della scena corrente.</li>
+<li>Il file FXML deve essere accessibile e correttamente formattato. </li>
+</ul>
 
 </div>
 </div>
@@ -201,19 +219,29 @@ Membri pubblici statici</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Metodo di avvio dell'applicazione JavaFX.</p>
+
+<p>Metodo principale che avvia l'applicazione JavaFX. </p>
+<p>Questo metodo configura e mostra la finestra principale dell'applicazione. Carica la scena iniziale definita nel file FXML "LoginView" e applica alcune configurazioni alla finestra, come il titolo, l'icona e lo stato massimizzato.</p>
 <dl class="params"><dt>Parametri</dt><dd>
   <table class="params">
-    <tr><td class="paramname">stage</td><td>Lo stage principale della finestra. </td></tr>
+    <tr><td class="paramname">stage</td><td>Lo stage principale dell'applicazione, fornito da JavaFX. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="exception"><dt>Eccezioni</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">IOException</td><td>Se il file FXML non può essere caricato. </td></tr>
+    <tr><td class="paramname">IOException</td><td>Se si verifica un errore durante il caricamento del file FXML.</td></tr>
   </table>
   </dd>
 </dl>
+<ul>
+<li>La scena iniziale viene caricata dal file "LoginView.fxml".</li>
+<li>La finestra viene impostata su "massimizzata".</li>
+<li>Il titolo della finestra è impostato su "Rubrica".</li>
+<li>L'icona della finestra viene caricata dal percorso <code>/imgs/icon.png</code>.</li>
+<li>Dopo la configurazione, la finestra viene resa visibile con <code>stage.show()</code>.</li>
+</ul>
+<dl class="section note"><dt>Nota</dt><dd>Assicurarsi che il file FXML "LoginView.fxml" e l'icona "/imgs/icon.png" siano presenti e accessibili all'interno del progetto. </dd></dl>
 
 </div>
 </div>
