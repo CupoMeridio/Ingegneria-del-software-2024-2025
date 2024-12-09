@@ -39,8 +39,10 @@ public class Contact extends Person{
         email = new ArrayList<>(3);
         this.tag= new ArrayList<>(3);
         this.ID = contatore;
-         contatore++;
-        
+    }
+    
+    public static void setContatore(int contatore) {
+        Contact.contatore = contatore;
     }
     
   /**

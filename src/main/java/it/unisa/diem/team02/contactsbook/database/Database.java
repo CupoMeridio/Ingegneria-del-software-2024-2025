@@ -41,7 +41,7 @@ public class Database  {
         try {
             Class.forName("org.postgresql.Driver");
             System.out.print("Driver trovato ");
-            conn= DriverManager.getConnection("jdbc:postgresql://localhost:5432/"+dbname,user,password);
+            conn=DriverManager.getConnection("jdbc:postgresql://rubrica-mattiasanzari2003-19e7.k.aivencloud.com:14305/"+dbname+"?ssl=require&user="+user+"&password="+password);
             if(conn!=null){
                 System.out.println("Connessione Stabilita");
             }else{
@@ -384,7 +384,7 @@ public class Database  {
            String tag= formattaOut(St);
            
            
-      String query = String.format("UPDATE into %s(email,name,surname,number,tag,email_contact,id) values('%s','%s','%s','%s','%s','%s','%s'); WHERE email='%s'",tableName,  email_Utente,nm,srn,number,tag,email,ID);
+      String query = String.format("UPDATE %s SET email='%s', name='%s', surname='%s', number='%s', tag='%s', email_contact='%s', id='%s' WHERE email='%s'", tableName, email_Utente, nm, srn, number, tag, email, ID, email_Utente);
       
       statment= conn.createStatement();
       statment.executeUpdate(query);
@@ -423,5 +423,24 @@ public class Database  {
     
     public void CloseConnection(Connection conn) throws SQLException{
         conn.close();
+        System.out.print("Chiusura connessione");
+    }
+    
+    public int getNumberContact(Connection conn, String tableName){
+        
+        int numero_righe=0;
+        try {
+            Statement statement = conn.createStatement();
+            String query = String.format("SELECT COUNT(*) AS rowcount FROM %s", tableName);//conta il numero di righe nella tabella nome_tabella e assegna il risultato alla colonna rowcount
+            ResultSet rs = statement.executeQuery(query);
+            if (rs.next()) { 
+             numero_righe = rs.getInt("rowcount"); 
+            System.out.println("Numero di righe: " + numero_righe); 
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+         
+        return numero_righe;
     }
 }
