@@ -20,6 +20,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -69,16 +70,6 @@ public class ContactsbookViewController implements Initializable {
     @FXML
     private Button btnModify;
     @FXML
-    private MenuButton mbtnSort;
-    @FXML
-    private RadioMenuItem rmSurInc;
-    @FXML
-    private RadioMenuItem rmSurDec;
-    @FXML
-    private RadioMenuItem rmNameInc;
-    @FXML
-    private RadioMenuItem rmNameDec;
-    @FXML
     private MenuButton mbtnFilter;
     @FXML
     private CheckMenuItem chkmHome;
@@ -115,6 +106,7 @@ public class ContactsbookViewController implements Initializable {
  * - Richiama il metodo `initializeList` per inizializzare e popolare la lista.
  * - Configura i pulsanti di modifica e cancellazione invocando i metodi `btnMofidyInitialize` 
  *   e `btnDeleteInitialize`.
+ * - Richiama il metodo 'inizializeSearch' per configurare la barra di ricerca
  */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -122,6 +114,9 @@ public class ContactsbookViewController implements Initializable {
         initializeList();
         btnMofidyInitialize();
         btnDeleteInitialize();
+        initializeSearch();
+        
+        
     }    
     
 /**
@@ -156,6 +151,8 @@ public class ContactsbookViewController implements Initializable {
      * Inizializza la lista osservabile con i contatti presenti nel database/file locale.
      */
     public void initializeList(){
+        
+       
         
     }
     
@@ -316,7 +313,7 @@ public class ContactsbookViewController implements Initializable {
     
     /**
      * 
-     * Implementa l'azione associcata al menu button Filter: vengono visualizzati solo i contatti associati
+     * Implementa l'azione associata al menu button Filter: vengono visualizzati solo i contatti associati
      * al tag selezionato.
      * 
      * @param event
@@ -324,6 +321,28 @@ public class ContactsbookViewController implements Initializable {
      */
     @FXML
     private void actionFilter(ActionEvent event) {
+        
+        /*//lista filtrata che lavora sulla lista contacts di osservabili
+        FilteredList<Contact> flContacts = new FilteredList(contacts, c->true);
+        tblvRubrica.setItems(flContacts);
+        
+        
+        flContacts.setPredicate(contact-> {
+                // se non c'è scritto nulla sulla barra di ricerca mostra tutti i contatti
+                
+                String lowerCaseFilter = newValue.toLowerCase();
+                
+                //è necessario gestire separatamente i valori null
+                return contact.getName().toLowerCase().contains(lowerCaseFilter) ||
+                       contact.getSurname().toLowerCase().contains(lowerCaseFilter) ||
+                       contact.getNumber().toLowerCase().contains(lowerCaseFilter) ||
+                       contact.getEmail().toLowerCase().contains(lowerCaseFilter);
+               
+        
+        });
+               
+   */
+        
     }
 
     /**
@@ -358,13 +377,37 @@ public class ContactsbookViewController implements Initializable {
     /**
      * 
      * Vengono visualizzati solo i contatti della rubrica contenenti la sottostringa inserita nella barra
-     * di ricarca
+     * di ricerca
      * 
      * @param event
      * 
      */
     @FXML
-    private void actionSearch(ActionEvent event) {
+    private void initializeSearch() {
+        
+        //lista filtrata che lavora sulla lista contacts di osservabili
+        FilteredList<Contact> flContacts = new FilteredList(contacts, c->true);
+        tblvRubrica.setItems(flContacts);
+        
+        //aggiungo un listener al campo testo
+        txtSearch.textProperty().addListener((obs,oldValue,newValue) -> {
+               flContacts.setPredicate(contact-> {
+                // se non c'è scritto nulla sulla barra di ricerca mostra tutti i contatti
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                
+                String lowerCaseFilter = newValue.toLowerCase();
+                
+                //è necessario gestire separatamente i valori null
+                return contact.getName().toLowerCase().contains(lowerCaseFilter) ||
+                       contact.getSurname().toLowerCase().contains(lowerCaseFilter) ||
+                       contact.getNumber().toLowerCase().contains(lowerCaseFilter) ||
+                       contact.getEmail().toLowerCase().contains(lowerCaseFilter);
+               });
+               
+        });
+        
     }
     
 /**

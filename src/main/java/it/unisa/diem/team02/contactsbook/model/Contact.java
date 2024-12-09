@@ -119,7 +119,11 @@ public class Contact extends Person implements Serializable{
     * Restituisce tutti i tag dell'oggetto corrente.
     */
     public String getTag(){
-        return "";
+        if(tag.isEmpty()) return "";
+        if(tag.size()==1) return tag.get(0).toString();
+        if(tag.size()==2) return tag.get(0).toString()+"\n"+tag.get(1);
+        return tag.get(0).toString()+"\n"+tag.get(1).toString()+"\n"+
+                tag.get(1).toString();
     }
     
     /**
