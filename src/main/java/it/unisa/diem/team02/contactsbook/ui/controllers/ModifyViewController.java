@@ -244,15 +244,13 @@ private void actionModify(ActionEvent event) throws IOException {
         newStage.setScene(scene);
 
         DuplicateContactViewController duplicateC = loader.getController();
-        Contact c1 = new Contact("Prova", "Prova");
-        duplicateC.set(c1);
 
         newStage.initModality(Modality.APPLICATION_MODAL);
         newStage.initOwner(btnModify.getScene().getWindow());
         newStage.showAndWait();
 
         // Se l'utente conferma la modifica, salva il nuovo contatto
-        if (c1.getName().equals("")) {
+        if (duplicateC.getBoolean()) {
             contacts.remove(oldContact);
             contacts.add(newContact);
             Stage stage = (Stage) btnModify.getScene().getWindow();

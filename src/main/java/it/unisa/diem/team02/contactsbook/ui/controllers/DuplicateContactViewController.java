@@ -24,7 +24,7 @@ public class DuplicateContactViewController implements Initializable {
     @FXML
     private Button btnNo;
     
-    private Contact contact;
+    private Boolean b;
 
     /**
      * 
@@ -53,7 +53,7 @@ public class DuplicateContactViewController implements Initializable {
  */
     @FXML
     private void actionYes(ActionEvent event){
-        contact.setName("");
+        b=true;
         Stage stage = (Stage) btnYes.getScene().getWindow();
         stage.close();
     }
@@ -71,20 +71,13 @@ public class DuplicateContactViewController implements Initializable {
  */
     @FXML
     private void actionNo(ActionEvent event){
+        b=false;
         Stage stage = (Stage) btnNo.getScene().getWindow();
         stage.close();
     }
     
-/**
- * @brief Imposta il contatto da gestire.
- * 
- * Questo metodo assegna un oggetto `Contact` alla variabile `contact`, che rappresenta il contatto da gestire
- * all'interno del controller.
- * 
- * @param c1 Il contatto da assegnare.
- */
-    public void set(Contact c1){
-        this.contact=c1;
+    public Boolean getBoolean(){
+        return b;
     }
     
 }
