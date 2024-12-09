@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * 
  * @author team02
  */
-public class Contact extends Person implements Serializable{
+public class Contact extends Person{
     private ArrayList<String> number;
     private ArrayList<String> email;
     private ArrayList<Tag> tag;
