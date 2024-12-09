@@ -82,7 +82,7 @@ public class Contact extends Person{
  * 
  */
     public String getNumber(){
-        if(number.isEmpty()) return null;
+        if(number.isEmpty()) return "";
         if(number.size()==1) return number.get(0);
         if(number.size()==2) return number.get(0)+"\n"+number.get(1);
         return number.get(0)+"\n"+number.get(1)+"\n"+number.get(2);
@@ -107,7 +107,7 @@ public class Contact extends Person{
  * 
  */
     public String getEmail() {
-        if(email.isEmpty()) return null;
+        if(email.isEmpty()) return "";
         if(email.size()==1) return email.get(0);
         if(email.size()==2) return email.get(0)+"\n"+email.get(1);
         return email.get(0)+"\n"+email.get(1)+"\n"+email.get(2);
@@ -118,7 +118,11 @@ public class Contact extends Person{
     * Restituisce tutti i tag dell'oggetto corrente.
     */
     public String getTag(){
-        return "";
+        if(tag.isEmpty()) return "";
+        if(tag.size()==1) return tag.get(0).toString();
+        if(tag.size()==2) return tag.get(0).toString()+"\n"+tag.get(1);
+        return tag.get(0).toString()+"\n"+tag.get(1).toString()+"\n"+
+                tag.get(1).toString();
     }
     
     /**
