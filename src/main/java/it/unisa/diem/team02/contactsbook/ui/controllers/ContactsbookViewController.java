@@ -4,7 +4,14 @@ package it.unisa.diem.team02.contactsbook.ui.controllers;
 import it.unisa.diem.team02.App;
 import it.unisa.diem.team02.contactsbook.model.Contact;
 import it.unisa.diem.team02.contactsbook.model.Tag;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -328,7 +335,7 @@ public class ContactsbookViewController implements Initializable {
      * 
      */
     @FXML
-    private void actionImport(ActionEvent event) {
+    private void actionImport(ActionEvent event) throws IOException {
     }
 
     /**
@@ -340,7 +347,12 @@ public class ContactsbookViewController implements Initializable {
      * 
      */
     @FXML
-    private void actionExport(ActionEvent event) {
+    private void actionExport(ActionEvent event) throws FileNotFoundException, IOException {
+        try(ObjectOutputStream oos= new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("prova.txt")))){
+            for(Contact c:contacts){
+                oos.writeObject(c);
+            }
+        }
     }
     
     /**
