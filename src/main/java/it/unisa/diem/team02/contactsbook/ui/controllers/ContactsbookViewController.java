@@ -9,6 +9,7 @@ import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.EOFException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -46,8 +47,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 /**
  * Controller per la gestione della schermata principale della rubrica.
@@ -363,49 +366,41 @@ public class ContactsbookViewController implements Initializable {
      */
     @FXML
     private void actionImport(ActionEvent event) throws IOException, ClassNotFoundException {
-//        try(ObjectInputStream ois=new ObjectInputStream(new BufferedInputStream(new FileInputStream("prova.txt")))){
-//            while (true) {
-//            try {
-//                Contact c = (Contact) ois.readObject();
-//                contacts.add(c);
-//            } catch (EOFException eof) {
-//                break;
-//            }
-//            }
-//        }
-        try(BufferedReader br=new BufferedReader(new FileReader("prova.txt"))){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Apri un file");
+
+        Window window = tblvRubrica.getScene().getWindow();
+        File selectedFile = fileChooser.showOpenDialog(window);
+        try(BufferedReader br=new BufferedReader(new FileReader(selectedFile))){
             if (br.readLine() == null) return;
             String line;
             while((line=br.readLine())!= null){
-                String campi []=line.split(";");
+                System.out.println("linea letta"+line);
+                String campi []=line.split(";",-1);
+                System.out.println(line.length());
+                for (int i=0; i<campi.length; i++){
+                    System.out.println(campi[i]);
+                }
                 Contact c=new Contact(campi[0], campi[1]);
-                List<String> number=new ArrayList<>();
-                if (!campi[2].equals("")){
-                    String num[]=campi[2].split(" ");
-                    c.addNumber(num[0]);
-                    if (num.length>=2){
-                        c.addNumber(num[1]);
-                    }
-                    if(num.length==3){
-                        c.addNumber(num[2]);
-                    }
-                }
-                
-                if (!campi[3].equals("")){
-                    String email[]=campi[3].split(" ");
-                    c.addEmail(email[0]);
-                    if (email.length>=2){
-                        c.addEmail(email[1]);
-                    }
-                    if(email.length==3){
-                        c.addEmail(email[2]);
-                    }
-                }
+                if (!campi[2].equals(""))
+                    c.addNumber(campi[2]);
+                if (!campi[3].equals(""))
+                    c.addNumber(campi[3]);
+                if (!campi[4].equals(""))
+                    c.addNumber(campi[4]);
+
+                if (!campi[5].equals(""))
+                    c.addEmail(campi[5]);
+                if (!campi[6].equals(""))
+                    c.addEmail(campi[6]);
+                if (!campi[7].equals(""))
+                    c.addEmail(campi[7]);
+
                 contacts.add(c);
             }
         }
     }
-
+    
     /**
      * 
      * Implementa l'azione associcata al tasto Export: tutti i contatti della rubrica sono esportati in 
@@ -416,23 +411,41 @@ public class ContactsbookViewController implements Initializable {
      */
     @FXML
     private void actionExport(ActionEvent event) throws FileNotFoundException, IOException {
-//        try(ObjectOutputStream oos= new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("prova.txt")))){
-//            for(Contact c:contacts){
-//                oos.writeObject(c);
-//            }
-//        }
-        try(PrintWriter pw=new PrintWriter(new BufferedWriter(new FileWriter("prova.txt")))){
-            pw.println("NOME;COGNOME;NUMERO DI TELEFONO;EMAIL; TAG");
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Scegli un file in cui salvare");
+     
+        Window window = (tblvRubrica.getParent().getScene().getWindow());
+        File selectedFile = fileChooser.showSaveDialog(window);
+       
+        try(PrintWriter pw=new PrintWriter(new BufferedWriter(new FileWriter(selectedFile)))){
+            pw.println("NOME;COGNOME;NUMERO DI TELEFONO;EMAIL;TAG");
             for (Contact c: contacts){
                 pw.append(c.getName());
                 pw.append(';');
                 pw.append(c.getSurname());
                 pw.append(';');
-                pw.append(c.getNumber());
+                String[] number=c.getNumber().split("\n");
+                if(number.length>=1)
+                    pw.append(number[0]);
                 pw.append(';');
-                pw.append(c.getEmail());
+                if (number.length>=2)
+                    pw.append(number[1]);
                 pw.append(';');
-                pw.append(c.getTag());
+                 if (number.length>=3)
+                    pw.append(number[2]);
+                 pw.append(';');
+                 
+                String[] email=c.getEmail().split("\n");
+                if (email.length>=1)
+                    pw.append(email[0]);
+                pw.append(';');
+                if (email.length>=2)
+                    pw.append(email[1]);
+                pw.append(';');
+                 if (email.length>=3)
+                    pw.append(email[2]);
+                pw.append(';');
+//                pw.append(c.getTag());
                 pw.append('\n');
             }
         }
