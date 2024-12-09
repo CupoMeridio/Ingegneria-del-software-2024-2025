@@ -148,14 +148,14 @@ public void setContact(Contact contact) {
     oldContact = contact;
     
     // Imposta il nome nel campo di testo "txtName" se presente
-    if (oldContact.getName() != null) txtName.setText(oldContact.getName());
+    if (oldContact.getName() != "") txtName.setText(oldContact.getName());
     
     // Imposta il cognome nel campo di testo "txtSur" se presente
-    if (oldContact.getSurname() != null) txtSur.setText(oldContact.getSurname());
+    if (oldContact.getSurname() != "") txtSur.setText(oldContact.getSurname());
     
     // Imposta i numeri di telefono separandoli se presenti
     String number = oldContact.getNumber();
-    if (number != null){
+    if (number != ""){
         String[] numbers = number.split("\n");
         txtNumber1.setText(numbers[0]);
         
@@ -172,7 +172,7 @@ public void setContact(Contact contact) {
     
     // Imposta le email separandole se presenti
     String email = oldContact.getEmail();
-    if (email != null){
+    if (email != ""){
         String[] emails = email.split("\n");
         txtEmail1.setText(emails[0]);
         
