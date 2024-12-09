@@ -6,13 +6,21 @@ import it.unisa.diem.team02.contactsbook.model.Contact;
 import it.unisa.diem.team02.contactsbook.model.Tag;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -354,7 +362,48 @@ public class ContactsbookViewController implements Initializable {
      * 
      */
     @FXML
-    private void actionImport(ActionEvent event) throws IOException {
+    private void actionImport(ActionEvent event) throws IOException, ClassNotFoundException {
+//        try(ObjectInputStream ois=new ObjectInputStream(new BufferedInputStream(new FileInputStream("prova.txt")))){
+//            while (true) {
+//            try {
+//                Contact c = (Contact) ois.readObject();
+//                contacts.add(c);
+//            } catch (EOFException eof) {
+//                break;
+//            }
+//            }
+//        }
+        try(BufferedReader br=new BufferedReader(new FileReader("prova.txt"))){
+            if (br.readLine() == null) return;
+            String line;
+            while((line=br.readLine())!= null){
+                String campi []=line.split(";");
+                Contact c=new Contact(campi[0], campi[1]);
+                List<String> number=new ArrayList<>();
+                if (!campi[2].equals("")){
+                    String num[]=campi[2].split(" ");
+                    c.addNumber(num[0]);
+                    if (num.length>=2){
+                        c.addNumber(num[1]);
+                    }
+                    if(num.length==3){
+                        c.addNumber(num[2]);
+                    }
+                }
+                
+                if (!campi[3].equals("")){
+                    String email[]=campi[3].split(" ");
+                    c.addEmail(email[0]);
+                    if (email.length>=2){
+                        c.addEmail(email[1]);
+                    }
+                    if(email.length==3){
+                        c.addEmail(email[2]);
+                    }
+                }
+                contacts.add(c);
+            }
+        }
     }
 
     /**
@@ -367,9 +416,24 @@ public class ContactsbookViewController implements Initializable {
      */
     @FXML
     private void actionExport(ActionEvent event) throws FileNotFoundException, IOException {
-        try(ObjectOutputStream oos= new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("prova.txt")))){
-            for(Contact c:contacts){
-                oos.writeObject(c);
+//        try(ObjectOutputStream oos= new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("prova.txt")))){
+//            for(Contact c:contacts){
+//                oos.writeObject(c);
+//            }
+//        }
+        try(PrintWriter pw=new PrintWriter(new BufferedWriter(new FileWriter("prova.txt")))){
+            pw.println("NOME;COGNOME;NUMERO DI TELEFONO;EMAIL; TAG");
+            for (Contact c: contacts){
+                pw.append(c.getName());
+                pw.append(';');
+                pw.append(c.getSurname());
+                pw.append(';');
+                pw.append(c.getNumber());
+                pw.append(';');
+                pw.append(c.getEmail());
+                pw.append(';');
+                pw.append(c.getTag());
+                pw.append('\n');
             }
         }
     }

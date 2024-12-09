@@ -16,7 +16,7 @@ package it.unisa.diem.team02.contactsbook.model;
  * 
  * @note L'enum può essere esteso in futuro per includere altre etichette, a seconda delle necessità dell'applicazione.
  */
-public enum Tag {
+public enum Tag{
     Home,
     University,
     Job
