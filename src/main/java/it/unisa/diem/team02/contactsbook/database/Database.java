@@ -26,6 +26,10 @@ public class Database  {
  * 
  * @brief Stabilisce una connessione al database PostgreSQL.
  * 
+ * @pre i parametri passati devono essere quelli di una tabella esistente in un database con un propretario e lacorrispettiva password
+ * @post la connessione viene stabilita
+ * @invariant dbname, user, password
+ * 
  * @param dbname Nome del database a cui connettersi.
  * @param user Nome del possessore del database in pgAdmin.
  * @param password Password per accedere al Database .
@@ -60,6 +64,12 @@ public class Database  {
     * 
     * @brief Inserisce un nuovo utente nella tabella specificata.
     * 
+    * 
+    * @pre conn!= null,tableName deve esistere nel database connesso, l' email inserita deve esser valida e diversa da altre email nel database, la password non può essere vuota o nulla
+    * @post viene salvato nella tableName l' email associata allapassword criptata
+    * @invariant conn,email, tableName
+    * 
+    * 
     * @param conn Oggetto Connection per interagire con il database.
     * @param tableName Nome della tabella in cui inserire l'utente.
     * @param email Email dell'utente.
@@ -82,6 +92,11 @@ public class Database  {
     /**
     * 
     * @brief Recupera tutti gli utenti dal database.
+    * 
+    * @pre conn!= null, tableName deve esistere nel database connesso
+    * @post viene restituita una Hashmap con chiave email e valore la password cryptata
+    * @invariant conn, tableName
+    * 
     * 
     * @param conn Oggetto Connection per interagire con il database.
     * @param tableName Nome della tabella da cui recuperare gli utenti.
@@ -124,11 +139,17 @@ public class Database  {
     * 
     * @brief Verifica le credenziali di login di un utente.
     * 
+    * 
+    * @pre conn!= null, tableName deve esistere nel database connesso, l' email inserita deve esser valida, la password non può essere vuota o nulla
+    * @post viene restituito un intero uguale a 1 se le credenziali sono corrette, 0 se la password è errata, -1 se l'email non esiste
+    * @invariant conn, tableName, email, password
+    * 
+    * 
     * @param conn Oggetto Connection per interagire con il database.
     * @param tableName Nome della tabella contenente gli utenti.
     * @param email Email dell'utente.
     * @param password Password inserita dall'utente.
-    * @return 1 se le credenziali sono corrette, 0 se la password è errata, -1 se l'email non esiste.
+    * @return 1 se le credenziali sono corrette, 0 se la password è errata, -1 se l'email non esiste
     * @throws SQLException Se si verifica un errore durante l'interrogazione.
     */
 
@@ -168,6 +189,10 @@ public class Database  {
     * 
     * @brief Cripta la password passata dall' utente 
     * 
+    * @pre  la password non può essere vuota o nulla
+    * @post viene criptata la password inserita
+    * @invariant  password
+    * 
     * @param password è la password da criptare
     * @return  Una stringa criptata
     */
@@ -181,6 +206,11 @@ public class Database  {
     /**
     * 
     * @brief Verifica corrispondenza tra password criptata e password in chiaro
+    * 
+    * @pre  la password!= null
+    * @post restituisce il risultato del confronto tra le 2 stringhe
+    * @invariant  password, hashed
+    * 
     * 
     * @param password è la password non criptata passata alla funzione 
     * @param hashed è la password criptata passata alla funzione 
@@ -198,6 +228,11 @@ public class Database  {
     /**
     * 
     * @brief Recupera i contatti associati a un utente specifico.
+    * 
+    * @pre  la password!= null,tableName deve esistere nel database connesso, l' email inserita deve esser valida e deve essere di un utente registrato
+    * @post restituisce l' hashmap con chiave ID del Contact e come valore il Contact
+    * @invariant  conn,tableName, email
+    * 
     * 
     * @param conn Oggetto Connection per interagire con il database.
     * @param tableName Nome della tabella contenente i contatti.
@@ -236,6 +271,10 @@ public class Database  {
     /**
     *  
     * @brief Crea un contatto.
+    * 
+    * @pre  ID non nullo
+    * @post crea un contatto che 
+    * @invariant   name, surname, numeri,  tag,  em_cont, ID
     * 
     * @param name nome del contatto.
     * @param surname cognome del contatto.
@@ -285,6 +324,13 @@ public class Database  {
     *  
     * @brief Inserisce il contatto associato ad un utente specifico.
     * 
+    * 
+    * @pre  conn!= null,tableName deve esistere nel database connesso, cont!= null, email_Utente deve essere valida e registrata nel DataBase 
+    * @post inserisce il contatto con tutti i rispettivi attributi nella tabella che ha come chiave primaria composta l' ID e l' email_Utente
+    * @invariant  conn,tableName,cont,email_Utente
+    * 
+    * 
+    * 
     * @param cont contatto da aggiungere
     * @param conn Oggetto Connection per interagire con il database.
     * @param tableName Nome della tabella contenente i contatti.
@@ -330,6 +376,11 @@ public class Database  {
     *  
     * @brief Concatena i valori di una lista in una stringa formattata.
     * 
+    * @pre  s non può essere vuota o nulla  
+    * @post crea una stringa con un separatore 
+    * @invariant  s
+    * 
+    * 
     * Questo metodo prende in ingresso una lista di stringhe e restituisce 
     * una stringa in cui tutti gli elementi della lista sono concatenati, 
     * separati dal carattere `;`.
@@ -351,6 +402,13 @@ public class Database  {
     /**
     * 
     * @brief Modifica il contatto associato a un utente specifico nel Database.
+    * 
+    * @pre  conn!= null,tableName deve esistere nel database connesso, cont!= null, il contatto deve essere già presente e deve esser gia associato a email_Utente, email_Utente deve essere valida e registrata nel DataBase 
+    * @post aggiorna la tabella tableName modificando i campi cambiati di cont
+    * @invariant  conn,tableName,cont,email_Utente
+    * 
+    * Modifica un contatto se è gia presente ed associato a email_Utente, in caso contrario aggiungerà il contatto come nuovo
+    * 
     * @param conn Oggetto Connection per interagire con il database.
     * @param tableName Nome della tabella contenente i contatti.
     * @param cont il contatto da modificare nel Database
@@ -396,18 +454,25 @@ public class Database  {
     * Questo metodo esegue un'operazione di eliminazione (`DELETE`) su una tabella 
     * di un database, rimuovendo il record che corrisponde all'ID specificato.
     * 
+    * @pre  conn!= null,tableName deve esistere nel database connesso, ID non deve essere vuoto o nullo e deve esser associato ad un contatto ,email deve essere valida e registrata nel DataBase 
+    * @post viene eliminato il contatto associato all' ID e all' email 
+    * @invariant  conn,tableName,ID,email
+    * 
+    * Rimuove un record dalla tabella specificata utilizzando l'ID, se l' ID non è associato a nessun contatto di email la tabella non verra modificata
+    * 
     * @param conn Oggetto Connection per interagire con il database.
     * @param tableName Nome della tabella contenente i contatti.
     * @param ID il contatto da modificare nel Database
+    * @param emai l' email del utente registrato
     * @throws SQLException Se si verifica un errore durante l'interrogazione.
     * 
     */
 
-    public void remuveContactByID(Connection conn, String tableName, String ID) throws SQLException{
+     public void remuveContactByID(Connection conn, String tableName, String ID, String email) throws SQLException{
     
        Statement statment;
        
-       String query= String.format("delete from %s where ID='%s'",tableName,ID);
+       String query= String.format("delete from %s where ID='%s' AND email='%s'",tableName,ID,email);
        statment= conn.createStatement();
        statment.execute(query);
        System.out.print("\n Dato eliminato per ID");
@@ -415,6 +480,10 @@ public class Database  {
     /**
     * 
     * @brief Chiude la connessione col database
+    * @pre  conn!= null
+    * @post la connessione col Database viene chiusa  
+    * 
+    * 
     * @param conn Oggetto Connection per interagire con il database.
     * 
     * @throws SQLException Se si verifica un errore durante l'interrogazione.
@@ -425,6 +494,21 @@ public class Database  {
         conn.close();
         System.out.print("Chiusura connessione");
     }
+    
+    /**
+    * 
+    * @brief Conta il numero di righe della tabella tableName associata al Database
+    * @pre  conn!= null, tableName!=null e deve appartenere al Database
+    * @post vengono contate il numero di righe della tabella  
+    * 
+    * @invariant conn, tableName
+    * 
+    * @param conn Oggetto Connection per interagire con il database.
+    * 
+    * @return viene restituito il numero di righe della tabella 
+    * 
+    * @throws SQLException Se si verifica un errore durante l'interrogazione.
+    */
     
     public int getNumberContact(Connection conn, String tableName){
         
