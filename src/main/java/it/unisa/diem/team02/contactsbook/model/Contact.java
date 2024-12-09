@@ -1,6 +1,7 @@
 
 package it.unisa.diem.team02.contactsbook.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  * 
  * @author team02
  */
-public class Contact extends Person{
+public class Contact extends Person implements Serializable{
     private ArrayList<String> number;
     private ArrayList<String> email;
     private ArrayList<Tag> tag;
@@ -82,7 +83,7 @@ public class Contact extends Person{
  * 
  */
     public String getNumber(){
-        if(number.isEmpty()) return null;
+        if(number.isEmpty()) return "";
         if(number.size()==1) return number.get(0);
         if(number.size()==2) return number.get(0)+"\n"+number.get(1);
         return number.get(0)+"\n"+number.get(1)+"\n"+number.get(2);
@@ -107,7 +108,7 @@ public class Contact extends Person{
  * 
  */
     public String getEmail() {
-        if(email.isEmpty()) return null;
+        if(email.isEmpty()) return "";
         if(email.size()==1) return email.get(0);
         if(email.size()==2) return email.get(0)+"\n"+email.get(1);
         return email.get(0)+"\n"+email.get(1)+"\n"+email.get(2);
