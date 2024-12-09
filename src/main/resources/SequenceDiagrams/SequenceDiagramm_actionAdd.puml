@@ -22,15 +22,15 @@ opt Email presente
 end
 Contact --> AddViewController
 deactivate Contact
-AddViewController->ContactsbookViewController: contains
-ContactsbookViewController-->AddViewController
+AddViewController->AddViewController: contains
 
 alt Contatto duplicato
-    AddViewController -> DuplicateContactViewController: set
+    AddViewController -> DuplicateContactViewController
     activate DuplicateContactViewController
     DuplicateContactViewController-->AddViewController
+    AddViewController->DuplicateContactViewController: getBoolean
     deactivate DuplicateContactViewController 
-        alt Aggiungi
+        alt true
             AddViewController->AddViewController:add
             AddViewController-->Database: insertContact
             activate Database
@@ -40,12 +40,19 @@ alt Contatto duplicato
             Database -> Database: executeUpdate
             Database --> AddViewController
             deactivate Database
-        else Modifica
+        else false
             AddViewController->AddViewController:show
         end
 else Contatto non duplicato
 AddViewController->AddViewController: add
 AddViewController-->Database: insertContact
+activate Database
+            loop 3
+             Database -> Database: formattaOut
+            end 
+            Database -> Database: executeUpdate
+            Database --> AddViewController
+            deactivate Database
 end
 deactivate Contact
 AddViewController-->ContactsbookViewController

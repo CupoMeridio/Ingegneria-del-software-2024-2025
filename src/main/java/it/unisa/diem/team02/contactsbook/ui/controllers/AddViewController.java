@@ -172,14 +172,12 @@ public class AddViewController implements Initializable {
             newStage.setScene(scene);
 
             DuplicateContactViewController duplicateC=loader.getController();
-            Contact c1=new Contact("Prova", "Prova");
-            duplicateC.set(c1);
 
             newStage.initModality(Modality.APPLICATION_MODAL);
             newStage.initOwner(btnAdd.getScene().getWindow());
             newStage.showAndWait();
                 
-            if (c1.getName().equals("")){
+            if (duplicateC.getBoolean()){
                     contacts.add(c);
                     Stage stage=(Stage) btnAdd.getScene().getWindow();
                     stage.close();

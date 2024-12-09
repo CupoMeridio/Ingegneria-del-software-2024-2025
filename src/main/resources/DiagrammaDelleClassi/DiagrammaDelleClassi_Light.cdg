@@ -307,7 +307,7 @@
         <Field name="lblMessage" type="Label" visibility="private"/>
         <Field name="btnYes" type="Button" visibility="private"/>
         <Field name="btnNo" type="Button" visibility="private"/>
-        <Field name="contact" type="Contact1" visibility="private"/>
+        <Field name="b" type="Boolean" visibility="private"/>
       </Fields>
       <Constructors/>
       <Methods>
@@ -321,9 +321,7 @@
         <Method name="actionNo" returnType="void" visibility="private">
           <Argument type="ActionEvent" name="event"/>
         </Method>
-        <Method name="set" returnType="void" visibility="public">
-          <Argument type="Contact" name="c1"/>
-        </Method>
+        <Method name="getBoolean" returnType="boolean" visibility="public"/>
       </Methods>
     </Class>
     <Class name="ErrorMessageViewController" package="it.unisa.diem.team02.contactsbook.ui.controllers" visibility="public" xPosition="291.0" yPosition="52.0">
@@ -448,24 +446,24 @@
     </Enum>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <UseRelation source="it.unisa.diem.team02.contactsbook.model.Contact" target="it.unisa.diem.team02.contactsbook.model.Tag" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="oldContact" source="it.unisa.diem.team02.contactsbook.ui.controllers.ModifyViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="it.unisa.diem.team02.contactsbook.ui.controllers.ModifyViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <IsRelation name="is" source="it.unisa.diem.team02.contactsbook.model.Contact" target="it.unisa.diem.team02.contactsbook.model.Person"/>
-    <HasRelation name="clmName" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="tblvRubrica" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="clmSur" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="clmTag" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Tag" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="contacts" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;Contact&gt;"/>
-    <HasRelation name="tag" source="it.unisa.diem.team02.contactsbook.model.Contact" target="it.unisa.diem.team02.contactsbook.model.Tag" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Tag&gt;"/>
-    <HasRelation name="contact" source="it.unisa.diem.team02.contactsbook.ui.controllers.DuplicateContactViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="clmNum" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation name="" source="it.unisa.diem.team02.contactsbook.ui.controllers.LoginViewController" target="it.unisa.diem.team02.contactsbook.database.Database" sourceCardinality="0..1" targetCardinality="1..1"/>
-    <IsRelation name="is" source="it.unisa.diem.team02.contactsbook.model.User" target="it.unisa.diem.team02.contactsbook.model.Person"/>
-    <UseRelation source="it.unisa.diem.team02.contactsbook.ui.controllers.DuplicateContactViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation name="" source="it.unisa.diem.team02.contactsbook.ui.controllers.AddViewController" target="it.unisa.diem.team02.contactsbook.ui.controllers.ErrorMessageViewController" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="clmEmail" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="it.unisa.diem.team02.contactsbook.ui.controllers.AddViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="contacts" source="it.unisa.diem.team02.contactsbook.ui.controllers.ModifyViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;Contact&gt;"/>
+    <HasRelation name="clmNum" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="it.unisa.diem.team02.contactsbook.ui.controllers.DuplicateContactViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="clmEmail" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="it.unisa.diem.team02.contactsbook.ui.controllers.AddViewController" target="it.unisa.diem.team02.contactsbook.ui.controllers.ErrorMessageViewController" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="tag" source="it.unisa.diem.team02.contactsbook.model.Contact" target="it.unisa.diem.team02.contactsbook.model.Tag" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Tag&gt;"/>
+    <UseRelation source="it.unisa.diem.team02.contactsbook.ui.controllers.AddViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="clmName" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="it.unisa.diem.team02.contactsbook.ui.controllers.ModifyViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="it.unisa.diem.team02.contactsbook.model.User" target="it.unisa.diem.team02.contactsbook.model.Person"/>
+    <HasRelation name="oldContact" source="it.unisa.diem.team02.contactsbook.ui.controllers.ModifyViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="clmTag" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Tag" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="tblvRubrica" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="contact" source="it.unisa.diem.team02.contactsbook.ui.controllers.DuplicateContactViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="it.unisa.diem.team02.contactsbook.model.Contact" target="it.unisa.diem.team02.contactsbook.model.Person"/>
+    <UseRelation source="it.unisa.diem.team02.contactsbook.model.Contact" target="it.unisa.diem.team02.contactsbook.model.Tag" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="it.unisa.diem.team02.contactsbook.ui.controllers.LoginViewController" target="it.unisa.diem.team02.contactsbook.database.Database" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="clmSur" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="contacts" source="it.unisa.diem.team02.contactsbook.ui.controllers.ContactsbookViewController" target="it.unisa.diem.team02.contactsbook.model.Contact" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;Contact&gt;"/>
   </ClassDiagramRelations>
 </ClassDiagram>

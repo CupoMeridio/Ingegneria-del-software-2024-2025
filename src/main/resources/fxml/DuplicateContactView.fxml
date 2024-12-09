@@ -10,8 +10,8 @@
         <URL value="@/styles/duplicatecontactview.css" />
     </stylesheets>
    <children>
-      <Label fx:id="lblMessage" layoutX="65.0" layoutY="40.0" prefHeight="86.0" prefWidth="294.0" text="A contact with this name and surname already exists? Do you want to add the contact anyway?" />
+      <Label fx:id="lblMessage" layoutX="65.0" layoutY="40.0" prefHeight="86.0" prefWidth="294.0" text="A contact with this name and surname already exists. Do you want to add the contact anyway?" wrapText="true" />
       <Button fx:id="btnYes" layoutX="243.0" layoutY="136.0" mnemonicParsing="false" onAction="#actionYes" prefHeight="26.0" prefWidth="46.0" text="Add" />
-      <Button fx:id="btnNo" layoutX="123.0" layoutY="136.0" mnemonicParsing="false" onAction="#actionNo" text="Modify" />
+      <Button fx:id="btnNo" layoutX="123.0" layoutY="136.0" mnemonicParsing="false" onAction="#actionNo" text="Keep modifyng" />
    </children>
 </AnchorPane>

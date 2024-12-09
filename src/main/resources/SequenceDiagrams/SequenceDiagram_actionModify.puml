@@ -17,14 +17,14 @@ ModifyViewController->Contact: new
 activate Contact
 Contact-->ModifyViewController: contact
 deactivate Contact
-ModifyViewController->ContactsbookViewController: contains
-ContactsbookViewController-->ModifyViewController
+ModifyViewController->ModifyViewController: contains
 alt Contatto duplicato
-    ModifyViewController -> DuplicateContactViewController: set
+    ModifyViewController -> DuplicateContactViewController
     activate DuplicateContactViewController
     DuplicateContactViewController-->ModifyViewController
+    ModifyViewController->DuplicateContactViewController: getBoolean
     deactivate DuplicateContactViewController 
-        alt Aggiungi
+        alt true
             ModifyViewController->ModifyViewController:remove
             ModifyViewController->ModifyViewController:add
             ModifyViewController-->Database: modifyContact
@@ -35,13 +35,20 @@ alt Contatto duplicato
             Database -> Database: executeUpdate
             Database --> ModifyViewController
             deactivate Database
-        else Modifica
+        else false
             ModifyViewController->ModifyViewController:show
         end
 else Contatto non duplicato
 ModifyViewController->ModifyViewController: remove
 ModifyViewController->ModifyViewController: add
 ModifyViewController-->Database: modifyContact
+activate Database
+            loop 3
+             Database -> Database: formattaOut
+            end 
+            Database -> Database: executeUpdate
+            Database --> ModifyViewController
+            deactivate Database
 end
 activate Database
 deactivate ModifyViewController
