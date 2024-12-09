@@ -287,7 +287,7 @@ public class Database  {
     */
 
    private Contact createContact(String name, String surname, String numeri, String tag, String em_cont,String ID) {
-        Contact c= new Contact(name,surname, Integer.valueOf(ID));
+        Contact c= new Contact(name,surname, ID);// quando cambierai Contat funzionera  
         ArrayList<String> n = new ArrayList<>();
         ArrayList<String> e = new ArrayList<>();
         ArrayList<Tag> t = new ArrayList<>();
