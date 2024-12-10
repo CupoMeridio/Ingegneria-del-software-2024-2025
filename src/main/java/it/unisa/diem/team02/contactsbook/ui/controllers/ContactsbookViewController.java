@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -59,7 +60,7 @@ public class ContactsbookViewController implements Initializable {
     @FXML
     private TableColumn<Contact, String> clmNum;
     @FXML
-    private TableColumn<Contact, Tag> clmTag;
+    private TableColumn<Contact, String> clmTag;
     @FXML
     private Button btnModify;
     @FXML
@@ -84,6 +85,7 @@ public class ContactsbookViewController implements Initializable {
     private Button btnLogout;
     
     private ObservableList<Contact> contacts;
+    FilteredList<Contact> flContacts;
 
 /**
  * @brief Metodo di inizializzazione del controller.
@@ -107,7 +109,13 @@ public class ContactsbookViewController implements Initializable {
         initializeList();
         btnMofidyInitialize();
         btnDeleteInitialize();
-        initializeSearch();
+        initializeSearch(flContacts);
+        mbtnFilter.setOnShown(event->{
+        
+           actionFilter(flContacts); 
+        
+        });
+        
         
         
     }    
@@ -133,10 +141,12 @@ public class ContactsbookViewController implements Initializable {
  */
     public void createList(){
         contacts = FXCollections.observableArrayList();
+        flContacts = new FilteredList(contacts, c->true);
         clmName.setCellValueFactory(new PropertyValueFactory("name"));
         clmSur.setCellValueFactory(new PropertyValueFactory("surname"));
         clmNum.setCellValueFactory(new PropertyValueFactory("number"));
         clmEmail.setCellValueFactory(new PropertyValueFactory("email"));
+        clmTag.setCellValueFactory(new PropertyValueFactory("tag"));
         tblvRubrica.setItems(contacts);
     }
     
@@ -309,34 +319,89 @@ public class ContactsbookViewController implements Initializable {
      * Implementa l'azione associata al menu button Filter: vengono visualizzati solo i contatti associati
      * al tag selezionato.
      * 
+     * @param Filteredlist<Contact> flContacts
+     * 
+     */
+    private void actionFilter(FilteredList<Contact> flContacts) {
+    
+        tblvRubrica.setItems(flContacts);
+        chkmHome.selectedProperty().addListener((obs, oldValue, newValue) -> updateFilter());
+        chkmJob.selectedProperty().addListener((obs, oldValue, newValue) -> updateFilter());
+        chkmUni.selectedProperty().addListener((obs, oldValue, newValue) -> updateFilter());
+
+
+       
+}
+    /**
+     * 
+     * Metodo ausiliario utilizzando per il filtraggio tramite l'utilizzo dei tag. Viene richiamata
+     * da actionFilter per ricalcolare il predicato associato alla lista filtrata
+     * 
+     */
+     private void updateFilter() {
+            flContacts.setPredicate(contact -> {
+                
+            String lowerCaseFilter = txtSearch.getText().toLowerCase();
+            boolean match = lowerCaseFilter.isEmpty() ||  
+                    contact.getName().toLowerCase().contains(lowerCaseFilter) ||
+                    contact.getSurname().toLowerCase().contains(lowerCaseFilter) ||
+                    contact.getNumber().toLowerCase().contains(lowerCaseFilter) ||
+                    contact.getEmail().toLowerCase().contains(lowerCaseFilter);
+            
+
+            boolean noTag = !chkmHome.isSelected() && !chkmUni.isSelected() && !chkmJob.isSelected();
+
+
+            boolean home = chkmHome.isSelected() && contact.getTag().toLowerCase().contains("home");
+            boolean uni = chkmUni.isSelected() && contact.getTag().toLowerCase().contains("university");
+            boolean job = chkmJob.isSelected() && contact.getTag().toLowerCase().contains("job");
+
+           
+            return match && (noTag || home || uni || job);
+        });
+    }
+    
+         
+    /**
+     * 
+     * Vengono visualizzati solo i contatti della rubrica contenenti la sottostringa inserita nella barra
+     * di ricerca
+     * 
      * @param event
      * 
      */
-    @FXML
-    private void actionFilter(ActionEvent event) {
+    private void initializeSearch(FilteredList<Contact> flContacts) {
         
-        /*//lista filtrata che lavora sulla lista contacts di osservabili
-        FilteredList<Contact> flContacts = new FilteredList(contacts, c->true);
         tblvRubrica.setItems(flContacts);
+        SimpleStringProperty string = new SimpleStringProperty("");
+        
+        txtSearch.textProperty().bindBidirectional(string);
+        
+        //Listener al campo testo
+        txtSearch.textProperty().addListener((obs, oldValue, newValue) -> updateFilter());
         
         
-        flContacts.setPredicate(contact-> {
-                // se non c'è scritto nulla sulla barra di ricerca mostra tutti i contatti
-                
-                String lowerCaseFilter = newValue.toLowerCase();
-                
-                //è necessario gestire separatamente i valori null
-                return contact.getName().toLowerCase().contains(lowerCaseFilter) ||
-                       contact.getSurname().toLowerCase().contains(lowerCaseFilter) ||
-                       contact.getNumber().toLowerCase().contains(lowerCaseFilter) ||
-                       contact.getEmail().toLowerCase().contains(lowerCaseFilter);
-               
-        
-        });
-               
-   */
+//        //aggiungo un listener al campo testo
+//        txtSearch.textProperty().addListener((obs,oldValue,newValue) -> {
+//               flContacts.setPredicate(contact-> {
+//                // se non c'è scritto nulla sulla barra di ricerca mostra tutti i contatti
+//                if (newValue == null || newValue.isEmpty()) {
+//                    return true;
+//                }
+//                
+//                String lowerCaseFilter = newValue.toLowerCase();
+//                
+//                //è necessario gestire separatamente i valori null
+//                return contact.getName().toLowerCase().contains(lowerCaseFilter) ||
+//                       contact.getSurname().toLowerCase().contains(lowerCaseFilter) ||
+//                       contact.getNumber().toLowerCase().contains(lowerCaseFilter) ||
+//                       contact.getEmail().toLowerCase().contains(lowerCaseFilter);
+//               });
+//               
+//        });
         
     }
+    
 
     /**
      * 
@@ -361,43 +426,7 @@ public class ContactsbookViewController implements Initializable {
     @FXML
     private void actionExport(ActionEvent event) {
     }
-    
-    /**
-     * 
-     * Vengono visualizzati solo i contatti della rubrica contenenti la sottostringa inserita nella barra
-     * di ricerca
-     * 
-     * @param event
-     * 
-     */
-    @FXML
-    private void initializeSearch() {
-        
-        //lista filtrata che lavora sulla lista contacts di osservabili
-        FilteredList<Contact> flContacts = new FilteredList(contacts, c->true);
-        tblvRubrica.setItems(flContacts);
-        
-        //aggiungo un listener al campo testo
-        txtSearch.textProperty().addListener((obs,oldValue,newValue) -> {
-               flContacts.setPredicate(contact-> {
-                // se non c'è scritto nulla sulla barra di ricerca mostra tutti i contatti
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-                
-                String lowerCaseFilter = newValue.toLowerCase();
-                
-                //è necessario gestire separatamente i valori null
-                return contact.getName().toLowerCase().contains(lowerCaseFilter) ||
-                       contact.getSurname().toLowerCase().contains(lowerCaseFilter) ||
-                       contact.getNumber().toLowerCase().contains(lowerCaseFilter) ||
-                       contact.getEmail().toLowerCase().contains(lowerCaseFilter);
-               });
-               
-        });
-        
-    }
-    
+
 /**
  * @brief Gestisce l'azione di logout e il ritorno alla schermata di login.
  * 

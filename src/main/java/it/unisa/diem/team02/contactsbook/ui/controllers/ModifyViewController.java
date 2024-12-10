@@ -2,6 +2,7 @@
 package it.unisa.diem.team02.contactsbook.ui.controllers;
 
 import it.unisa.diem.team02.contactsbook.model.Contact;
+import it.unisa.diem.team02.contactsbook.model.Tag;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -84,6 +86,14 @@ public class ModifyViewController implements Initializable {
     
     private ObservableList<Contact> contacts;
     private Contact oldContact;
+    @FXML
+    private Label lblTag;
+    @FXML
+    private CheckBox chkmHome;
+    @FXML
+    private CheckBox chkmUni;
+    @FXML
+    private CheckBox chkmJob;
 
 /**
  * Inizializza il controller, definendo i comportamenti dei bottoni e dei campi di input.
@@ -186,6 +196,19 @@ public void setContact(Contact contact) {
             }
         }
     }
+    
+    // Imposta i tag
+    String tag = oldContact.getTag();
+    if (tag != null){
+        String tags = tag.toString();
+        if(tags.contains("Home"))
+            chkmHome.setSelected(true);
+        if(tags.contains("University"))
+            chkmUni.setSelected(true);
+        if(tags.contains("Job"))
+            chkmJob.setSelected(true);
+    }
+    
 }
 
 /**
@@ -207,6 +230,7 @@ private void actionModify(ActionEvent event) throws IOException {
     Contact newContact = new Contact(txtName.getText(), txtSur.getText(), oldContact.getID());
     ArrayList<String> numbers = new ArrayList<>(3);
     ArrayList<String> emails = new ArrayList<>(3);
+    ArrayList<Tag> tags = new ArrayList<>(3);
     
     // Aggiungi numeri di telefono se non vuoti
     if (!txtNumber1.getText().isEmpty())
@@ -223,10 +247,19 @@ private void actionModify(ActionEvent event) throws IOException {
         emails.add(txtEmail2.getText());
     if (!txtEmail3.getText().isEmpty())
         emails.add(txtEmail3.getText());
+    
+    // Aggiungi tag se presenti
+     if (chkmHome.isSelected())
+        tags.add(Tag.Home);
+     if (chkmUni.isSelected())
+        tags.add(Tag.University);
+     if (chkmJob.isSelected())
+        tags.add(Tag.Job);
 
     // Imposta numeri di telefono ed email nel nuovo contatto
     newContact.setNumber(numbers);
     newContact.setEmail(emails);
+    newContact.setTag(tags);
 
     // Verifica se il contatto esiste già nella lista
     if (!contacts.contains(newContact)) {

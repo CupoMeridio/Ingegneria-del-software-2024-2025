@@ -23,7 +23,7 @@
                      </HBox.margin></Button>
                   <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#actionDelete" text="Delete" />
                   <Button fx:id="btnModify" mnemonicParsing="false" onAction="#actionModify" text="Modify" />
-                  <MenuButton fx:id="mbtnFilter" mnemonicParsing="false" onAction="#actionFilter" text="Filter">
+                  <MenuButton fx:id="mbtnFilter" mnemonicParsing="false" text="Filter">
                      <items>
                         <CheckMenuItem fx:id="chkmHome" mnemonicParsing="false" text="Home" />
                         <CheckMenuItem fx:id="chkmUni" mnemonicParsing="false" text="University" />
@@ -32,10 +32,10 @@
                   </MenuButton>
                   <Button fx:id="btnImport" mnemonicParsing="false" onAction="#actionImport" text="Import" />
                   <Button fx:id="btnExport" mnemonicParsing="false" onAction="#actionExport" text="Export" />
-                  <TextField fx:id="txtSearch" onAction="#actionSearch" promptText="Search" />
-                  <Button fx:id="btnLogout" mnemonicParsing="false" onAction="#actionLogout" prefHeight="31.0" prefWidth="87.0" text="Logout">
+                  <TextField fx:id="txtSearch" promptText="Search" />
+                  <Button fx:id="btnLogout" alignment="CENTER" mnemonicParsing="false" onAction="#actionLogout" prefHeight="31.0" prefWidth="87.0" text="Logout">
                      <HBox.margin>
-                        <Insets left="460.0" />
+                        <Insets left="600.0" />
                      </HBox.margin>
                   </Button>
                </children>

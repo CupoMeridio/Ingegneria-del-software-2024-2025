@@ -93,6 +93,12 @@ public class LoginViewController implements Initializable {
     
     @FXML
     private Label lblLogErr;
+    
+    @FXML
+    private Label lblLogOpp;
+    
+    @FXML
+    private Button btnLoginLocal;
 
 /**
  * @brief Inizializza il controller, configurando il binding dei bottoni e dei campi di input.

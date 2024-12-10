@@ -2,6 +2,7 @@
 package it.unisa.diem.team02.contactsbook.ui.controllers;
 
 import it.unisa.diem.team02.contactsbook.model.Contact;
+import it.unisa.diem.team02.contactsbook.model.Tag;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -78,8 +80,17 @@ public class AddViewController implements Initializable {
     private TextField txtNumber3;
     @FXML
     private Button btnAdd;
+    @FXML
+    private Label lblTag;
+    @FXML
+    private CheckBox chkmHome;
+    @FXML
+    private CheckBox chkmUni;
+    @FXML
+    private CheckBox chkmJob;
     
     private ObservableList<Contact> contacts;
+    
 
 /**
  * @brief Inizializza il controller e gestisce i binding dei componenti dell'interfaccia utente.
@@ -155,14 +166,19 @@ public class AddViewController implements Initializable {
  * @see Contact
  * @see DuplicateContactViewController
  */
+    @FXML
     public void actionAdd(ActionEvent event) throws IOException{
         Contact c=new Contact(txtName.getText(), txtSur.getText());
         if (!txtNumber1.getText().isEmpty()) c.addNumber(txtNumber1.getText());
         if (!txtNumber2.getText().isEmpty()) c.addNumber(txtNumber2.getText());
         if (!txtNumber3.getText().isEmpty()) c.addNumber(txtNumber3.getText());
-        if(!txtEmail1.getText().isEmpty()) c.addEmail(txtEmail1.getText());
-        if(!txtEmail2.getText().isEmpty()) c.addEmail(txtEmail2.getText());
-        if(!txtEmail3.getText().isEmpty()) c.addEmail(txtEmail3.getText());
+        if (!txtEmail1.getText().isEmpty()) c.addEmail(txtEmail1.getText());
+        if (!txtEmail2.getText().isEmpty()) c.addEmail(txtEmail2.getText());
+        if (!txtEmail3.getText().isEmpty()) c.addEmail(txtEmail3.getText());
+        if (chkmHome.isSelected()) c.addTag(Tag.Home);
+        if (chkmUni.isSelected()) c.addTag(Tag.University);
+        if (chkmJob.isSelected()) c.addTag(Tag.Job);
+        
         
         if (contacts.contains(c)){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DuplicateContactView.fxml"));
@@ -207,10 +223,12 @@ public class AddViewController implements Initializable {
  * 
  * @note Questo metodo non modifica alcun dato e si limita a chiudere la finestra.
  */
+    @FXML
     public void actionCancel(ActionEvent event){
         Stage stage=(Stage) btnCanc.getScene().getWindow();
         stage.close();
     }
-    
+
+        
         
 }
