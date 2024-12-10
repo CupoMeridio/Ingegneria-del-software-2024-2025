@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -53,7 +54,7 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 /**
- * Controller per la gestione della schermata principale della rubrica.
+ * @brief Controller per la gestione della schermata principale della rubrica.
  * @author team02
  */
 public class ContactsbookViewController implements Initializable {
@@ -77,7 +78,7 @@ public class ContactsbookViewController implements Initializable {
     @FXML
     private TableColumn<Contact, String> clmNum;
     @FXML
-    private TableColumn<Contact, Tag> clmTag;
+    private TableColumn<Contact, String> clmTag;
     @FXML
     private Button btnModify;
     @FXML
@@ -102,6 +103,7 @@ public class ContactsbookViewController implements Initializable {
     private Button btnLogout;
     
     private ObservableList<Contact> contacts;
+    FilteredList<Contact> flContacts;
 
 /**
  * @brief Inizializza il controller e configura gli elementi dell'interfaccia utente.
@@ -121,7 +123,15 @@ public class ContactsbookViewController implements Initializable {
         initializeList();
         btnMofidyInitialize();
         btnDeleteInitialize();
-        initializeSearch(); 
+        initializeSearch(flContacts);
+        mbtnFilter.setOnShown(event->{
+        
+           actionFilter(flContacts); 
+        
+        });
+        
+        
+        
     }    
     
 /**
@@ -136,10 +146,12 @@ public class ContactsbookViewController implements Initializable {
  */
     public void createList(){
         contacts = FXCollections.observableArrayList();
+        flContacts = new FilteredList(contacts, c->true);
         clmName.setCellValueFactory(new PropertyValueFactory("name"));
         clmSur.setCellValueFactory(new PropertyValueFactory("surname"));
         clmNum.setCellValueFactory(new PropertyValueFactory("number"));
         clmEmail.setCellValueFactory(new PropertyValueFactory("email"));
+        clmTag.setCellValueFactory(new PropertyValueFactory("tag"));
         tblvRubrica.setItems(contacts);
     }
     
@@ -297,39 +309,114 @@ public class ContactsbookViewController implements Initializable {
         contacts.remove(selectedContact); 
     }
     
+/**
+ * @brief Applica un filtro alla lista di contatti mostrata nella tabella.
+ *
+ * Questo metodo imposta la lista filtrata `FilteredList` di contatti sulla tabella `tblvRubrica` 
+ * e aggiunge dei listener alle checkbox (`chkmHome`, `chkmJob`, `chkmUni`) per aggiornare il filtro
+ * ogni volta che una di queste viene selezionata o deselezionata. Ogni cambio di stato nelle checkbox
+ * farà chiamare il metodo `updateFilter` per aggiornare la visualizzazione della lista dei contatti.
+ *
+ * @pre La lista `flContacts` deve essere una lista filtrata valida di contatti.
+ * @pre La tabella `tblvRubrica` deve essere inizializzata correttamente e pronta per l'aggiornamento.
+ * @post La lista filtrata viene applicata alla tabella e i listener sono stati aggiunti per monitorare
+ *       le modifiche nei checkbox e aggiornare il filtro di conseguenza.
+ * @invariant Il filtro sui contatti deve essere applicato correttamente in base alle selezioni delle checkbox.
+ *
+ * @param flContacts La lista filtrata di contatti da visualizzare nella tabella.
+ */
+    private void actionFilter(FilteredList<Contact> flContacts) {
+    
+        tblvRubrica.setItems(flContacts);
+        chkmHome.selectedProperty().addListener((obs, oldValue, newValue) -> updateFilter());
+        chkmJob.selectedProperty().addListener((obs, oldValue, newValue) -> updateFilter());
+        chkmUni.selectedProperty().addListener((obs, oldValue, newValue) -> updateFilter());
+        }
+
+    
+    /**
+ * @brief Aggiorna il filtro dei contatti in base ai criteri di ricerca e selezione dei tag.
+ *
+ * Questo metodo applica un filtro alla lista di contatti `flContacts` in base al testo di ricerca inserito
+ * nell'elemento `txtSearch` e alle selezioni delle checkbox dei tag (`chkmHome`, `chkmUni`, `chkmJob`).
+ * Se il testo di ricerca non è vuoto, il filtro cercherà i contatti che contengono il testo nelle loro
+ * proprietà `name`, `surname`, `number` ed `email`. Inoltre, il filtro applica i tag selezionati
+ * (Home, University, Job) se corrispondono al tag associato al contatto.
+ *
+ * @pre Il campo di ricerca `txtSearch` deve essere inizializzato e contenere il testo di ricerca.
+ * @pre Le checkbox `chkmHome`, `chkmUni` e `chkmJob` devono essere inizializzate e il loro stato deve
+ *      riflettere le preferenze dell'utente.
+ * @post La lista `flContacts` è filtrata in base al testo di ricerca e alle selezioni dei tag, aggiornando
+ *       i contatti visibili nella lista.
+ * @invariant I contatti che soddisfano i criteri di ricerca e tag selezionati saranno visibili nella lista.
+ *
+ * @return Nessun valore restituito. La lista di contatti viene modificata direttamente.
+ */
+    
+     private void updateFilter() {
+            flContacts.setPredicate(contact -> {
+                
+            String lowerCaseFilter = txtSearch.getText().toLowerCase();
+            boolean match = lowerCaseFilter.isEmpty() ||  
+                    contact.getName().toLowerCase().contains(lowerCaseFilter) ||
+                    contact.getSurname().toLowerCase().contains(lowerCaseFilter) ||
+                    contact.getNumber().toLowerCase().contains(lowerCaseFilter) ||
+                    contact.getEmail().toLowerCase().contains(lowerCaseFilter);
+            
+
+            boolean noTag = !chkmHome.isSelected() && !chkmUni.isSelected() && !chkmJob.isSelected();
+
+
+            boolean home = chkmHome.isSelected() && contact.getTag().toLowerCase().contains("home");
+            boolean uni = chkmUni.isSelected() && contact.getTag().toLowerCase().contains("university");
+            boolean job = chkmJob.isSelected() && contact.getTag().toLowerCase().contains("job");
+
+           
+            return match && (noTag || home || uni || job);
+        });
+    }
+    
+         
     /**
      * 
-     * Implementa l'azione associata al menu button Filter: vengono visualizzati solo i contatti associati
-     * al tag selezionato.
+     * Vengono visualizzati solo i contatti della rubrica contenenti la sottostringa inserita nella barra
+     * di ricerca
      * 
      * @param event
      * 
      */
-    @FXML
-    private void actionFilter(ActionEvent event) {
+    private void initializeSearch(FilteredList<Contact> flContacts) {
         
-        /*//lista filtrata che lavora sulla lista contacts di osservabili
-        FilteredList<Contact> flContacts = new FilteredList(contacts, c->true);
         tblvRubrica.setItems(flContacts);
+        SimpleStringProperty string = new SimpleStringProperty("");
+        
+        txtSearch.textProperty().bindBidirectional(string);
+        
+        //Listener al campo testo
+        txtSearch.textProperty().addListener((obs, oldValue, newValue) -> updateFilter());
         
         
-        flContacts.setPredicate(contact-> {
-                // se non c'è scritto nulla sulla barra di ricerca mostra tutti i contatti
-                
-                String lowerCaseFilter = newValue.toLowerCase();
-                
-                //è necessario gestire separatamente i valori null
-                return contact.getName().toLowerCase().contains(lowerCaseFilter) ||
-                       contact.getSurname().toLowerCase().contains(lowerCaseFilter) ||
-                       contact.getNumber().toLowerCase().contains(lowerCaseFilter) ||
-                       contact.getEmail().toLowerCase().contains(lowerCaseFilter);
-               
-        
-        });
-               
-   */
+//        //aggiungo un listener al campo testo
+//        txtSearch.textProperty().addListener((obs,oldValue,newValue) -> {
+//               flContacts.setPredicate(contact-> {
+//                // se non c'è scritto nulla sulla barra di ricerca mostra tutti i contatti
+//                if (newValue == null || newValue.isEmpty()) {
+//                    return true;
+//                }
+//                
+//                String lowerCaseFilter = newValue.toLowerCase();
+//                
+//                //è necessario gestire separatamente i valori null
+//                return contact.getName().toLowerCase().contains(lowerCaseFilter) ||
+//                       contact.getSurname().toLowerCase().contains(lowerCaseFilter) ||
+//                       contact.getNumber().toLowerCase().contains(lowerCaseFilter) ||
+//                       contact.getEmail().toLowerCase().contains(lowerCaseFilter);
+//               });
+//               
+//        });
         
     }
+    
 
 /**
  * @brief Importa i contatti da un file CSV e li aggiunge alla rubrica.
@@ -388,14 +475,24 @@ public class ContactsbookViewController implements Initializable {
         }
     }
     
-    /**
-     * 
-     * Implementa l'azione associata al tasto Export: tutti i contatti della rubrica sono esportati in 
-     * un file specificato.
-     * 
-     * @param event
-     * 
-     */
+/**
+ * @brief Esporta la lista dei contatti in un file CSV.
+ *
+ * Questo metodo consente all'utente di scegliere un file in cui salvare i contatti presenti nella rubrica.
+ * La lista dei contatti viene esportata in formato CSV, con i seguenti campi: "NOME", "COGNOME", "NUMERO DI TELEFONO", 
+ * "EMAIL" e "TAG". I numeri di telefono e le email vengono separati da un carattere di nuova linea e ogni valore
+ * è separato da un punto e virgola.
+ *
+ * @pre La lista `contacts` deve essere inizializzata e contenere i contatti da esportare.
+ * @post I contatti vengono esportati nel file CSV selezionato dall'utente. Il file viene creato o sovrascritto
+ *       con i dati esportati.
+ * @invariant I dati dei contatti vengono esportati correttamente, con ogni campo separato da un punto e virgola e ogni
+ *            contatto su una nuova riga.
+ *
+ * @param event L'evento che ha causato l'azione (ad esempio, il clic del pulsante).
+ * @throws FileNotFoundException Se il file selezionato non può essere trovato.
+ * @throws IOException Se si verifica un errore durante la scrittura nel file.
+ */
     @FXML
     private void actionExport(ActionEvent event) throws FileNotFoundException, IOException {
         FileChooser fileChooser = new FileChooser();

@@ -7,6 +7,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
+ * @brief
+ * Classe che definisce i contatti memorizzabili in rubrica
  * 
  * Classe che estende la classe astratta Person. Definisce degli ulteriori attributi e metodi
  * per effettuare specifiche operazioni sugli oggetti Contact. Gli attributi
@@ -154,17 +156,17 @@ public class Contact extends Person{
      */
     public String getTag(){
         if(tag.isEmpty()) return "";
-        if(tag.size()==1) return tag.get(0).toString();
+        if(tag.size()==1) return tag.get(0).toString();        
         if(tag.size()==2) return tag.get(0).toString()+"\n"+tag.get(1);
         return tag.get(0).toString()+"\n"+tag.get(1).toString()+"\n"+
-                tag.get(1).toString();
+                tag.get(2).toString();
     }
     
     /**
      * @brief Aggiunge un tag al contatto.
      * 
      * Questo metodo aggiunge un tag alla lista dei tag del contatto, se il tag non è già presente. Se il tag è nullo, viene 
-     * generata un'eccezione {@link IllegalArgumentException}.
+     * generata un'eccezione IllegalArgumentException.
      * 
      * @param tag Il tag da aggiungere al contatto.
      * 
@@ -183,11 +185,16 @@ public class Contact extends Person{
     public void addTag(Tag tag) {
         if (tag == null) {
             throw new IllegalArgumentException("Il tag non può essere null.");
-        }
+        }        
         if (!this.tag.contains(tag)) {
             this.tag.add(tag);
         }
     }
+    public void removeTag(Tag tag, int index) {
+        
+    
+    }
+    
     
     /**
      * @brief Aggiunge un numero di telefono al contatto.

@@ -26,7 +26,8 @@ import java.io.IOException;
 
 
 /**
- * Controller per la gestione della schermata di login e registrazione.
+ * @brief Controller per la gestione della schermata di login e registrazione.
+ * 
  * Questo controller gestisce la validazione dei campi email e password.
  * 
  * @author team02
@@ -54,8 +55,7 @@ public class LoginViewController implements Initializable {
     @FXML
     private Button btnLogin;
     
-    @FXML
-    private Button btnLoginLocal;
+    
     
     @FXML
     private Label lblSignMail;
@@ -96,6 +96,12 @@ public class LoginViewController implements Initializable {
     
     @FXML
     private Label lblLogErr;
+    
+    @FXML
+    private Label lblLogOpp;
+    
+    @FXML
+    private Button btnLoginLocal;
 
 /**
  * @brief Inizializza le proprietà dell'interfaccia utente per la registrazione.

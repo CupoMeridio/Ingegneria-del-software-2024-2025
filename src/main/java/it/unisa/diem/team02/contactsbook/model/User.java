@@ -2,6 +2,9 @@
 package it.unisa.diem.team02.contactsbook.model;
 
 /**
+ * @brief
+ * Classe che definisce l'utente che accede all'applicazione
+ * 
  * Classe che estende la classe astratta Person. Definisce degli ulteriori attributi e metodi
  * per effettuare specifiche operazioni sugli oggetti User.
  */

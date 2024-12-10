@@ -12,7 +12,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
- * Controller per la gestione dei contatti duplicati.
+ * @brief Controller per la gestione dei contatti duplicati.
  * @author team02
  */
 public class DuplicateContactViewController implements Initializable {

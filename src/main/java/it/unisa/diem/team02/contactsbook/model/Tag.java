@@ -2,7 +2,6 @@
 package it.unisa.diem.team02.contactsbook.model;
 
 /**
- * @enum Tag
  * @brief Enum che rappresenta le possibili etichette per un contatto.
  * 
  * Questa enum definisce una serie di etichette predefinite che possono essere associate a un contatto.

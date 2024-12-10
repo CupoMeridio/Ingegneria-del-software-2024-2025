@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -71,10 +72,18 @@
             <Insets right="90.0" top="10.0" />
          </padding>
       </HBox>
-      <HBox fx:id="hboxButton" alignment="CENTER" layoutY="428.0" prefHeight="73.0" prefWidth="600.0" spacing="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <HBox fx:id="hboxButton" alignment="CENTER" layoutY="481.0" prefHeight="73.0" prefWidth="600.0" spacing="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.7999999999999545">
          <children>
             <Button fx:id="btnCanc" mnemonicParsing="false" onAction="#actionCancel" text="Cancel" />
             <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#actionAdd" text="Add" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="1.0" layoutY="411.0" prefHeight="74.0" prefWidth="762.0" spacing="15.0">
+         <children>
+            <Label fx:id="lblTag" text="Inserisci tag" />
+            <CheckBox fx:id="chkmHome" mnemonicParsing="false" text="Home" />
+            <CheckBox fx:id="chkmUni" mnemonicParsing="false" text="Uni" />
+            <CheckBox fx:id="chkmJob" mnemonicParsing="false" text="Job" />
          </children>
       </HBox>
    </children>

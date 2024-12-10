@@ -2,7 +2,7 @@
 package it.unisa.diem.team02.contactsbook.model;
 
 /**
- * Classe astratta che definisce gli attributi e i metodi di una Persona generica.
+ * @brief Classe astratta che definisce gli attributi e i metodi di una Persona generica.
  * @author team02
  */
 public abstract class Person {
