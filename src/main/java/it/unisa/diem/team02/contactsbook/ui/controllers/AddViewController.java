@@ -82,24 +82,30 @@ public class AddViewController implements Initializable {
     private ObservableList<Contact> contacts;
 
 /**
- * @brief Inizializza il controller e gestisce i binding dei componenti dell'interfaccia utente.
+ * @brief Inizializza la finestra o il controller associato alla vista FXML.
  * 
- * Questo metodo viene chiamato automaticamente durante il processo di inizializzazione del controller
- * associato a un file FXML. Configura i binding per abilitare o disabilitare dinamicamente i bottoni e 
- * i campi di testo basandosi sullo stato degli altri campi di input.
+ * Questo metodo configura le proprietà di abilitazione/disabilitazione di alcuni componenti dell'interfaccia utente,
+ * utilizzando binding JavaFX per collegare le proprietà degli elementi.
  * 
- * @param url L'URL utilizzato per risolvere il percorso del file FXML. Può essere `null` se il percorso non è necessario.
- * @param rb Un oggetto `ResourceBundle` contenente dati di localizzazione. Può essere `null` se non sono necessari dati localizzati.
+ * @param url L'URL utilizzato per individuare le risorse necessarie al controller (può essere nullo).
+ * @param rb Il ResourceBundle contenente le risorse internazionalizzate per il controller (può essere nullo).
  * 
  * @details 
- * - Il bottone `btnAdd` viene disabilitato se sia `txtName` che `txtSur` sono vuoti.
- * - Il campo `txtNumber2` viene disabilitato se `txtNumber1` è vuoto.
- * - Il campo `txtNumber3` viene disabilitato se `txtNumber2` è vuoto.
- * - Il campo `txtEmail2` viene disabilitato se `txtEmail1` è vuoto.
- * - Il campo `txtEmail3` viene disabilitato se `txtEmail2` è vuoto.
+ * - Il pulsante `btnAdd` viene disabilitato se entrambi i campi di testo `txtName` e `txtSur` sono vuoti.
+ * - I campi `txtNumber2` e `txtNumber3` vengono abilitati sequenzialmente solo se i campi precedenti contengono testo.
+ * - I campi `txtEmail2` e `txtEmail3` seguono una logica simile a quella dei numeri.
+ * - Le proprietà di abilitazione/disabilitazione sono gestite con il metodo `bind` della classe `Bindings`.
  * 
- * @note Questo metodo utilizza la classe `Bindings` per configurare i binding logici e monitorare dinamicamente 
- *       i cambiamenti delle proprietà dei campi di testo.
+ * @pre
+ * - I campi `txtName`, `txtSur`, `txtNumber1`, `txtNumber2`, `txtNumber3`, `txtEmail1`, `txtEmail2`, `txtEmail3`
+ *   devono essere inizializzati correttamente e associati agli elementi corrispondenti nella vista FXML.
+ * - Il pulsante `btnAdd` deve essere inizializzato e associato a un elemento della vista.
+ * 
+ * @post
+ * - Le proprietà di abilitazione/disabilitazione dei componenti sono configurate in base alle condizioni specificate.
+ * 
+ * @invariant
+ * - Gli oggetti associati alle proprietà (es. `txtName.textProperty()`) devono rimanere consistenti durante l'esecuzione del metodo.
  */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -110,48 +116,59 @@ public class AddViewController implements Initializable {
         txtEmail3.disableProperty().bind(Bindings.isEmpty(txtEmail2.textProperty()));
     }
     
+    
 /**
  * @brief Imposta la lista osservabile dei contatti.
  * 
- * Questo metodo consente di assegnare un oggetto `ObservableList` contenente i contatti 
- * all'istanza corrente. La lista osservabile permette di monitorare dinamicamente i cambiamenti 
- * dei dati nei contatti.
+ * Questo metodo consente di assegnare un oggetto `ObservableList` contenente i contatti all'istanza corrente.
  * 
- * @param contacts Un'istanza di `ObservableList<Contact>` che rappresenta la lista dei contatti 
- *                 da associare.
+ * @param contacts La nuova lista osservabile di oggetti `Contact` da associare.
  * 
- * @details 
- * - Il parametro `contacts` sostituisce l'attuale lista associata all'oggetto.
- * - La lista osservabile viene utilizzata per aggiornare automaticamente l'interfaccia utente 
- *   quando i dati nei contatti cambiano.
+ * @pre
+ * - Il parametro `contacts` non deve essere nullo.
+ * 
+ * @post
+ * - L'attributo `contacts` contiene il riferimento alla lista osservabile specificata.
+ * - La lista osservabile può essere utilizzata per monitorare e aggiornare dinamicamente le modifiche ai contatti.
+ * 
+ * @invariant
+ * - L'attributo `contacts` rimane consistente durante l'esecuzione del metodo.
+ * 
+ * @throws IllegalArgumentException Se il parametro `contacts` è nullo.
  */
     public void setObservableList(ObservableList<Contact> contacts){
         this.contacts=contacts;
     }
     
 /**
- * @brief Gestisce l'aggiunta di un nuovo contatto.
+ * @brief Aggiunge un nuovo contatto alla lista osservabile o gestisce duplicati.
  * 
- * Questo metodo viene chiamato quando l'utente attiva l'azione di aggiunta di un contatto. 
- * Crea un nuovo oggetto `Contact` utilizzando i dati inseriti nei campi di input, lo aggiunge 
- * alla lista dei contatti se non è già presente o gestisce i duplicati mostrando una finestra 
- * modale per la risoluzione dei conflitti.
+ * Questo metodo crea un oggetto `Contact` basato sui dati inseriti nei campi di testo 
+ * e lo aggiunge alla lista osservabile `contacts`. Se il contatto esiste già, 
+ * viene mostrata una finestra per gestire il duplicato.
  * 
- * @param event L'evento che ha scatenato l'azione, ovvero un clic sul bottone di aggiunta.
+ * @param event L'evento che ha attivato l'azione, tipicamente un clic sul pulsante "Aggiungi".
  * 
- * @throws IOException Se si verifica un errore durante il caricamento della vista `DuplicateContactView.fxml`.
+ * @throws IOException Se si verifica un errore durante il caricamento del file FXML per la gestione dei duplicati.
  * 
- * @details 
- * - I campi di testo relativi a nome, cognome, numeri di telefono ed email vengono utilizzati 
- *   per creare un nuovo contatto.
- * - Se uno o più campi di testo sono vuoti, il relativo dato non viene aggiunto al contatto.
- * - Se il contatto è già presente nella lista:
- *   - Viene caricata una finestra modale che consente di gestire i duplicati.
- *   - Il controller della vista dei duplicati (`DuplicateContactViewController`) viene inizializzato 
- *     con un contatto fittizio e aggiornato in base all'input dell'utente.
- * - Se il contatto non è un duplicato, viene aggiunto alla lista dei contatti.
- * - Dopo l'aggiunta, la finestra corrente viene chiusa.
+ * @pre
+ * - Il campo `contacts` deve essere inizializzato.
+ * - I campi di testo devono essere accessibili e contenere i dati corretti.
  * 
+ * @post
+ * - Se il contatto non è un duplicato, viene aggiunto a `contacts`.
+ * - Se il contatto è un duplicato, l'utente decide se aggiungerlo o meno.
+ * - La finestra corrente viene chiusa dopo l'aggiunta o il rifiuto del contatto.
+ * 
+ * @details
+ * - I dati vengono estratti dai campi di testo `txtName`, `txtSur`, `txtNumber1`, `txtNumber2`, 
+ *   `txtNumber3`, `txtEmail1`, `txtEmail2` e `txtEmail3`.
+ * - Se un campo di numero o email è vuoto, non viene aggiunto al contatto.
+ * - In caso di duplicato, viene caricata la vista `DuplicateContactView.fxml`, e l'utente 
+ *   sceglie se aggiungere il contatto o meno.
+ * 
+ * @invariant
+ * - La lista `contacts` deve rimanere consistente durante l'esecuzione.
  * @see Contact
  * @see DuplicateContactViewController
  */
@@ -194,18 +211,20 @@ public class AddViewController implements Initializable {
     }
     
 /**
- * @brief Gestisce l'azione di annullamento.
+ * @brief Gestisce l'azione di annullamento dell'operazione corrente.
  * 
- * Questo metodo viene chiamato quando l'utente attiva l'azione di annullamento. Chiude la finestra 
- * attualmente aperta senza apportare modifiche ai dati o eseguire ulteriori operazioni.
+ * Questo metodo chiude la finestra attualmente aperta senza apportare modifiche ai dati o alle operazioni in corso.
  * 
- * @param event L'evento che ha scatenato l'azione, tipicamente un clic sul bottone di annullamento.
+ * @param event L'evento che ha attivato l'azione di annullamento.
  * 
- * @details 
- * - Recupera la finestra (stage) associata al bottone di annullamento `btnCanc`.
- * - Chiude la finestra corrente utilizzando il metodo `close()` dello stage.
+ * @pre 
+ * - Il pulsante associato a questa azione deve essere correttamente configurato e visibile nell'interfaccia utente.
  * 
- * @note Questo metodo non modifica alcun dato e si limita a chiudere la finestra.
+ * @post
+ * - La finestra corrente viene chiusa.
+ * 
+ * @invariant
+ * - Nessuna modifica ai dati gestiti dall'applicazione è consentita durante l'esecuzione di questo metodo.
  */
     public void actionCancel(ActionEvent event){
         Stage stage=(Stage) btnCanc.getScene().getWindow();

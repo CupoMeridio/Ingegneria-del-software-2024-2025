@@ -86,19 +86,21 @@ public class ModifyViewController implements Initializable {
     private Contact oldContact;
 
 /**
- * Inizializza il controller, definendo i comportamenti dei bottoni e dei campi di input.
- * Questo metodo viene chiamato automaticamente durante la fase di inizializzazione della scena.
+ * @brief Inizializza le proprietà dei controlli dell'interfaccia utente.
  * 
- * Le seguenti proprietà sono legate tramite binding:
+ * Questo metodo viene invocato automaticamente quando la vista è stata completamente caricata e inizializzata. 
+ * Si occupa di legare le proprietà dei controlli dell'interfaccia utente (come bottoni e campi di testo) con le 
+ * condizioni di stato, disabilitando o abilitando determinati elementi in base al contenuto degli altri campi.
  * 
- * - Il bottone "btnModify" è disabilitato se i campi "txtName" e "txtSur" sono vuoti.
- * - Il campo "txtNumber2" è disabilitato se il campo "txtNumber1" è vuoto.
- * - Il campo "txtNumber3" è disabilitato se il campo "txtNumber2" è vuoto.
- * - Il campo "txtEmail2" è disabilitato se il campo "txtEmail1" è vuoto.
- * - Il campo "txtEmail3" è disabilitato se il campo "txtEmail2" è vuoto.
+ * @param url URL utilizzato per il caricamento della risorsa FXML (non utilizzato in questo caso).
+ * @param rb Risorse locali associate alla vista (non utilizzato in questo caso).
  * 
- * @param url L'URL utilizzato per caricare il file FXML (se presente).
- * @param rb Il ResourceBundle utilizzato per internazionalizzare il contenuto.
+ * @pre
+ * - La vista FXML è stata correttamente caricata e tutti i controlli sono disponibili.
+ * 
+ * @post
+ * - I controlli dell'interfaccia sono legati correttamente con le proprietà dei campi di testo, 
+ *   e i bottoni saranno abilitati o disabilitati in base al contenuto dei campi.
  */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -109,14 +111,7 @@ public class ModifyViewController implements Initializable {
         txtEmail3.disableProperty().bind(Bindings.isEmpty(txtEmail2.textProperty()));
     }    
 
-/**
- * Gestisce l'azione di annullamento, chiudendo la finestra corrente.
- * Questo metodo viene chiamato quando l'utente clicca sul bottone "btnCanc" (annulla).
- * 
- * Il metodo ottiene il riferimento alla finestra corrente (stage) e la chiude.
- * 
- * @param event L'evento generato dal click sul bottone "btnCanc".
- */
+
     @FXML
     private void actionCancel(ActionEvent event) {
         Stage stage=(Stage) btnCanc.getScene().getWindow();
@@ -124,24 +119,52 @@ public class ModifyViewController implements Initializable {
     }
 
 /**
- * Imposta la lista osservabile di contatti.
- * Questo metodo viene utilizzato per aggiornare l'elenco dei contatti nella vista.
+ * @brief Imposta la lista osservabile di contatti.
+ * 
+ * Questo metodo assegna una lista osservabile di contatti alla variabile di istanza `contacts`, che viene poi utilizzata 
+ * per gestire dinamicamente la visualizzazione e la modifica dei contatti nell'interfaccia utente.
  * 
  * @param contacts La lista osservabile di contatti da impostare.
+ * 
+ * @pre
+ * - Il parametro `contacts` deve essere non nullo e rappresentare una lista valida di oggetti `Contact`.
+ * 
+ * @post
+ * - La variabile di istanza `contacts` viene aggiornata con il valore del parametro passato.
+ * 
+ * @invariant
+ * - La variabile `contacts` deve sempre contenere una lista di oggetti `Contact` valida e aggiornata.
+ * 
+ * @see Contact
  */
     public void setObservableList(ObservableList<Contact> contacts){
         this.contacts=contacts;
     }
     
 /**
- * @brief Imposta i dettagli di un contatto esistente nei campi di input.
+ * @brief Imposta i valori di un contatto nelle apposite caselle di testo.
  * 
- * Questo metodo aggiorna i vari campi di testo (nome, cognome, numeri di telefono, email) 
- * con i valori del contatto passato come parametro. Gestisce il caso in cui il contatto 
- * abbia più di un numero di telefono o più di un'email, separandoli tramite il carattere di newline ("\n").
+ * Questo metodo imposta i campi di un contatto (nome, cognome, numeri di telefono, email) nei rispettivi campi di input 
+ * nell'interfaccia utente. I numeri di telefono e le email vengono separati e assegnati a più campi di testo, se presenti.
  * 
- * @param contact Il contatto da impostare nei campi di input.
+ * @param contact Il contatto da impostare, che fornisce le informazioni da visualizzare nei campi di input.
  * 
+ * @pre
+ * - Il parametro `contact` deve essere non nullo e contenere i dati da visualizzare.
+ * - La variabile `oldContact` è utilizzata per salvare il contatto passato.
+ * 
+ * @post
+ * - I valori del contatto passato vengono impostati nei rispettivi campi di testo (nome, cognome, numeri di telefono, email).
+ * - Se un numero di telefono o una email è presente, verrà separato nei vari campi di input.
+ * 
+ * @invariant
+ * - I campi di testo (txtName, txtSur, txtNumber1, txtNumber2, txtNumber3, txtEmail1, txtEmail2, txtEmail3) 
+ *   devono essere correttamente aggiornati con i dati del contatto.
+ * 
+ * @see Contact#getName()
+ * @see Contact#getSurname()
+ * @see Contact#getNumber()
+ * @see Contact#getEmail()
  */
 public void setContact(Contact contact) {
     // Salva il contatto passato come parametro nella variabile di istanza
@@ -191,16 +214,23 @@ public void setContact(Contact contact) {
 /**
  * @brief Gestisce l'azione di modifica di un contatto esistente.
  * 
- * Questo metodo consente di modificare un contatto esistente con nuovi dettagli (nome, cognome, numeri di telefono e email).
- * Verifica se il contatto modificato è già presente nella lista dei contatti. In caso affermativo, viene mostrata una finestra 
- * di dialogo per gestire il duplicato. Se il contatto non è un duplicato, la modifica viene salvata nella lista.
+ * Questo metodo crea un nuovo oggetto `Contact` con le informazioni aggiornate fornite dall'utente.
+ * Se il contatto modificato non esiste già nella lista, il contatto precedente viene sostituito con quello nuovo.
+ * Se il contatto modificato è un duplicato, viene mostrata una finestra di conferma per decidere se salvare la modifica o meno.
  * 
- * @param event L'evento associato al clic del pulsante di modifica.
+ * @param event L'evento che ha attivato l'azione di modifica.
  * 
- * @throws IOException Se si verifica un errore nel caricare la finestra di dialogo.
+ * @pre
+ * - Il contatto da modificare (`oldContact`) deve esistere e essere presente nella lista `contacts`.
+ * - I campi di input per il nome, cognome, numeri di telefono e email devono essere configurati correttamente.
  * 
- * @note I numeri di telefono e le email vengono aggiunti solo se i rispettivi campi di input non sono vuoti.
-
+ * @post
+ * - Se il contatto non è un duplicato, il contatto precedente viene sostituito con quello modificato.
+ * - Se il contatto è un duplicato, viene mostrata una finestra di dialogo per confermare o annullare la modifica.
+ * 
+ * @invariant
+ * - La lista `contacts` rimane consistente, senza duplicati, dopo la modifica del contatto.
+ * - I numeri di telefono e le email devono essere aggiunti solo se non vuoti.
  */
     @FXML
 private void actionModify(ActionEvent event) throws IOException {
