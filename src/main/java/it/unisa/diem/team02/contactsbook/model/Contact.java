@@ -1,6 +1,9 @@
 
 package it.unisa.diem.team02.contactsbook.model;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -15,8 +18,8 @@ public class Contact extends Person{
     private ArrayList<String> number;
     private ArrayList<String> email;
     private ArrayList<Tag> tag;
-    private static int contatore; // bisogna Salvare il numero di contatti, da rivedere 
-    private final int ID;
+    //private static int contatore; // bisogna Salvare il numero di contatti da rivedere 
+    private final String ID;
     
     
 /**
@@ -35,13 +38,15 @@ public class Contact extends Person{
  */
     public Contact(String name, String surname) {
         super(name, surname);
-        number = new ArrayList<>(3);
-        email = new ArrayList<>(3);
-        this.tag= new ArrayList<>(3);
-        this.ID = contatore;
-         contatore++;
-        
+        number = new ArrayList<String>();
+        email = new ArrayList<String>();
+        this.tag= new ArrayList<Tag>();
+        this.ID = this.generateID();
     }
+    
+   /* public static void setContatore(int contatore) {
+        Contact.contatore = contatore;
+    }*/
     
   /**
   * lang it
@@ -58,7 +63,7 @@ public class Contact extends Person{
   *       rendendolo utile in scenari come il caricamento di dati da un database o da file.
   * 
   */
-    public Contact(String name, String surname, int ID) {
+    public Contact(String name, String surname, String ID) {
         super(name, surname);
         number = new ArrayList<>();
         email = new ArrayList<>();
@@ -286,7 +291,7 @@ public class Contact extends Person{
  * - L'ID è un valore numerico univoco assegnato al contatto.
  * - Questo metodo fornisce un accesso diretto all'ID, che potrebbe essere utilizzato per identificare il contatto in modo univoco all'interno di un sistema.
  */
-     public int getID() {
+     public String getID() {
         return ID;
     }
     
@@ -329,6 +334,18 @@ public class Contact extends Person{
         for (int i=0; i<this.email.size();i++)
             sb=sb.append(" Email: ").append(email.get(i));
         return sb.toString();
+    }
+    
+    
+        private  String generateID(){
+    
+        LocalDateTime now = LocalDateTime.now();
+    
+        // Formatta l'ora corrente con nanosecondi 
+        DateTimeFormatter nanoFormatter; 
+        nanoFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSSSSS");
+        String id = now.format(nanoFormatter); 
+        return id;
     }
 }
     

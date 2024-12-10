@@ -4,8 +4,24 @@ package it.unisa.diem.team02.contactsbook.ui.controllers;
 import it.unisa.diem.team02.App;
 import it.unisa.diem.team02.contactsbook.model.Contact;
 import it.unisa.diem.team02.contactsbook.model.Tag;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,8 +48,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 /**
  * Controller per la gestione della schermata principale della rubrica.
@@ -412,9 +430,42 @@ public class ContactsbookViewController implements Initializable {
      * 
      */
     @FXML
-    private void actionImport(ActionEvent event) {
-    }
+    private void actionImport(ActionEvent event) throws IOException, ClassNotFoundException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Apri un file");
 
+        Window window = tblvRubrica.getScene().getWindow();
+        File selectedFile = fileChooser.showOpenDialog(window);
+        try(BufferedReader br=new BufferedReader(new FileReader(selectedFile))){
+            if (br.readLine() == null) return;
+            String line;
+            while((line=br.readLine())!= null){
+                System.out.println("linea letta"+line);
+                String campi []=line.split(";",-1);
+                System.out.println(line.length());
+                for (int i=0; i<campi.length; i++){
+                    System.out.println(campi[i]);
+                }
+                Contact c=new Contact(campi[0], campi[1]);
+                if (!campi[2].equals(""))
+                    c.addNumber(campi[2]);
+                if (!campi[3].equals(""))
+                    c.addNumber(campi[3]);
+                if (!campi[4].equals(""))
+                    c.addNumber(campi[4]);
+
+                if (!campi[5].equals(""))
+                    c.addEmail(campi[5]);
+                if (!campi[6].equals(""))
+                    c.addEmail(campi[6]);
+                if (!campi[7].equals(""))
+                    c.addEmail(campi[7]);
+
+                contacts.add(c);
+            }
+        }
+    }
+    
     /**
      * 
      * Implementa l'azione associcata al tasto Export: tutti i contatti della rubrica sono esportati in 
@@ -424,7 +475,45 @@ public class ContactsbookViewController implements Initializable {
      * 
      */
     @FXML
-    private void actionExport(ActionEvent event) {
+    private void actionExport(ActionEvent event) throws FileNotFoundException, IOException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Scegli un file in cui salvare");
+     
+        Window window = (tblvRubrica.getParent().getScene().getWindow());
+        File selectedFile = fileChooser.showSaveDialog(window);
+       
+        try(PrintWriter pw=new PrintWriter(new BufferedWriter(new FileWriter(selectedFile)))){
+            pw.println("NOME;COGNOME;NUMERO DI TELEFONO;EMAIL;TAG");
+            for (Contact c: contacts){
+                pw.append(c.getName());
+                pw.append(';');
+                pw.append(c.getSurname());
+                pw.append(';');
+                String[] number=c.getNumber().split("\n");
+                if(number.length>=1)
+                    pw.append(number[0]);
+                pw.append(';');
+                if (number.length>=2)
+                    pw.append(number[1]);
+                pw.append(';');
+                 if (number.length>=3)
+                    pw.append(number[2]);
+                 pw.append(';');
+                 
+                String[] email=c.getEmail().split("\n");
+                if (email.length>=1)
+                    pw.append(email[0]);
+                pw.append(';');
+                if (email.length>=2)
+                    pw.append(email[1]);
+                pw.append(';');
+                 if (email.length>=3)
+                    pw.append(email[2]);
+                pw.append(';');
+//                pw.append(c.getTag());
+                pw.append('\n');
+            }
+        }
     }
 
 /**
