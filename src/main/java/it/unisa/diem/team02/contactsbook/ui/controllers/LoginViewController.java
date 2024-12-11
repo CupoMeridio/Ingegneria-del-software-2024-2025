@@ -23,6 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import it.unisa.diem.team02.App;
 import java.io.IOException;
+import javafx.scene.input.KeyEvent;
 
 
 /**
@@ -103,6 +104,10 @@ public class LoginViewController implements Initializable {
     @FXML
     private Button btnLoginLocal;
     
+    private BooleanProperty bMail=new SimpleBooleanProperty(true);
+    private BooleanProperty bPass=new SimpleBooleanProperty(true);
+    private BooleanProperty bConfirm=new SimpleBooleanProperty(true);
+    
     static Connection connection; ///Variabile statica che meorizza lo stato della connesione con il database
 
 /**
@@ -128,7 +133,7 @@ public class LoginViewController implements Initializable {
  */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    btnSign.disableProperty().bind(Bindings.or(txtConfirmPassInitialize(), txtSignMailInitialize()).or(txtSignPassInitialize()));
+        btnSign.disableProperty().bind(Bindings.or(txtConfirmPassInitialize(), txtSignMailInitialize()).or(txtSignPassInitialize()).or(bMail).or(bPass).or(bConfirm));
         connection = null;
     }
     
@@ -443,5 +448,56 @@ public class LoginViewController implements Initializable {
         catch (IOException ex) {
             Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    private void keyEmailSign(KeyEvent event) {
+        txtSignMail.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (isValidEmail(newValue)) {
+                txtSignMail.setStyle("-fx-border-color: green;");  ///<  Bordo verde se valido
+                                                                 
+                bMail.set(false);
+                lblErrorEmail.setText("");
+                
+            } else {
+                txtSignMail.setStyle("-fx-border-color: red;");    ///<  Bordo rosso se non valido
+                                                           
+                lblErrorEmail.setText("Invalid email address");
+                bMail.set(true);
+            }
+        });
+    }
+
+    @FXML
+    private void keyPassSign(KeyEvent event) {
+        txtSignPass.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (isValidPassword(newValue)) {
+                txtSignPass.setStyle("-fx-border-color: green;");  ///<  Bordo verde se valido
+                                                                 ///< @lang en Green border if valid
+                bPass.set(false);
+                lblErrorPass.setText("");
+                   
+            } else {
+                txtSignPass.setStyle("-fx-border-color: red;");    ///<  Bordo rosso se non valido
+                                                                 ///< @lang en Red border if invalid
+                lblErrorPass.setText("The password must be 8 characters long and contain a special \ncharacter, an uppercase, " + "a lowercase and a number");
+                bPass.set(true);
+            }
+        }); 
+    }
+
+    @FXML
+    private void keyConfirmPass(KeyEvent event) {
+        txtConfirmPass.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.equals(txtSignPass.getText())) {
+                txtConfirmPass.setStyle("-fx-border-color: green;");  // Bordo verde se corrispondono
+                lblPassInequals.setText("");
+                bConfirm.set(false);
+            } else {
+                txtConfirmPass.setStyle("-fx-border-color: red;");    // Bordo rosso se non corrispondono
+                lblPassInequals.setText("The passwords do not match");
+                bConfirm.set(true);
+            }
+        });
     }
 }
