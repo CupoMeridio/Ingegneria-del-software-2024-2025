@@ -2,6 +2,7 @@
 package it.unisa.diem.team02.contactsbook.ui.controllers;
 
 import it.unisa.diem.team02.contactsbook.model.Contact;
+import it.unisa.diem.team02.contactsbook.model.Contactbook;
 import it.unisa.diem.team02.contactsbook.model.Tag;
 import java.io.IOException;
 import java.net.URL;
@@ -84,8 +85,6 @@ public class ModifyViewController implements Initializable {
     @FXML
     private Button btnModify;
     
-    private ObservableList<Contact> contacts;
-    private Contact oldContact;
     @FXML
     private Label lblTag;
     @FXML
@@ -94,6 +93,9 @@ public class ModifyViewController implements Initializable {
     private CheckBox chkmUni;
     @FXML
     private CheckBox chkmJob;
+    
+    private Contactbook contactbook;
+    private Contact oldContact;
 
 /**
  * @brief Inizializza le proprietà dei controlli dell'interfaccia utente.
@@ -147,8 +149,8 @@ public class ModifyViewController implements Initializable {
  * 
  * @see Contact
  */
-    public void setObservableList(ObservableList<Contact> contacts){
-        this.contacts=contacts;
+    public void setContactbook(Contactbook c){
+        contactbook=c;
     }
     
 /**
@@ -292,10 +294,10 @@ private void actionModify(ActionEvent event) throws IOException {
     newContact.setTag(tags);
 
     // Verifica se il contatto esiste già nella lista
-    if (!contacts.contains(newContact)) {
+    if (!contactbook.contains(newContact, oldContact)){
         // Se il contatto non è un duplicato, sostituisci il vecchio contatto con il nuovo
-        contacts.remove(oldContact);
-        contacts.add(newContact);
+        contactbook.remove(oldContact);
+        contactbook.add(newContact);
         Stage stage = (Stage) btnModify.getScene().getWindow();
         stage.close();
     } else { 
@@ -314,8 +316,8 @@ private void actionModify(ActionEvent event) throws IOException {
 
         // Se l'utente conferma la modifica, salva il nuovo contatto
         if (duplicateC.getBoolean()) {
-            contacts.remove(oldContact);
-            contacts.add(newContact);
+            contactbook.remove(oldContact);
+            contactbook.add(newContact);
             Stage stage = (Stage) btnModify.getScene().getWindow();
             stage.close();
         } else {
