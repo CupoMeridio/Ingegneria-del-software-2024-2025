@@ -187,7 +187,9 @@ public class ContactsbookViewController implements Initializable {
               Scene scene=new Scene(root);
               
               AddViewController addC=loader.getController();
-              addC.setObservableList(contacts);
+              if(contacts!=null)
+                addC.setObservableList(contacts);
+              
               
     
               //gestire eccezione
@@ -382,7 +384,7 @@ public class ContactsbookViewController implements Initializable {
      * Vengono visualizzati solo i contatti della rubrica contenenti la sottostringa inserita nella barra
      * di ricerca
      * 
-     * @param event
+     * @param flContacts
      * 
      */
     private void initializeSearch(FilteredList<Contact> flContacts) {
@@ -411,7 +413,7 @@ public class ContactsbookViewController implements Initializable {
  * @details Il metodo apre un file CSV selezionato tramite un `FileChooser`, legge ogni riga e 
  * divide i dati nei rispettivi campi (nome, cognome, numeri di telefono, e-mail). I contatti 
  * creati vengono aggiunti alla lista `contacts` della rubrica. Ogni campo viene controllato per 
- * determinare se è presente o vuoto prima di essere aggiunto come numero di telefono o e-mail.
+ * determinare se è presente o vuoto prima di essere aggiunto come numero di telefono, e-mail o tag.
  * 
  * @pre Il file selezionato deve essere un file CSV valido contenente i dati dei contatti.
  * @post I contatti letti dal file vengono aggiunti alla lista `contacts` e visualizzati nella tabella.
