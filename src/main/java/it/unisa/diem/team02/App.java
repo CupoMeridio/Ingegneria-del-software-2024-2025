@@ -26,7 +26,7 @@ public class App extends Application {
  * 
  * Questo metodo configura e mostra la finestra principale dell'applicazione. 
  * Carica la scena iniziale definita nel file FXML "LoginView" e applica alcune
- * configurazioni alla finestra, come il titolo, l'icona e lo stato massimizzato.
+ * configurazioni alla finestra, come il titolo e l'icona.
  * 
  * @param stage Lo stage principale dell'applicazione, fornito da JavaFX.
  * @throws IOException Se si verifica un errore durante il caricamento del file FXML.
@@ -37,7 +37,7 @@ public class App extends Application {
  * 
  * @post 
  * - La finestra principale dell'applicazione viene visualizzata sullo schermo.
- * - La finestra è configurata con la scena "LoginView", è massimizzata e ha titolo e icona impostati.
+ * - La finestra è configurata con la scena "LoginView" e ha titolo e icona impostati.
  * 
  * @invariant 
  * - La variabile `scene` mantiene una scena valida per l'intera durata dell'applicazione.
@@ -47,7 +47,7 @@ public class App extends Application {
  * - La finestra viene impostata su "massimizzata".
  * - Il titolo della finestra è impostato su "Rubrica".
  * - L'icona della finestra viene caricata dal percorso `/imgs/icon.png`.
- * - Dopo la configurazione, la finestra viene resa visibile con `stage.show()`.
+ * - Dopo la configurazione, la finestra viene resa visibile.
  * 
  * @note Assicurarsi che il file FXML "LoginView.fxml" e l'icona "/imgs/icon.png"
  * siano presenti e accessibili all'interno del progetto.
@@ -126,7 +126,7 @@ public class App extends Application {
 /**
  * @brief Metodo principale dell'applicazione.
  * 
- * Questo metodo avvia l'applicazione JavaFX chiamando il metodo `launch()`.
+ * Questo metodo avvia l'applicazione JavaFX.
  * 
  * @param args Gli argomenti della riga di comando. Non vengono utilizzati in questa implementazione.
  * 

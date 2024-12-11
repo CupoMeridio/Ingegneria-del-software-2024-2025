@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
- */
 package it.unisa.diem.team02.contactsbook.model;
 
 import java.util.ArrayList;
@@ -208,16 +204,6 @@ public class ContactTest {
         System.out.println("setTag and getTagList");
         Test2.setTag(tag2);
         assertEquals(tag2, Test2.getTagList()); 
-    }
-
-
-    /**
-     * Test of getRole method, of class Contact.
-     */
-    @Test
-    public void testGetRole() {
-        System.out.println("getRole");
-        assertEquals("Contact",Test1.getRole());
     }
     
     
