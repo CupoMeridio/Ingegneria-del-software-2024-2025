@@ -8,7 +8,7 @@ package it.unisa.diem.team02.contactsbook.model;
  * Classe che estende la classe astratta Person. Definisce degli ulteriori attributi e metodi
  * per effettuare specifiche operazioni sugli oggetti User.
  */
-public class User extends Person{
+public class User{
     private String password;
     private final String email;
 
@@ -36,8 +36,7 @@ public class User extends Person{
  * @param name Il nome dell'utente.
  * @param surname Il cognome dell'utente.
  */
-    public User(String password, String email, String name, String surname) {
-        super(name, surname);
+    public User(String password, String email) {
         this.password = password;
         this.email = email;
     }
@@ -72,26 +71,6 @@ public class User extends Person{
         return email;
     }
     
-    
-/**
- * @brief Restituisce il ruolo dell'oggetto sotto forma di nome della classe.
- *
- * Questo metodo restituisce il ruolo dell'oggetto, che è rappresentato dal nome della classe dell'oggetto stesso.
- * Il nome della classe viene restituito come stringa completa (incluso il package).
- *
- * @pre Il metodo è implementato nella classe corrente e restituirà una stringa rappresentante
- *      il nome della classe.
- * @post Il metodo restituisce una stringa che rappresenta il ruolo dell'oggetto, 
- *       che corrisponde al nome della classe dell'oggetto.
- * @invariant Il metodo non modifica lo stato dell'oggetto, restituendo semplicemente una stringa.
- *
- * @return Una stringa che rappresenta il ruolo dell'oggetto, equivalente al nome della classe.
- */
-    @Override
-    public String getRole() {
-        return "User";
-    }
-    
 /**
  * @brief Restituisce una rappresentazione testuale dell'oggetto.
  *
@@ -108,7 +87,7 @@ public class User extends Person{
  */
     @Override
     public String toString(){
-        return this.getRole()+" "+super.toString()+" Email: "+email;
+        return " Email: "+email;
     }
 }
 

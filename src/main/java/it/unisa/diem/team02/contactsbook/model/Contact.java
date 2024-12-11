@@ -1,22 +1,20 @@
-
 package it.unisa.diem.team02.contactsbook.model;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
- * @brief
- * Classe che definisce i contatti memorizzabili in rubrica
+ * @brief Classe che modella un contatto.
  * 
- * Classe che estende la classe astratta Person. Definisce degli ulteriori attributi e metodi
- * per effettuare specifiche operazioni sugli oggetti Contact. Gli attributi
+ * Definisce attributi e metodi per effettuare operazioni sugli oggetti Contact. Gli attributi 
  * number, email e tag sono implementati tramite un ArrayList.
  * 
  * @author team02
  */
-public class Contact extends Person{
+public class Contact{
+    private String name;
+    private String surname;
     private ArrayList<String> number;
     private ArrayList<String> email;
     private ArrayList<Tag> tag;
@@ -34,18 +32,19 @@ public class Contact extends Person{
      * @param surname Il cognome del contatto.
      * 
      * @pre
-     * - Il parametro `name` e `surname` devono essere non nulli e rappresentare valori validi per un contatto.
+     * - I parametri `name` e `surname` devono essere non nulli.
      * 
      * @post
-     * - La variabile di istanza `number` è stata inizializzata come una lista vuota di numeri di telefono.
-     * - La variabile di istanza `email` è stata inizializzata come una lista vuota di indirizzi email.
+     * - La variabile di istanza `number` è stata inizializzata come una lista vuota.
+     * - La variabile di istanza `email` è stata inizializzata come una lista vuota.
      * - La variabile di istanza `tag` è stata inizializzata come una lista vuota di tag.
      * - Un ID univoco è stato generato e assegnato al contatto.
      * 
      * @see Contact#generateID() per la generazione dell'ID univoco.
      */
     public Contact(String name, String surname) {
-        super(name, surname);
+        this.name=name;
+        this.surname=surname;
         number = new ArrayList<String>();
         email = new ArrayList<String>();
         this.tag= new ArrayList<Tag>();
@@ -57,7 +56,7 @@ public class Contact extends Person{
     }*/
     
     
-        /**
+     /**
      * @brief Crea un nuovo oggetto {@link Contact} con il nome, cognome e ID forniti.
      * 
      * Questo costruttore inizializza il contatto con un nome, un cognome e un ID, e crea nuove liste vuote per i numeri di 
@@ -68,11 +67,11 @@ public class Contact extends Person{
      * @param ID L'ID univoco del contatto.
      * 
      * @pre
-     * - Il parametro `name`, `surname` e `ID` devono essere non nulli e rappresentare valori validi per un contatto.
+     * - Il parametro `name`, `surname` e `ID` devono essere non nulli.
      * 
      * @post
-     * - La variabile di istanza `number` è stata inizializzata come una lista vuota di numeri di telefono.
-     * - La variabile di istanza `email` è stata inizializzata come una lista vuota di indirizzi email.
+     * - La variabile di istanza `number` è stata inizializzata come una lista vuota.
+     * - La variabile di istanza `email` è stata inizializzata come una lista vuota.
      * - La variabile di istanza `tag` è stata inizializzata come una lista vuota di tag.
      * - L'ID del contatto è stato impostato con il valore fornito nel parametro `ID`.
      * 
@@ -82,7 +81,8 @@ public class Contact extends Person{
      * utile in scenari come il caricamento di dati da un database o da file.
      */
     public Contact(String name, String surname, String ID) {
-        super(name, surname);
+        this.name=name;
+        this.surname=surname;
         number = new ArrayList<>();
         email = new ArrayList<>();
         this.tag= new ArrayList<>();
@@ -90,21 +90,75 @@ public class Contact extends Person{
     }
     
     /**
+    * @brief Restituisce il nome della persona.
+    *
+    * @pre La variabile d'istanza `name` deve essere stata inizializzata correttamente.
+    * @post La stringa restituita rappresenta il nome della persona e non è modificata dal metodo.
+    * @invariant La variabile `name` deve sempre contenere un valore valido che rappresenta
+    *            il nome della persona.
+    *
+    * @return Una stringa contenente il nome della persona.
+    */
+    public String getName() {
+        return name;
+    }
+    
+    /**
+    * @brief Restituisce il cognome della persona.
+    *
+    * @pre La variabile d'istanza `surname` deve essere stata inizializzata correttamente.
+    * @post La stringa restituita rappresenta il cognome della persona e non è modificata dal metodo.
+    * @invariant La variabile `surname` deve sempre contenere un valore valido che rappresenta
+    *            il cognome della persona.
+    *
+    * @return Una stringa contenente il cognome della persona.
+    */
+    public String getSurname() {
+        return surname;
+    }
+    
+        /**
+    * @brief Imposta il nome della persona.
+    *
+    * @pre Il parametro `name` non deve essere null.
+    * @post La variabile d'istanza `name` viene aggiornata con il valore del parametro `name`.
+    * @invariant La variabile `name` deve sempre contenere un valore valido.
+    *
+    * @param name Il nuovo nome della persona.
+    */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+    * @brief Imposta il cognome della persona.
+    *
+    * @pre Il parametro `surname` non deve essere null.
+    * @post La variabile d'istanza `surname` viene aggiornata con il valore del parametro `surname`.
+    * @invariant La variabile `surname` deve sempre contenere un valore valido.
+    *
+    * @param surname Il nuovo cognome della persona.
+    */
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+    
+    /**
      * @brief Restituisce i numeri di telefono del contatto.
      * 
-     * Questo metodo restituisce i numeri di telefono associati al contatto. Se il contatto ha più di un numero, i numeri vengono 
-     * restituiti separati da una nuova linea. Se non sono presenti numeri, viene restituita una stringa vuota.
+     * Questo metodo restituisce i numeri di telefono associati al contatto. Se il contatto ha più numeri, vengono 
+     * restituiti ognuno su una linea diversa. Se non sono presenti numeri, viene restituita una stringa vuota.
      * 
-     * @return Una stringa contenente i numeri di telefono del contatto, separati da nuove linee se ce ne sono più di uno.
+     * @return Una stringa contenente i numeri di telefono del contatto, ognuno su una linea diversa.
      * 
      * @pre
      * - La lista `number` deve essere correttamente inizializzata e contenere i numeri di telefono del contatto.
      * 
      * @post
-     * - La stringa restituita contiene i numeri di telefono del contatto, separati da nuove linee se presenti.
+     * - La stringa restituita contiene i numeri di telefono del contatto.
      * 
      * @invariant
-     * - La lista `number` non è mai nulla e può contenere uno, due o più numeri di telefono.
+     * - La lista `number` non è mai nulla e può contenere zero, uno o più numeri di telefono.
      */
     public String getNumber(){
         if(number.isEmpty()) return "";
@@ -112,23 +166,23 @@ public class Contact extends Person{
         if(number.size()==2) return number.get(0)+"\n"+number.get(1);
         return number.get(0)+"\n"+number.get(1)+"\n"+number.get(2);
     }
-
+    
     /**
-     * @brief Restituisce gli indirizzi email del contatto.
+     * @brief Restituisce le email del contatto.
      * 
-     * Questo metodo restituisce gli indirizzi email associati al contatto. Se il contatto ha più di un indirizzo, gli indirizzi 
-     * vengono restituiti separati da una nuova linea. Se non sono presenti indirizzi email, viene restituita una stringa vuota.
+     * Questo metodo restituisce le email associate al contatto. Se il contatto ha più email, vengono 
+     * restituiti ognuna su una linea diversa. Se non sono presenti email, viene restituita una stringa vuota.
      * 
-     * @return Una stringa contenente gli indirizzi email del contatto, separati da nuove linee se ce ne sono più di uno.
+     * @return Una stringa contenente le email del contatto, ognuna su una linea diversa.
      * 
      * @pre
-     * - La lista `email` deve essere correttamente inizializzata e contenere gli indirizzi email del contatto.
+     * - La lista `email` deve essere correttamente inizializzata e contenere le email del contatto.
      * 
      * @post
-     * - La stringa restituita contiene gli indirizzi email del contatto, separati da nuove linee se presenti.
+     * - La stringa restituita contiene le email del contatto.
      * 
      * @invariant
-     * - La lista `email` non è mai nulla e può contenere uno, due o più indirizzi email.
+     * - La lista `email` non è mai nulla e può contenere zero, uno o più email.
      */
     public String getEmail() {
         if(email.isEmpty()) return "";
@@ -138,21 +192,21 @@ public class Contact extends Person{
     }
     
     /**
-     * @brief Restituisce i tag associati al contatto.
+     * @brief Restituisce i tag del contatto.
      * 
-     * Questo metodo restituisce i tag associati al contatto. Se il contatto ha più di un tag, i tag vengono restituiti separati 
-     * da una nuova linea. Se non sono presenti tag, viene restituita una stringa vuota.
+     * Questo metodo restituisce i tag associati al contatto. Se il contatto ha più tag, vengono 
+     * restituiti ognuno su una linea diversa. Se non sono presenti tag, viene restituita una stringa vuota.
      * 
-     * @return Una stringa contenente i tag del contatto, separati da nuove linee se ce ne sono più di uno.
+     * @return Una stringa contenente i tag del contatto, ognuno su una linea diversa.
      * 
      * @pre
-     * - La lista `tag` deve essere correttamente inizializzata e contenere i tag associati al contatto.
+     * - La lista `tag` deve essere correttamente inizializzata e contenere i tag del contatto.
      * 
      * @post
-     * - La stringa restituita contiene i tag del contatto, separati da nuove linee se presenti.
+     * - La stringa restituita contiene i tag del contatto.
      * 
      * @invariant
-     * - La lista `tag` non è mai nulla e può contenere uno, due o più tag.
+     * - La lista `tag` non è mai nulla e può contenere zero, uno o più tag.
      */
     public String getTag(){
         if(tag.isEmpty()) return "";
@@ -174,7 +228,6 @@ public class Contact extends Person{
      * 
      * @pre
      * - Il parametro `tag` deve essere non nullo.
-     * - Il tag non deve essere già presente nella lista dei tag.
      * 
      * @post
      * - Se il tag è valido e non duplicato, viene aggiunto alla lista dei tag del contatto.
@@ -199,7 +252,7 @@ public class Contact extends Person{
      * @param number Il numero di telefono da aggiungere al contatto.
      * 
      * @pre
-     * - Il parametro `number` deve essere una stringa non nulla e rappresentare un numero valido.
+     * - Il parametro `number` deve essere una stringa non nulla.
      * 
      * @post
      * - Il numero di telefono fornito viene aggiunto alla lista dei numeri del contatto.
@@ -219,7 +272,7 @@ public class Contact extends Person{
      * @param email L'indirizzo email da aggiungere al contatto.
      * 
      * @pre
-     * - Il parametro `email` deve essere una stringa non nulla e rappresentare un indirizzo email valido.
+     * - Il parametro `email` deve essere una stringa non nulla.
      * 
      * @post
      * - L'indirizzo email fornito viene aggiunto alla lista degli indirizzi email del contatto.
@@ -231,151 +284,156 @@ public class Contact extends Person{
         this.email.add(email);
     }
     
-/**
- * @brief Imposta il campo number con la lista fornita.
- *
- * @param number L'ArrayList di stringhe da assegnare al campo number.
- *
- * @pre Il parametro `number` non deve essere null.
- * @post Il campo `number` dell'oggetto viene aggiornato con la lista fornita.
- * @invariant Il campo `number` deve sempre contenere un ArrayList valido di stringhe (i valori null non sono ammessi).
- */
+    /**
+     * @brief Imposta il campo number con la lista fornita.
+     *
+     * @param number L'ArrayList di stringhe da assegnare al campo number.
+     *
+     * @pre Il parametro `number` non deve essere null.
+     * @post Il campo `number` dell'oggetto viene aggiornato con la lista fornita.
+     * @invariant Il campo `number` deve sempre contenere un ArrayList valido di stringhe (i valori null non sono ammessi).
+     */
     public void setNumber(ArrayList<String> number) {
         this.number = number;
     }
     
-/**
- * @brief Imposta il campo email con la lista fornita.
- *
- * @param email L'ArrayList di stringhe da assegnare al campo email.
- *
- * @pre Il parametro `email` non deve essere null.
- * @post Il campo `email` dell'oggetto viene aggiornato con la lista fornita.
- * @invariant Il campo `email` deve sempre contenere un ArrayList valido di stringhe (i valori null non sono ammessi).
- */
+    /**
+     * @brief Imposta il campo email con la lista fornita.
+     *
+     * @param email L'ArrayList di stringhe da assegnare al campo email.
+     *
+     * @pre Il parametro `email` non deve essere null.
+     * @post Il campo `email` dell'oggetto viene aggiornato con la lista fornita.
+     * @invariant Il campo `email` deve sempre contenere un ArrayList valido di stringhe (i valori null non sono ammessi).
+     */
     public void setEmail(ArrayList<String> email) {
         this.email = email;
     }
     
-/**
- * @brief Imposta il campo tag con la lista fornita.
- *
- * @param tag L'ArrayList di oggetti Tag da assegnare al campo tag.
- *
- * @pre Il parametro `tag` non deve essere null.
- * @post Il campo `tag` dell'oggetto viene aggiornato con la lista fornita.
- * @invariant Il campo `tag` deve sempre contenere un ArrayList valido di oggetti Tag (i valori null non sono ammessi).
- */
+    /**
+     * @brief Imposta il campo tag con la lista fornita.
+     *
+     * @param tag L'ArrayList di oggetti Tag da assegnare al campo tag.
+     *
+     * @pre Il parametro `tag` non deve essere null.
+     * @post Il campo `tag` dell'oggetto viene aggiornato con la lista fornita.
+     * @invariant Il campo `tag` deve sempre contenere un ArrayList valido di oggetti Tag (i valori null non sono ammessi).
+     */
     public void setTag(ArrayList<Tag> tag) {
         this.tag = tag;
     }
     
-/**
- * @brief Restituisce la lista di tag.
- *
- * @return L'ArrayList di oggetti Tag contenuto nel campo tag.
- *
- * @pre Il campo `tag` deve essere inizializzato.
- * @post Nessuna modifica allo stato dell'oggetto.
- * @invariant Il campo `tag` deve sempre contenere un ArrayList valido di oggetti Tag (i valori null non sono ammessi).
- */
+    /**
+     * @brief Restituisce la lista dei tag associati al contatto.
+     *
+     * @return L'ArrayList di oggetti Tag contenuto nel campo tag.
+     *
+     * @pre Il campo `tag` deve essere inizializzato.
+     * @post Si ottiene l'ArrayList dei tag associati al contatto.
+     * @invariant Nessuna modifica allo stato dell'oggetto.
+     */
      public ArrayList<Tag> getTagList() {
         return tag;
     }
      
-/**
- * @brief Restituisce la lista dei numeri.
- *
- * @pre La variabile d'istanza `number` deve essere stata inizializzata correttamente.
- *      Non deve essere null.
- * @post La lista restituita è immutata rispetto a prima della chiamata del metodo.
- * @invariant L'oggetto `number` rimane consistente in ogni stato dell'oggetto.
- *
- * @return Un oggetto ArrayList contenente la lista dei numeri.
- */
+    /**
+     * @brief Restituisce la lista dei numeri di telefono associati al contatto.
+     *
+     * @return L'ArrayList di oggetti String contenuto nel campo number.
+     *
+     * @pre Il campo `number` deve essere inizializzato.
+     * @post Si ottiene l'ArrayList dei numeri di telefono associati al contatto.
+     * @invariant Nessuna modifica allo stato dell'oggetto.
+     */
     public ArrayList<String> getNumberList(){
         return this.number ;
     }
     
-/**
- * @brief Restituisce la lista delle email.
- *
- * @pre La variabile d'istanza `email` deve essere stata inizializzata correttamente
- *      e non deve essere null.
- * @post La lista restituita non viene modificata durante l'esecuzione del metodo.
- * @invariant La variabile `email` rimane consistente e non viene alterata
- *            da questo metodo.
- *
- * @return Un oggetto ArrayList contenente la lista delle email.
- */
+     /**
+     * @brief Restituisce la lista delle email associate al contatto.
+     *
+     * @return L'ArrayList di oggetti String contenuto nel campo email.
+     *
+     * @pre Il campo `email` deve essere inizializzato.
+     * @post Si ottiene l'ArrayList delle email associate al contatto.
+     * @invariant Nessuna modifica allo stato dell'oggetto.
+     */
     public ArrayList<String> getEmailList() {
         return email;
     }
     
-/**
- * @brief Restituisce l'ID associato a questo oggetto.
- *
- * @pre La variabile d'istanza `ID` deve essere stata inizializzata e non deve essere null.
- * @post Il valore della variabile `ID` rimane immutato dopo la chiamata del metodo.
- * @invariant La variabile `ID` deve sempre contenere un valore valido (non null e coerente con il contesto).
- *
- * @return Una stringa contenente l'ID associato a questo oggetto.
- */
+    /**
+     * @brief Restituisce l'ID associato a questo oggetto.
+     *
+     * @pre La variabile d'istanza `ID` deve essere stata inizializzata e non deve essere null.
+     * @post Si ottiene l'ID associato al contatto.
+     * @invariant Il valore della variabile `ID` rimane immutato dopo la chiamata del metodo.
+     *
+     * @return Una stringa contenente l'ID associato a questo oggetto.
+     */
      public String getID() {
         return ID;
     }
-    
-/**
- * @brief Restituisce il ruolo dell'oggetto come stringa.
- *
- * @pre L'oggetto deve essere correttamente istanziato e il metodo può essere chiamato su qualsiasi istanza valida.
- * @post Il valore restituito è una rappresentazione testuale della classe dell'oggetto.
- * @invariant L'implementazione del metodo `getClass()` deve fornire informazioni consistenti sulla classe dell'oggetto.
- *
- * @return Una stringa che rappresenta il ruolo dell'oggetto, basato sulla classe dell'istanza.
- */
+     
+    /**
+    * @brief Confronta l'oggetto su cui viene invocato il metodo con un altro per verificarne l'uguaglianza.
+    *
+    * Questo metodo confronta l'oggetto corrente con un altro oggetto di tipo `Object`. Due oggetti sono considerati uguali
+    * se hanno lo stesso nome e cognome.
+    *
+    * @post Il metodo restituisce `true` se l'oggetto corrente è uguale all'oggetto passato come parametro, 
+    *       altrimenti restituisce `false`.
+    * @invariant Gli oggetti `name` e `surname` devono contenere valori consistenti.
+    *
+    * @param o L'oggetto da confrontare con l'oggetto corrente.
+    * @return `true` se l'oggetto corrente è uguale all'oggetto passato, `false` altrimenti.
+    */
+
     @Override
-    public String getRole() {
-        return "Contact";
+    public boolean equals(Object o){
+        if(o==null) return false;
+        if(o==this) return true;
+        if (!(o instanceof Contact)) return false;
+        
+        Contact c = (Contact) o;
+        
+        return c.getName().equals(this.getName()) && c.getSurname().equals(this.getSurname());
     }
     
-    
-/**
- * @brief Genera una rappresentazione testuale dell'oggetto.
- *
- * @pre La variabile d'istanza `number` deve essere stata inizializzata correttamente 
- *      (non null) e può contenere una lista di numeri di telefono.
- * @pre La variabile d'istanza `email` deve essere stata inizializzata correttamente 
- *      (non null) e può contenere una lista di indirizzi email.
- * @post La stringa restituita include il ruolo dell'oggetto, il risultato del metodo
- *       `super.toString()`, i numeri di telefono e gli indirizzi email associati.
- * @invariant Le variabili `number` ed `email` rimangono consistenti e non vengono
- *            modificate durante l'esecuzione del metodo.
- *
- * @return Una stringa che rappresenta l'oggetto, contenente il ruolo, 
- *         i numeri di telefono e gli indirizzi email associati.
- */
+    /**
+     * @brief Genera una rappresentazione testuale dell'oggetto.
+     *
+     * @pre La variabile d'istanza `number` deve essere stata inizializzata correttamente 
+     *      (non null) e può contenere una lista di numeri di telefono.
+     * @pre La variabile d'istanza `email` deve essere stata inizializzata correttamente 
+     *      (non null) e può contenere una lista di indirizzi email.
+     * @post La stringa restituita include il nome, il cognome, i numeri di telefono e gli indirizzi email associati al contatto.
+     * @invariant Le variabili `number` ed `email` rimangono consistenti e non vengono
+     *            modificate durante l'esecuzione del metodo.
+     *
+     * @return Una stringa che rappresenta l'oggetto, contenente il nome, il cognome, 
+     *         i numeri di telefono e gli indirizzi email associati.
+     */
     @Override
     public String toString(){
-        StringBuffer sb=new StringBuffer(this.getRole()+" "+super.toString());
+        StringBuffer sb=new StringBuffer("Name: "+name+" Surname: "+surname+" ");
         for (int i=0; i<this.number.size();i++)
-            sb=sb.append(" Phone number: ").append(number.get(i));
+            sb=sb.append("Phone number: ").append(number.get(i));
         for (int i=0; i<this.email.size();i++)
-            sb=sb.append(" Email: ").append(email.get(i));
+            sb=sb.append("Email: ").append(email.get(i));
         return sb.toString();
     }
     
-/**
- * @brief Genera un ID basato sulla data e ora correnti con precisione ai nanosecondi.
- *
- * @pre Il sistema deve essere in grado di ottenere la data e l'ora correnti.
- * @post Viene restituito un identificatore unico sotto forma di stringa che rappresenta
- *       la data e l'ora correnti fino ai nanosecondi.
- * @invariant Il formato dell'ID generato è sempre coerente con il pattern specificato 
- *            "yyyy-MM-dd HH:mm:ss.SSSSSSSSS" e non dipende dallo stato dell'oggetto.
- *
- * @return Una stringa che rappresenta la data e ora correnti con precisione ai nanosecondi.
- */
+    /**
+     * @brief Genera un ID basato su data e ora correnti con precisione ai nanosecondi.
+     *
+     * @pre Il sistema deve essere in grado di ottenere la data e l'ora correnti.
+     * @post Viene restituito un identificatore univoco sotto forma di stringa.
+     * @invariant Il formato dell'ID generato è sempre coerente con il pattern specificato 
+     *            "yyyy-MM-dd HH:mm:ss.SSSSSSSSS" e non dipende dallo stato dell'oggetto.
+     *
+     * @return Una stringa che rappresenta la data e ora correnti con precisione ai nanosecondi.
+     */
         private  String generateID(){
     
         LocalDateTime now = LocalDateTime.now();
