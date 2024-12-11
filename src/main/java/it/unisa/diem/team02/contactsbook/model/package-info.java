@@ -9,6 +9,11 @@
  * Classi principali:
  * - Contact: Rappresenta un singolo contatto nella rubrica, contenente informazioni come nome, cognome, 
  *   numero di telefono, email e altri dettagli.
+ * - Contactbook: Rappresenta la rubrica dei contatti ed è implementata con una lista osservabil di oggetti 
+ *   di tipo Contact. Implementa metodi per aggiungere o rimuovere un contatto e per verificare se un contatto
+ *   è già presente nella rubrica.
+ * - Filter: Rappresenta il filtro con cui vengono selezionati i contatti della rubrica che soddisfanno determinati
+ *   criteri: se sono associati a un certo tag oppure se uno dei campi coincide con una data sottostringa.
  * - Person: Contiene informazioni anagrafiche di una persona, come nome, cognome e data di nascita. 
  *   Viene utilizzato come base per la classe `Contact`.
  * - Tag: Rappresenta un tag che può essere associato a un contatto per facilitarne la categorizzazione 

@@ -1,7 +1,6 @@
 
 package it.unisa.diem.team02.contactsbook.ui.controllers;
 
-import it.unisa.diem.team02.contactsbook.model.Contact;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
