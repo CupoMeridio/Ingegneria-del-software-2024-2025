@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author anuar
  */
 public class ContactTest {
-    private Contact Test1, Test2, Test3;
+    private Contact Test1, Test2, Test3, Test4;
     ArrayList<String> number1, number2;
     ArrayList<String> email1, email2;
     ArrayList<Tag> tag1, tag2;
@@ -29,6 +29,7 @@ public class ContactTest {
         Test1 = new Contact("Anuar", "Zouhri");
         Test2 = new Contact("Valeria","");
         Test3 = new Contact("","Postiglione","10");
+        Test4 = new Contact("Anuar","Zouhri");
         
         //inizializzazione della lista di numeri number1 con i numeri 3393434025 e ""
         number1 = new ArrayList<>(3);
@@ -211,14 +212,6 @@ public class ContactTest {
         assertEquals(tag2, Test2.getTagList()); 
     }
 
-    /**
-     * Test of getID method, of class Contact. The object has ID = 10
-     */
-    @Test
-    public void testGetID() {
-        System.out.println("getID");
-        assertEquals("10",Test3.getID());
-    }
 
     /**
      * Test of getRole method, of class Contact.
@@ -228,14 +221,36 @@ public class ContactTest {
         System.out.println("getRole");
         assertEquals("Contact",Test1.getRole());
     }
-
+    
+    
     /**
-     * Test of toString method, of class Contact.
+     * 
+     * Test n1 of equals method, of class Person inherited by Contact. The test apply
+     * the equals method on two objects with different name and surname. It is
+     * applied assertFalse
+     *
      */
-//    @Test
-//    public void testToString() {
-//        System.out.println("toString");
-//        Test1.setEmail(email1);
-//    }
-//    
+    @Test
+    public void testEquals1() {
+        System.out.println("equals");
+        assertFalse(Test1.equals(Test2));
+    
+    }
+    
+    /**
+     * 
+     * Test n2 of equals method, of class Person inherited by Contact. The test apply
+     * the equals method on two objects with the same name and surname. It is applied
+     * asserTrue
+     *
+     */
+    @Test
+    public void testEquals2() {
+        System.out.println("equals");
+        assertTrue(Test1.equals(Test4));
+    
+    }
+
+
+   
 }

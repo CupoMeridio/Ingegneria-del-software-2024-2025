@@ -396,24 +396,6 @@ public class ContactsbookViewController implements Initializable {
         txtSearch.textProperty().addListener((obs, oldValue, newValue) -> updateFilter());
         
         
-//        //aggiungo un listener al campo testo
-//        txtSearch.textProperty().addListener((obs,oldValue,newValue) -> {
-//               flContacts.setPredicate(contact-> {
-//                // se non c'è scritto nulla sulla barra di ricerca mostra tutti i contatti
-//                if (newValue == null || newValue.isEmpty()) {
-//                    return true;
-//                }
-//                
-//                String lowerCaseFilter = newValue.toLowerCase();
-//                
-//                //è necessario gestire separatamente i valori null
-//                return contact.getName().toLowerCase().contains(lowerCaseFilter) ||
-//                       contact.getSurname().toLowerCase().contains(lowerCaseFilter) ||
-//                       contact.getNumber().toLowerCase().contains(lowerCaseFilter) ||
-//                       contact.getEmail().toLowerCase().contains(lowerCaseFilter);
-//               });
-//               
-//        });
         
     }
     
@@ -469,6 +451,14 @@ public class ContactsbookViewController implements Initializable {
                     c.addEmail(campi[6]);
                 if (!campi[7].equals(""))
                     c.addEmail(campi[7]);
+                
+                if(!campi[8].equals(""))
+                    c.addTag(Tag.Home);
+                if(!campi[9].equals(""))
+                    c.addTag(Tag.University);
+                if(!campi[10].equals(""))
+                    c.addTag(Tag.Job);
+                
 
                 contacts.add(c);
             }
@@ -502,12 +492,13 @@ public class ContactsbookViewController implements Initializable {
         File selectedFile = fileChooser.showSaveDialog(window);
        
         try(PrintWriter pw=new PrintWriter(new BufferedWriter(new FileWriter(selectedFile)))){
-            pw.println("NOME;COGNOME;NUMERO DI TELEFONO;EMAIL;TAG");
+            pw.println("NOME;COGNOME;NUMERO DI TELEFONO;EMAIL;TAG;");
             for (Contact c: contacts){
                 pw.append(c.getName());
                 pw.append(';');
                 pw.append(c.getSurname());
                 pw.append(';');
+                
                 String[] number=c.getNumber().split("\n");
                 if(number.length>=1)
                     pw.append(number[0]);
@@ -529,7 +520,18 @@ public class ContactsbookViewController implements Initializable {
                  if (email.length>=3)
                     pw.append(email[2]);
                 pw.append(';');
-//                pw.append(c.getTag());
+                
+                String[] tag=c.getTag().split("\n");
+                if (tag.length>=1)
+                    pw.append(tag[0]);
+                pw.append(';');
+                if (tag.length>=2)
+                    pw.append(tag[1]);
+                pw.append(';');
+                 if (tag.length>=3)
+                    pw.append(tag[2]);
+                pw.append(';');
+                    
                 pw.append('\n');
             }
         }
