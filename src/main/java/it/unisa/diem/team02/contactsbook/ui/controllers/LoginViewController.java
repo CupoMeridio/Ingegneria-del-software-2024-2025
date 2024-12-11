@@ -102,6 +102,8 @@ public class LoginViewController implements Initializable {
     
     @FXML
     private Button btnLoginLocal;
+    
+    static Connection connection; ///Variabile statica che meorizza lo stato della connesione con il database
 
 /**
  * @brief Inizializza le proprietà dell'interfaccia utente per la registrazione.
@@ -126,7 +128,8 @@ public class LoginViewController implements Initializable {
  */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        btnSign.disableProperty().bind(Bindings.or(txtConfirmPassInitialize(), txtSignMailInitialize()).or(txtSignPassInitialize()));
+    btnSign.disableProperty().bind(Bindings.or(txtConfirmPassInitialize(), txtSignMailInitialize()).or(txtSignPassInitialize()));
+        connection = null;
     }
     
     
@@ -164,13 +167,13 @@ public class LoginViewController implements Initializable {
         txtSignMail.textProperty().addListener((observable, oldValue, newValue) -> {
             if (isValidEmail(newValue)) {
                 txtSignMail.setStyle("-fx-border-color: green;");  ///<  Bordo verde se valido
-                                                                 ///< @lang en Green border if valid
+                                                                 
                 observableBoolean.set(false);
                 lblErrorEmail.setText("");
                 
             } else {
                 txtSignMail.setStyle("-fx-border-color: red;");    ///<  Bordo rosso se non valido
-                                                                 ///< @lang en Red border if invalid
+                                                           
                 lblErrorEmail.setText("Invalid email address");
                 
             }
@@ -376,31 +379,34 @@ public class LoginViewController implements Initializable {
     @FXML
     private void actionLogin(ActionEvent event) {
         Database database= new Database();
-        Connection connection = database.ConnectionDB("rubrica", "postgres", "postgres");
+        connection = database.ConnectionDB("rubrica", "postgres", "postgres");
             try {
                 int controllo=database.checkLogin(connection, "utenti", txtLogMail.getText(), txtLogPass.getText());
                 switch(controllo){
                     case -1:
-                    lblLogErr.setText("Error. There is no account associated with this email.");    
+                    lblLogErr.setText("Error. There is no account associated with this email.");
+                    database.CloseConnection(connection);
+                    connection=null;
                     break;
                     
                     case 1:
                     lblLogErr.setText("Login successfully."); 
-                    {
                         try {
                             App.setRoot("ContactsbookView");
                         } catch (IOException ex) {
                             Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                    }
                     break;
 
                     
                     case 0:
                     lblLogErr.setText("Incorrect password.");
-                    
+                    database.CloseConnection(connection);
+                    connection=null;
                     default:
                     lblLogErr.setText("Oops, something went wrong...");
+                    database.CloseConnection(connection);
+                    connection=null;
                 }
             } catch (SQLException ex) {
                 lblLogErr.setText("Unable to contact the server, please try again later.");
