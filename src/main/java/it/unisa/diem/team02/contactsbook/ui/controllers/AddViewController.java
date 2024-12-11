@@ -126,31 +126,22 @@ public class AddViewController implements Initializable {
         txtEmail2.disableProperty().bind(Bindings.isEmpty(txtEmail1.textProperty()));
         txtEmail3.disableProperty().bind(Bindings.isEmpty(txtEmail2.textProperty()));
     }
-    
-    
-///**
-// * @brief Imposta la lista osservabile dei contatti.
-// * 
-// * Questo metodo consente di assegnare un oggetto `ObservableList` contenente i contatti all'istanza corrente.
-// * 
-// * @param contacts La nuova lista osservabile di oggetti `Contact` da associare.
-// * 
-// * @pre
-// * - Il parametro `contacts` non deve essere nullo.
-// * 
-// * @post
-// * - L'attributo `contacts` contiene il riferimento alla lista osservabile specificata.
-// * - La lista osservabile può essere utilizzata per monitorare e aggiornare dinamicamente le modifiche ai contatti.
-// * 
-// * @invariant
-// * - L'attributo `contacts` rimane consistente durante l'esecuzione del metodo.
-// * 
-// * @throws IllegalArgumentException Se il parametro `contacts` è nullo.
-// */
-//    public void setObservableList(ObservableList<Contact> contacts){
-//        this.contacts=contacts;
-//    }
 
+    /**
+    * @brief Imposta l'istanza di rubrica da utilizzare.
+    * 
+    * @param c La rubrica da aggiornare.
+    * 
+    * @pre
+    * - Il parametro `c` non deve essere nullo.
+    * 
+    * @post
+    * - L'attributo `contactbook` contiene il riferimento alla rubrica specificata.
+    * - La rubrica può essere utilizzata per monitorare e aggiornare dinamicamente le modifiche ai contatti.
+    * 
+    * @invariant
+    * - L'attributo `contactbook` rimane consistente durante l'esecuzione del metodo.
+    */
     public void setContactbook(Contactbook c){
         contactbook=c;
     }
