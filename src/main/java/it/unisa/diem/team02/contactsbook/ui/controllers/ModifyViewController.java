@@ -297,7 +297,7 @@ private void actionModify(ActionEvent event) throws IOException {
     // Verifica se il contatto esiste già nella lista
     if (!contactbook.contains(newContact, oldContact)){
         // Se il contatto non è un duplicato, sostituisci il vecchio contatto con il nuovo
-        contactbook.remove(oldContact);
+        contactbook.delete(oldContact);
         contactbook.add(newContact);
         Stage stage = (Stage) btnModify.getScene().getWindow();
         stage.close();
@@ -317,7 +317,7 @@ private void actionModify(ActionEvent event) throws IOException {
 
         // Se l'utente conferma la modifica, salva il nuovo contatto
         if (duplicateC.getBoolean()) {
-            contactbook.remove(oldContact);
+            contactbook.delete(oldContact);
             contactbook.add(newContact);
             Stage stage = (Stage) btnModify.getScene().getWindow();
             stage.close();

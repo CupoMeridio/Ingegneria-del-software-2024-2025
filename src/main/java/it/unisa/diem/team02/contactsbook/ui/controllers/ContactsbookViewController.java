@@ -120,16 +120,13 @@ public class ContactsbookViewController implements Initializable {
            
     }    
     
-/**
- * @brief Crea e configura la lista dei contatti.
- * 
- * Questo metodo inizializza la lista dei contatti come un array osservabile e configura le colonne 
- * della tabella per visualizzare i dettagli di ciascun contatto, come nome, cognome, numero di telefono ed email.
- * 
- * @pre La tabella e le colonne devono essere già configurate nell'interfaccia utente.
- * @post La lista dei contatti è stata creata e la tabella è configurata per visualizzare i dati.
- * @invariant La tabella visualizzerà correttamente i contatti con i dettagli impostati nelle rispettive colonne.
- */
+    /**
+     * @brief Configura la tabella visuale con le colonne e i dati dei contatti.
+     * 
+     * @pre La tabella e le colonne devono essere già configurate nell'interfaccia utente.
+     * @post La  tabella è configurata per visualizzare i dati.
+     * @invariant La tabella visualizzerà correttamente i contatti con i dettagli impostati nelle rispettive colonne.
+     */
     public void createList(){
         clmName.setCellValueFactory(new PropertyValueFactory("name"));
         clmSur.setCellValueFactory(new PropertyValueFactory("surname"));
@@ -144,23 +141,21 @@ public class ContactsbookViewController implements Initializable {
      */
     public void initializeList(){
         
-       
-        
     }
     
 /**
  * @brief Apre una nuova finestra per aggiungere un nuovo contatto.
  * 
- * Questo metodo carica la vista per aggiungere un nuovo contatto, inizializza la lista dei contatti
- * da visualizzare nella nuova finestra, e mostra la finestra in modalità modale.
+ * Questo metodo carica la vista per aggiungere un nuovo contatto, passa al prossimo controller la 
+ * rubrica da aggiornare, e mostra la finestra in modalità finestra modale.
  * 
  * @param event L'evento di azione che attiva il metodo.
  * 
  * @throws IOException Se si verifica un errore durante il caricamento della vista FXML.
  * 
  * @pre La scena corrente deve contenere il bottone di aggiunta per attivare questa azione.
- * @post Una nuova finestra viene mostrata con la possibilità di aggiungere un nuovo contatto alla lista.
- * @invariant La nuova finestra è modale e non permette di interagire con la finestra principale fino alla sua chiusura.
+ * @post Viene mostrata una nuova finestra con la possibilità di aggiungere un nuovo contatto alla lista.
+ * @invariant La nuova finestra è una finestra modale e non permette di interagire con la finestra principale fino alla sua chiusura.
  * 
  * @see AddViewController
  */
@@ -186,17 +181,19 @@ public class ContactsbookViewController implements Initializable {
 /**
  * @brief Apre una finestra modale per modificare un contatto selezionato.
  * 
- * Questo metodo carica la vista per modificare un contatto esistente, inizializza la lista dei contatti,
- * e mostra la finestra in modalità modale. Inoltre, imposta il contatto selezionato nella lista
- * per essere modificato nella nuova finestra.
+ * Questo metodo carica la vista per modificare un contatto esistente,  passa al prossimo 
+ * controller la rubrica da aggiornare e mostra la finestra in modalità finestra modale. 
+ * Inoltre, imposta il contatto selezionato nella tabella per essere modificato nella nuova finestra.
  * 
  * @param event L'evento di azione che attiva il metodo.
  * 
  * @throws IOException Se si verifica un errore durante il caricamento della vista FXML.
  * 
- * @pre La scena corrente deve contenere il bottone di modifica e un contatto selezionato dalla lista.
- * @post Una nuova finestra viene mostrata con il contatto selezionato, pronto per essere modificato.
- * @invariant La finestra di modifica è modale e non permette di interagire con la finestra principale fino alla sua chiusura.
+ * @pre La scena corrente deve contenere il bottone di modifica e un contatto deve essere 
+ * selezionato dalla lista.
+ * @post Viene mostrata una nuova finestra con le informazioni del contatto selezionato, pronto 
+ * per essere modificato.
+ * @invariant La finestra di modifica è una finestra modale e non permette di interagire con la finestra principale fino alla sua chiusura.
  * 
  * @see ModifyViewController
  */
@@ -225,13 +222,12 @@ public class ContactsbookViewController implements Initializable {
 /**
  * @brief Inizializza il comportamento del bottone di modifica.
  * 
- * Questo metodo imposta lo stato del bottone di modifica (`btnModify`) su disabilitato inizialmente. 
- * Inoltre, aggiunge un listener alla selezione della tabella dei contatti (`tblvRubrica`). Quando viene selezionato un contatto,
- * il bottone di modifica viene abilitato; se nessun contatto è selezionato, il bottone viene disabilitato.
+ * Questo metodo imposta lo stato del bottone di modifica (`btnModify`) su disabilitato. 
+ * Inoltre, aggiunge un listener alla selezione della tabella dei contatti (`tblvRubrica`). Quando 
+ * viene selezionato un contatto, il bottone di modifica viene abilitato; se nessun contatto è 
+ * selezionato, il bottone viene disabilitato.
  * 
- * @pre La tabella dei contatti deve essere visibile e contenere degli elementi.
  * @post Il bottone di modifica sarà disabilitato finché non viene selezionato un contatto nella tabella.
- * @invariant Il bottone di modifica rimane disabilitato se nessun contatto è selezionato.
  */
     public void btnMofidyInitialize(){
         btnModify.setDisable(true);
@@ -247,16 +243,15 @@ public class ContactsbookViewController implements Initializable {
 /**
  * @brief Inizializza il comportamento del bottone di eliminazione.
  * 
- * Questo metodo imposta lo stato del bottone di eliminazione (`btnDelete`) su disabilitato inizialmente. 
- * Viene poi aggiunto un listener alla selezione della tabella dei contatti (`tblvRubrica`). Quando viene selezionato un contatto,
- * il bottone di eliminazione viene abilitato; se nessun contatto è selezionato, il bottone viene disabilitato.
+ * Questo metodo imposta lo stato del bottone di eliminazione (`btnDelete`) su disabilitato. 
+ * Viene poi aggiunto un listener alla selezione della tabella dei contatti (`tblvRubrica`). Quando
+ * viene selezionato un contatto, il bottone di eliminazione viene abilitato; se nessun contatto 
+ * è selezionato, il bottone viene disabilitato.
  * 
  * @details Il bottone di eliminazione permette all'utente di eliminare un contatto dalla rubrica. 
  * Tuttavia, il bottone è disabilitato quando non è selezionato alcun contatto, impedendo azioni non desiderate.
  * 
- * @pre La tabella dei contatti deve essere visibile e contenere degli elementi.
  * @post Il bottone di eliminazione sarà disabilitato finché non viene selezionato un contatto nella tabella.
- * @invariant Il bottone di eliminazione rimane disabilitato se nessun contatto è selezionato.
  */
     
     public void btnDeleteInitialize(){
@@ -273,24 +268,22 @@ public class ContactsbookViewController implements Initializable {
 /**
  * @brief Elimina un contatto selezionato dalla tabella.
  * 
- * Questo metodo rimuove il contatto attualmente selezionato dalla tabella dei contatti 
- * (`tblvRubrica`) dalla lista `contacts`. L'eliminazione è eseguita sulla base della selezione 
- * effettuata dall'utente. Se non viene selezionato alcun contatto, il metodo non avrà alcun effetto.
+ * Questo metodo rimuove il contatto attualmente selezionato dalla tabella dei contatti dalla 
+ * rubrica.
  * 
  * @details Quando l'utente clicca sul bottone di eliminazione, il contatto selezionato viene 
- * rimosso dalla lista `contacts` associata alla tabella. Questo comporta l'aggiornamento 
- * dinamico della vista della tabella, con la rimozione visibile del contatto.
+ * rimosso dalla rubrica associata alla tabella. Questo comporta l'aggiornamento dinamico della 
+ * vista della tabella, con la rimozione visibile del contatto.
  * 
- * @pre Un contatto deve essere selezionato nella tabella (`tblvRubrica`).
- * @post Il contatto selezionato viene rimosso dalla lista `contacts` e dalla vista della tabella.
- * @invariant La lista `contacts` rimane consistente dopo l'eliminazione del contatto.
+ * @pre Un contatto deve essere selezionato nella tabella.
+ * @post Il contatto selezionato viene rimosso dalla rubrica.
  * 
  * @see contacts
  */
     @FXML
     private void actionDelete(ActionEvent event) {
         Contact selectedContact = tblvRubrica.getSelectionModel().getSelectedItem();
-        contactbook.remove(selectedContact); 
+        contactbook.delete(selectedContact); 
     }
     
 /**
@@ -370,17 +363,16 @@ public class ContactsbookViewController implements Initializable {
  * 
  * Questo metodo permette all'utente di selezionare un file CSV tramite un dialogo di selezione 
  * file. Ogni riga del file CSV viene letta e i dati vengono utilizzati per creare nuovi oggetti 
- * `Contact`, che vengono successivamente aggiunti alla lista `contacts`. Il formato del file CSV 
+ * `Contact`, che vengono successivamente aggiunti alla rubrica. Il formato del file CSV 
  * deve essere conforme alla struttura prevista, con i campi separati da punto e virgola.
  * 
  * @details Il metodo apre un file CSV selezionato tramite un `FileChooser`, legge ogni riga e 
- * divide i dati nei rispettivi campi (nome, cognome, numeri di telefono, e-mail). I contatti 
- * creati vengono aggiunti alla lista `contacts` della rubrica. Ogni campo viene controllato per 
- * determinare se è presente o vuoto prima di essere aggiunto come numero di telefono, e-mail o tag.
+ * divide i dati nei rispettivi campi (nome, cognome, numeri di telefono, e-mail, tag). I contatti 
+ * creati vengono aggiunti alla rubrica. Prima di aggiungere un campo (ad esempio numero di telefono) al contatto, si verifica
+ * che questo non sia vuoto.
  * 
  * @pre Il file selezionato deve essere un file CSV valido contenente i dati dei contatti.
- * @post I contatti letti dal file vengono aggiunti alla lista `contacts` e visualizzati nella tabella.
- * @invariant La lista `contacts` è aggiornata con i nuovi contatti e la tabella è sincronizzata con la lista.
+ * @post I contatti letti dal file vengono aggiunti alla rubrica e visualizzati nella tabella.
  * 
  * @throws IOException Se si verifica un errore durante la lettura del file.
  * @throws ClassNotFoundException Se il tipo di dato non è trovato durante il caricamento dei dati.
@@ -430,14 +422,12 @@ public class ContactsbookViewController implements Initializable {
  *
  * Questo metodo consente all'utente di scegliere un file in cui salvare i contatti presenti nella rubrica.
  * La lista dei contatti viene esportata in formato CSV, con i seguenti campi: "NOME", "COGNOME", "NUMERO DI TELEFONO", 
- * "EMAIL" e "TAG". I numeri di telefono e le email vengono separati da un carattere di nuova linea e ogni valore
+ * "EMAIL" e "TAG". I numeri di telefono, le email e i tag vengono separati da un carattere newline e ogni valore
  * è separato da un punto e virgola.
  *
- * @pre La lista `contacts` deve essere inizializzata e contenere i contatti da esportare.
+ * @pre La rubrica deve essere inizializzata.
  * @post I contatti vengono esportati nel file CSV selezionato dall'utente. Il file viene creato o sovrascritto
  *       con i dati esportati.
- * @invariant I dati dei contatti vengono esportati correttamente, con ogni campo separato da un punto e virgola e ogni
- *            contatto su una nuova riga.
  *
  * @param event L'evento che ha causato l'azione (ad esempio, il clic del pulsante).
  * @throws FileNotFoundException Se il file selezionato non può essere trovato.
@@ -508,7 +498,7 @@ public class ContactsbookViewController implements Initializable {
  *           finestra principale a quella di login utilizzando il metodo `App.setRoot()`.
  *           In caso di errore durante il caricamento della vista, viene loggato un errore.
  * 
- * @pre L'utente deve essere loggato e aver effettuato l'accesso alla schermata attuale.
+ * @pre L'utente deve aver effettuato l'accesso.
  * @post La schermata attuale viene cambiata con la vista di login.
  * @invariant Nessuna modifica permanente ai dati dell'utente o allo stato dell'applicazione.
  * 

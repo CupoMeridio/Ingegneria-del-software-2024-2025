@@ -54,9 +54,7 @@ public class LoginViewController implements Initializable {
     private PasswordField txtLogPass;
     
     @FXML
-    private Button btnLogin;
-    
-    
+    private Button btnLogin; 
     
     @FXML
     private Label lblSignMail;
@@ -113,16 +111,14 @@ public class LoginViewController implements Initializable {
 /**
  * @brief Inizializza le proprietà dell'interfaccia utente per la registrazione.
  * 
- * Questo metodo è chiamato automaticamente dopo che la vista FXML è stata completamente caricata. 
- * Configura le proprietà di binding dei controlli dell'interfaccia utente, come la disabilitazione 
- * del pulsante di registrazione in base alle condizioni dei campi di input.
+ * Questo metodo configura le proprietà di binding dei controlli dell'interfaccia utente, come la disabilitazione 
+ * del bottone di registrazione in base alle condizioni dei campi di testo.
  * 
  * @param url URL utilizzato per il caricamento della risorsa FXML (non utilizzato in questo caso).
  * @param rb Risorse locali associate alla vista (non utilizzato in questo caso).
  * 
  * @pre
  * - La vista FXML è stata caricata correttamente e i controlli sono disponibili.
- * - I metodi `txtConfirmPassInitialize`, `txtSignMailInitialize`, e `txtSignPassInitialize` devono essere implementati correttamente.
  * 
  * @post
  * - Il pulsante `btnSign` sarà abilitato solo se tutte le condizioni nei campi di input sono soddisfatte.
@@ -133,7 +129,7 @@ public class LoginViewController implements Initializable {
  */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        btnSign.disableProperty().bind(Bindings.or(txtConfirmPassInitialize(), txtSignMailInitialize()).or(txtSignPassInitialize()).or(bMail).or(bPass).or(bConfirm));
+        btnSign.disableProperty().bind(Bindings.or(txtSignPassInitialize(), txtSignMailInitialize()).or(txtConfirmPassInitialize()).or(bMail).or(bPass).or(bConfirm));
         connection = null;
     }
     
@@ -146,18 +142,16 @@ public class LoginViewController implements Initializable {
  * e visualizzare messaggi di errore a seconda della validità dell'indirizzo email.
  * 
  * @return Una proprietà booleana (`BooleanProperty`) che rappresenta lo stato di validità dell'email:
- *         - `true` se l'email è invalida.
+ *         - `true` se l'email è non valida.
  *         - `false` se l'email è valida.
  * 
  * @pre
- * - Il campo `txtSignMail` deve essere inizializzato.
  * - L'etichetta `lblErrorEmail` deve essere inizializzata.
- * - Il metodo `isValidEmail` deve essere implementato correttamente.
  * 
  * @post
  * - Il bordo di `txtSignMail` cambierà colore a seconda della validità dell'email:
  *   - Verde per valido.
- *   - Rosso per invalido.
+ *   - Rosso per non valido.
  * - L'etichetta `lblErrorEmail` sarà aggiornata con un messaggio di errore per email non valide.
  * 
  * @invariant
@@ -194,13 +188,11 @@ public class LoginViewController implements Initializable {
  * e visualizzare messaggi di errore a seconda della validità della password.
  * 
  * @return Una proprietà booleana (`BooleanProperty`) che rappresenta lo stato di validità della password:
- *         - `true` se la password è invalida.
+ *         - `true` se la password è non valida.
  *         - `false` se la password è valida.
  * 
  * @pre
- * - Il campo `txtSignPass` deve essere inizializzato.
  * - L'etichetta `lblErrorPass` deve essere inizializzata.
- * - Il metodo `isValidPassword` deve essere implementato correttamente.
  * 
  * @post
  * - Il bordo di `txtSignPass` cambierà colore a seconda della validità della password:
@@ -247,7 +239,6 @@ public class LoginViewController implements Initializable {
  *         - `false` se le password corrispondono.
  * 
  * @pre
- * - Il campo `txtConfirmPass` deve essere inizializzato.
  * - Il campo `txtSignPass` deve essere inizializzato e contenere il valore della password principale.
  * - L'etichetta `lblPassInequals` deve essere inizializzata.
  * 
@@ -450,6 +441,27 @@ public class LoginViewController implements Initializable {
         }
     }
 
+    /**
+    * @brief Il metodo verifica che la mail inserita nel relativo campo di testo sia valida.
+    * 
+    * Questo metodo viene invocato ogni volta che viene premuto un tasto nel campo di testo relativo all'email per
+    * la registrazione.
+    * Assegna un ascoltatore al campo di testo `txtSignMail` per aggiornare lo stile del bordo 
+    * e visualizzare messaggi di errore a seconda della validità dell'indirizzo email.
+    * 
+    * @pre
+    * - L'etichetta `lblErrorEmail` deve essere inizializzata.
+    * 
+    * @post
+    * - Il bordo di `txtSignMail` cambierà colore a seconda della validità dell'email:
+    *   - Verde per valido.
+    *   - Rosso per non valido.
+    * - L'etichetta `lblErrorEmail` sarà aggiornata con un messaggio di errore per email non valide.
+    * 
+    * @see #isValidEmail(String)
+    * 
+    * @note Lo stile del bordo è modificato tramite CSS inline.
+    */
     @FXML
     private void keyEmailSign(KeyEvent event) {
         txtSignMail.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -468,6 +480,27 @@ public class LoginViewController implements Initializable {
         });
     }
 
+    /**
+    * @brief Il metodo verifica che la password inserita nel relativo campo di testo sia valida.
+    * 
+    * Questo metodo viene invocato ogni volta che viene premuto un tasto nel campo di testo relativo alla password per
+    * la registrazione.
+    * Assegna un ascoltatore al campo di testo `txtSignPass` per aggiornare lo stile del bordo 
+    * e visualizzare messaggi di errore a seconda della validità della password.
+    * 
+    * @pre
+    * - L'etichetta `lblErrorPass` deve essere inizializzata.
+    * 
+    * @post
+    * - Il bordo di `txtSignPass` cambierà colore a seconda della validità dell'email:
+    *   - Verde per valido.
+    *   - Rosso per non valido.
+    * - L'etichetta `lblErrorEmail` sarà aggiornata con un messaggio di errore per email non valide.
+    * 
+    * @see #isValidPassword(String)
+    * 
+    * @note Lo stile del bordo è modificato tramite CSS inline.
+    */
     @FXML
     private void keyPassSign(KeyEvent event) {
         txtSignPass.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -486,6 +519,25 @@ public class LoginViewController implements Initializable {
         }); 
     }
 
+    /**
+    * @brief Il metodo verifica che la password di conferma coincida con quella principale.
+    * 
+    * Questo metodo viene invocato ogni volta che viene premuto un tasto nel campo di testo relativo alla password di conferma.
+    * Assegna un ascoltatore al campo di testo `txtConfirmPass` per aggiornare lo stile del bordo e visualizzare
+    * messaggi di errore in caso di non corrispondenza.
+    * 
+    * @pre
+    * - Il campo `txtSignPass` deve essere inizializzato e contenere il valore della password principale.
+    * - L'etichetta `lblPassInequals` deve essere inizializzata.
+    * 
+    * @post
+    * - Il bordo di `txtConfirmPass` cambierà colore a seconda della corrispondenza delle password:
+    *   - Verde per corrispondenti.
+    *   - Rosso per non corrispondenti.
+    * - L'etichetta `lblPassInequals` sarà aggiornata con un messaggio di errore in caso di non corrispondenza.
+    * 
+    * @note Lo stile del bordo è modificato tramite CSS inline.
+    */
     @FXML
     private void keyConfirmPass(KeyEvent event) {
         txtConfirmPass.textProperty().addListener((observable, oldValue, newValue) -> {

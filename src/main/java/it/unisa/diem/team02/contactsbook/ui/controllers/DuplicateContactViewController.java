@@ -42,16 +42,14 @@ public class DuplicateContactViewController implements Initializable {
     }    
     
 /**
- * @brief Gestisce l'azione quando l'utente clicca "Sì".
+ * @brief Gestisce l'azione quando l'utente clicca "Add".
  * 
- * Questo metodo viene invocato quando l'utente clicca sul pulsante "Sì" in una finestra di dialogo.
+ * Questo metodo viene invocato quando l'utente clicca sul pulsante "Add" nella finestra di dialogo.
  * Imposta la variabile booleana `b` su `true` e chiude la finestra corrente.
  * 
- * @pre Il metodo viene invocato solo quando l'utente ha interagito con la finestra di dialogo.
  * @post La variabile `b` sarà impostata su `true` e la finestra corrente sarà chiusa.
- * @invariant La variabile `b` sarà sempre aggiornata correttamente e la finestra verrà chiusa.
  * 
- * @param event L'evento che attiva l'azione di clic sul pulsante "Sì".
+ * @param event L'evento che attiva l'azione di clic sul pulsante "Add".
  */
     @FXML
     private void actionYes(ActionEvent event){
@@ -61,14 +59,12 @@ public class DuplicateContactViewController implements Initializable {
     }
     
 /**
- * @brief Gestisce l'azione quando l'utente clicca "No".
+ * @brief Gestisce l'azione quando l'utente clicca "Modify".
  * 
- * Questo metodo viene invocato quando l'utente clicca sul pulsante "No" in una finestra di dialogo.
+ * Questo metodo viene invocato quando l'utente clicca sul pulsante "Modify" nella finestra di dialogo.
  * Imposta la variabile booleana `b` su `false` e chiude la finestra corrente.
  * 
- * @pre Il metodo viene invocato solo quando l'utente ha interagito con la finestra di dialogo.
  * @post La variabile `b` sarà impostata su `false` e la finestra corrente sarà chiusa.
- * @invariant La variabile `b` sarà sempre aggiornata correttamente e la finestra verrà chiusa.
  * 
  * @param event L'evento che attiva l'azione di clic sul pulsante "No".
  */
@@ -84,13 +80,12 @@ public class DuplicateContactViewController implements Initializable {
  * @brief Restituisce il valore della variabile booleana `b`.
  * 
  * Questo metodo restituisce il valore corrente della variabile booleana `b`, che rappresenta
- * una scelta dell'utente in una finestra di dialogo. Viene utilizzato per recuperare la decisione
- * dell'utente riguardo a una determinata azione.
+ * la scelta dell'utente nella finestra di dialogo.
  * 
  * @pre La variabile `b` deve essere stata precedentemente impostata tramite uno dei metodi
- *      che gestiscono l'interazione dell'utente (ad esempio, `actionYes` o `actionNo`).
+ *      che gestiscono l'interazione dell'utente (`actionYes` o `actionNo`).
  * @post Il valore di `b` rimane invariato, restituendo semplicemente il valore corrente.
- * @invariant Il valore di `b` rimarrà coerente con la scelta dell'utente fino a un'eventuale modifica.
+ * @invariant Il valore di `b` rimarrà coerente con la scelta dell'utente.
  * 
  * @return Il valore della variabile booleana `b`.
  */
