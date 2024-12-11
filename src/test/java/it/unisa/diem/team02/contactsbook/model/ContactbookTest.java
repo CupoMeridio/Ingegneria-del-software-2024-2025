@@ -96,20 +96,6 @@ public class ContactbookTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of remove method, of class Contactbook.
-     */
-    @Test
-    public void testRemove() {
-        System.out.println("remove");
-        Contact c = null;
-        Contactbook instance = new Contactbook();
-        boolean expResult = false;
-        boolean result = instance.remove(c);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of initializeList method, of class Contactbook.

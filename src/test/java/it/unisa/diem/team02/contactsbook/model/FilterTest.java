@@ -45,47 +45,51 @@ public class FilterTest {
     public void tearDown() {
     }
     
-    public void testConstructor1() {
+    public void testConstructor() {
         System.out.println("Filter constructor");
         flContactTest = new Filter (listTest);
         assertEquals(3,flContactTest.getFlContacts().size(),"La lista filtrata deve contenere tutti gli elementi iniziali");
         assertFalse(flContactTest.getIsSelectedHome(), "Il valore iniziale di isSelectedHome deve essere false");
         assertFalse(flContactTest.getIsSelectedUniversity(),"Il valore iniziale di isSelectedUni deve essere false");
         assertFalse(flContactTest.getIsSelectedJob(),"Il valore iniziale di isSelectedJob deve essere false");
-        
-    
+
     }
     
-    
-    
-    /**
-     * Test of getFlContacts method, of class Filter.
-     */
-    @Test
-    public void testGetFlContacts() {
-        System.out.println("getFlContacts");
-        Filter instance = null;
-        FilteredList<Contact> expResult = null;
-        FilteredList<Contact> result = instance.getFlContacts();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of updateFilter method, of class Filter.
      */
     @Test
-    public void testUpdateFilter() {
+    public void testUpdateFilter1() {
         System.out.println("updateFilter");
-        String string = "";
-        boolean h = false;
-        boolean u = false;
-        boolean j = false;
-        Filter instance = null;
-        instance.updateFilter(string, h, u, j);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+    }
+    
+    /**
+     * Test of updateFilter method, of class Filter.
+     */
+    @Test
+    public void testUpdateFilter2() {
+        System.out.println("updateFilter");
+        
+    }
+    
+    /**
+     * Test of updateFilter method, of class Filter.
+     */
+    @Test
+    public void testUpdateFilter3() {
+        System.out.println("updateFilter");
+        
+    }
+    
+    /**
+     * Test of updateFilter method, of class Filter.
+     */
+    @Test
+    public void testUpdateFilter4() {
+        System.out.println("updateFilter");
+        
     }
     
 }
