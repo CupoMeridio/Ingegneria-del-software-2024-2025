@@ -13,7 +13,7 @@
  * 
  * Classi principali:
  * - AddViewController: Gestisce le operazioni relative all'aggiunta dei contatti alla rubrica
- * - ContactsbookViewController: Gestisce la visualizzazione e la gestione della lista di contatti, nonchè i tasti epr accedere alle singole funzioni della rubrica
+ * - ContactsbookViewController: Gestisce la visualizzazione e la gestione della lista di contatti, nonchè i tasti per accedere alle singole funzioni della rubrica
  * - ModifyContactsbookViewController: Gestisce le operazioni relative alla modifica dei contatti già presenti in rubrica
  * - DuplicateContactViewController: Gestisce le operazioni da eseguire nei casi in cui dovessero essere presenti contatti duplicati
  * - ErrorMessaViewController: Gestisce l'interfaccia dedita alla visualizzazione degli errori da far visualizzare a schermo

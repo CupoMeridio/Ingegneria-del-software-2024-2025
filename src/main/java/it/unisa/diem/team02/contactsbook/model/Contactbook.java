@@ -11,20 +11,15 @@ public class Contactbook {
     
     public Contactbook(){
         contacts=FXCollections.observableArrayList();
-        flContacts=new FilteredList<>(contacts, c->true);
     }
 
     public ObservableList<Contact> getContacts() {
         return contacts;
     }
 
-    public FilteredList<Contact> getFlContacts() {
-        return flContacts;
-    }
     
     public void createList(){
         contacts = FXCollections.observableArrayList();
-        flContacts = new FilteredList(contacts, c->true);
     }
     
     public void delete(Contact c){

@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * 
  * Classe che estende la classe astratta Person. Definisce degli ulteriori attributi e metodi
  * per effettuare specifiche operazioni sugli oggetti Contact. Gli attributi
- * number, email e tag sono implementati tramite un ArrayList
+ * number, email e tag sono implementati tramite un ArrayList.
  * 
  * @author team02
  */
