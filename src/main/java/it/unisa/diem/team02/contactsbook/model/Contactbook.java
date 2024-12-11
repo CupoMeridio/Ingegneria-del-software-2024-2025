@@ -3,11 +3,9 @@ package it.unisa.diem.team02.contactsbook.model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 public class Contactbook {
     private ObservableList<Contact> contacts;
-    private FilteredList<Contact> flContacts;
     
     public Contactbook(){
         contacts=FXCollections.observableArrayList();
