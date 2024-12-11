@@ -7,7 +7,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class Contactbook {
     private ObservableList<Contact> contacts;
-    FilteredList<Contact> flContacts;
+    private FilteredList<Contact> flContacts;
     
     public Contactbook(){
         contacts=FXCollections.observableArrayList();
