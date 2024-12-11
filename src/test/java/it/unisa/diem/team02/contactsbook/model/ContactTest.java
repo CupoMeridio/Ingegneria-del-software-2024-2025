@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *
- * @author anuar
+ * @author team02
  */
 public class ContactTest {
     private Contact Test1, Test2, Test3, Test4;
