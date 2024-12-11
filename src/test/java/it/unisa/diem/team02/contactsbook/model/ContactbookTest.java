@@ -38,17 +38,6 @@ public class ContactbookTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of createList method, of class Contactbook.
-     */
-    @Test
-    public void testCreateList() {
-        System.out.println("createList");
-        Contactbook instance = new Contactbook();
-        instance.createList();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of delete method, of class Contactbook.

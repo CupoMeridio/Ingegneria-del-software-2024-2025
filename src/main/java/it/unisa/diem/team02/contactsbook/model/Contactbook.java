@@ -14,11 +14,6 @@ public class Contactbook {
         return contacts;
     }
 
-    
-    public void createList(){
-        contacts = FXCollections.observableArrayList();
-    }
-    
     public void delete(Contact c){
         contacts.remove(c);
     }
