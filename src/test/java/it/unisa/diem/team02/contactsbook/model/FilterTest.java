@@ -23,6 +23,7 @@ public class FilterTest {
     
     @BeforeEach
     public void setUp() {
+        listTest = FXCollections.observableArrayList();
         
         //inizializzazione oggetti Contact
         contactTest1 = new Contact("","Zouhri");
