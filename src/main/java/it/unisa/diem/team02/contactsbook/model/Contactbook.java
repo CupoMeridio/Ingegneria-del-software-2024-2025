@@ -2,7 +2,6 @@ package it.unisa.diem.team02.contactsbook.model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 
 public class Contactbook {
     private ObservableList<Contact> contacts;
