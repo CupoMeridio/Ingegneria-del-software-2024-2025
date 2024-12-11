@@ -89,7 +89,7 @@ public class User extends Person{
  */
     @Override
     public String getRole() {
-        return this.getClass().toString();
+        return "User";
     }
     
 /**
