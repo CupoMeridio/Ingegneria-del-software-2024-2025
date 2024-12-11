@@ -353,7 +353,7 @@ public class ContactsbookViewController implements Initializable {
     /**
      * 
      * Metodo ausiliario utilizzando per il filtraggio tramite l'utilizzo dei tag. Viene richiamata
-     * da actionFilter per ricalcolare il predicato associato alla lista filtrata
+     * da actionFilter e da initializeSearch per ricalcolare il predicato associato alla lista filtrata
      * 
      */
      private void updateFilter() {

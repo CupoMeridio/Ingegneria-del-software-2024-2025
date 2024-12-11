@@ -154,11 +154,6 @@ public class Contact extends Person{
             this.tag.add(tag);
         }
     }
-    public void removeTag(Tag tag, int index) {
-        
-    
-    }
-    
     
    /**
     * @brief Aggiunge un numero alla lista di numeri del contatto.
@@ -337,7 +332,7 @@ public class Contact extends Person{
     }
     
     
-        private  String generateID(){
+    private  String generateID(){
     
         LocalDateTime now = LocalDateTime.now();
     

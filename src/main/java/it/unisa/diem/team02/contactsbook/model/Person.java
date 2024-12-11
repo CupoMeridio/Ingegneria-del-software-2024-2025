@@ -125,13 +125,6 @@ public abstract class Person {
         
         Person c = (Person) o;
         
-        if(c.getName()==null && this.getName()==null)
-            return c.getSurname().equals(this.getSurname());
-        else if(c.getSurname()==null && this.getSurname()==null)
-            return c.getName().equals(this.getName());
-        else if((c.getSurname()==null && this.getName()==null) || (c.getName()==null && this.getSurname()==null))
-            return false;
-        
         return c.getName().equals(this.getName()) && c.getSurname().equals(this.getSurname());
         
     }

@@ -55,8 +55,6 @@ public class LoginViewController implements Initializable {
     private Button btnLogin;
     
     
-    @FXML
-    private Button btnLoginLocal;
     
     @FXML
     private Label lblSignMail;
