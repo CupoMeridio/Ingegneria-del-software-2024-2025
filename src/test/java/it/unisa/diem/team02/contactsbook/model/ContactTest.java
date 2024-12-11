@@ -31,15 +31,13 @@ public class ContactTest {
         Test3 = new Contact("","Postiglione","10");
         Test4 = new Contact("Anuar","Zouhri");
         
-        //inizializzazione della lista di numeri number1 con i numeri 3393434025 e ""
+        //inizializzazione della lista di numeri number1 con il numero 3393434025
         number1 = new ArrayList<>(3);
         number1.add("3393434025");
-        number1.add("");
         
-        //inizializzazione della lista di numeri number2 con i numeri 333173282, "" e 3349891345
+        //inizializzazione della lista di numeri number2 con i numeri 333173282 e 3349891345
         number2 = new ArrayList<>(3);
         number2.add("333173282");
-        number2.add("");
         number2.add("3349891345");
         
         //instanziazione della lista di email email1 con nessuna email
