@@ -2,6 +2,7 @@
 package it.unisa.diem.team02.contactsbook.ui.controllers;
 
 import it.unisa.diem.team02.contactsbook.model.Contact;
+import it.unisa.diem.team02.contactsbook.model.Contactbook;
 import it.unisa.diem.team02.contactsbook.model.Tag;
 import java.io.IOException;
 import java.net.URL;
@@ -89,7 +90,7 @@ public class AddViewController implements Initializable {
     @FXML
     private CheckBox chkmJob;
     
-    private ObservableList<Contact> contacts;
+    private Contactbook contactbook;
     
 
 /**
@@ -128,48 +129,50 @@ public class AddViewController implements Initializable {
     }
     
     
-/**
- * @brief Imposta la lista osservabile dei contatti.
- * 
- * Questo metodo consente di assegnare un oggetto `ObservableList` contenente i contatti all'istanza corrente.
- * 
- * @param contacts La nuova lista osservabile di oggetti `Contact` da associare.
- * 
- * @pre
- * - Il parametro `contacts` non deve essere nullo.
- * 
- * @post
- * - L'attributo `contacts` contiene il riferimento alla lista osservabile specificata.
- * - La lista osservabile può essere utilizzata per monitorare e aggiornare dinamicamente le modifiche ai contatti.
- * 
- * @invariant
- * - L'attributo `contacts` rimane consistente durante l'esecuzione del metodo.
- * 
- * @throws IllegalArgumentException Se il parametro `contacts` è nullo.
- */
-    public void setObservableList(ObservableList<Contact> contacts){
-        this.contacts=contacts;
+///**
+// * @brief Imposta la lista osservabile dei contatti.
+// * 
+// * Questo metodo consente di assegnare un oggetto `ObservableList` contenente i contatti all'istanza corrente.
+// * 
+// * @param contacts La nuova lista osservabile di oggetti `Contact` da associare.
+// * 
+// * @pre
+// * - Il parametro `contacts` non deve essere nullo.
+// * 
+// * @post
+// * - L'attributo `contacts` contiene il riferimento alla lista osservabile specificata.
+// * - La lista osservabile può essere utilizzata per monitorare e aggiornare dinamicamente le modifiche ai contatti.
+// * 
+// * @invariant
+// * - L'attributo `contacts` rimane consistente durante l'esecuzione del metodo.
+// * 
+// * @throws IllegalArgumentException Se il parametro `contacts` è nullo.
+// */
+//    public void setObservableList(ObservableList<Contact> contacts){
+//        this.contacts=contacts;
+//    }
+
+    public void setContactbook(Contactbook c){
+        contactbook=c;
     }
     
 /**
- * @brief Aggiunge un nuovo contatto alla lista osservabile o gestisce duplicati.
+ * @brief Aggiunge un nuovo contatto alla lista osservabile e gestisce duplicati.
  * 
  * Questo metodo crea un oggetto `Contact` basato sui dati inseriti nei campi di testo 
- * e lo aggiunge alla lista osservabile `contacts`. Se il contatto esiste già, 
- * viene mostrata una finestra per gestire il duplicato.
+ * e lo aggiunge al contactbook. Se il contatto esiste già, viene mostrata una finestra per gestire il duplicato.
  * 
  * @param event L'evento che ha attivato l'azione, tipicamente un clic sul pulsante "Aggiungi".
  * 
  * @throws IOException Se si verifica un errore durante il caricamento del file FXML per la gestione dei duplicati.
  * 
  * @pre
- * - Il campo `contacts` deve essere inizializzato.
- * - I campi di testo devono essere accessibili e contenere i dati corretti.
+ * - Il campo `contactbook` deve essere inizializzato.
  * 
  * @post
- * - Se il contatto non è un duplicato, viene aggiunto a `contacts`.
+ * - Se il contatto non è un duplicato, viene aggiunto a `contactbook`.
  * - Se il contatto è un duplicato, l'utente decide se aggiungerlo o meno.
- * - La finestra corrente viene chiusa dopo l'aggiunta o il rifiuto del contatto.
+ * - La finestra corrente viene chiusa dopo l'aggiunta del contatto o se l'utente decide di annullare l'operazione.
  * 
  * @details
  * - I dati vengono estratti dai campi di testo `txtName`, `txtSur`, `txtNumber1`, `txtNumber2`, 
@@ -177,10 +180,10 @@ public class AddViewController implements Initializable {
  * - Se un campo di numero o email è vuoto, non viene aggiunto al contatto.
  * - Se una checkbox dei tag non è selezionata, non viene aggiunto un tag.
  * - In caso di duplicato, viene caricata la vista `DuplicateContactView.fxml`, e l'utente 
- *   sceglie se aggiungere il contatto o meno.
+ *   sceglie se aggiungere il contatto o tornare a modificare i dati.
  * 
  * @invariant
- * - La lista `contacts` deve rimanere consistente durante l'esecuzione.
+ * - Il `contactbook` deve rimanere consistente durante l'esecuzione.
  * @see Contact
  * @see DuplicateContactViewController
  */
@@ -198,7 +201,7 @@ public class AddViewController implements Initializable {
         if (chkmJob.isSelected()) c.addTag(Tag.Job);
         
         
-        if (contacts.contains(c)){
+        if (contactbook.contains(c)){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DuplicateContactView.fxml"));
             Parent root = loader.load();
             Scene scene=new Scene(root);
@@ -212,7 +215,7 @@ public class AddViewController implements Initializable {
             newStage.showAndWait();
                 
             if (duplicateC.getBoolean()){
-                    contacts.add(c);
+                    contactbook.add(c);
                     Stage stage=(Stage) btnAdd.getScene().getWindow();
                     stage.close();
                 } else {
@@ -221,7 +224,7 @@ public class AddViewController implements Initializable {
                 }       
         }
         else{
-            contacts.add(c);
+            contactbook.add(c);
             Stage stage=(Stage) btnAdd.getScene().getWindow();
             stage.close();
         }

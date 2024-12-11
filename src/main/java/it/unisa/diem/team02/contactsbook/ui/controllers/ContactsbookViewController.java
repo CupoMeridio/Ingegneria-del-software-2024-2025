@@ -102,8 +102,7 @@ public class ContactsbookViewController implements Initializable {
     @FXML
     private Button btnLogout;
     
-    private ObservableList<Contact> contacts;
-    FilteredList<Contact> flContacts;
+    private Contactbook contactbook=new Contactbook();
 
 /**
  * @brief Inizializza il controller e configura gli elementi dell'interfaccia utente.
@@ -123,11 +122,9 @@ public class ContactsbookViewController implements Initializable {
         initializeList();
         btnMofidyInitialize();
         btnDeleteInitialize();
-        initializeSearch(flContacts);
+        initializeSearch(contactbook.getFlContacts());
         mbtnFilter.setOnShown(event->{
-        
-           actionFilter(flContacts); 
-        
+           actionFilter(contactbook.getFlContacts());
         });
         
         
@@ -152,7 +149,7 @@ public class ContactsbookViewController implements Initializable {
         clmNum.setCellValueFactory(new PropertyValueFactory("number"));
         clmEmail.setCellValueFactory(new PropertyValueFactory("email"));
         clmTag.setCellValueFactory(new PropertyValueFactory("tag"));
-        tblvRubrica.setItems(contacts);
+        tblvRubrica.setItems(contactbook.getContacts());
     }
     
     /**
@@ -187,9 +184,7 @@ public class ContactsbookViewController implements Initializable {
               Scene scene=new Scene(root);
               
               AddViewController addC=loader.getController();
-              if(contacts!=null)
-                addC.setObservableList(contacts);
-              
+              addC.setContactbook(contactbook);
               
     
               //gestire eccezione
@@ -198,7 +193,7 @@ public class ContactsbookViewController implements Initializable {
               
               newStage.initModality(Modality.WINDOW_MODAL);
               newStage.initOwner(btnAdd.getScene().getWindow());
-              newStage.show();           
+              newStage.showAndWait(); 
     }
     
 /**
@@ -236,7 +231,7 @@ public class ContactsbookViewController implements Initializable {
               newStage.show();
               
               Contact selectedContact = tblvRubrica.getSelectionModel().getSelectedItem();
-              modifyC.setObservableList(contacts);
+              modifyC.setContactbook(contactbook);
               modifyC.setContact(selectedContact);
     }
     
@@ -356,7 +351,7 @@ public class ContactsbookViewController implements Initializable {
  */
     
      private void updateFilter() {
-            flContacts.setPredicate(contact -> {
+            contactbook.getFlContacts().setPredicate(contact -> {
                 
             String lowerCaseFilter = txtSearch.getText().toLowerCase();
             boolean match = lowerCaseFilter.isEmpty() ||  
@@ -433,12 +428,7 @@ public class ContactsbookViewController implements Initializable {
             if (br.readLine() == null) return;
             String line;
             while((line=br.readLine())!= null){
-                System.out.println("linea letta"+line);
                 String campi []=line.split(";",-1);
-                System.out.println(line.length());
-                for (int i=0; i<campi.length; i++){
-                    System.out.println(campi[i]);
-                }
                 Contact c=new Contact(campi[0], campi[1]);
                 if (!campi[2].equals(""))
                     c.addNumber(campi[2]);
@@ -462,7 +452,7 @@ public class ContactsbookViewController implements Initializable {
                     c.addTag(Tag.Job);
                 
 
-                contacts.add(c);
+                contactbook.add(c);
             }
         }
     }
@@ -495,7 +485,7 @@ public class ContactsbookViewController implements Initializable {
        
         try(PrintWriter pw=new PrintWriter(new BufferedWriter(new FileWriter(selectedFile)))){
             pw.println("NOME;COGNOME;NUMERO DI TELEFONO;EMAIL;TAG;");
-            for (Contact c: contacts){
+            for (Contact c: contactbook.getContacts()){
                 pw.append(c.getName());
                 pw.append(';');
                 pw.append(c.getSurname());
@@ -559,6 +549,33 @@ public class ContactsbookViewController implements Initializable {
  * @invariant La ricerca non modificherà la lista originale di contatti, ma solo quella visibile nella 
  *            `TableView`.
  */
+    @FXML
+    private void initializeSearch() {
+        
+        //lista filtrata che lavora sulla lista contacts di osservabili
+        FilteredList<Contact> flContacts = new FilteredList(contactbook.getContacts(), c->true);
+        tblvRubrica.setItems(flContacts);
+        
+        //aggiungo un listener al campo testo
+        txtSearch.textProperty().addListener((obs,oldValue,newValue) -> {
+               flContacts.setPredicate(contact-> {
+                // se non c'è scritto nulla sulla barra di ricerca mostra tutti i contatti
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                
+                String lowerCaseFilter = newValue.toLowerCase();
+                
+                //è necessario gestire separatamente i valori null
+                return contact.getName().toLowerCase().contains(lowerCaseFilter) ||
+                       contact.getSurname().toLowerCase().contains(lowerCaseFilter) ||
+                       contact.getNumber().toLowerCase().contains(lowerCaseFilter) ||
+                       contact.getEmail().toLowerCase().contains(lowerCaseFilter);
+               });
+               
+        });
+        
+    }
     
 /**
  * @brief Esegue il logout dell'utente e redirige alla schermata di login.
