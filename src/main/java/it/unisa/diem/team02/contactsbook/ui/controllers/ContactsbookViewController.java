@@ -3,7 +3,6 @@ package it.unisa.diem.team02.contactsbook.ui.controllers;
 
 import it.unisa.diem.team02.App;
 import it.unisa.diem.team02.contactsbook.model.Contact;
-import it.unisa.diem.team02.contactsbook.model.Contactbook;
 import it.unisa.diem.team02.contactsbook.model.Tag;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -103,52 +102,66 @@ public class ContactsbookViewController implements Initializable {
     @FXML
     private Button btnLogout;
     
-    private Contactbook contactbook=new Contactbook();
     private ObservableList<Contact> contacts;
-    private FilteredList<Contact> flContacts;
+    FilteredList<Contact> flContacts;
 
 /**
  * @brief Inizializza il controller e configura gli elementi dell'interfaccia utente.
  * 
- * Questo metodo viene invocato automaticamente all'avvio della scena e prepara la tabella,
+ * Questo metodo viene invocato automaticamente all'avvio della scena e prepara la lista di contatti,
  * i bottoni di modifica e cancellazione, e la funzionalità di ricerca.
  * 
  * @pre La scena e gli elementi dell'interfaccia utente devono essere già stati caricati.
- * @post Gli elementi dell'interfaccia sono stati configurati correttamente.
- * @invariant I bottoni di modifica e cancellazione sono abilitati e la ricerca è configurata.
+ * @post Gli elementi dell'interfaccia sono stati configurati correttamente e la lista è pronta per l'uso.
+ * @invariant La lista di contatti viene creata e popolata, i bottoni di modifica e cancellazione sono abilitati e la ricerca è configurata.
  * 
  * @see createList(), initializeList(), btnModifyInitialize(), btnDeleteInitialize(), initializeSearch()
  */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        bindingList();
+        createList();
+        initializeList();
         btnMofidyInitialize();
         btnDeleteInitialize();
-        contacts=contactbook.getContacts();
-        flContacts=contactbook.getFlContacts();
         initializeSearch(flContacts);
         mbtnFilter.setOnShown(event->{
-           actionFilter(flContacts);
+        
+           actionFilter(flContacts); 
+        
         });
+        
+        
+        
     }    
     
 /**
- * @brief Gestisce il legame tra la lista dei contatti e la tabella.
+ * @brief Crea e configura la lista dei contatti.
  * 
- * Questo metodo configura le colonne della tabella per visualizzare i dettagli di ciascun contatto: nome, 
- * cognome, numero di telefono, email e tag.
+ * Questo metodo inizializza la lista dei contatti come un array osservabile e configura le colonne 
+ * della tabella per visualizzare i dettagli di ciascun contatto, come nome, cognome, numero di telefono ed email.
  * 
  * @pre La tabella e le colonne devono essere già configurate nell'interfaccia utente.
- * @post La tabella è configurata per visualizzare i dati.
+ * @post La lista dei contatti è stata creata e la tabella è configurata per visualizzare i dati.
  * @invariant La tabella visualizzerà correttamente i contatti con i dettagli impostati nelle rispettive colonne.
  */
-    public void bindingList(){
+    public void createList(){
+        contacts = FXCollections.observableArrayList();
+        flContacts = new FilteredList(contacts, c->true);
         clmName.setCellValueFactory(new PropertyValueFactory("name"));
         clmSur.setCellValueFactory(new PropertyValueFactory("surname"));
         clmNum.setCellValueFactory(new PropertyValueFactory("number"));
         clmEmail.setCellValueFactory(new PropertyValueFactory("email"));
         clmTag.setCellValueFactory(new PropertyValueFactory("tag"));
         tblvRubrica.setItems(contacts);
+    }
+    
+    /**
+     * Inizializza la lista osservabile con i contatti presenti nel database/file locale.
+     */
+    public void initializeList(){
+        
+       
+        
     }
     
 /**
@@ -293,7 +306,7 @@ public class ContactsbookViewController implements Initializable {
     @FXML
     private void actionDelete(ActionEvent event) {
         Contact selectedContact = tblvRubrica.getSelectionModel().getSelectedItem();
-        contactbook.delete(selectedContact);
+        contacts.remove(selectedContact); 
     }
     
 /**
@@ -313,6 +326,7 @@ public class ContactsbookViewController implements Initializable {
  * @param flContacts La lista filtrata di contatti da visualizzare nella tabella.
  */
     private void actionFilter(FilteredList<Contact> flContacts) {
+    
         tblvRubrica.setItems(flContacts);
         chkmHome.selectedProperty().addListener((obs, oldValue, newValue) -> updateFilter());
         chkmJob.selectedProperty().addListener((obs, oldValue, newValue) -> updateFilter());
