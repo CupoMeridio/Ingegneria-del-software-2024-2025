@@ -543,33 +543,6 @@ public class ContactsbookViewController implements Initializable {
  * @invariant La ricerca non modificherà la lista originale di contatti, ma solo quella visibile nella 
  *            `TableView`.
  */
-    @FXML
-    private void initializeSearch() {
-        
-        //lista filtrata che lavora sulla lista contacts di osservabili
-        FilteredList<Contact> flContacts = new FilteredList(contacts, c->true);
-        tblvRubrica.setItems(flContacts);
-        
-        //aggiungo un listener al campo testo
-        txtSearch.textProperty().addListener((obs,oldValue,newValue) -> {
-               flContacts.setPredicate(contact-> {
-                // se non c'è scritto nulla sulla barra di ricerca mostra tutti i contatti
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-                
-                String lowerCaseFilter = newValue.toLowerCase();
-                
-                //è necessario gestire separatamente i valori null
-                return contact.getName().toLowerCase().contains(lowerCaseFilter) ||
-                       contact.getSurname().toLowerCase().contains(lowerCaseFilter) ||
-                       contact.getNumber().toLowerCase().contains(lowerCaseFilter) ||
-                       contact.getEmail().toLowerCase().contains(lowerCaseFilter);
-               });
-               
-        });
-        
-    }
     
 /**
  * @brief Esegue il logout dell'utente e redirige alla schermata di login.
