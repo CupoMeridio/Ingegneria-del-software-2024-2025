@@ -2,6 +2,9 @@
 package it.unisa.diem.team02.contactsbook.model;
 
 /**
+ * @brief
+ * Classe che definisce l'utente che accede all'applicazione
+ * 
  * Classe che estende la classe astratta Person. Definisce degli ulteriori attributi e metodi
  * per effettuare specifiche operazioni sugli oggetti User.
  */
@@ -11,20 +14,27 @@ public class User extends Person{
 
     
 /**
- * @brief Costruttore per creare un oggetto `User` con password, email, nome e cognome.
- * 
- * Questo costruttore inizializza un oggetto `User` con i valori di password, email, nome e cognome forniti.
- * 
+ * @brief Costruttore per inizializzare un oggetto User con una password, un'email, un nome e un cognome.
+ *
+ * Questo costruttore inizializza un oggetto `User` con i valori forniti per la password, l'email, 
+ * il nome e il cognome. La classe `User` estende la classe `Person`, quindi il nome e il cognome 
+ * sono gestiti dal costruttore della classe padre.
+ *
+ * @pre 
+ * - Il parametro `password` deve essere non null e non vuoto.
+ * - Il parametro `email` deve essere un'email valida (non null e con il formato corretto).
+ * - I parametri `name` e `surname` devono essere non null e non vuoti.
+ * @post
+ * L'oggetto `User` viene creato con i valori di `password`, `email`, `name` e `surname`.
+ * @invariant 
+ * La variabile `password` deve essere sempre valida e sicura, la variabile `email` 
+ * deve essere un'email correttamente formattata, e `name` e `surname` devono essere 
+ * consistenti con i dati forniti.
+ *
  * @param password La password dell'utente.
  * @param email L'email dell'utente.
  * @param name Il nome dell'utente.
  * @param surname Il cognome dell'utente.
- * 
- * @details 
- * - Il costruttore accetta i parametri `password`, `email`, `name` e `surname` e li utilizza per inizializzare
- *   le rispettive variabili d'istanza.
- * - Il nome e il cognome vengono passati al costruttore della classe padre tramite la chiamata a `super(name, surname)`.
- * - La password e l'email sono specifiche per ogni utente.
  */
     public User(String password, String email, String name, String surname) {
         super(name, surname);
@@ -34,11 +44,14 @@ public class User extends Person{
     
 /**
  * @brief Imposta la password dell'utente.
- * 
- * Questo metodo consente di assegnare una nuova password all'oggetto `User`.
- * 
- * @param password La nuova password da associare all'utente.
- * 
+ *
+ * Questo metodo consente di impostare una nuova password per l'utente.
+ *
+ * @pre Il parametro `password` deve essere non null e non vuoto.
+ * @post La variabile d'istanza `password` viene aggiornata con il valore del parametro `password`.
+ * @invariant La variabile `password` deve contenere una password valida e sicura.
+ *
+ * @param password La nuova password dell'utente.
  */
     public void setPassword(String password) {
         this.password = password;
@@ -46,11 +59,14 @@ public class User extends Person{
     
 /**
  * @brief Restituisce l'email dell'utente.
- * 
- * Questo metodo restituisce l'email associata all'oggetto `User`.
- * 
- * @return L'email dell'utente come stringa.
- * 
+ *
+ * Questo metodo restituisce l'email associata all'utente.
+ *
+ * @pre La variabile d'istanza `email` deve essere stata inizializzata correttamente.
+ * @post Il metodo restituisce l'email dell'utente, senza modificarla.
+ * @invariant La variabile `email` deve contenere un'email valida e correttamente formattata.
+ *
+ * @return Una stringa contenente l'email dell'utente.
  */
     public String getEmail() {
         return email;
@@ -58,12 +74,18 @@ public class User extends Person{
     
     
 /**
- * @brief Restituisce il ruolo dell'utente come stringa.
- * 
- * Questo metodo sovrascrive il metodo `getRole` e restituisce una rappresentazione del ruolo dell'oggetto 
- * basata sul nome completo della classe dell'oggetto.
- * 
- * @return Una stringa che rappresenta il ruolo dell'utente, in questo caso il nome completo della classe.
+ * @brief Restituisce il ruolo dell'oggetto sotto forma di nome della classe.
+ *
+ * Questo metodo restituisce il ruolo dell'oggetto, che è rappresentato dal nome della classe dell'oggetto stesso.
+ * Il nome della classe viene restituito come stringa completa (incluso il package).
+ *
+ * @pre Il metodo è implementato nella classe corrente e restituirà una stringa rappresentante
+ *      il nome della classe.
+ * @post Il metodo restituisce una stringa che rappresenta il ruolo dell'oggetto, 
+ *       che corrisponde al nome della classe dell'oggetto.
+ * @invariant Il metodo non modifica lo stato dell'oggetto, restituendo semplicemente una stringa.
+ *
+ * @return Una stringa che rappresenta il ruolo dell'oggetto, equivalente al nome della classe.
  */
     @Override
     public String getRole() {
@@ -71,17 +93,18 @@ public class User extends Person{
     }
     
 /**
- * @brief Restituisce una rappresentazione testuale dell'utente.
- * 
- * Questo metodo sovrascrive il metodo `toString` della classe `Object` per fornire una descrizione completa dell'oggetto `User`.
- * La rappresentazione include il ruolo dell'utente, le informazioni ereditate dalla classe padre e l'email dell'utente.
- * 
- * @return Una stringa che rappresenta l'utente, comprendente il ruolo, il nome e cognome ereditati dalla classe `Person`, 
+ * @brief Restituisce una rappresentazione testuale dell'oggetto.
+ *
+ * Questo metodo restituisce una stringa che rappresenta l'oggetto, includendo il ruolo dell'oggetto,
+ * i dettagli della classe genitore (`toString` di `Person`), e l'email dell'utente.
+ *
+ * @pre L'oggetto deve essere stato correttamente inizializzato con un ruolo e un'email validi.
+ * @post Il metodo restituisce una stringa formattata che include il ruolo, il risultato di `toString` 
+ *       della classe `Person` e l'email dell'utente.
+ * @invariant Le variabili `role` e `email` devono contenere valori validi.
+ *
+ * @return Una stringa contenente il ruolo, il nome e cognome (tramite `super.toString()`), 
  *         e l'email dell'utente.
- * 
- * @details 
- * - La stringa restituita avrà il formato: 
- *   `"Role: ruolo Name: nome Surname: cognome Email: eemail"`.
  */
     @Override
     public String toString(){

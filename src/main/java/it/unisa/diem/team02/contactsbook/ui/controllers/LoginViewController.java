@@ -26,7 +26,8 @@ import java.io.IOException;
 
 
 /**
- * Controller per la gestione della schermata di login e registrazione.
+ * @brief Controller per la gestione della schermata di login e registrazione.
+ * 
  * Questo controller gestisce la validazione dei campi email e password.
  * 
  * @author team02
@@ -101,48 +102,78 @@ public class LoginViewController implements Initializable {
     
     @FXML
     private Button btnLoginLocal;
+    
+    static Connection connection; ///Variabile statica che meorizza lo stato della connesione con il database
 
 /**
- * @brief Inizializza il controller, configurando il binding dei bottoni e dei campi di input.
+ * @brief Inizializza le proprietà dell'interfaccia utente per la registrazione.
  * 
- * Questo metodo viene invocato al momento dell'inizializzazione del controller. Imposta i binding per il pulsante di registrazione
- * (`btnSign`), disabilitandolo finché uno dei campi di input non è correttamente compilato. I campi monitorati sono: 
- * la conferma della password, la mail di registrazione e la password.
+ * Questo metodo è chiamato automaticamente dopo che la vista FXML è stata completamente caricata. 
+ * Configura le proprietà di binding dei controlli dell'interfaccia utente, come la disabilitazione 
+ * del pulsante di registrazione in base alle condizioni dei campi di input.
  * 
- * @param url Il percorso del file FXML, utilizzato per risolvere il percorso del file di configurazione.
- * @param rb Un oggetto `ResourceBundle` contenente i dati di localizzazione per l'internazionalizzazione dell'applicazione.
+ * @param url URL utilizzato per il caricamento della risorsa FXML (non utilizzato in questo caso).
+ * @param rb Risorse locali associate alla vista (non utilizzato in questo caso).
  * 
- * @see Bindings#or(javafx.beans.binding.BooleanBinding, javafx.beans.binding.BooleanBinding)
+ * @pre
+ * - La vista FXML è stata caricata correttamente e i controlli sono disponibili.
+ * - I metodi `txtConfirmPassInitialize`, `txtSignMailInitialize`, e `txtSignPassInitialize` devono essere implementati correttamente.
+ * 
+ * @post
+ * - Il pulsante `btnSign` sarà abilitato solo se tutte le condizioni nei campi di input sono soddisfatte.
+ * 
+ * @invariant
+ * - La UI deve essere in uno stato consistente, con proprietà di binding correttamente applicate.
+ * 
  */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        btnSign.disableProperty().bind(Bindings.or(txtConfirmPassInitialize(), txtSignMailInitialize()).or(txtSignPassInitialize()));
+    btnSign.disableProperty().bind(Bindings.or(txtConfirmPassInitialize(), txtSignMailInitialize()).or(txtSignPassInitialize()));
+        connection = null;
     }
     
     
 /**
- * @brief Inizializza il campo di input per l'email di registrazione, impostando il binding e la validazione.
+ * @brief Inizializza e gestisce la validazione del campo email per la registrazione.
  * 
- * Questo metodo crea un `BooleanProperty` che monitora il valore del campo di input per l'email di registrazione (`txtSignMail`).
- * Aggiunge un listener che valida il formato dell'email ogni volta che il valore cambia. Se l'email è valida, il bordo del campo 
- * viene colorato di verde e l'errore viene rimosso. In caso contrario, il bordo diventa rosso e viene mostrato un messaggio di errore.
+ * Questo metodo crea una proprietà booleana osservabile che riflette la validità dell'email inserita.
+ * Assegna inoltre un ascoltatore al campo di testo `txtSignMail` per aggiornare lo stile del bordo 
+ * e visualizzare messaggi di errore a seconda della validità dell'indirizzo email.
  * 
- * @return Una proprietà booleana che indica se l'email è valida o meno (false se valida, true se non valida).
+ * @return Una proprietà booleana (`BooleanProperty`) che rappresenta lo stato di validità dell'email:
+ *         - `true` se l'email è invalida.
+ *         - `false` se l'email è valida.
  * 
- * @see isValidEmail(String)
+ * @pre
+ * - Il campo `txtSignMail` deve essere inizializzato.
+ * - L'etichetta `lblErrorEmail` deve essere inizializzata.
+ * - Il metodo `isValidEmail` deve essere implementato correttamente.
+ * 
+ * @post
+ * - Il bordo di `txtSignMail` cambierà colore a seconda della validità dell'email:
+ *   - Verde per valido.
+ *   - Rosso per invalido.
+ * - L'etichetta `lblErrorEmail` sarà aggiornata con un messaggio di errore per email non valide.
+ * 
+ * @invariant
+ * - La proprietà booleana riflette sempre lo stato corrente della validità dell'email.
+ * 
+ * @see #isValidEmail(String)
+ * 
+ * @note Lo stile del bordo è modificato tramite CSS inline.
  */
     private BooleanProperty txtSignMailInitialize(){
         BooleanProperty observableBoolean = new SimpleBooleanProperty(true);
         txtSignMail.textProperty().addListener((observable, oldValue, newValue) -> {
             if (isValidEmail(newValue)) {
                 txtSignMail.setStyle("-fx-border-color: green;");  ///<  Bordo verde se valido
-                                                                 ///< @lang en Green border if valid
+                                                                 
                 observableBoolean.set(false);
                 lblErrorEmail.setText("");
                 
             } else {
                 txtSignMail.setStyle("-fx-border-color: red;");    ///<  Bordo rosso se non valido
-                                                                 ///< @lang en Red border if invalid
+                                                           
                 lblErrorEmail.setText("Invalid email address");
                 
             }
@@ -151,17 +182,33 @@ public class LoginViewController implements Initializable {
     }
     
 /**
- * @brief Inizializza il campo di input per la password di registrazione, impostando il binding e la validazione.
+ * @brief Inizializza e gestisce la validazione del campo password per la registrazione.
  * 
- * Questo metodo crea un `BooleanProperty` che monitora il valore del campo di input per la password di registrazione (`txtSignPass`).
- * Aggiunge un listener che valida la password ogni volta che il valore cambia. Se la password è valida, il bordo del campo 
- * viene colorato di verde e l'errore viene rimosso. In caso contrario, il bordo diventa rosso e viene mostrato un messaggio di errore.
- * La password è considerata valida se ha una lunghezza di almeno 8 caratteri e contiene almeno un carattere speciale, 
- * una lettera maiuscola, una lettera minuscola e un numero.
+ * Questo metodo crea una proprietà booleana osservabile che riflette la validità della password inserita.
+ * Assegna inoltre un ascoltatore al campo di testo `txtSignPass` per aggiornare lo stile del bordo 
+ * e visualizzare messaggi di errore a seconda della validità della password.
  * 
- * @return Una proprietà booleana che indica se la password è valida o meno (false se valida, true se non valida).
+ * @return Una proprietà booleana (`BooleanProperty`) che rappresenta lo stato di validità della password:
+ *         - `true` se la password è invalida.
+ *         - `false` se la password è valida.
  * 
- * @see isValidPassword(String)
+ * @pre
+ * - Il campo `txtSignPass` deve essere inizializzato.
+ * - L'etichetta `lblErrorPass` deve essere inizializzata.
+ * - Il metodo `isValidPassword` deve essere implementato correttamente.
+ * 
+ * @post
+ * - Il bordo di `txtSignPass` cambierà colore a seconda della validità della password:
+ *   - Verde per valida.
+ *   - Rosso per invalida.
+ * - L'etichetta `lblErrorPass` sarà aggiornata con un messaggio di errore per password non valide.
+ * 
+ * @invariant
+ * - La proprietà booleana riflette sempre lo stato corrente della validità della password.
+ * 
+ * @see #isValidPassword(String)
+ * 
+ * @note Lo stile del bordo è modificato tramite CSS inline.
  */
     private BooleanProperty txtSignPassInitialize(){
         BooleanProperty observableBoolean = new SimpleBooleanProperty(true);
@@ -183,14 +230,32 @@ public class LoginViewController implements Initializable {
     }
     
 /**
- * @brief Inizializza il campo di input per la conferma della password di registrazione, impostando il binding e la validazione.
+ * @brief Inizializza e gestisce la validazione del campo di conferma password.
  * 
- * Questo metodo crea una `BooleanProperty` che monitora il valore del campo di input per la conferma della password (`txtConfirmPass`).
- * Aggiunge un listener che verifica se il valore inserito nel campo di conferma della password corrisponde al valore della password principale (`txtSignPass`).
- * Se le password corrispondono, il bordo del campo di conferma viene colorato di verde e il messaggio di errore viene rimosso. In caso contrario, il bordo 
- * diventa rosso e viene mostrato un messaggio di errore che indica che le password non corrispondono.
+ * Questo metodo crea una proprietà booleana osservabile che riflette la corrispondenza tra 
+ * il valore del campo di conferma password e quello del campo password principale. Assegna un 
+ * ascoltatore al campo di testo `txtConfirmPass` per aggiornare lo stile del bordo e visualizzare
+ * messaggi di errore in caso di non corrispondenza.
  * 
- * @return Una proprietà booleana che indica se le password corrispondono o meno (false se corrispondono, true se non corrispondono).
+ * @return Una proprietà booleana (`BooleanProperty`) che rappresenta lo stato di validità della conferma password:
+ *         - `true` se le password non corrispondono.
+ *         - `false` se le password corrispondono.
+ * 
+ * @pre
+ * - Il campo `txtConfirmPass` deve essere inizializzato.
+ * - Il campo `txtSignPass` deve essere inizializzato e contenere il valore della password principale.
+ * - L'etichetta `lblPassInequals` deve essere inizializzata.
+ * 
+ * @post
+ * - Il bordo di `txtConfirmPass` cambierà colore a seconda della corrispondenza delle password:
+ *   - Verde per corrispondenti.
+ *   - Rosso per non corrispondenti.
+ * - L'etichetta `lblPassInequals` sarà aggiornata con un messaggio di errore in caso di non corrispondenza.
+ * 
+ * @invariant
+ * - La proprietà booleana riflette sempre lo stato corrente della corrispondenza delle password.
+ * 
+ * @note Lo stile del bordo è modificato tramite CSS inline.
  */
     private BooleanProperty txtConfirmPassInitialize(){
         BooleanProperty b=new SimpleBooleanProperty(true);
@@ -211,17 +276,31 @@ public class LoginViewController implements Initializable {
     
     
 /**
+ * @brief Verifica la validità di un indirizzo email.
  * 
- * Valida un indirizzo email.
- * Questo metodo controlla se l'indirizzo email è valido seguendo una espressione regolare, verificando che:
- * - Inizia con una parte locale che può contenere lettere, numeri, punti, trattini e il carattere di sottolineatura (_).
- * - È seguito dal simbolo @.
- * - La parte del dominio (dopo @) può contenere lettere, numeri, punti e trattini.
- * - Termina con un dominio di primo livello (TLD) composto solo da lettere, con una lunghezza compresa tra 2 e 6 caratteri.
+ * Questo metodo utilizza un'espressione regolare per verificare se una stringa 
+ * rappresenta un indirizzo email valido. La validità è determinata in base al formato 
+ * comune degli indirizzi email.
  * 
- * @param email L'email da validare.
- * @return true se l'email è valida, false altrimenti.
+ * @param email La stringa da validare come indirizzo email.
  * 
+ * @return `true` se la stringa è un indirizzo email valido, `false` altrimenti.
+ * 
+ * @pre
+ * - La stringa `email` non deve essere `null`.
+ * 
+ * @post
+ * - Nessuna modifica a stati esterni o variabili di istanza.
+ * 
+ * @invariant
+ * - La validità di un indirizzo email è determinata esclusivamente dal confronto con 
+ *   l'espressione regolare definita.
+ * 
+ * @note
+ * L'espressione regolare utilizzata supporta:
+ * - Lettere, numeri, punti (`.`), trattini (`-`) e underscore (`_`) per il nome utente.
+ * - Un dominio con lettere, numeri, punti e trattini.
+ * - Estensioni di dominio tra 2 e 6 caratteri alfabetici.
  */
     private boolean isValidEmail(String email) {
         String emailRegex = "^[\\w.-]+@[a-zA-Z\\d.-]+\\.[a-zA-Z]{2,6}$";
@@ -229,20 +308,35 @@ public class LoginViewController implements Initializable {
     }
     
 /**
- * @brief Verifica la validità della password in base ai criteri di sicurezza.
+ * @brief Verifica la validità di una password.
  * 
- * Questo metodo utilizza una espressione regolare per verificare che la password soddisfi determinati criteri di sicurezza:
- * - Contiene almeno una lettera maiuscola.
- * - Contiene almeno un numero.
- * - Contiene almeno un carattere speciale (come !, @, #, $, %, ecc.).
- * - Ha una lunghezza minima di 8 caratteri.
+ * Questo metodo utilizza un'espressione regolare per verificare se una stringa soddisfa 
+ * i criteri di validità di una password. Una password valida deve contenere:
+ * - Almeno 8 caratteri.
+ * - Almeno una lettera maiuscola.
+ * - Almeno un numero.
+ * - Almeno un carattere speciale.
  * 
- * @param password La password da validare.
+ * @param password La stringa da validare come password.
  * 
- * @return `true` se la password soddisfa i criteri di sicurezza, altrimenti `false`.
+ * @return `true` se la stringa è una password valida, `false` altrimenti.
  * 
- * @note L'espressione regolare utilizzata è: 
- *        ^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\",.<>?/]).{8,}$
+ * @pre
+ * - La stringa `password` non deve essere `null`.
+ * 
+ * @post
+ * - Nessuna modifica a stati esterni o variabili di istanza.
+ * 
+ * @invariant
+ * - La validità di una password è determinata esclusivamente dal confronto con 
+ *   l'espressione regolare definita.
+ * 
+ * @note
+ * L'espressione regolare utilizzata supporta:
+ * - Una lettera maiuscola (`A-Z`).
+ * - Un numero (`\\d`).
+ * - Un carattere speciale tra quelli inclusi nella lista: `!@#$%^&*()_+-=[]{};':",.<>?/`.
+ * - Una lunghezza minima di 8 caratteri.
  */
     private boolean isValidPassword(String password) {
         // Espressione regolare per la validazione della password
@@ -253,48 +347,66 @@ public class LoginViewController implements Initializable {
     }
     
     
-    /**
-    * @brief Inizializza il pulsante di login e gestisce l'autenticazione dell'utente.
-    * 
-    * Questo metodo imposta un listener sul pulsante di login. Verifica le credenziali inserite
-    * con il database e fornisce un feedback all'utente. Se il login è corretto, carica la vista principale dei contatti.
-    * 
-    * @details
-    * - Connette al database PostgreSQL utilizzando la classe Database.
-    * - Verifica l'email e la password attraverso il metodo checkLogin().
-    * - Mostra messaggi di errore specifici in caso di fallimento.
-    * 
-    * @throws SQLException Se si verifica un problema con la connessione al database.
-    */
+/**
+ * @brief Gestisce l'evento di login dell'utente.
+ * 
+ * Questo metodo viene invocato quando l'utente clicca sul pulsante di login. Si connette al database,
+ * verifica le credenziali inserite dall'utente e visualizza un messaggio corrispondente all'esito
+ * della verifica. In caso di successo, carica la vista principale della rubrica.
+ * 
+ * @param event L'evento scatenato dall'interazione dell'utente con l'interfaccia.
+ * 
+ * @throws IOException Se si verifica un errore durante il caricamento della nuova vista.
+ * @throws SQLException Se si verifica un errore di comunicazione con il database.
+ * 
+ * @pre
+ * - `txtLogMail` contiene un indirizzo email valido.
+ * - `txtLogPass` contiene una password.
+ * 
+ * @post
+ * - Mostra un messaggio di errore o successo nella label `lblLogErr`.
+ * - Cambia la vista dell'applicazione in caso di login riuscito.
+ * 
+ * @see Database#ConnectionDB(String, String, String)
+ * @see Database#checkLogin(Connection, String, String, String)
+ * @see App#setRoot(String)
+ * 
+ * @note
+ * - I messaggi di errore sono mostrati nella label `lblLogErr`.
+ * - La connessione al database utilizza un nome utente e una password fissi.
+ */
     
     @FXML
     private void actionLogin(ActionEvent event) {
         Database database= new Database();
-        Connection connection = database.ConnectionDB("rubrica", "postgres", "postgres");
+        connection = database.ConnectionDB("rubrica", "postgres", "postgres");
             try {
                 int controllo=database.checkLogin(connection, "utenti", txtLogMail.getText(), txtLogPass.getText());
                 switch(controllo){
                     case -1:
-                    lblLogErr.setText("Error. There is no account associated with this email.");    
+                    lblLogErr.setText("Error. There is no account associated with this email.");
+                    database.CloseConnection(connection);
+                    connection=null;
                     break;
                     
                     case 1:
                     lblLogErr.setText("Login successfully."); 
-                    {
                         try {
                             App.setRoot("ContactsbookView");
                         } catch (IOException ex) {
                             Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                    }
                     break;
 
                     
                     case 0:
                     lblLogErr.setText("Incorrect password.");
-                    
+                    database.CloseConnection(connection);
+                    connection=null;
                     default:
                     lblLogErr.setText("Oops, something went wrong...");
+                    database.CloseConnection(connection);
+                    connection=null;
                 }
             } catch (SQLException ex) {
                 lblLogErr.setText("Unable to contact the server, please try again later.");
@@ -312,15 +424,18 @@ public class LoginViewController implements Initializable {
     }
     
 /**
- * Gestisce l'azione di login locale.
+ * @brief Gestisce l'azione di login locale e carica la vista della rubrica dei contatti.
  * 
- * Questo metodo viene chiamato quando l'utente interagisce con il componente di login per accedere all'applicazione. 
- * Dopo una validazione, se il login è riuscito, il metodo carica la vista dei contatti.
+ * Questo metodo viene invocato quando l'utente effettua il login locale. Dopo che l'utente 
+ * ha completato il login, la vista "ContactsbookView" viene caricata tramite il metodo `setRoot` di `App`.
+ * In caso di errore nel caricamento della vista, viene registrato un errore nel log.
  * 
- * @param event L'evento che ha attivato il metodo, tipicamente un'azione di clic su un pulsante.
- * @throws IOException Se si verifica un errore durante il caricamento della vista dei contatti.
+ * @pre Il login locale deve essere stato completato con successo prima di chiamare questo metodo.
+ * @post La vista "ContactsbookView" sarà caricata.
+ * @invariant Se un errore si verifica durante il caricamento della vista, un log verrà generato.
+ * 
+ * @param event L'evento che attiva l'azione di login.
  */
-    
     @FXML
     private void actionLoginLocal(ActionEvent event){
         try{ 

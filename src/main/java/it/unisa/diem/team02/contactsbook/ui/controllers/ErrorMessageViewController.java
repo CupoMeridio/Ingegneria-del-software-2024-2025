@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 /**
- * Controller per la gestione dei messaggi di errori
+ * @brief Controller per la gestione dei messaggi di errori
  * 
  * @author team02
  */

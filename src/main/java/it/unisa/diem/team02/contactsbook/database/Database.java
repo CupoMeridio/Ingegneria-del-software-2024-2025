@@ -17,7 +17,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 /**
- *
+ * @brief
+ * Classe che implementa tutti i metodi per comunicare con il database
+ * 
  * @author team02
  */
 public class Database  {
@@ -448,7 +450,8 @@ public class Database  {
       statment.executeUpdate(query);
       System.out.println("Contatto modificato");
     }
-      /**
+    
+   /**
     * 
     * @brief Rimuove un record dalla tabella specificata utilizzando l'ID.
     * Questo metodo esegue un'operazione di eliminazione (`DELETE`) su una tabella 
@@ -463,11 +466,10 @@ public class Database  {
     * @param conn Oggetto Connection per interagire con il database.
     * @param tableName Nome della tabella contenente i contatti.
     * @param ID il contatto da modificare nel Database
-    * @param emai l' email del utente registrato
+    * @param email l' email del utente registrato
     * @throws SQLException Se si verifica un errore durante l'interrogazione.
     * 
     */
-
      public void remuveContactByID(Connection conn, String tableName, String ID, String email) throws SQLException{
     
        Statement statment;
@@ -497,19 +499,18 @@ public class Database  {
     
     /**
     * 
+
     * @brief Conta il numero di righe della tabella tableName associata al Database
     * @pre  conn!= null, tableName!=null e deve appartenere al Database
     * @post vengono contate il numero di righe della tabella  
-    * 
     * @invariant conn, tableName
     * 
     * @param conn Oggetto Connection per interagire con il database.
-    * 
+    * @param tableName nome della tabella dal quale prendere le informazioni
     * @return viene restituito il numero di righe della tabella 
     * 
     * @throws SQLException Se si verifica un errore durante l'interrogazione.
     */
-    
     public int getNumberContact(Connection conn, String tableName){
         
         int numero_righe=0;
