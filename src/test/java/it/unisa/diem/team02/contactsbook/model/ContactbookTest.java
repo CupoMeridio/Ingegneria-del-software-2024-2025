@@ -11,13 +11,47 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author team02
  */
 public class ContactbookTest {
-
+    private Contactbook contact;
+    private Contact contactTest1, contactTest2, contactTest3;
+    
     @BeforeEach
     public void setUp() {
+        //inizializzazione oggetti Contact
+        contactTest1 = new Contact("AlbaL","");
+        contactTest2 = new Contact("","Nasti");
+        contactTest3 = new Contact("Claudia","Romano");
+        
+        contactTest1.addEmail("alba@gmail.com");
+        contactTest2.addNumber("5789101118");
+        contactTest3.addEmail("fisciano@gmail.it");
+        contactTest3.addEmail("semigroups@free.it");
+        
+        contactTest2.addTag(Tag.Home);
+        contactTest2.addTag(Tag.University);
+        contactTest2.addTag(Tag.Job);
+        contactTest3.addTag(Tag.Job);
+        
+        
     }
     
     @AfterEach
     public void tearDown() {
+    }
+    
+    
+    /**
+     * Test on the Constructor
+     * 
+     *  
+     */
+    @Test
+    public void testContactbookConstructor() {
+        System.out.println("Contactbook constructor");
+        contact = new Contactbook();
+        assertNotNull(contact.getContacts());
+        
+    
+    
     }
 
     /**

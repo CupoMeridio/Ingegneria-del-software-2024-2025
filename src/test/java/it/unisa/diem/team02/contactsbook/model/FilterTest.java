@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
- */
 package it.unisa.diem.team02.contactsbook.model;
 
 import javafx.collections.FXCollections;
@@ -35,6 +31,12 @@ public class FilterTest {
         contactTest3.addEmail("yoga@mystress.it");
         contactTest3.addEmail("english@geometry4.it");
         
+        contactTest2.addTag(Tag.Home);
+        contactTest2.addTag(Tag.University);
+        contactTest2.addTag(Tag.Job);
+        contactTest3.addTag(Tag.Job);
+        
+        
         //aggiunta contatti alla lista
         listTest.add(contactTest1);
         listTest.add(contactTest2);
@@ -45,6 +47,12 @@ public class FilterTest {
     public void tearDown() {
     }
     
+    
+    /**
+     * Test of the constructor and get method
+     * 
+     */
+    @Test
     public void testConstructor() {
         System.out.println("Filter constructor");
         flContactTest = new Filter (listTest);
@@ -57,38 +65,69 @@ public class FilterTest {
     
 
     /**
-     * Test of updateFilter method, of class Filter.
+     * Test n1 of updateFilter method, of class Filter. Update only by substring
      */
     @Test
     public void testUpdateFilter1() {
         System.out.println("updateFilter");
+        flContactTest = new Filter(listTest);
+        String string = "Zou";
+        boolean h = false;
+        boolean u = false;
+        boolean j = false;
+        flContactTest.updateFilter(string, h, u, j);
+        
+        assertEquals(1,flContactTest.getFlContacts().size());
         
     }
     
     /**
-     * Test of updateFilter method, of class Filter.
+     * Test n2 of updateFilter method, of class Filter. Update only by tag
      */
     @Test
     public void testUpdateFilter2() {
         System.out.println("updateFilter");
+        flContactTest = new Filter(listTest);
+        String string = "";
+        boolean h = false;
+        boolean u = false;
+        boolean j = true;
+        flContactTest.updateFilter(string, h, u, j);
+        
+        assertEquals(2,flContactTest.getFlContacts().size());
         
     }
     
     /**
-     * Test of updateFilter method, of class Filter.
+     * Test n3 of updateFilter method, of class Filter. No filter selected
      */
     @Test
     public void testUpdateFilter3() {
         System.out.println("updateFilter");
+        flContactTest = new Filter(listTest);
+        String string = "";
+        boolean h = false;
+        boolean u = false;
+        boolean j = false;
+        flContactTest.updateFilter(string, h, u, j);
         
+        assertEquals(3,flContactTest.getFlContacts().size());
     }
     
     /**
-     * Test of updateFilter method, of class Filter.
+     * Test n4 of updateFilter method, of class Filter.
      */
     @Test
     public void testUpdateFilter4() {
         System.out.println("updateFilter");
+        flContactTest = new Filter(listTest);
+        String string = "an";
+        boolean h = true;
+        boolean u = false;
+        boolean j = true;
+        flContactTest.updateFilter(string, h, u, j);
+        
+        assertEquals(2,flContactTest.getFlContacts().size());
         
     }
     
