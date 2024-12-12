@@ -49,12 +49,11 @@ public class FilterTest {
     
     
     /**
-     * Test of the constructor and get method
+     * Test del construttore e dei metodi getter
      * 
      */
     @Test
     public void testConstructor() {
-        System.out.println("Filter constructor");
         flContactTest = new Filter (listTest);
         assertEquals(3,flContactTest.getFlContacts().size(),"La lista filtrata deve contenere tutti gli elementi iniziali");
         assertFalse(flContactTest.getIsSelectedHome(), "Il valore iniziale di isSelectedHome deve essere false");
@@ -65,11 +64,11 @@ public class FilterTest {
     
 
     /**
-     * Test n1 of updateFilter method, of class Filter. Update only by substring
+     * Test n1 del metodo updateFilter della classe Filter. Il filtro viene aggiornato passando solamente
+     * una sottostringa
      */
     @Test
     public void testUpdateFilter1() {
-        System.out.println("updateFilter");
         flContactTest = new Filter(listTest);
         String string = "Zou";
         boolean h = false;
@@ -82,11 +81,10 @@ public class FilterTest {
     }
     
     /**
-     * Test n2 of updateFilter method, of class Filter. Update only by tag
+     * Test n2 del metodo updateFilter della classe Filter. Il filtro viene aggiornato settando un solo tag
      */
     @Test
     public void testUpdateFilter2() {
-        System.out.println("updateFilter");
         flContactTest = new Filter(listTest);
         String string = "";
         boolean h = false;
@@ -99,11 +97,10 @@ public class FilterTest {
     }
     
     /**
-     * Test n3 of updateFilter method, of class Filter. No filter selected
+     * Test n3 del metodo UpdateFilter della classe Filter. Nessun filtro viene selezionato
      */
     @Test
     public void testUpdateFilter3() {
-        System.out.println("updateFilter");
         flContactTest = new Filter(listTest);
         String string = "";
         boolean h = false;
@@ -115,11 +112,11 @@ public class FilterTest {
     }
     
     /**
-     * Test n4 of updateFilter method, of class Filter.
+     * Test n4 del metodo updateFilter della classe Filter. Il filtro viene impostando una sottostringa
+     * e settando due tag.
      */
     @Test
     public void testUpdateFilter4() {
-        System.out.println("updateFilter");
         flContactTest = new Filter(listTest);
         String string = "an";
         boolean h = true;

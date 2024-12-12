@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author team02
  */
 public class ContactTest {
-    private Contact Test1, Test2, Test3, Test4;
+    private Contact Test1, Test2, Test3;
     ArrayList<String> number1, number2;
     ArrayList<String> email1, email2;
     ArrayList<Tag> tag1, tag2;
@@ -25,7 +25,6 @@ public class ContactTest {
         Test1 = new Contact("Anuar", "Zouhri");
         Test2 = new Contact("Valeria","");
         Test3 = new Contact("","Postiglione","10");
-        Test4 = new Contact("Anuar","Zouhri");
         
         //inizializzazione della lista di numeri number1 con i numeri 3393434025 e ""
         number1 = new ArrayList<>(3);
@@ -65,11 +64,10 @@ public class ContactTest {
     }
 
     /**
-     * Test n1 of addNumber and getNumber method, of class Contact. The object has a single number 
+     * Test n1 dei metodi addNumber e getNumber della classe Contact. L'oggetto ha un numero.
      */
     @Test
     public void testAddAndGetNumber1() {
-        System.out.println("addNumber and getNumber");
         Test1.addNumber("3393424025");
         String expResult = "3393424025";
         String result = Test1.getNumber();
@@ -77,11 +75,10 @@ public class ContactTest {
     }
     
     /**
-     * Test n2 of addNumber and getNumber method, of class Contact. The object has two numbers
+     * Test n2 dei metodi addNumber e getNumber della classe Contact. L'oggetto ha due numeri.
      */
     @Test
     public void testAddAndGetNumber2() {
-        System.out.println("addNumber and getNumber");
         Test2.addNumber("3393424025");
         Test2.addNumber("2238123");
         String expResult = "3393424025\n2238123";
@@ -91,11 +88,10 @@ public class ContactTest {
     
 
     /**
-     * Test n1 of addEmail and getEmail method, of class Contact. The object has three emails
+     * Test n1 dei metodi addEmail e getEmail method della classe Contact. L'oggetto ha tre email.
      */
     @Test
     public void testAddAndGetEmail1() {
-        System.out.println("addEmail and getEmail");
         Test3.addEmail("vittorio@gmail.it");
         Test3.addEmail("vittorio@gmail.it");
         Test3.addEmail("vitt@gmail.com");
@@ -106,11 +102,10 @@ public class ContactTest {
     }
     
     /**
-     * Test n2 of addEmail and getEmail method, of class Contact.
+     * Test n2 dei metodi addEmail e getEmail method della classe Contact.
      */
     @Test
     public void testAddAndGetEmail2() {
-        System.out.println("addEmail and getEmail");
         Test2.addEmail("");
         String expResult = "";
         String result = Test3.getEmail();
@@ -119,11 +114,10 @@ public class ContactTest {
     }
 
     /**
-     * Test n1 of addTag and getTag method, of class Contact. The object has two tags
+     * Test n1 dei metodi addTag e getTag della classe Contact. L'oggetto ha due tag
      */
     @Test
     public void testAddAndGetTag1() {
-        System.out.println("addTag and getTag");
         Test1.addTag(Tag.Job);
         Test1.addTag(Tag.University);
         String expResult = "Job\nUniversity";
@@ -133,11 +127,10 @@ public class ContactTest {
     }
     
     /**
-     * Test n2 of addTag and getTag method, of class Contact. The object has three tags
+     * Test n2 dei metodi addTag e getTag della classe Contact. L'oggetto ha tre tag
      */
     @Test
     public void testAddAndGetTag2() {
-        System.out.println("addTag and getTag");
         Test1.addTag(Tag.Home);
         Test1.addTag(Tag.Job);
         Test1.addTag(Tag.University);
@@ -147,63 +140,57 @@ public class ContactTest {
     }
 
     /**
-     * Test n1 of setNumber and getNumberList method, of class Contact. 
+     * Test n1 dei metodi setNumber e getNumberList della classe Contact. 
      */
     @Test
     public void testSetAndGetNumberList1() {
-        System.out.println("setNumber and getNumberList ");
         Test1.setNumber(number1);
         assertEquals(number1, Test1.getNumberList()); 
         
     }
     
     /**
-     * Test n2 of setNumber and getNumberList method, of class Contact. 
+     * Test n2 dei metodi setNumber e getNumberList della classe Contact. 
      */
     @Test
     public void testSetAndGetNumberList2() {
-        System.out.println("setNumber and getNumberList ");
         Test2.setNumber(number2);
         assertEquals(number2, Test2.getNumberList()); 
         
     }
 
     /**
-     * Test n1 of setEmail and getEmailList method, of class Contact.
+     * Test n1 dei metodi setEmail e getEmailList della classe Contact.
      */
     @Test
     public void testSetAndGetEmailList1() {
-        System.out.println("setEmail and getEmailList");
         Test2.setEmail(email1);
         assertEquals(email1, Test2.getEmailList()); 
     }
     
     /**
-     * Test n2 of setEmail and getEmailList method, of class Contact.
+     * Test n2 dei metodi setEmail e getEmailList della classe Contact.
      */
     @Test
     public void testSetAndGetEmailList2() {
-        System.out.println("setEmail and getEmailList");
         Test3.setEmail(email2);
         assertEquals(email2, Test3.getEmailList()); 
     }
 
     /**
-     * Test n1 of setTag and getTagList method, of class Contact.
+     * Test n1 dei metodi setTag ae getTagList della classe Contact.
      */
     @Test
     public void testSetAndGetTagList1() {
-        System.out.println("setTag and getTagList");
         Test1.setTag(tag1);
         assertEquals(tag1, Test1.getTagList()); 
     }
     
     /**
-     * Test n2 of setTag and getTagList method, of class Contact.
+     * Test n2 dei metodi setTag ae getTagList della classe Contact.
      */
     @Test
     public void testSetAndGetTagList2() {
-        System.out.println("setTag and getTagList");
         Test2.setTag(tag2);
         assertEquals(tag2, Test2.getTagList()); 
     }
@@ -211,29 +198,53 @@ public class ContactTest {
     
     /**
      * 
-     * Test n1 of equals method, of class Person inherited by Contact. The test apply
-     * the equals method on two objects with different name and surname. It is
-     * applied assertFalse
+     * Test n1 del metodo equals. Il  The metodo è utilizzato su due oggetti con diverso nome e cognome. 
+     * Viene utilizzato assertFalse.
      *
      */
     @Test
     public void testEquals1() {
-        System.out.println("equals");
         assertFalse(Test1.equals(Test2));
     
     }
     
     /**
      * 
-     * Test n2 of equals method, of class Person inherited by Contact. The test apply
-     * the equals method on two objects with the same name and surname. It is applied
-     * asserTrue
-     *
+     * Test n2 del metodo equal. Il metodo è utilizzato su due contatti che hanno lo stesso nome
+     * e cognome. Viene utilizzato AssertTrue
      */
     @Test
     public void testEquals2() {
-        System.out.println("equals");
-        assertTrue(Test1.equals(Test4));
+        Contact c = new Contact(Test1.getName(),Test1.getSurname());
+        assertTrue(Test1.equals(c));
     
-    }  
+    }
+    
+    /**
+     * 
+     * Test n3 del metodo equal. Il metodo è utilizzato su due contatti che hanno lo stesso nome
+     * ma cognome diverso. Viene utilizzato AssertFalse
+     */
+    @Test
+    public void testEquals3() {
+        Contact c = new Contact(Test1.getName(),Test2.getSurname());
+        assertFalse(Test1.equals(c));
+    
+    }
+    
+    /**
+     * 
+     * Test n4 del metodo equal. Il metodo è utilizzato su due contatti che hanno nome
+     * diverso ma stesso cognome. Viene utilizzato AssertFalse
+     */
+    @Test
+    public void testEquals4() {
+        Contact c = new Contact(Test1.getName(),Test2.getSurname());
+        assertFalse(Test2.equals(c));
+    
+    }
+    
+
+
+   
 }
