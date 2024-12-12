@@ -44,6 +44,22 @@ public class Filter {
         matchString="";
     }
     
+    public String getMatchString(){
+        return this.matchString;
+    }
+    
+    public boolean getIsSelectedHome(){
+        return this.isSelectedHome;
+    }
+    
+    public boolean getIsSelectedUniversity(){
+        return this.isSelectedUni;
+    }
+    
+    public boolean getIsSelectedJob(){
+        return this.isSelectedJob;
+    }
+    
     /**
      * 
      * @brief Questo metodo restituisce il riferimento alla lista filtrata.

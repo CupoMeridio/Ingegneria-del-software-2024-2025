@@ -235,8 +235,5 @@ public class ContactTest {
         System.out.println("equals");
         assertTrue(Test1.equals(Test4));
     
-    }
-
-
-   
+    }  
 }
