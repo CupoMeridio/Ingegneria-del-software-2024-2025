@@ -21,6 +21,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -94,6 +95,8 @@ public class ContactsbookViewController implements Initializable {
     
     private Contactbook contactbook=new Contactbook();
     private Filter filter = new Filter(contactbook.getContacts());
+    //private SortedList sortedList = new SortedList(contactbook.getContacts());
+    
 
 /**
  * @brief Inizializza il controller e configura gli elementi dell'interfaccia utente.
@@ -118,7 +121,10 @@ public class ContactsbookViewController implements Initializable {
         mbtnFilter.setOnShown(event->{
            actionFilter(filter.getFlContacts());
         });
-           
+        //tblvRubrica.setItems(sortedList);
+        //sortedList.comparatorProperty().bind(tblvRubrica.comparatorProperty());
+   
+        
     }    
     
     /**

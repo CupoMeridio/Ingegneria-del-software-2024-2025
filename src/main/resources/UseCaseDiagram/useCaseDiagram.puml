@@ -2,7 +2,6 @@
 left to right direction
 actor Utente as u
 actor "Utente registrato" as ur
-actor "Database" as db
 rectangle Rubrica{
     usecase "Operazioni Rubrica" as or
     usecase "Registrazione" as reg
@@ -23,7 +22,6 @@ rectangle Rubrica{
 
 ur--or
 
-db--salva
 
 u--reg
 ur --|>u
