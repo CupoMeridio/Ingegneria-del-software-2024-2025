@@ -38,6 +38,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -381,110 +382,40 @@ public class ContactsbookViewController implements Initializable {
     private void actionImport(ActionEvent event) throws IOException, ClassNotFoundException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Apri un file");
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("CSV", "*.csv"));
 
         Window window = tblvRubrica.getScene().getWindow();
         File selectedFile = fileChooser.showOpenDialog(window);
-        try(BufferedReader br=new BufferedReader(new FileReader(selectedFile))){
-            if (br.readLine() == null) return;
-            String line;
-            while((line=br.readLine())!= null){
-                String campi []=line.split(";",-1);
-                Contact c=new Contact(campi[0], campi[1]);
-                if (!campi[2].equals(""))
-                    c.addNumber(campi[2]);
-                if (!campi[3].equals(""))
-                    c.addNumber(campi[3]);
-                if (!campi[4].equals(""))
-                    c.addNumber(campi[4]);
-
-                if (!campi[5].equals(""))
-                    c.addEmail(campi[5]);
-                if (!campi[6].equals(""))
-                    c.addEmail(campi[6]);
-                if (!campi[7].equals(""))
-                    c.addEmail(campi[7]);
-                
-                if(!campi[8].equals(""))
-                    c.addTag(Tag.Home);
-                if(!campi[9].equals(""))
-                    c.addTag(Tag.University);
-                if(!campi[10].equals(""))
-                    c.addTag(Tag.Job);
-                
-
-                contactbook.add(c);
-            }
-        }
+        
+        if (selectedFile!=null)
+            contactbook.caricaDaFile(selectedFile);
     }
     
 /**
  * @brief Esporta la lista dei contatti in un file CSV.
  *
  * Questo metodo consente all'utente di scegliere un file in cui salvare i contatti presenti nella rubrica.
- * La lista dei contatti viene esportata in formato CSV, con i seguenti campi: "NOME", "COGNOME", "NUMERO DI TELEFONO", 
- * "EMAIL" e "TAG". I numeri di telefono, le email e i tag vengono separati da un carattere newline e ogni valore
- * è separato da un punto e virgola.
+ * La lista dei contatti viene esportata in formato CSV.
  *
  * @pre La rubrica deve essere inizializzata.
  * @post I contatti vengono esportati nel file CSV selezionato dall'utente. Il file viene creato o sovrascritto
  *       con i dati esportati.
  *
  * @param event L'evento che ha causato l'azione (ad esempio, il clic del pulsante).
- * @throws FileNotFoundException Se il file selezionato non può essere trovato.
+ * @throws FileNotFoundException Se il file selezionato non viene trovato.
  * @throws IOException Se si verifica un errore durante la scrittura nel file.
  */
     @FXML
     private void actionExport(ActionEvent event) throws FileNotFoundException, IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Scegli un file in cui salvare");
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("CSV", "*.csv"));
      
         Window window = (tblvRubrica.getParent().getScene().getWindow());
         File selectedFile = fileChooser.showSaveDialog(window);
-       
-        try(PrintWriter pw=new PrintWriter(new BufferedWriter(new FileWriter(selectedFile)))){
-            pw.println("NOME;COGNOME;NUMERO DI TELEFONO;EMAIL;TAG;");
-            for (Contact c: contactbook.getContacts()){
-                pw.append(c.getName());
-                pw.append(';');
-                pw.append(c.getSurname());
-                pw.append(';');
-                
-                String[] number=c.getNumber().split("\n");
-                if(number.length>=1)
-                    pw.append(number[0]);
-                pw.append(';');
-                if (number.length>=2)
-                    pw.append(number[1]);
-                pw.append(';');
-                 if (number.length>=3)
-                    pw.append(number[2]);
-                 pw.append(';');
-                 
-                String[] email=c.getEmail().split("\n");
-                if (email.length>=1)
-                    pw.append(email[0]);
-                pw.append(';');
-                if (email.length>=2)
-                    pw.append(email[1]);
-                pw.append(';');
-                 if (email.length>=3)
-                    pw.append(email[2]);
-                pw.append(';');
-                
-                String[] tag=c.getTag().split("\n");
-                if (tag.length>=1)
-                    pw.append(tag[0]);
-                pw.append(';');
-                if (tag.length>=2)
-                    pw.append(tag[1]);
-                pw.append(';');
-                 if (tag.length>=3)
-                    pw.append(tag[2]);
-                pw.append(';');
-                    
-                pw.append('\n');
-            }
-        }
+        
+        if (selectedFile!=null)
+            contactbook.salvaSuFile(selectedFile);
     }
     
     
