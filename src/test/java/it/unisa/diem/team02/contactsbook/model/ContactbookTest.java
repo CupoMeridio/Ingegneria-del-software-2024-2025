@@ -1,133 +1,74 @@
-package it.unisa.diem.team02.contactsbook.model;
-
-import javafx.collections.ObservableList;
-import org.junit.jupiter.api.AfterEach;
+import it.unisa.diem.team02.contactsbook.model.Contact;
+import it.unisa.diem.team02.contactsbook.model.Contactbook;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import javafx.collections.ObservableList;
+import java.io.File;
+import java.io.IOException;
 
-/**
- *
- * @author team02
- */
 public class ContactbookTest {
+    private Contactbook contactbook;
+    private Contact contact1;
+    private Contact contact2;
 
     @BeforeEach
     public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
-    }
-
-    /**
-     * Test of getContacts method, of class Contactbook.
-     */
-    @Test
-    public void testGetContacts() {
-        System.out.println("getContacts");
-        Contactbook instance = new Contactbook();
-        ObservableList<Contact> expResult = null;
-        ObservableList<Contact> result = instance.getContacts();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        contactbook = new Contactbook();
+        contact1 = new Contact("Valeria", "Quaranta");
+        contact2 = new Contact("Mario", "Rossi");
     }
 
-    /**
-     * Test of createList method, of class Contactbook.
-     */
     @Test
-    public void testCreateList() {
-        System.out.println("createList");
-        Contactbook instance = new Contactbook();
-        instance.createList();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testAddContact() {
+        contactbook.add(contact1);
+        ObservableList<Contact> contacts = contactbook.getContacts();
+        assertTrue(contacts.contains(contact1));
     }
 
-    /**
-     * Test of delete method, of class Contactbook.
-     */
     @Test
-    public void testDelete() {
-        System.out.println("delete");
-        Contact c = null;
-        Contactbook instance = new Contactbook();
-        instance.delete(c);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testDeleteContact() {
+        contactbook.add(contact1);
+        contactbook.delete(contact1);
+        ObservableList<Contact> contacts = contactbook.getContacts();
+        assertFalse(contacts.contains(contact1));
     }
 
-    /**
-     * Test of add method, of class Contactbook.
-     */
     @Test
-    public void testAdd() {
-        System.out.println("add");
-        Contact c = null;
-        Contactbook instance = new Contactbook();
-        instance.add(c);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testContainsContact() {
+        contactbook.add(contact1);
+        assertTrue(contactbook.contains(contact1));
+        assertFalse(contactbook.contains(contact2));
     }
 
-    /**
-     * Test of contains method, of class Contactbook.
-     */
     @Test
-    public void testContains_Contact() {
-        System.out.println("contains");
-        Contact c = null;
-        Contactbook instance = new Contactbook();
-        boolean expResult = false;
-        boolean result = instance.contains(c);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testContainsContactWithOldContact() {
+        contactbook.add(contact1);
+        contactbook.add(contact2);
+        Contact newContact = new Contact("Mario", "Rossi");
+        assertFalse(contactbook.contains(newContact, contact2));
+        assertTrue(contactbook.contains(newContact, contact1));
     }
 
-    /**
-     * Test of contains method, of class Contactbook.
-     */
     @Test
-    public void testContains_Contact_Contact() {
-        System.out.println("contains");
-        Contact newC = null;
-        Contact oldC = null;
-        Contactbook instance = new Contactbook();
-        boolean expResult = false;
-        boolean result = instance.contains(newC, oldC);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testSalvaSuFile() throws IOException {
+        contactbook.add(contact1);
+        File file = new File("contacts.csv");
+        contactbook.salvaSuFile(file);
+        assertTrue(file.exists());
+        file.delete();
     }
 
-    /**
-     * Test of remove method, of class Contactbook.
-     */
     @Test
-    public void testRemove() {
-        System.out.println("remove");
-        Contact c = null;
-        Contactbook instance = new Contactbook();
-        boolean expResult = false;
-        boolean result = instance.remove(c);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+    public void testCaricaDaFile() throws IOException {
+        File file = new File("contacts.csv");
+        contactbook.add(contact1);
+        contactbook.salvaSuFile(file);
 
-    /**
-     * Test of initializeList method, of class Contactbook.
-     */
-    @Test
-    public void testInitializeList() {
-        System.out.println("initializeList");
-        Contactbook instance = new Contactbook();
-        instance.initializeList();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Contactbook newContactbook = new Contactbook();
+        newContactbook.caricaDaFile(file);
+        ObservableList<Contact> contacts = newContactbook.getContacts();
+        assertTrue(contacts.contains(contact1));
+        file.delete();
     }
-    
 }
