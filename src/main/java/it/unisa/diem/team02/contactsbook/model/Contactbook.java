@@ -106,16 +106,14 @@ public class Contactbook {
     }
     
     /**
-    * @brief Esporta la lista dei contatti della rubrica in un file CSV.
+    * @brief Esporta la lista dei contatti della rubrica in un file.
     *
     * Questo metodo consente all'utente di salvare i contatti presenti nella rubrica in un file passato
     * come parametro.
-    * La lista dei contatti viene salvata in formato CSV, con i seguenti campi: "NOME", "COGNOME", "NUMERO DI TELEFONO", 
-    * "EMAIL" e "TAG". I numeri di telefono, le email e i tag vengono separati da un carattere newline e ogni valore
-    * è separato da un punto e virgola.
+    * La lista dei contatti viene salvata in formato CSV.
     *
     * @pre La rubrica deve essere inizializzata.
-    * @post I contatti vengono salvati nel file CSV selezionato dall'utente. Il file viene creato o sovrascritto
+    * @post I contatti vengono salvati nel file selezionato dall'utente. Il file viene creato o sovrascritto
     *       con i dati esportati.
     *
     * @param filename Il file in cui salvare il contatto.
@@ -124,7 +122,7 @@ public class Contactbook {
     */
     public void salvaSuFile(File filename) throws IOException{
         try(PrintWriter pw=new PrintWriter(new BufferedWriter(new FileWriter(filename)))){
-            pw.println("NOME;COGNOME;NUMERO DI TELEFONO;EMAIL;TAG;");
+            pw.println("NOME;COGNOME;NUMERO 1; NUMERO 2; NUMERO 3;EMAIL 1;EMAIL 2; EMAIL 3; Tag;");
             for (Contact c : contacts){
                 pw.append(c.getName());
                 pw.append(';');
@@ -170,11 +168,11 @@ public class Contactbook {
     }
     
     /**
-    * @brief Importa i contatti da un file CSV e li aggiunge alla rubrica.
+    * @brief Importa i contatti da un file e li aggiunge alla rubrica.
     * 
     * Questo metodo permette all'utente di aggiungere dei contatti dal file passato come parametro.
-    * Ogni riga del file CSV viene letta e i dati vengono utilizzati per creare nuovi oggetti 
-    * `Contact`, che vengono successivamente aggiunti alla rubrica. Il formato del file CSV 
+    * Ogni riga del file viene letta e i dati vengono utilizzati per creare nuovi oggetti 
+    * `Contact`, che vengono successivamente aggiunti alla rubrica. Il formato del file 
     * deve essere conforme alla struttura prevista, con i campi separati da punto e virgola.
     * 
     * @details Il metodo apre un file passato come parametro, legge ogni riga e divide i dati nei 
@@ -182,7 +180,7 @@ public class Contactbook {
     * aggiunti alla rubrica. Prima di aggiungere un campo (ad esempio numero di telefono) al contatto, 
     * si verifica che questo non sia vuoto.
     * 
-    * @pre Il file passato come parametro deve essere un file CSV valido.
+    * @pre Il file passato come parametro deve essere un file valido.
     * @post I contatti letti dal file vengono aggiunti alla rubrica.
     * 
     * @throws IOException Se si verifica un errore durante la lettura del file.
@@ -209,12 +207,29 @@ public class Contactbook {
                 if (!campi[7].equals(""))
                     c.addEmail(campi[7]);
                 
-                if(!campi[8].equals(""))
-                    c.addTag(Tag.Home);
-                if(!campi[9].equals(""))
-                    c.addTag(Tag.University);
-                if(!campi[10].equals(""))
-                    c.addTag(Tag.Job);
+                if(!campi[8].equals("")){ //è presente almeno un tag.
+                    if(campi[8].equals(Tag.Job.toString())) 
+                        c.addTag(Tag.Job); //se il primo tag è Job, è anche l'unico
+                    else {
+                        if (campi[8].equals(Tag.University.toString())){
+                            c.addTag(Tag.University);
+                            if (campi[9].equals(Tag.Job.toString())) //l'altro tag, se c'è è Job
+                                c.addTag(Tag.Job);
+                        } 
+                        else{
+                            c.addTag(Tag.Home);
+                            if (!campi[9].equals("")){
+                                if (campi[9].equals(Tag.Job))
+                                    c.addTag(Tag.Job);
+                                else{
+                                    c.addTag(Tag.University);
+                                    if (campi[10].equals(Tag.Job))
+                                        c.addTag(Tag.Job);
+                            }
+                        }
+                    }
+                    }
+                }
                 
                 contacts.add(c);
             }

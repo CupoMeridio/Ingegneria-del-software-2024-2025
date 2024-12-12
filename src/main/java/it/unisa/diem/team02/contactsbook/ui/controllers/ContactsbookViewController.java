@@ -38,6 +38,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -381,20 +382,20 @@ public class ContactsbookViewController implements Initializable {
     private void actionImport(ActionEvent event) throws IOException, ClassNotFoundException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Apri un file");
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("CSV", "*.csv"));
 
         Window window = tblvRubrica.getScene().getWindow();
         File selectedFile = fileChooser.showOpenDialog(window);
         
-        contactbook.caricaDaFile(selectedFile);
+        if (selectedFile!=null)
+            contactbook.caricaDaFile(selectedFile);
     }
     
 /**
  * @brief Esporta la lista dei contatti in un file CSV.
  *
  * Questo metodo consente all'utente di scegliere un file in cui salvare i contatti presenti nella rubrica.
- * La lista dei contatti viene esportata in formato CSV, con i seguenti campi: "NOME", "COGNOME", "NUMERO DI TELEFONO", 
- * "EMAIL" e "TAG". I numeri di telefono, le email e i tag vengono separati da un carattere newline e ogni valore
- * è separato da un punto e virgola.
+ * La lista dei contatti viene esportata in formato CSV.
  *
  * @pre La rubrica deve essere inizializzata.
  * @post I contatti vengono esportati nel file CSV selezionato dall'utente. Il file viene creato o sovrascritto
@@ -408,11 +409,13 @@ public class ContactsbookViewController implements Initializable {
     private void actionExport(ActionEvent event) throws FileNotFoundException, IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Scegli un file in cui salvare");
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("CSV", "*.csv"));
      
         Window window = (tblvRubrica.getParent().getScene().getWindow());
         File selectedFile = fileChooser.showSaveDialog(window);
         
-        contactbook.salvaSuFile(selectedFile);
+        if (selectedFile!=null)
+            contactbook.salvaSuFile(selectedFile);
     }
     
     
