@@ -228,7 +228,7 @@ public class ContactTest {
     @Test
     public void testEquals3() {
         Contact c = new Contact(Test1.getName(),Test2.getSurname());
-        assertTrue(Test1.equals(c));
+        assertFalse(Test1.equals(c));
     
     }
     
@@ -240,7 +240,7 @@ public class ContactTest {
     @Test
     public void testEquals4() {
         Contact c = new Contact(Test1.getName(),Test2.getSurname());
-        assertTrue(Test2.equals(c));
+        assertFalse(Test2.equals(c));
     
     }
     
