@@ -79,6 +79,8 @@ class Contactbook {
     + boolean contains(Contact c)
     + boolean contains(Contact newC, Contact oldC)
     + void initializeList()
+    + void caricaDaFile(File filename)
+    + void salvaSuFile(File filename)
 
 }
 
@@ -105,9 +107,17 @@ class LoginViewController {
     - BooleanProperty bConfirm
     -{static} Connection connection
     --
-    + void initialize(URL, ResourceBundle)
+    + void initialize(URL url, ResourceBundle rb)
+    - BooleanProperty txtSignMailInitialize()
+    - BooleanProperty txtSignPassInitialize()
+    - BooleanProperty txtConfirmPassInitialize()
+    - boolean isValidEmail(String email)
+    - boolean isValidPassword(String password)
     + void actionLogin(ActionEvent event)
-    + void actionForgotPassword(ActionEvent event)
+    - void actionSignin(ActionEvent event)
+    - void keyEmailSign(KeyEvent event)
+    - void keyPassSign(KeyEvent event)
+    - void keyConfirmPass(KeyEvent event)
 }
 
 class AddViewController {
