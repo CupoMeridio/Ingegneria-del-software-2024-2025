@@ -1,5 +1,12 @@
 package it.unisa.diem.team02.contactsbook.model;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -96,5 +103,121 @@ public class Contactbook {
      */
     public void initializeList(){
         
+    }
+    
+    /**
+    * @brief Esporta la lista dei contatti della rubrica in un file CSV.
+    *
+    * Questo metodo consente all'utente di salvare i contatti presenti nella rubrica in un file passato
+    * come parametro.
+    * La lista dei contatti viene salvata in formato CSV, con i seguenti campi: "NOME", "COGNOME", "NUMERO DI TELEFONO", 
+    * "EMAIL" e "TAG". I numeri di telefono, le email e i tag vengono separati da un carattere newline e ogni valore
+    * è separato da un punto e virgola.
+    *
+    * @pre La rubrica deve essere inizializzata.
+    * @post I contatti vengono salvati nel file CSV selezionato dall'utente. Il file viene creato o sovrascritto
+    *       con i dati esportati.
+    *
+    * @param filename Il file in cui salvare il contatto.
+    * @throws FileNotFoundException Se il file non viene trovato.
+    * @throws IOException Se si verifica un errore durante la scrittura nel file.
+    */
+    public void salvaSuFile(File filename) throws IOException{
+        try(PrintWriter pw=new PrintWriter(new BufferedWriter(new FileWriter(filename)))){
+            pw.println("NOME;COGNOME;NUMERO DI TELEFONO;EMAIL;TAG;");
+            for (Contact c : contacts){
+                pw.append(c.getName());
+                pw.append(';');
+                pw.append(c.getSurname());
+                pw.append(';');
+                
+                String[] number=c.getNumber().split("\n");
+                if(number.length>=1)
+                    pw.append(number[0]);
+                pw.append(';');
+                if (number.length>=2)
+                    pw.append(number[1]);
+                pw.append(';');
+                 if (number.length>=3)
+                    pw.append(number[2]);
+                 pw.append(';');
+                 
+                String[] email=c.getEmail().split("\n");
+                if (email.length>=1)
+                    pw.append(email[0]);
+                pw.append(';');
+                if (email.length>=2)
+                    pw.append(email[1]);
+                pw.append(';');
+                 if (email.length>=3)
+                    pw.append(email[2]);
+                pw.append(';');
+                
+                String[] tag=c.getTag().split("\n");
+                if (tag.length>=1)
+                    pw.append(tag[0]);
+                pw.append(';');
+                if (tag.length>=2)
+                    pw.append(tag[1]);
+                pw.append(';');
+                 if (tag.length>=3)
+                    pw.append(tag[2]);
+                pw.append(';');
+                    
+                pw.append('\n');
+            }
+        }
+    }
+    
+    /**
+    * @brief Importa i contatti da un file CSV e li aggiunge alla rubrica.
+    * 
+    * Questo metodo permette all'utente di aggiungere dei contatti dal file passato come parametro.
+    * Ogni riga del file CSV viene letta e i dati vengono utilizzati per creare nuovi oggetti 
+    * `Contact`, che vengono successivamente aggiunti alla rubrica. Il formato del file CSV 
+    * deve essere conforme alla struttura prevista, con i campi separati da punto e virgola.
+    * 
+    * @details Il metodo apre un file passato come parametro, legge ogni riga e divide i dati nei 
+    * rispettivi campi (nome, cognome, numeri di telefono, e-mail, tag). I contatti creati vengono 
+    * aggiunti alla rubrica. Prima di aggiungere un campo (ad esempio numero di telefono) al contatto, 
+    * si verifica che questo non sia vuoto.
+    * 
+    * @pre Il file passato come parametro deve essere un file CSV valido.
+    * @post I contatti letti dal file vengono aggiunti alla rubrica.
+    * 
+    * @throws IOException Se si verifica un errore durante la lettura del file.
+    * @throws ClassNotFoundException Se il tipo di dato non è trovato durante il caricamento dei dati.
+    */
+    public void caricaDaFile(File filename) throws IOException{
+        try(BufferedReader br=new BufferedReader(new FileReader(filename))){
+            if (br.readLine() == null) return;
+            String line;
+            while((line=br.readLine())!= null){
+                String campi []=line.split(";",-1);
+                Contact c=new Contact(campi[0], campi[1]);
+                if (!campi[2].equals(""))
+                    c.addNumber(campi[2]);
+                if (!campi[3].equals(""))
+                    c.addNumber(campi[3]);
+                if (!campi[4].equals(""))
+                    c.addNumber(campi[4]);
+
+                if (!campi[5].equals(""))
+                    c.addEmail(campi[5]);
+                if (!campi[6].equals(""))
+                    c.addEmail(campi[6]);
+                if (!campi[7].equals(""))
+                    c.addEmail(campi[7]);
+                
+                if(!campi[8].equals(""))
+                    c.addTag(Tag.Home);
+                if(!campi[9].equals(""))
+                    c.addTag(Tag.University);
+                if(!campi[10].equals(""))
+                    c.addTag(Tag.Job);
+                
+                contacts.add(c);
+            }
+        }
     }
 }

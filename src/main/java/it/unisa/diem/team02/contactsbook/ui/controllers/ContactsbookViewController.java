@@ -384,37 +384,8 @@ public class ContactsbookViewController implements Initializable {
 
         Window window = tblvRubrica.getScene().getWindow();
         File selectedFile = fileChooser.showOpenDialog(window);
-        try(BufferedReader br=new BufferedReader(new FileReader(selectedFile))){
-            if (br.readLine() == null) return;
-            String line;
-            while((line=br.readLine())!= null){
-                String campi []=line.split(";",-1);
-                Contact c=new Contact(campi[0], campi[1]);
-                if (!campi[2].equals(""))
-                    c.addNumber(campi[2]);
-                if (!campi[3].equals(""))
-                    c.addNumber(campi[3]);
-                if (!campi[4].equals(""))
-                    c.addNumber(campi[4]);
-
-                if (!campi[5].equals(""))
-                    c.addEmail(campi[5]);
-                if (!campi[6].equals(""))
-                    c.addEmail(campi[6]);
-                if (!campi[7].equals(""))
-                    c.addEmail(campi[7]);
-                
-                if(!campi[8].equals(""))
-                    c.addTag(Tag.Home);
-                if(!campi[9].equals(""))
-                    c.addTag(Tag.University);
-                if(!campi[10].equals(""))
-                    c.addTag(Tag.Job);
-                
-
-                contactbook.add(c);
-            }
-        }
+        
+        contactbook.caricaDaFile(selectedFile);
     }
     
 /**
@@ -430,7 +401,7 @@ public class ContactsbookViewController implements Initializable {
  *       con i dati esportati.
  *
  * @param event L'evento che ha causato l'azione (ad esempio, il clic del pulsante).
- * @throws FileNotFoundException Se il file selezionato non può essere trovato.
+ * @throws FileNotFoundException Se il file selezionato non viene trovato.
  * @throws IOException Se si verifica un errore durante la scrittura nel file.
  */
     @FXML
@@ -440,51 +411,8 @@ public class ContactsbookViewController implements Initializable {
      
         Window window = (tblvRubrica.getParent().getScene().getWindow());
         File selectedFile = fileChooser.showSaveDialog(window);
-       
-        try(PrintWriter pw=new PrintWriter(new BufferedWriter(new FileWriter(selectedFile)))){
-            pw.println("NOME;COGNOME;NUMERO DI TELEFONO;EMAIL;TAG;");
-            for (Contact c: contactbook.getContacts()){
-                pw.append(c.getName());
-                pw.append(';');
-                pw.append(c.getSurname());
-                pw.append(';');
-                
-                String[] number=c.getNumber().split("\n");
-                if(number.length>=1)
-                    pw.append(number[0]);
-                pw.append(';');
-                if (number.length>=2)
-                    pw.append(number[1]);
-                pw.append(';');
-                 if (number.length>=3)
-                    pw.append(number[2]);
-                 pw.append(';');
-                 
-                String[] email=c.getEmail().split("\n");
-                if (email.length>=1)
-                    pw.append(email[0]);
-                pw.append(';');
-                if (email.length>=2)
-                    pw.append(email[1]);
-                pw.append(';');
-                 if (email.length>=3)
-                    pw.append(email[2]);
-                pw.append(';');
-                
-                String[] tag=c.getTag().split("\n");
-                if (tag.length>=1)
-                    pw.append(tag[0]);
-                pw.append(';');
-                if (tag.length>=2)
-                    pw.append(tag[1]);
-                pw.append(';');
-                 if (tag.length>=3)
-                    pw.append(tag[2]);
-                pw.append(';');
-                    
-                pw.append('\n');
-            }
-        }
+        
+        contactbook.salvaSuFile(selectedFile);
     }
     
     
