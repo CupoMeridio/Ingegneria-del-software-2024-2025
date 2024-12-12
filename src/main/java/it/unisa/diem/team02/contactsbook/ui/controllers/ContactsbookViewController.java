@@ -27,6 +27,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.MenuButton;
@@ -374,12 +376,10 @@ public class ContactsbookViewController implements Initializable {
  * 
  * @pre Il file selezionato deve essere un file CSV valido contenente i dati dei contatti.
  * @post I contatti letti dal file vengono aggiunti alla rubrica e visualizzati nella tabella.
- * 
- * @throws IOException Se si verifica un errore durante la lettura del file.
- * @throws ClassNotFoundException Se il tipo di dato non è trovato durante il caricamento dei dati.
+ *
  */
     @FXML
-    private void actionImport(ActionEvent event) throws IOException, ClassNotFoundException {
+    private void actionImport(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Apri un file");
         fileChooser.getExtensionFilters().add(new ExtensionFilter("CSV", "*.csv"));
@@ -388,7 +388,20 @@ public class ContactsbookViewController implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(window);
         
         if (selectedFile!=null)
-            contactbook.caricaDaFile(selectedFile);
+            try {
+                contactbook.caricaDaFile(selectedFile);
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Operation completed");
+                alert.setHeaderText("");
+                alert.setContentText("File import was successfully completed.");
+                alert.showAndWait();
+        } catch (Exception ex) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText("");
+            alert.setContentText("An error occurred during the import. No contact has been imported.");
+            alert.showAndWait();
+        }
     }
     
 /**
@@ -402,11 +415,9 @@ public class ContactsbookViewController implements Initializable {
  *       con i dati esportati.
  *
  * @param event L'evento che ha causato l'azione (ad esempio, il clic del pulsante).
- * @throws FileNotFoundException Se il file selezionato non viene trovato.
- * @throws IOException Se si verifica un errore durante la scrittura nel file.
  */
     @FXML
-    private void actionExport(ActionEvent event) throws FileNotFoundException, IOException {
+    private void actionExport(ActionEvent event){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Scegli un file in cui salvare");
         fileChooser.getExtensionFilters().add(new ExtensionFilter("CSV", "*.csv"));
@@ -415,7 +426,20 @@ public class ContactsbookViewController implements Initializable {
         File selectedFile = fileChooser.showSaveDialog(window);
         
         if (selectedFile!=null)
-            contactbook.salvaSuFile(selectedFile);
+            try {
+                contactbook.salvaSuFile(selectedFile);
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Operation completed");
+                alert.setHeaderText("");
+                alert.setContentText("File export was successfully completed.");
+                alert.showAndWait();
+        } catch (Exception ex) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText("");
+            alert.setContentText("An error occurred during the export. No contact has been exported.");
+            alert.showAndWait();
+        }
     }
     
     
