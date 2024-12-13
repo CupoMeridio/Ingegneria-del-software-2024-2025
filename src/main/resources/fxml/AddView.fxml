@@ -47,8 +47,8 @@
             <Label fx:id="lblEmail" prefHeight="21.0" prefWidth="54.0" text="E-mail:" />
             <VBox fx:id="vboxEmail" alignment="CENTER_RIGHT" prefHeight="113.0" prefWidth="224.0" spacing="10.0">
                <children>
-                  <TextField fx:id="txtEmail1" maxWidth="159.0" prefHeight="31.0" />
-                  <TextField fx:id="txtEmail2" maxWidth="159.0" prefHeight="31.0" prefWidth="160.0" />
+                  <TextField fx:id="txtEmail1" maxWidth="159.0" onKeyReleased="#onKeyReleasedEmail1" prefHeight="31.0" />
+                  <TextField fx:id="txtEmail2" maxWidth="159.0" onKeyReleased="#onKeyReleasedEmail2" prefHeight="31.0" prefWidth="160.0" />
                   <TextField fx:id="txtEmail3" maxWidth="159.0" prefHeight="31.0" prefWidth="161.0" />
                </children>
             </VBox>
@@ -62,8 +62,8 @@
             <Label fx:id="lblNumber" text="Number:" />
             <VBox fx:id="vboxNumber" alignment="CENTER_RIGHT" prefHeight="113.0" prefWidth="230.0" spacing="10.0">
                <children>
-                  <TextField fx:id="txtNumber1" maxWidth="159.0" prefHeight="31.0" prefWidth="156.0" />
-                  <TextField fx:id="txtNumber2" maxWidth="159.0" prefHeight="31.0" prefWidth="162.0" />
+                  <TextField fx:id="txtNumber1" maxWidth="159.0" onKeyReleased="#onKeyReleasedNumber1" prefHeight="31.0" prefWidth="156.0" />
+                  <TextField fx:id="txtNumber2" maxWidth="159.0" onKeyReleased="#onKeyReleasedNumber2" prefHeight="31.0" prefWidth="162.0" />
                   <TextField fx:id="txtNumber3" maxWidth="159.0" prefHeight="31.0" prefWidth="163.0" />
                </children>
             </VBox>
