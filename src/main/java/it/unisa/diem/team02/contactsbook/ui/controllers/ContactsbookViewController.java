@@ -20,6 +20,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.util.Comparator;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -174,8 +175,8 @@ public class ContactsbookViewController implements Initializable {
 
         System.out.println("Sto recuperando i contatti");
         Database database = new Database();
-        TreeSet<Contact> listaContatti = database.getContact(Database.connection, "contatti",Database.user.getEmail());
-        for (Contact c : listaContatti){
+        TreeMap<String, Contact> listaContatti = database.getContact(Database.connection, "contatti",Database.user.getEmail());
+        for (Contact c : listaContatti.values()){
             contactbook.add(c);    
         }
         System.out.println(listaContatti);
@@ -433,8 +434,9 @@ public class ContactsbookViewController implements Initializable {
         
         if (selectedFile!=null)
             try {
-                contactbook.loadFromFile(selectedFile);
-                for(Contact c : contactbook.getDbContact())
+                contactbook.caricaDaFile(selectedFile);
+                System.out.println(contactbook.getContacts());
+                for(Contact c : contactbook.getContacts())
                 try {
                         database.insertContact(Database.connection, "contatti", c, Database.user.getEmail());
                     } catch (SQLException ex) {

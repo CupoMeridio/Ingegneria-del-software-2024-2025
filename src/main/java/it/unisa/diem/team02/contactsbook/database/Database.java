@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -250,13 +251,13 @@ public class Database  {
     */
 
     
-   public TreeSet<Contact> getContact(Connection conn, String tableName,String email){
+   public TreeMap<String, Contact> getContact(Connection conn, String tableName,String email){
         
         Statement statement;
         ResultSet rs= null;
-        Set <Contact>table=null;
+        Map <String, Contact>table=null;
         try {
-            table =  new TreeSet();
+            table =  new TreeMap<>();
             String query= String.format("select * from %s where email='%s'", tableName,email);
             statement= conn.createStatement();
             rs= statement.executeQuery(query);
@@ -268,14 +269,14 @@ public class Database  {
                 String tag = rs.getString("tag");
                 String em_cont = rs.getString("email_contact");
                 String ID = rs.getString("id");
-                table.add(createContact(name,surname,numeri,tag,em_cont,ID));
+                table.put(ID, createContact(name,surname,numeri,tag,em_cont,ID));
             }
             statement.close(); 
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
     
-        return (TreeSet<Contact>) table;
+        return (TreeMap<String, Contact>) table;
     }
     
     /**

@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -192,9 +193,9 @@ public class DatabaseTest {
         System.out.println("getContact");
         String tableName = "contatti";
         
-        TreeSet<Contact> result = db.getContact(conn, tableName, email_utente); // CAMBIATO PER TREESET
+        TreeMap<String,Contact> result = db.getContact(conn, tableName, email_utente); // CAMBIATO PER TREESET
         // assertTrue(result.containsKey(cont.getID()));
-         Contact cont_result= result.pollLast();
+         Contact cont_result= result.get(cont.getID());
         assertEquals(cont_result.getID(),cont.getID());
     }
 
@@ -212,8 +213,8 @@ public class DatabaseTest {
         number.add("numero cambiato");
         cont.setNumber(number);
         db.modifyContact(conn, tableName, cont, email_utente);
-        TreeSet<Contact> result=db.getContact(conn, tableName, email_utente);// CAMBIATO DA HASH MAP
-        Contact cont_result= result.pollLast();
+        TreeMap<String,Contact> result=db.getContact(conn, tableName, email_utente);// CAMBIATO DA HASH MAP
+        Contact cont_result= result.get(cont.getID());
         assertNotNull(cont_result);
         assertEquals(cont.getNumberList().size(),cont_result.getNumberList().size());
         for(int i=0; i<cont_result.getNumberList().size(); i++){
@@ -231,7 +232,7 @@ public class DatabaseTest {
         String tableName = "contatti";
         db.removeContactByID(conn, tableName, cont.getID(), email_utente);
         //Map <String,Contact>table=  new HashMap();
-        TreeSet<Contact> table= new TreeSet();
+        TreeMap<String,Contact> table= new TreeMap<>();
         assertEquals(table,db.getContact(conn, tableName, email_utente));
     }
 

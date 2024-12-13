@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Thread.sleep;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ import javafx.collections.ObservableList;
  */
 public class Contactbook {
     private ObservableList<Contact> contacts;
-    private List<Contact> DbContact;
+
     
     /**
      * @brief Crea un nuovo oggetto Contactbook inizializzando la lisra di contatti.
@@ -35,7 +36,7 @@ public class Contactbook {
      */
     public Contactbook(){
         contacts=FXCollections.observableArrayList();
-        DbContact = new ArrayList<>();
+
     }
 
     /**
@@ -63,14 +64,7 @@ public class Contactbook {
         contacts.remove(c);
     }
 
-    /**
-     * @brief Metodo getter per ottenere la lista DbContact "usata" dal database.
-     * 
-     * @return Restituisce un'arraylist
-     */
-    public List<Contact> getDbContact() {
-        return DbContact;
-    }
+
     
     
  
@@ -213,6 +207,11 @@ public class Contactbook {
             while((line=br.readLine())!= null){
                 String campi []=line.split(";",-1);
                 Contact c=new Contact(campi[0], campi[1]);
+                try {
+                    sleep(100); //diamo il tempo di generare un id univoco valido per il contatto
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Contactbook.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 if (!campi[2].equals(""))
                     c.addNumber(campi[2]);
                 if (!campi[3].equals(""))
@@ -250,7 +249,7 @@ public class Contactbook {
                     }
                     }
                 }
-                DbContact.add(c);
+
                 contacts.add(c);
             }
         }
