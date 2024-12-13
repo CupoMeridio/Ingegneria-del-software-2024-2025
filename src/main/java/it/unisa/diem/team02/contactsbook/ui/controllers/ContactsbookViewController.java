@@ -14,6 +14,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
+import java.util.Comparator;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +22,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -96,6 +98,7 @@ public class ContactsbookViewController implements Initializable {
     
     private Contactbook contactbook=new Contactbook();
     private Filter filter = new Filter(contactbook.getContacts());
+    private SortedList<Contact> sortedContacts;
 
 /**
  * @brief Inizializza il controller e configura gli elementi dell'interfaccia utente.
@@ -116,9 +119,9 @@ public class ContactsbookViewController implements Initializable {
         initializeList();
         btnMofidyInitialize();
         btnDeleteInitialize();
-        initializeSearch(filter.getFlContacts());
+        initializeSearch();
         mbtnFilter.setOnShown(event->{
-           actionFilter(filter.getFlContacts());
+           actionFilter();
         });
            
     }    
@@ -131,12 +134,18 @@ public class ContactsbookViewController implements Initializable {
      * @invariant La tabella visualizzerà correttamente i contatti con i dettagli impostati nelle rispettive colonne.
      */
     public void createList(){
+        sortedContacts= new SortedList<>(filter.getFlContacts());
+        tblvRubrica.setItems(sortedContacts);
         clmName.setCellValueFactory(new PropertyValueFactory("name"));
         clmSur.setCellValueFactory(new PropertyValueFactory("surname"));
+        clmName.setSortable(true);
+        clmSur.setSortable(true);
         clmNum.setCellValueFactory(new PropertyValueFactory("number"));
         clmEmail.setCellValueFactory(new PropertyValueFactory("email"));
         clmTag.setCellValueFactory(new PropertyValueFactory("tag"));
-        tblvRubrica.setItems(contactbook.getContacts());
+        clmName.setSortable(true);
+        clmSur.setSortable(true);
+        sortedContacts.comparatorProperty().bind(tblvRubrica.comparatorProperty());
     }
     
     /**
@@ -307,9 +316,8 @@ public class ContactsbookViewController implements Initializable {
  * 
  * @see Filter
  */
-    private void actionFilter(FilteredList<Contact> flContacts) {
+    private void actionFilter() {
     
-        tblvRubrica.setItems(flContacts);
         chkmHome.selectedProperty().addListener((obs, oldValue, newValue) -> filter.updateFilter(
         txtSearch.getText(),chkmHome.isSelected(),chkmUni.isSelected(),chkmJob.isSelected()));
         
@@ -346,9 +354,8 @@ public class ContactsbookViewController implements Initializable {
     * @see Filter
     * 
     */
-    private void initializeSearch(FilteredList<Contact> flContacts) {
+    private void initializeSearch() {
         
-        tblvRubrica.setItems(flContacts);
         SimpleStringProperty string = new SimpleStringProperty("");
         
         txtSearch.textProperty().bindBidirectional(string);

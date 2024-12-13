@@ -17,7 +17,7 @@
    <children>
       <HBox fx:id="hboxLogin" alignment="CENTER" layoutX="19.0" layoutY="40.0" prefHeight="210.0" prefWidth="782.0" spacing="80.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox fx:id="vBoxLogin" prefHeight="507.0" prefWidth="302.0" spacing="15.0" HBox.hgrow="ALWAYS">
+            <VBox fx:id="vBoxLogin" prefHeight="507.0" prefWidth="302.0" spacing="20.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label fx:id="lblLogMail" text="E-mail" />
                   <TextField fx:id="txtLogMail" />
@@ -39,24 +39,24 @@
                   </HBox>
                </children>
                <padding>
-                  <Insets left="20.0" top="116.0" />
+                  <Insets left="20.0" right="30.0" top="127.0" />
                </padding>
             </VBox>
-            <VBox fx:id="vboxSignin" prefHeight="507.0" prefWidth="351.0" spacing="15.0" HBox.hgrow="ALWAYS">
+            <VBox fx:id="vboxSignin" prefHeight="507.0" prefWidth="351.0" spacing="7.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label fx:id="lblSignMail" text="E-mail" />
                   <TextField fx:id="txtSignMail" onKeyPressed="#keyEmailSign" />
-                  <Label fx:id="lblErrorEmail" prefHeight="42.0" prefWidth="314.0" />
+                  <Label fx:id="lblErrorEmail" />
                   <Label fx:id="lblSignPass" text="Password" />
                   <PasswordField fx:id="txtSignPass" onKeyPressed="#keyPassSign" />
-                  <Label fx:id="lblErrorPass" prefHeight="47.0" prefWidth="350.0" />
+                  <Label fx:id="lblErrorPass" />
                   <Label fx:id="lblSignConfirm" layoutX="10.0" layoutY="10.0" text="Confirm password" />
                   <PasswordField fx:id="txtConfirmPass" layoutX="30.0" layoutY="168.0" onKeyPressed="#keyConfirmPass" />
-                  <Label fx:id="lblPassInequals" prefHeight="32.0" prefWidth="345.0" />
+                  <Label fx:id="lblPassInequals" />
                   <Button fx:id="btnSign" mnemonicParsing="false" onAction="#actionSignin" text="Sign-in" />
                </children>
                <padding>
-                  <Insets left="20.0" right="20.0" top="20.0" />
+                  <Insets left="20.0" right="20.0" top="60.0" />
                </padding>
             </VBox>
          </children>
