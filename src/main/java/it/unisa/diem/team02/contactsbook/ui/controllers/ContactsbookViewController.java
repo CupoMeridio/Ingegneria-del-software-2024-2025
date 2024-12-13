@@ -434,7 +434,8 @@ public class ContactsbookViewController implements Initializable {
         if (selectedFile!=null)
             try {
                 contactbook.caricaDaFile(selectedFile);
-                for(Contact c : contactbook.getDbContact())
+                System.out.println(contactbook.getContacts());
+                for(Contact c : contactbook.getContacts())
                 try {
                         database.insertContact(Database.connection, "contatti", c, Database.user.getEmail());
                     } catch (SQLException ex) {
