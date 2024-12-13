@@ -139,7 +139,7 @@ public class Contactbook {
     * @throws FileNotFoundException Se il file non viene trovato.
     * @throws IOException Se si verifica un errore durante la scrittura nel file.
     */
-    public void salvaSuFile(File filename) throws IOException{
+    public void saveOnFile(File filename) throws IOException{
         try(PrintWriter pw=new PrintWriter(new BufferedWriter(new FileWriter(filename)))){
             pw.println("NOME;COGNOME;NUMERO 1; NUMERO 2; NUMERO 3;EMAIL 1;EMAIL 2; EMAIL 3; Tag;");
             for (Contact c : contacts){
@@ -205,7 +205,7 @@ public class Contactbook {
     * @throws IOException Se si verifica un errore durante la lettura del file.
     * @throws ClassNotFoundException Se il tipo di dato non è trovato durante il caricamento dei dati.
     */
-    public void caricaDaFile(File filename) throws IOException{
+    public void loadFromFile(File filename) throws IOException{
         
         try(BufferedReader br=new BufferedReader(new FileReader(filename))){
             if (br.readLine() == null) return;

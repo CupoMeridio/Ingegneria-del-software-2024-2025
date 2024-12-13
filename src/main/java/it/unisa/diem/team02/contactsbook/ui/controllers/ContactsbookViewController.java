@@ -433,7 +433,7 @@ public class ContactsbookViewController implements Initializable {
         
         if (selectedFile!=null)
             try {
-                contactbook.caricaDaFile(selectedFile);
+                contactbook.loadFromFile(selectedFile);
                 for(Contact c : contactbook.getDbContact())
                 try {
                         database.insertContact(Database.connection, "contatti", c, Database.user.getEmail());
@@ -478,7 +478,7 @@ public class ContactsbookViewController implements Initializable {
         
         if (selectedFile!=null)
             try {
-                contactbook.salvaSuFile(selectedFile);
+                contactbook.saveOnFile(selectedFile);
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Operation completed");
                 alert.setHeaderText("");

@@ -1,3 +1,5 @@
+package it.unisa.diem.team02.contactsbook.model;
+
 import it.unisa.diem.team02.contactsbook.model.Contact;
 import it.unisa.diem.team02.contactsbook.model.Contactbook;
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,9 +22,12 @@ public class ContactbookTest {
         
     }
     
-    
-  
-    
+    /**
+     *
+     * Test per l'aggiunta di un nuovo contatto nella rubrica.
+     * 
+     */
+   
     
     @Test
     public void testAddContact() {
@@ -30,7 +35,14 @@ public class ContactbookTest {
         ObservableList<Contact> contacts = contactbook.getContacts();
         assertTrue(contacts.contains(contact1));
     }
-
+    
+    
+    /**
+     *
+     * Test per la cancellazione di un nuovo contatto dalla rubrica.
+     * 
+     */
+    
     @Test
     public void testDeleteContact() {
         contactbook.add(contact1);
@@ -38,13 +50,21 @@ public class ContactbookTest {
         ObservableList<Contact> contacts = contactbook.getContacts();
         assertFalse(contacts.contains(contact1));
     }
-
+    
+    /**
+     * Test del metodo containsContact.* 
+     */
+    
     @Test
     public void testContainsContact() {
         contactbook.add(contact1);
         assertTrue(contactbook.contains(contact1));
         assertFalse(contactbook.contains(contact2));
     }
+    
+    /**
+     * Test del metodo containsContactWithOldContac con due contatti distinti.
+     */
 
     @Test
     public void testContainsContactWithOldContact() {
@@ -54,26 +74,35 @@ public class ContactbookTest {
         assertFalse(contactbook.contains(newContact, contact2));
         assertTrue(contactbook.contains(newContact, contact1));
     }
-
+    
+    /**
+     * Test del metodo saveOnFile di un contatto.
+     */
+    
+    
     @Test
-    public void testSalvaSuFile() throws IOException {
+    public void testSaveOnFile() throws IOException {
         contactbook.add(contact1);
         File file = new File("contacts.csv");
-        contactbook.salvaSuFile(file);
+        contactbook.saveOnFile(file);
         assertTrue(file.exists());
         file.delete();
     }
-
+    
+    /**
+     * Test del metodo loadFromFile di un contatto
+     */
+    
     @Test
-    public void testCaricaDaFile() throws IOException {
+    public void testLoadFromFile() throws IOException {
         File file = new File("contacts.csv");
         contactbook.add(contact1);
-        contactbook.salvaSuFile(file);
-
+        contactbook.saveOnFile(file);
         Contactbook newContactbook = new Contactbook();
-        newContactbook.caricaDaFile(file);
+        newContactbook.loadFromFile(file);
         ObservableList<Contact> contacts = newContactbook.getContacts();
         assertTrue(contacts.contains(contact1));
         file.delete();
     }
+    
 }

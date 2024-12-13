@@ -447,15 +447,14 @@ public class Contact implements Comparable<Contact>{
 
     @Override
     public int compareTo(Contact o) {
-        
+    
         if(!this.surname.equals(o.getSurname()))
             return this.surname.compareTo(o.getSurname());
         return this.name.compareTo(o.getName());
     
-    }
-    
 }
     
+}
     
     
   

@@ -7,7 +7,7 @@ class App {
     + {static} void setRoot(String fxml)
     - {static} Parent loadFXML(String fxml)
     + void main(String[] args)
-}+
+}
 
 class Database {
     + Connection connectDB(String dbname, String user, String password)
@@ -127,9 +127,10 @@ class AddViewController {
     + void setContactbook(Contactbook c)
     + void actionAdd(ActionEvent event)
     + void actionCanel(ActionEvent event)
-    - void onKeyReleasedEmail1()
-    - void onKeyReleasedEmail2()
-    - void onKeyReleasedNumber1()
+    - void onKeyReleasedEmail1(KeyEvent event)
+    - void onKeyReleasedEmail2(KeyEvent event)
+    - void onKeyReleasedNumber1(KeyEvent event)
+    - void onKeyReleasedNumber2(KeyEvent event)
 }
 
 class ModifyViewController {
@@ -141,6 +142,10 @@ class ModifyViewController {
     + void setContactbook(Contactbook c)
     + void setContact(Contact contact)
     + void actionModify(ActionEvent event)
+    - void onKeyReleasedEmail1(KeyEvent event)
+    - void onKeyReleasedEmail2(KeyEvent event)
+    - void onKeyReleasedNumber1(KeyEvent event)
+    - void onKeyReleasedNumber2(KeyEvent event)
 }
 
 class ContactsbookViewController {
