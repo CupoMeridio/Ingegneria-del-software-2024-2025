@@ -385,7 +385,7 @@ private void txtConfirmPassInitialize() {
             }
             else if(esito==1){
                 lblLogErr.setText("Login effettuato con successo.");
-                Database.user= new User(txtLogMail.getText(), txtLogPass.getText());
+                Database.user= new User(txtLogPass.getText(), txtLogMail.getText());
                 try {
                     App.setRoot("ContactsbookView");
                 } catch (IOException ex) {

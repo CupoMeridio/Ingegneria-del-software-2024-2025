@@ -255,11 +255,7 @@ public class ContactsbookViewController implements Initializable {
               
               Contact selectedContact = tblvRubrica.getSelectionModel().getSelectedItem();
               
-            try {
-                database.modifyContact(Database.connection, "contatti", selectedContact, selectedContact.getEmail());
-            } catch (SQLException ex) {
-                Logger.getLogger(ContactsbookViewController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
               
               modifyC.setContactbook(contactbook);
               modifyC.setContact(selectedContact);
