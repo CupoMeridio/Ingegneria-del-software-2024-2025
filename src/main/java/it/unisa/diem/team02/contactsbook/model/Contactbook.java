@@ -10,6 +10,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -24,6 +26,7 @@ import javafx.collections.ObservableList;
  */
 public class Contactbook {
     private ObservableList<Contact> contacts;
+    private List<Contact> DbContact;
     
     /**
      * @brief Crea un nuovo oggetto Contactbook inizializzando la lisra di contatti.
@@ -32,6 +35,7 @@ public class Contactbook {
      */
     public Contactbook(){
         contacts=FXCollections.observableArrayList();
+        DbContact = new ArrayList<>();
     }
 
     /**
@@ -58,8 +62,18 @@ public class Contactbook {
     public void delete(Contact c){
         contacts.remove(c);
     }
+
+    /**
+     * @brief Metodo getter per ottenere la lista DbContact "usata" dal database.
+     * 
+     * @return Restituisce un'arraylist
+     */
+    public List<Contact> getDbContact() {
+        return DbContact;
+    }
     
     
+ 
     /**
      * @brief Aggiunge il contatto passato come parametro alla lista dei contatti.
      * 
@@ -236,7 +250,7 @@ public class Contactbook {
                     }
                     }
                 }
-                Database database = new Database();
+                DbContact.add(c);
                 contacts.add(c);
             }
         }

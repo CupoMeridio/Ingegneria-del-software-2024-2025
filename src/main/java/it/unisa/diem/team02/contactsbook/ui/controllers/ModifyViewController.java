@@ -299,11 +299,13 @@ private void actionModify(ActionEvent event) throws IOException {
     newContact.setEmail(emails);
     newContact.setTag(tags);
 
+
+    
     // Verifica se il contatto esiste già nella lista
     if (!contactbook.contains(newContact, oldContact)){
         // Se il contatto non è un duplicato, sostituisci il vecchio contatto con il nuovo
-        try {
-            database.modifyContact(Database.connection, "Contatti", newContact, Database.user.getEmail());
+            try {
+            database.modifyContact(Database.connection, "contatti", newContact, Database.user.getEmail());
         } catch (SQLException ex) {
             Logger.getLogger(ModifyViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -329,7 +331,7 @@ private void actionModify(ActionEvent event) throws IOException {
         if (duplicateC.getBoolean()) {
             
             try {
-                database.modifyContact(Database.connection, "Contatti", newContact, Database.user.getEmail());
+                database.modifyContact(Database.connection, "contatti", newContact, Database.user.getEmail());
             } catch (SQLException ex) {
                 Logger.getLogger(ModifyViewController.class.getName()).log(Level.SEVERE, null, ex);
             }

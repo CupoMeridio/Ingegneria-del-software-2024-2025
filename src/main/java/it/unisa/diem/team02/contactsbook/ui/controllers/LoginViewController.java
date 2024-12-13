@@ -369,8 +369,8 @@ private void txtConfirmPassInitialize() {
     @FXML
     private void actionLogin(ActionEvent event) {
         Database database = new Database();
-        //Database.connection = database.ConnectionDB("rubrica", "avnadmin", "AVNS_rgkdmIqyKlbMdHqenly");
-          Database.connection = database.ConnectionDB("rubrica", "postgres", "postgres");
+          Database.connection = database.ConnectionDB("rubrica", "avnadmin", "AVNS_rgkdmIqyKlbMdHqenly");
+        //Database.connection = database.ConnectionDB("rubrica", "postgres", "postgres");
         try {
             int esito = database.checkLogin(Database.connection, "utenti", txtLogMail.getText(), txtLogPass.getText());
              if(esito==0){
@@ -421,10 +421,10 @@ private void txtConfirmPassInitialize() {
     @FXML
     private void actionSignin(ActionEvent event) {
         Database database= new Database();
-        //Database.connection = database.ConnectionDB("rubrica", "avnadmin", "AVNS_rgkdmIqyKlbMdHqenly");
-          Database.connection = database.ConnectionDB("rubrica", "postgres", "postgres");
+          Database.connection = database.ConnectionDB("rubrica", "avnadmin", "AVNS_rgkdmIqyKlbMdHqenly");
+        //Database.connection = database.ConnectionDB("rubrica", "postgres", "postgres");
         try {
-            database.insertUser(Database.connection, "utenti" , txtSignMail.getText(), txtSignPass.getText());
+            database.insertUser(Database.connection, "utenti" ,txtSignMail.getText(), txtSignPass.getText());
         } catch (SQLException ex) {
             txtSignError.setText("L'email è già associata ad un'account.\nEsegui il login.");
             Database.connection=null;
@@ -436,7 +436,7 @@ private void txtConfirmPassInitialize() {
             }
         }
         
-        Database.user = new User(txtSignMail.getText(),txtSignPass.getText());
+        Database.user = new User(txtSignPass.getText(), txtSignMail.getText());
         
         try {
                App.setRoot("ContactsbookView");

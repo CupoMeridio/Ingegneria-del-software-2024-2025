@@ -453,6 +453,7 @@ public class Contact implements Comparable<Contact>{
         return this.name.compareTo(o.getName());
     
     }
+    
 }
     
     

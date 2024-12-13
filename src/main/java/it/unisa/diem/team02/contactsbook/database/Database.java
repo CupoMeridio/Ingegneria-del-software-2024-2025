@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.mindrot.jbcrypt.BCrypt;
@@ -48,8 +50,8 @@ public class Database  {
         try {
             Class.forName("org.postgresql.Driver");
             System.out.print("Driver trovato ");
-            //conn=DriverManager.getConnection("jdbc:postgresql://rubrica-mattiasanzari2003-19e7.k.aivencloud.com:14305/"+dbname+"?ssl=require&user="+user+"&password="+password);   connessione database online
-              conn= DriverManager.getConnection("jdbc:postgresql://localhost:5432/"+dbname,user,password); //Conessione database offline
+              conn= DriverManager.getConnection("jdbc:postgresql://rubrica-mattiasanzari2003-19e7.k.aivencloud.com:14305/"+dbname+"?ssl=require&user="+user+"&password="+password); //connessione database online
+            //conn= DriverManager.getConnection("jdbc:postgresql://localhost:5432/"+dbname,user,password); //Conessione database offline
             if(conn!=null){
                 System.out.println("Connessione Stabilita");
             }else{
@@ -90,6 +92,7 @@ public class Database  {
            statment= conn.createStatement();
            statment.executeUpdate(query);
            System.out.println("Utente inserito");
+           statment.close();
         
     }
     
@@ -128,12 +131,12 @@ public class Database  {
                 
                /* System.out.print(email+" ");
                 System.out.print(password+" ");*/
-                
             }
+            statement.close(); 
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
+        
         return (HashMap<String, String>) table;
     }
     
@@ -186,7 +189,8 @@ public class Database  {
                        esito= 0;// email corretta e password sbagliata
                     }
                 }while(rs.next());
-           }       
+           }
+        statment.close(); 
         return esito;
     }
     
@@ -246,13 +250,13 @@ public class Database  {
     */
 
     
-   public HashMap<String, Contact> getContact(Connection conn, String tableName,String email){
+   public TreeSet<Contact> getContact(Connection conn, String tableName,String email){
         
         Statement statement;
         ResultSet rs= null;
-        Map <String,Contact>table=null;
+        Set <Contact>table=null;
         try {
-            table =  new HashMap();
+            table =  new TreeSet();
             String query= String.format("select * from %s where email='%s'", tableName,email);
             statement= conn.createStatement();
             rs= statement.executeQuery(query);
@@ -264,13 +268,14 @@ public class Database  {
                 String tag = rs.getString("tag");
                 String em_cont = rs.getString("email_contact");
                 String ID = rs.getString("id");
-                table.put(ID, createContact(name,surname,numeri,tag,em_cont,ID));
+                table.add(createContact(name,surname,numeri,tag,em_cont,ID));
             }
+            statement.close(); 
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
     
-        return (HashMap<String, Contact>) table;
+        return (TreeSet<Contact>) table;
     }
     
     /**
@@ -374,6 +379,7 @@ public class Database  {
            statment= conn.createStatement();
            statment.executeUpdate(query);
            System.out.println("Contatto inserito");
+           statment.close(); 
         
     }
     
@@ -427,7 +433,7 @@ public class Database  {
          Statement statment;
            String nm=cont.getName();
            String srn=cont.getSurname();
-           String ID= String.valueOf(cont.getID());
+           String ID= cont.getID();
            
            ArrayList<String> e = cont.getEmailList();
            ArrayList<String> n = cont.getNumberList();
@@ -447,11 +453,12 @@ public class Database  {
            String tag= formattaOut(St);
            
            
-      String query = String.format("UPDATE %s SET email='%s', name='%s', surname='%s', number='%s', tag='%s', email_contact='%s', id='%s' WHERE email='%s'", tableName, email_Utente, nm, srn, number, tag, email, ID, email_Utente);
+      String query = String.format("UPDATE %s SET name='%s', surname='%s', number='%s', tag='%s', email_contact='%s' WHERE email='%s' AND id='%s'", tableName, nm, srn, number, tag, email, email_Utente, ID);
       
       statment= conn.createStatement();
       statment.executeUpdate(query);
       System.out.println("Contatto modificato");
+      statment.close(); 
     }
     
    /**
@@ -481,6 +488,7 @@ public class Database  {
        statment= conn.createStatement();
        statment.execute(query);
        System.out.print("\n Dato eliminato per ID");
+       statment.close(); 
     }
     /**
     * 
@@ -524,7 +532,8 @@ public class Database  {
             if (rs.next()) { 
              numero_righe = rs.getInt("rowcount"); 
             System.out.println("Numero di righe: " + numero_righe); 
-        }
+            }
+            statement.close(); 
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }   
