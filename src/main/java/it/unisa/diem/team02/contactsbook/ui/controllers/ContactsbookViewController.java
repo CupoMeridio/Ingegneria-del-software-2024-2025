@@ -17,6 +17,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Map;
 import java.net.URL;
+import java.sql.Connection;
 import java.util.Comparator;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -236,6 +237,7 @@ public class ContactsbookViewController implements Initializable {
  */
     @FXML
     public void actionModify(ActionEvent event) throws IOException{
+              Database database = new Database();
               FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ModifyView.fxml"));
             
               Parent root = loader.load();
@@ -252,6 +254,13 @@ public class ContactsbookViewController implements Initializable {
               newStage.show();
               
               Contact selectedContact = tblvRubrica.getSelectionModel().getSelectedItem();
+              
+            try {
+                database.modifyContact(Database.connection, "contatti", selectedContact, selectedContact.getEmail());
+            } catch (SQLException ex) {
+                Logger.getLogger(ContactsbookViewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+              
               modifyC.setContactbook(contactbook);
               modifyC.setContact(selectedContact);
     }
@@ -319,7 +328,13 @@ public class ContactsbookViewController implements Initializable {
  */
     @FXML
     private void actionDelete(ActionEvent event) {
+        Database database = new Database ();
         Contact selectedContact = tblvRubrica.getSelectionModel().getSelectedItem();
+        try {
+            database.removeContactByID(Database.connection, "contatti", selectedContact.getID(), Database.user.getEmail());
+        } catch (SQLException ex){
+            Logger.getLogger(ContactsbookViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         contactbook.delete(selectedContact); 
     }
     
