@@ -1,6 +1,7 @@
 package it.unisa.diem.team02.contactsbook.ui.controllers;
 
 import it.unisa.diem.team02.App;
+import it.unisa.diem.team02.contactsbook.database.Database;
 import it.unisa.diem.team02.contactsbook.model.Contact;
 import it.unisa.diem.team02.contactsbook.model.Contactbook;
 import it.unisa.diem.team02.contactsbook.model.Filter;
@@ -13,7 +14,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.Map;
 import java.net.URL;
+import java.util.Comparator;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -96,9 +100,8 @@ public class ContactsbookViewController implements Initializable {
     private Button btnLogout;
     
     private Contactbook contactbook=new Contactbook();
-    private Filter filter = new Filter(contactbook.getContacts());
-    //private SortedList sortedList = new SortedList(contactbook.getContacts());
-    
+    private SortedList sortedList = new SortedList(contactbook.getContacts());
+    private Filter filter = new Filter(sortedList);
 
 /**
  * @brief Inizializza il controller e configura gli elementi dell'interfaccia utente.
@@ -116,16 +119,12 @@ public class ContactsbookViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         createList();
-        initializeList();
         btnMofidyInitialize();
         btnDeleteInitialize();
-        initializeSearch(filter.getFlContacts());
-        mbtnFilter.setOnShown(event->{
-           actionFilter(filter.getFlContacts());
-        });
-        //tblvRubrica.setItems(sortedList);
-        //sortedList.comparatorProperty().bind(tblvRubrica.comparatorProperty());
-   
+        initializeSearch();
+        mbtnFilter.setOnShown(event->{actionFilter();});
+        tblvRubricaInizialize();
+       
         
     }    
     
@@ -142,14 +141,45 @@ public class ContactsbookViewController implements Initializable {
         clmNum.setCellValueFactory(new PropertyValueFactory("number"));
         clmEmail.setCellValueFactory(new PropertyValueFactory("email"));
         clmTag.setCellValueFactory(new PropertyValueFactory("tag"));
-        tblvRubrica.setItems(contactbook.getContacts());
+
+        sortedList.comparatorProperty().bind(tblvRubrica.comparatorProperty());
+        contactbook.getContacts().sort(Comparator.comparing(Contact::getSurname));
+        
+        tblvRubrica.setItems(filter.getFlContacts());
+        
+        
+        
+        
     }
     
-    /**
-     * Inizializza la lista osservabile con i contatti presenti nel database/file locale.
-     */
-    public void initializeList(){
-        
+
+/**
+
+ * @brief Inizializza la tabella dei contatti recuperando i contatti dal database.
+ *
+ * Questo metodo recupera un elenco di contatti dal database e li aggiunge alla raccolta `contactbook`.
+ *
+ *@pre
+ * - `Database.connection` deve essere una connessione al database valida e aperta.
+ * - `Database.user` deve essere inizializzato correttamente con un indirizzo email valido.
+ * - La tabella del database `contatti` deve esistere ed essere accessibile.
+ *
+ * @post
+ * - Tutti i contatti recuperati dal database vengono aggiunti alla raccolta `contactbook`.
+ *
+ * @invariant
+ * - La raccolta `contactbook` rimane coerente, contenente solo oggetti `Contact` validi.
+ */
+
+    public void tblvRubricaInizialize(){
+
+        System.out.println("Sto recuperando i contatti");
+        Database database = new Database();
+        Map<String, Contact> listaContatti = database.getContact(Database.connection, "contatti",Database.user.getEmail());
+        for (Contact c : listaContatti.values()){
+            contactbook.add(c);    
+        }
+        System.out.println(listaContatti);
     }
     
 /**
@@ -231,8 +261,8 @@ public class ContactsbookViewController implements Initializable {
 /**
  * @brief Inizializza il comportamento del bottone di modifica.
  * 
- * Questo metodo imposta lo stato del bottone di modifica (`btnModify`) su disabilitato. 
- * Inoltre, aggiunge un listener alla selezione della tabella dei contatti (`tblvRubrica`). Quando 
+ * Questo metodo imposta lo stato del bottone di modifica (btnModify) su disabilitato. 
+ * Inoltre, aggiunge un listener alla selezione della tabella dei contatti (tblvRubrica). Quando 
  * viene selezionato un contatto, il bottone di modifica viene abilitato; se nessun contatto è 
  * selezionato, il bottone viene disabilitato.
  * 
@@ -252,8 +282,8 @@ public class ContactsbookViewController implements Initializable {
 /**
  * @brief Inizializza il comportamento del bottone di eliminazione.
  * 
- * Questo metodo imposta lo stato del bottone di eliminazione (`btnDelete`) su disabilitato. 
- * Viene poi aggiunto un listener alla selezione della tabella dei contatti (`tblvRubrica`). Quando
+ * Questo metodo imposta lo stato del bottone di eliminazione (btnDelete) su disabilitato. 
+ * Viene poi aggiunto un listener alla selezione della tabella dei contatti (tblvRubrica). Quando
  * viene selezionato un contatto, il bottone di eliminazione viene abilitato; se nessun contatto 
  * è selezionato, il bottone viene disabilitato.
  * 
@@ -298,13 +328,13 @@ public class ContactsbookViewController implements Initializable {
 /**
  * @brief Applica un filtro alla lista di contatti mostrata nella tabella.
  *
- * Questo metodo imposta la lista filtrata `FilteredList` di contatti sulla tabella `tblvRubrica` 
- * e aggiunge dei listener alle checkbox (`chkmHome`, `chkmJob`, `chkmUni`) per aggiornare il filtro
+ * Questo metodo imposta la lista filtrata FilteredList di contatti sulla tabella tblvRubrica 
+ * e aggiunge dei listener alle checkbox (chkmHome, chkmJob, chkmUni) per aggiornare il filtro
  * ogni volta che una di queste viene selezionata o deselezionata. Ogni cambio di stato nelle checkbox
- * farà chiamare il metodo `updateFilter` di filter per aggiornare la visualizzazione della lista dei contatti.
+ * farà chiamare il metodo updateFilter di filter per aggiornare la visualizzazione della lista dei contatti.
  *
- * @pre La lista `flContacts` deve essere una lista filtrata valida di contatti.
- * @pre La tabella `tblvRubrica` deve essere inizializzata correttamente e pronta per l'aggiornamento.
+ * @pre La lista flContacts deve essere una lista filtrata valida di contatti.
+ * @pre La tabella tblvRubrica deve essere inizializzata correttamente e pronta per l'aggiornamento.
  * @post La lista filtrata viene applicata alla tabella e i listener sono stati aggiunti per monitorare
  *       le modifiche nei checkbox e aggiornare il filtro di conseguenza.
  * @invariant Il filtro sui contatti deve essere applicato correttamente in base alle selezioni delle checkbox.
@@ -313,9 +343,9 @@ public class ContactsbookViewController implements Initializable {
  * 
  * @see Filter
  */
-    private void actionFilter(FilteredList<Contact> flContacts) {
+    private void actionFilter() {
     
-        tblvRubrica.setItems(flContacts);
+        //tblvRubrica.setItems(flContacts);
         chkmHome.selectedProperty().addListener((obs, oldValue, newValue) -> filter.updateFilter(
         txtSearch.getText(),chkmHome.isSelected(),chkmUni.isSelected(),chkmJob.isSelected()));
         
@@ -333,13 +363,13 @@ public class ContactsbookViewController implements Initializable {
     * Questo metodo imposta un campo di ricerca che permette agli utenti di filtrare i contatti 
     * nella rubrica in base ai criteri inseriti nella barra di ricerca. Ogni volta che l'utente 
     * digita un carattere, la lista dei contatti viene filtrata in tempo reale richiamando il metodo 
-    * `updateFilter` di filter per aggiornare la visualizzazione della lista dei contatti.. La ricerca può essere 
+    * updateFilter di filter per aggiornare la visualizzazione della lista dei contatti.. La ricerca può essere 
     * effettuata su nome, cognome, numero di telefono ed e-mail. 
     *
     * 
     * 
-    * @pre La lista `flContacts` deve essere una lista filtrata valida di contatti.
-    * @pre La tabella `tblvRubrica` deve essere inizializzata correttamente e pronta per l'aggiornamento.
+    * @pre La lista flContacts deve essere una lista filtrata valida di contatti.
+    * @pre La tabella tblvRubrica deve essere inizializzata correttamente e pronta per l'aggiornamento.
     * 
     * @invariant Il filtro sui contatti deve essere applicato correttamente in base alle selezioni delle checkbox.
     *
@@ -352,9 +382,9 @@ public class ContactsbookViewController implements Initializable {
     * @see Filter
     * 
     */
-    private void initializeSearch(FilteredList<Contact> flContacts) {
+    private void initializeSearch() {
         
-        tblvRubrica.setItems(flContacts);
+        
         SimpleStringProperty string = new SimpleStringProperty("");
         
         txtSearch.textProperty().bindBidirectional(string);
@@ -372,10 +402,10 @@ public class ContactsbookViewController implements Initializable {
  * 
  * Questo metodo permette all'utente di selezionare un file CSV tramite un dialogo di selezione 
  * file. Ogni riga del file CSV viene letta e i dati vengono utilizzati per creare nuovi oggetti 
- * `Contact`, che vengono successivamente aggiunti alla rubrica. Il formato del file CSV 
+ * Contact, che vengono successivamente aggiunti alla rubrica. Il formato del file CSV 
  * deve essere conforme alla struttura prevista, con i campi separati da punto e virgola.
  * 
- * @details Il metodo apre un file CSV selezionato tramite un `FileChooser`, legge ogni riga e 
+ * @details Il metodo apre un file CSV selezionato tramite un FileChooser, legge ogni riga e 
  * divide i dati nei rispettivi campi (nome, cognome, numeri di telefono, e-mail, tag). I contatti 
  * creati vengono aggiunti alla rubrica. Prima di aggiungere un campo (ad esempio numero di telefono) al contatto, si verifica
  * che questo non sia vuoto.
@@ -456,7 +486,7 @@ public class ContactsbookViewController implements Initializable {
  * Dopo il logout, l'applicazione cambia la vista corrente alla schermata di login.
  * 
  * @details Quando l'utente esegue il logout, il metodo cerca di cambiare la vista della 
- *           finestra principale a quella di login utilizzando il metodo `App.setRoot()`.
+ *           finestra principale a quella di login utilizzando il metodo App.setRoot().
  *           In caso di errore durante il caricamento della vista, viene loggato un errore.
  * 
  * @pre L'utente deve aver effettuato l'accesso.

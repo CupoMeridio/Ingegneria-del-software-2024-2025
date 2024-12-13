@@ -3,6 +3,7 @@ package it.unisa.diem.team02.contactsbook.database;
 
 import it.unisa.diem.team02.contactsbook.model.Contact;
 import it.unisa.diem.team02.contactsbook.model.Tag;
+import it.unisa.diem.team02.contactsbook.model.User;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -23,7 +24,8 @@ import org.mindrot.jbcrypt.BCrypt;
  * @author team02
  */
 public class Database  {
-        
+    static public Connection connection; ///Variabile statica che memorizza lo stato della connesione con il database
+    static public User user;
 /**
  * 
  * @brief Stabilisce una connessione al database PostgreSQL.
@@ -39,7 +41,6 @@ public class Database  {
  * @throws SQLException Se si verifica un errore durante la connessione.
  * 
  */
-    
     public Connection ConnectionDB(String dbname, String user, String password) {
         Connection conn=null;
         
@@ -47,7 +48,8 @@ public class Database  {
         try {
             Class.forName("org.postgresql.Driver");
             System.out.print("Driver trovato ");
-            conn=DriverManager.getConnection("jdbc:postgresql://rubrica-mattiasanzari2003-19e7.k.aivencloud.com:14305/"+dbname+"?ssl=require&user="+user+"&password="+password);
+            //conn=DriverManager.getConnection("jdbc:postgresql://rubrica-mattiasanzari2003-19e7.k.aivencloud.com:14305/"+dbname+"?ssl=require&user="+user+"&password="+password);   connessione database online
+              conn= DriverManager.getConnection("jdbc:postgresql://localhost:5432/"+dbname,user,password); //Conessione database offline
             if(conn!=null){
                 System.out.println("Connessione Stabilita");
             }else{
@@ -170,6 +172,7 @@ public class Database  {
                 esito= -1;// -1 perchè email non è presente nel db
             }else{
                 do{
+                    rs.next();
                     String em=rs.getString("email");
                     String hashed = rs.getString("password");
                     System.out.print("\n"+email+"   checkLogin");
@@ -470,7 +473,7 @@ public class Database  {
     * @throws SQLException Se si verifica un errore durante l'interrogazione.
     * 
     */
-     public void remuveContactByID(Connection conn, String tableName, String ID, String email) throws SQLException{
+     public void removeContactByID(Connection conn, String tableName, String ID, String email) throws SQLException{
     
        Statement statment;
        

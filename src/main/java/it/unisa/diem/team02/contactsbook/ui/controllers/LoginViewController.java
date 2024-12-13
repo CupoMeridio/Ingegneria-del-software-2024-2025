@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import it.unisa.diem.team02.App;
+import it.unisa.diem.team02.contactsbook.model.User;
 import java.io.IOException;
 import javafx.scene.input.KeyEvent;
 
@@ -81,7 +82,6 @@ public class LoginViewController implements Initializable {
     private HBox hboxLogin;
     
     @FXML
-    
     private VBox vboxSignin;
     
     @FXML
@@ -102,11 +102,13 @@ public class LoginViewController implements Initializable {
     @FXML
     private Button btnLoginLocal;
     
+    @FXML
+    private Label txtSignError;
+    
     private BooleanProperty bMail=new SimpleBooleanProperty(true);
     private BooleanProperty bPass=new SimpleBooleanProperty(true);
     private BooleanProperty bConfirm=new SimpleBooleanProperty(true);
     
-    static Connection connection; ///Variabile statica che meorizza lo stato della connesione con il database
 
 /**
  * @brief Inizializza le proprietà dell'interfaccia utente per la registrazione.
@@ -128,10 +130,14 @@ public class LoginViewController implements Initializable {
  * 
  */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        btnSign.disableProperty().bind(Bindings.or(txtSignPassInitialize(), txtSignMailInitialize()).or(txtConfirmPassInitialize()).or(bMail).or(bPass).or(bConfirm));
-        connection = null;
-    }
+public void initialize(URL url, ResourceBundle rb) {
+    txtSignMailInitialize();
+    txtSignPassInitialize();
+    txtConfirmPassInitialize();
+
+    btnSign.disableProperty().bind(bMail.or(bPass).or(bConfirm));
+    Database.connection = null;
+}
     
     
 /**
@@ -161,24 +167,19 @@ public class LoginViewController implements Initializable {
  * 
  * @note Lo stile del bordo è modificato tramite CSS inline.
  */
-    private BooleanProperty txtSignMailInitialize(){
-        BooleanProperty observableBoolean = new SimpleBooleanProperty(true);
-        txtSignMail.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (isValidEmail(newValue)) {
-                txtSignMail.setStyle("-fx-border-color: green;");  ///<  Bordo verde se valido
-                                                                 
-                observableBoolean.set(false);
-                lblErrorEmail.setText("");
-                
-            } else {
-                txtSignMail.setStyle("-fx-border-color: red;");    ///<  Bordo rosso se non valido
-                                                           
-                lblErrorEmail.setText("Invalid email address");
-                
-            }
-        });
-     return observableBoolean;   
-    }
+private void txtSignMailInitialize() {
+    txtSignMail.textProperty().addListener((observable, oldValue, newValue) -> {
+        if (isValidEmail(newValue)) {
+            txtSignMail.setStyle("-fx-border-color: green;");
+            bMail.set(false);
+            lblErrorEmail.setText("");
+        } else {
+            txtSignMail.setStyle("-fx-border-color: red;");
+            bMail.set(true);
+            lblErrorEmail.setText("Invalid email address");
+        }
+    });
+}
     
 /**
  * @brief Inizializza e gestisce la validazione del campo password per la registrazione.
@@ -207,24 +208,19 @@ public class LoginViewController implements Initializable {
  * 
  * @note Lo stile del bordo è modificato tramite CSS inline.
  */
-    private BooleanProperty txtSignPassInitialize(){
-        BooleanProperty observableBoolean = new SimpleBooleanProperty(true);
-        txtSignPass.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (isValidPassword(newValue)) {
-                txtSignPass.setStyle("-fx-border-color: green;");  ///<  Bordo verde se valido
-                                                                 ///< @lang en Green border if valid
-                observableBoolean.set(false);
-                lblErrorPass.setText("");
-                   
-            } else {
-                txtSignPass.setStyle("-fx-border-color: red;");    ///<  Bordo rosso se non valido
-                                                                 ///< @lang en Red border if invalid
-                lblErrorPass.setText("The password must be 8 characters long and contain a special \ncharacter, an uppercase, " + "a lowercase and a number");
-                
-            }
-        }); 
-        return observableBoolean;
-    }
+private void txtSignPassInitialize() {
+    txtSignPass.textProperty().addListener((observable, oldValue, newValue) -> {
+        if (isValidPassword(newValue)) {
+            txtSignPass.setStyle("-fx-border-color: green;");
+            bPass.set(false);
+            lblErrorPass.setText("");
+        } else {
+            txtSignPass.setStyle("-fx-border-color: red;");
+            bPass.set(true);
+            lblErrorPass.setText("The password must be 8 characters long and contain a special \ncharacter, an uppercase, a lowercase and a number");
+        }
+    });
+}
     
 /**
  * @brief Inizializza e gestisce la validazione del campo di conferma password.
@@ -253,21 +249,19 @@ public class LoginViewController implements Initializable {
  * 
  * @note Lo stile del bordo è modificato tramite CSS inline.
  */
-    private BooleanProperty txtConfirmPassInitialize(){
-        BooleanProperty b=new SimpleBooleanProperty(true);
-        txtConfirmPass.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.equals(txtSignPass.getText())) {
-                txtConfirmPass.setStyle("-fx-border-color: green;");  // Bordo verde se corrispondono
-                lblPassInequals.setText("");
-                b.set(false);
-            } else {
-                txtConfirmPass.setStyle("-fx-border-color: red;");    // Bordo rosso se non corrispondono
-                lblPassInequals.setText("The passwords do not match");
-                
-            }
-        });
-        return b;
-    }
+private void txtConfirmPassInitialize() {
+    txtConfirmPass.textProperty().addListener((observable, oldValue, newValue) -> {
+        if (newValue.equals(txtSignPass.getText())) {
+            txtConfirmPass.setStyle("-fx-border-color: green;");
+            bConfirm.set(false);
+            lblPassInequals.setText("");
+        } else {
+            txtConfirmPass.setStyle("-fx-border-color: red;");
+            bConfirm.set(true);
+            lblPassInequals.setText("The passwords do not match");
+        }
+    });
+}
     
     
     
@@ -374,39 +368,49 @@ public class LoginViewController implements Initializable {
     
     @FXML
     private void actionLogin(ActionEvent event) {
-        Database database= new Database();
-        connection = database.ConnectionDB("rubrica", "postgres", "postgres");
-            try {
-                int controllo=database.checkLogin(connection, "utenti", txtLogMail.getText(), txtLogPass.getText());
-                switch(controllo){
-                    case -1:
-                    lblLogErr.setText("Error. There is no account associated with this email.");
-                    database.CloseConnection(connection);
-                    connection=null;
-                    break;
-                    
-                    case 1:
-                    lblLogErr.setText("Login successfully."); 
-                        try {
-                            App.setRoot("ContactsbookView");
-                        } catch (IOException ex) {
-                            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    break;
-
-                    
-                    case 0:
-                    lblLogErr.setText("Incorrect password.");
-                    database.CloseConnection(connection);
-                    connection=null;
-                    default:
-                    lblLogErr.setText("Oops, something went wrong...");
-                    database.CloseConnection(connection);
-                    connection=null;
-                }
-            } catch (SQLException ex) {
-                lblLogErr.setText("Unable to contact the server, please try again later.");
+        Database database = new Database();
+        //Database.connection = database.ConnectionDB("rubrica", "avnadmin", "AVNS_rgkdmIqyKlbMdHqenly");
+          Database.connection = database.ConnectionDB("rubrica", "postgres", "postgres");
+        try {
+            int esito = database.checkLogin(Database.connection, "utenti", txtLogMail.getText(), txtLogPass.getText());
+             if(esito==0){
+                lblLogErr.setText("Password errata.");
+                database.CloseConnection(database.connection);
+                Database.connection=null;
+             }
+             else if(esito==-1){
+                lblLogErr.setText("Non esiste alcun account legato a questa email.");
+                database.CloseConnection(Database.connection);
+                Database.connection=null;
             }
+            else if(esito==1){
+                lblLogErr.setText("Login effettuato con successo.");
+                Database.user= new User(txtLogMail.getText(), txtLogPass.getText());
+                try {
+                    App.setRoot("ContactsbookView");
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }    
+            }
+            else{
+            lblLogErr.setText("Qualcosa è anadato storto.");
+            database.CloseConnection(Database.connection);
+            Database.connection=null;
+            }
+
+
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                database.CloseConnection(Database.connection);
+            } catch (SQLException ex1) {
+                Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+            Database.connection=null;
+        }
+       
+            
     }
     
     /*
@@ -416,7 +420,29 @@ public class LoginViewController implements Initializable {
     
     @FXML
     private void actionSignin(ActionEvent event) {
+        Database database= new Database();
+        //Database.connection = database.ConnectionDB("rubrica", "avnadmin", "AVNS_rgkdmIqyKlbMdHqenly");
+          Database.connection = database.ConnectionDB("rubrica", "postgres", "postgres");
+        try {
+            database.insertUser(Database.connection, "utenti" , txtSignMail.getText(), txtSignPass.getText());
+        } catch (SQLException ex) {
+            txtSignError.setText("L'email è già associata ad un'account.\nEsegui il login.");
+            Database.connection=null;
+            
+            try {
+                database.CloseConnection(Database.connection);
+            } catch (SQLException ex1) {
+                Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
         
+        Database.user = new User(txtSignMail.getText(),txtSignPass.getText());
+        
+        try {
+               App.setRoot("ContactsbookView");
+            } catch (IOException ex) {
+               Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
     
 /**

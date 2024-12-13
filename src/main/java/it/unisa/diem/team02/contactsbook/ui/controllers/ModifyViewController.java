@@ -1,13 +1,17 @@
 
 package it.unisa.diem.team02.contactsbook.ui.controllers;
 
+import it.unisa.diem.team02.contactsbook.database.Database;
 import it.unisa.diem.team02.contactsbook.model.Contact;
 import it.unisa.diem.team02.contactsbook.model.Contactbook;
 import it.unisa.diem.team02.contactsbook.model.Tag;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -260,6 +264,7 @@ public void setContact(Contact contact) {
  */
     @FXML
 private void actionModify(ActionEvent event) throws IOException {
+    Database database=new Database();
     Contact newContact = new Contact(txtName.getText(), txtSur.getText(), oldContact.getID());
     ArrayList<String> numbers = new ArrayList<>(3);
     ArrayList<String> emails = new ArrayList<>(3);
@@ -297,6 +302,11 @@ private void actionModify(ActionEvent event) throws IOException {
     // Verifica se il contatto esiste già nella lista
     if (!contactbook.contains(newContact, oldContact)){
         // Se il contatto non è un duplicato, sostituisci il vecchio contatto con il nuovo
+        try {
+            database.modifyContact(Database.connection, "Contatti", newContact, Database.user.getEmail());
+        } catch (SQLException ex) {
+            Logger.getLogger(ModifyViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         contactbook.delete(oldContact);
         contactbook.add(newContact);
         Stage stage = (Stage) btnModify.getScene().getWindow();
@@ -317,6 +327,13 @@ private void actionModify(ActionEvent event) throws IOException {
 
         // Se l'utente conferma la modifica, salva il nuovo contatto
         if (duplicateC.getBoolean()) {
+            
+            try {
+                database.modifyContact(Database.connection, "Contatti", newContact, Database.user.getEmail());
+            } catch (SQLException ex) {
+                Logger.getLogger(ModifyViewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             contactbook.delete(oldContact);
             contactbook.add(newContact);
             Stage stage = (Stage) btnModify.getScene().getWindow();
