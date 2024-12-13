@@ -127,6 +127,9 @@ class AddViewController {
     + void setContactbook(Contactbook c)
     + void actionAdd(ActionEvent event)
     + void actionCanel(ActionEvent event)
+    - void onKeyReleasedEmail1()
+    - void onKeyReleasedEmail2()
+    - void onKeyReleasedNumber1()
 }
 
 class ModifyViewController {
