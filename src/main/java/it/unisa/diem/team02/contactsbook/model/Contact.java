@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * 
  * @author team02
  */
-public class Contact{
+public class Contact implements Comparable<Contact>{
     private String name;
     private String surname;
     private ArrayList<String> number;
@@ -443,6 +443,15 @@ public class Contact{
         nanoFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSSSSS");
         String id = now.format(nanoFormatter); 
         return id;
+    }
+
+    @Override
+    public int compareTo(Contact o) {
+        
+        if(!this.surname.equals(o.getSurname()))
+            return this.surname.compareTo(o.getSurname());
+        return this.name.compareTo(o.getName());
+    
     }
 }
     

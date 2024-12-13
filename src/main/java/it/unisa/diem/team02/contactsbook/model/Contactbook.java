@@ -1,5 +1,7 @@
 package it.unisa.diem.team02.contactsbook.model;
 
+import it.unisa.diem.team02.contactsbook.database.Database;
+import it.unisa.diem.team02.contactsbook.ui.controllers.AddViewController;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,6 +9,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -187,6 +192,7 @@ public class Contactbook {
     * @throws ClassNotFoundException Se il tipo di dato non è trovato durante il caricamento dei dati.
     */
     public void caricaDaFile(File filename) throws IOException{
+        
         try(BufferedReader br=new BufferedReader(new FileReader(filename))){
             if (br.readLine() == null) return;
             String line;
@@ -230,7 +236,7 @@ public class Contactbook {
                     }
                     }
                 }
-                
+                Database database = new Database();
                 contacts.add(c);
             }
         }

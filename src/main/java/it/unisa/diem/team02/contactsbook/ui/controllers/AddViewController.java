@@ -1,12 +1,16 @@
 
 package it.unisa.diem.team02.contactsbook.ui.controllers;
 
+import it.unisa.diem.team02.contactsbook.database.Database;
 import it.unisa.diem.team02.contactsbook.model.Contact;
 import it.unisa.diem.team02.contactsbook.model.Contactbook;
 import it.unisa.diem.team02.contactsbook.model.Tag;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -179,6 +183,7 @@ public class AddViewController implements Initializable {
  */
     @FXML
     public void actionAdd(ActionEvent event) throws IOException{
+        Database database = new Database();
         Contact c=new Contact(txtName.getText(), txtSur.getText());
         if (!txtNumber1.getText().isEmpty()) c.addNumber(txtNumber1.getText());
         if (!txtNumber2.getText().isEmpty()) c.addNumber(txtNumber2.getText());
@@ -189,6 +194,7 @@ public class AddViewController implements Initializable {
         if (chkmHome.isSelected()) c.addTag(Tag.Home);
         if (chkmUni.isSelected()) c.addTag(Tag.University);
         if (chkmJob.isSelected()) c.addTag(Tag.Job);
+        
         
         
         if (contactbook.contains(c)){
@@ -205,7 +211,14 @@ public class AddViewController implements Initializable {
             newStage.showAndWait();
                 
             if (duplicateC.getBoolean()){
+                
+                    try {
+                        database.insertContact(Database.connection, "contatti", c, Database.user.getEmail());
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AddViewController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     contactbook.add(c);
+                    
                     Stage stage=(Stage) btnAdd.getScene().getWindow();
                     stage.close();
                 } else {
@@ -214,6 +227,11 @@ public class AddViewController implements Initializable {
                 }       
         }
         else{
+            try {
+                database.insertContact(Database.connection, "contatti", c, Database.user.getEmail());
+                } catch (SQLException ex) {
+                    Logger.getLogger(AddViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             contactbook.add(c);
             Stage stage=(Stage) btnAdd.getScene().getWindow();
             stage.close();

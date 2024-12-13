@@ -17,6 +17,7 @@ public class ContactbookTest {
         contactbook = new Contactbook();
         contact1 = new Contact("Valeria", "Quaranta");
         contact2 = new Contact("Mario", "Rossi");
+        
     }
     
     
