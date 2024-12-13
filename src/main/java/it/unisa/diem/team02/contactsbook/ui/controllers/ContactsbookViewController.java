@@ -416,6 +416,7 @@ public class ContactsbookViewController implements Initializable {
  */
     @FXML
     private void actionImport(ActionEvent event) {
+        Database database = new Database();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Apri un file");
         fileChooser.getExtensionFilters().add(new ExtensionFilter("CSV", "*.csv"));
@@ -426,6 +427,13 @@ public class ContactsbookViewController implements Initializable {
         if (selectedFile!=null)
             try {
                 contactbook.caricaDaFile(selectedFile);
+                for(Contact c : contactbook.getContacts())
+                try {
+                        database.modifyContact(Database.connection, "contatti", c, Database.user.getEmail());
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AddViewController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Operation completed");
                 alert.setHeaderText("");

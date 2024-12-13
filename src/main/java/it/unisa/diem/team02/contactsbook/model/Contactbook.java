@@ -237,11 +237,6 @@ public class Contactbook {
                     }
                 }
                 Database database = new Database();
-                try {
-                        database.insertContact(Database.connection, "contatti", c, Database.user.getEmail());
-                    } catch (SQLException ex) {
-                        Logger.getLogger(AddViewController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
                 contacts.add(c);
             }
         }
