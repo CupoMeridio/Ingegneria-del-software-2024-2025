@@ -22,6 +22,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -258,8 +259,43 @@ public class AddViewController implements Initializable {
     public void actionCancel(ActionEvent event){
         Stage stage=(Stage) btnCanc.getScene().getWindow();
         stage.close();
+    }   
+    
+    @FXML
+    private void onKeyReleasedEmail1(KeyEvent event) {
+        if(txtEmail1.getText().equals("")){
+            if(txtEmail2.getText().equals(""))
+                return;
+            txtEmail1.setText(txtEmail2.getText());
+            txtEmail2.setText(txtEmail3.getText());
+            txtEmail3.setText("");
+        }
     }
 
-        
-        
+    @FXML
+    private void onKeyReleasedEmail2(KeyEvent event) {
+        if (txtEmail2.getText().equals("")){
+            txtEmail2.setText(txtEmail3.getText());
+            txtEmail3.setText("");
+        }
+    }
+
+    @FXML
+    private void onKeyReleasedNumber1(KeyEvent event) {
+        if(txtNumber1.getText().equals("")){
+            if(txtNumber2.getText().equals(""))
+                return;
+            txtNumber1.setText(txtNumber2.getText());
+            txtNumber2.setText(txtNumber3.getText());
+            txtNumber3.setText("");
+        }
+    }
+
+    @FXML
+    private void onKeyReleasedNumber2(KeyEvent event) {
+        if (txtNumber2.getText().equals("")){
+            txtNumber2.setText(txtNumber3.getText());
+            txtNumber3.setText("");
+        }
+    }
 }
