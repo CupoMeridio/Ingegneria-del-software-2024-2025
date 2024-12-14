@@ -30,7 +30,7 @@ public class Contactbook {
 
     
     /**
-     * @brief Crea un nuovo oggetto Contactbook inizializzando la lisra di contatti.
+     * @brief Crea un nuovo oggetto Contactbook inizializzando la lista di contatti.
      * 
      * @post La lista di contatti è inizializzata.
      */
@@ -57,7 +57,8 @@ public class Contactbook {
      * @param c Il contatto da rimuovere dalla rubrica.
      * 
      * @pre La variabile d'istanza contacts deve essere stata inizializzata correttamente.
-     * @post Il contatto non è presente nella lista.
+     * @post Il contatto non è più presente nella lista.
+     * 
      * 
      */
     public void delete(Contact c){

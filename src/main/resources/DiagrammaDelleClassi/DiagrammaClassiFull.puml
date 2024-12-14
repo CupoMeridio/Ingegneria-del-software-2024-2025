@@ -79,8 +79,8 @@ class Contactbook {
     + boolean contains(Contact c)
     + boolean contains(Contact newC, Contact oldC)
     + void initializeList()
-    + void caricaDaFile(File filename)
-    + void salvaSuFile(File filename)
+    + void loadFromFile(File filename)
+    + void saveOnFile(File filename)
 
 }
 
@@ -288,6 +288,9 @@ enum Tag {
 Tag --> Contact : Association
 DuplicateContactViewController -> AddViewController : Association
 DuplicateContactViewController -> ModifyViewController : Association
+AddViewController -> Database : Association
+ContactsbookViewController : Association
+ModifyViewController : Association 
 
 ContactsbookViewController "1" *-- "1" Contactbook : Composition
 ContactsbookViewController "1" *-- "1" Filter : Composition
@@ -296,6 +299,7 @@ Filter "1" o-- "1" Contactbook : Aggregation
 AddViewController "1" o-- "1" Contactbook : Aggregation
 ModifyViewController  "1" o-- "1"  Contactbook : Aggregation 
 Contactbook "1" o-- "0..*" Contact  : Aggregation
+User "1" *-- "1" Database: Aggregation
 
 
 LoginViewController ..> Database : Dependency

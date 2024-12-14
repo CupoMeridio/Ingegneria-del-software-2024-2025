@@ -98,6 +98,7 @@ public class Filter {
      * 
      * 
     */
+    
     public FilteredList<Contact> getFlContacts() {
         return flContacts;
     }
