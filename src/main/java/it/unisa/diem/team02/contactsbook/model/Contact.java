@@ -397,7 +397,7 @@ public class Contact implements Comparable<Contact>{
         
         Contact c = (Contact) o;
         
-        return c.getName().equals(this.getName()) && c.getSurname().equals(this.getSurname());
+        return c.getName().toUpperCase().equals(this.getName().toUpperCase()) && c.getSurname().toUpperCase().equals(this.getSurname().toUpperCase());
     }
     
     /**
