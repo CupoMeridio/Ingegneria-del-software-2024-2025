@@ -434,7 +434,7 @@ public class ContactsbookViewController implements Initializable {
         
         if (selectedFile!=null)
             try {
-                contactbook.caricaDaFile(selectedFile);
+                contactbook.loadFromFile(selectedFile);
                 System.out.println(contactbook.getContacts());
                 for(Contact c : contactbook.getContacts())
                 try {

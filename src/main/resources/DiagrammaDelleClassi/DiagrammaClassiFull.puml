@@ -21,7 +21,7 @@ class Database {
     + void insertContact(Connection conn, String tableName, Contact cont, String email_Utente)
     - String formattaOut(ArrayList<String> s)
     + void modifyContact(Connection conn, String tableName, Contact cont, String email_Utente)
-    + void remuveContactByID(Connection conn, String tableName, String ID, String email)
+    + void removeContactByID(Connection conn, String tableName, String ID, String email)
     + void closeConnection(Connection conn)
     + int getNumberContact(Connection conn, String tableName)
 }
@@ -102,6 +102,28 @@ class Filter {
 }
 
 class LoginViewController {
+    - VBox vBoxLogin
+    - HBox hboxLogin
+    - VBox vboxSignin
+    - Label lblLogMail
+    - TextField txtLogMail
+    - Label lblLogPass
+    - PasswordField txtLogPass
+    - Button btnLogin
+    - Button btnLoginLocal
+    - Label lblSignMail
+    - TextField txtSignMail
+    - Label lblSignPass
+    - PasswordField txtSignPass
+    - Label lblSignConfirm
+    - PasswordField txtConfirmPass
+    - Button btnSign
+    - Label lblErrorPass
+    - Label lblPassInequals
+    - Label lblErrorEmail
+    - Label lblLogErr
+    - Label lblLogOpp
+    - Label txtSignError
     - BooleanProperty bMail
     - BooleanProperty bPass
     - BooleanProperty bConfirm
@@ -121,6 +143,34 @@ class LoginViewController {
 }
 
 class AddViewController {
+    - HBox hboxInsertInfo
+    - HBox hboxName
+    - HBox hboxSur
+    - HBox hboxEmail
+    - HBox hboxNumber
+    - HBox hboxButton
+    - VBox vboxName
+    - VBox vboxSur
+    - VBox vboxEmail
+    - VBox vboxNumber
+    - Label lblName
+    - Label lblSur
+    - Label lblEmail
+    - Label lblNumber
+    - Label lblTag
+    - TextField txtName
+    - TextField txtSur
+    - TextField txtEmail1
+    - TextField txtEmail2
+    - TextField txtEmail3
+    - TextField txtNumber1
+    - TextField txtNumber2
+    - TextField txtNumber3
+    - Button btnAdd
+    - Button btnCanc
+    - CheckBox chkmHome
+    - CheckBox chkmUni
+    - CheckBox chkmJob
     - Contactbook contactbook
     --
     + void initialize(URL url, ResourceBundle rb)
@@ -134,6 +184,34 @@ class AddViewController {
 }
 
 class ModifyViewController {
+    - HBox hboxInsertInfo
+    - HBox hboxName
+    - HBox hboxSur
+    - HBox hboxEmail
+    - HBox hboxNumber
+    - HBox hboxButton
+    - VBox vboxName
+    - VBox vboxSur
+    - VBox vboxEmail
+    - VBox vboxNumber
+    - Label lblName
+    - Label lblSur
+    - Label lblEmail
+    - Label lblNumber
+    - Label lblTag
+    - TextField txtName
+    - TextField txtSur
+    - TextField txtEmail1
+    - TextField txtEmail2
+    - TextField txtEmail3
+    - TextField txtNumber1
+    - TextField txtNumber2
+    - TextField txtNumber3
+    - Button btnAdd
+    - Button btnCanc
+    - CheckBox chkmHome
+    - CheckBox chkmUni
+    - CheckBox chkmJob
     - Contactbook contactbook
     - Contact oldContact
     --
@@ -149,8 +227,29 @@ class ModifyViewController {
 }
 
 class ContactsbookViewController {
+    - AnchorPane anchorUp
+    - AnchorPane anchorBottom
+    - HBox hboxButton
+    - TableView<Contact> tblvRubrica
+    - TableColumn<Contact, String> clmName
+    - TableColumn<Contact, String> clmSur
+    - TableColumn<Contact, String> clmEmail
+    - TableColumn<Contact, String> clmNum
+    - TableColumn<Contact, String> clmTag
+    - TextField txtSearch
+    - MenuButton mbtnFilter
+    - CheckMenuItem chkmHome
+    - CheckMenuItem chkmUni
+    - CheckMenuItem chkmJob
+    - Button btnAdd
+    - Button btnDelete
+    - Button btnModify
+    - Button btnImport
+    - Button btnExport
+    - Button btnLogout
     - Contactbook contactbook
     - Filter filter
+    - SortedList<Contact> sortedContacts
     --
     + void createList()
     + void initializeList()
@@ -168,6 +267,9 @@ class ContactsbookViewController {
 }
 
 class DuplicateContactViewController {
+    - Label lblMessage;
+    - Button btnYes;
+    - Button btnNo;
     - Boolean b
     --
     + void initialize(URL url, ResourceBundle rb)

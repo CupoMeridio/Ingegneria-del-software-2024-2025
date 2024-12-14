@@ -66,7 +66,6 @@ public class ContactTest {
         Test2 = new Contact("Valeria","");
         assertNotNull(Test1);
         assertNotNull(Test2);
-        assertNotNull(Test3);
     }
     
     
@@ -128,6 +127,7 @@ public class ContactTest {
      */
     @Test
     public void testAddNumber() {
+        Test1 = new Contact("Anuar", "Zouhri");
         Test1.addNumber("3393424025");
         String expResult = "3393424025";
         String result = Test1.getNumber();
@@ -139,6 +139,7 @@ public class ContactTest {
      */
     @Test
     public void testGetNumber() {
+        Test2 = new Contact("Valeria","");
         Test2.addNumber("3393424025");
         Test2.addNumber("2238123");
         String expResult = "3393424025\n2238123";
@@ -152,6 +153,7 @@ public class ContactTest {
      */
     @Test
     public void testAddEmail() {
+        Test3 = new Contact("","Postiglione","10");
         Test3.addEmail("vittorio@gmail.it");
         Test3.addEmail("vittorio@gmail.it");
         Test3.addEmail("vitt@gmail.com");
@@ -166,6 +168,7 @@ public class ContactTest {
      */
     @Test
     public void testGetEmail() {
+        Test3 = new Contact("","Postiglione","10");
         String expResult = "";
         String result = Test3.getEmail();
         assertEquals(expResult, result);
@@ -177,6 +180,7 @@ public class ContactTest {
      */
     @Test
     public void testAddTag() {
+        Test1 = new Contact("Anuar", "Zouhri");
         Test1.addTag(Tag.Job);
         Test1.addTag(Tag.University);
         String expResult = "Job\nUniversity";
@@ -190,6 +194,7 @@ public class ContactTest {
      */
     @Test
     public void testGetTag() {
+        Test1 = new Contact("Anuar", "Zouhri");
         Test1.addTag(Tag.Home);
         Test1.addTag(Tag.Job);
         Test1.addTag(Tag.University);
@@ -203,6 +208,7 @@ public class ContactTest {
      */
     @Test
     public void testSetNumberList() {
+        Test1 = new Contact("Anuar", "Zouhri");
         Test1.setNumber(number1);
         assertEquals(number1, Test1.getNumberList()); 
         
@@ -213,6 +219,7 @@ public class ContactTest {
      */
     @Test
     public void testGetNumberList() {
+        Test2 = new Contact("Valeria","");
         Test2.setNumber(number2);
         assertEquals(number2, Test2.getNumberList()); 
         
@@ -223,6 +230,7 @@ public class ContactTest {
      */
     @Test
     public void testSetEmailList() {
+        Test2 = new Contact("Valeria","");
         Test2.setEmail(email1);
         assertEquals(email1, Test2.getEmailList()); 
     }
@@ -232,6 +240,7 @@ public class ContactTest {
      */
     @Test
     public void testGetEmailList() {
+        Test3 = new Contact("","Postiglione","10");
         Test3.setEmail(email2);
         assertEquals(email2, Test3.getEmailList()); 
     }
@@ -241,6 +250,7 @@ public class ContactTest {
      */
     @Test
     public void testSetTagList() {
+        Test1 = new Contact("Anuar", "Zouhri");
         Test1.setTag(tag1);
         assertEquals(tag1, Test1.getTagList()); 
     }
@@ -250,6 +260,7 @@ public class ContactTest {
      */
     @Test
     public void testGetTagList() {
+        Test2 = new Contact("Valeria","");
         Test2.setTag(tag2);
         assertEquals(tag2, Test2.getTagList()); 
     }
@@ -263,6 +274,8 @@ public class ContactTest {
      */
     @Test
     public void testEquals1() {
+        Test1 = new Contact("Anuar", "Zouhri");
+        Test2 = new Contact("Valeria","");
         assertFalse(Test1.equals(Test2));
     
     }
@@ -274,6 +287,7 @@ public class ContactTest {
      */
     @Test
     public void testEquals2() {
+        Test1 = new Contact("Anuar", "Zouhri");
         Contact c = new Contact(Test1.getName(),Test1.getSurname());
         assertTrue(Test1.equals(c));
     
@@ -286,6 +300,8 @@ public class ContactTest {
      */
     @Test
     public void testEquals3() {
+        Test1 = new Contact("Anuar", "Zouhri");
+        Test2 = new Contact("Valeria","");
         Contact c = new Contact(Test1.getName(),Test2.getSurname());
         assertFalse(Test1.equals(c));
     
@@ -298,6 +314,8 @@ public class ContactTest {
      */
     @Test
     public void testEquals4() {
+        Test1 = new Contact("Anuar", "Zouhri");
+        Test2 = new Contact("Valeria","");
         Contact c = new Contact(Test1.getName(),Test2.getSurname());
         assertFalse(Test2.equals(c));
     
