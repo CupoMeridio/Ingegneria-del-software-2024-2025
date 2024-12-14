@@ -153,7 +153,7 @@ public class ModifyViewController implements Initializable {
  * Questo metodo assegna una lista osservabile di contatti alla variabile di istanza `contacts`, che viene poi utilizzata 
  * per gestire dinamicamente la visualizzazione e la modifica dei contatti nell'interfaccia utente.
  * 
- * @param contacts La lista osservabile di contatti da impostare.
+ * @param c La lista osservabile di contatti da impostare.
  * 
  * @pre
  * - Il parametro `contacts` deve essere non nullo e rappresentare una lista valida di oggetti `Contact`.
