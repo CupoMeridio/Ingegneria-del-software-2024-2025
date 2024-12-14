@@ -30,7 +30,7 @@ public class Contactbook {
 
     
     /**
-     * @brief Crea un nuovo oggetto Contactbook inizializzando la lisra di contatti.
+     * @brief Crea un nuovo oggetto Contactbook inizializzando la lista di contatti.
      * 
      * @post La lista di contatti è inizializzata.
      */
@@ -57,7 +57,8 @@ public class Contactbook {
      * @param c Il contatto da rimuovere dalla rubrica.
      * 
      * @pre La variabile d'istanza contacts deve essere stata inizializzata correttamente.
-     * @post Il contatto non è presente nella lista.
+     * @post Il contatto non è più presente nella lista.
+     * 
      * 
      */
     public void delete(Contact c){
@@ -133,7 +134,7 @@ public class Contactbook {
     * @throws FileNotFoundException Se il file non viene trovato.
     * @throws IOException Se si verifica un errore durante la scrittura nel file.
     */
-    public void salvaSuFile(File filename) throws IOException{
+    public void saveOnFile(File filename) throws IOException{
         try(PrintWriter pw=new PrintWriter(new BufferedWriter(new FileWriter(filename)))){
             pw.println("NOME;COGNOME;NUMERO 1; NUMERO 2; NUMERO 3;EMAIL 1;EMAIL 2; EMAIL 3; Tag;");
             for (Contact c : contacts){
@@ -199,7 +200,7 @@ public class Contactbook {
     * @throws IOException Se si verifica un errore durante la lettura del file.
     * @throws ClassNotFoundException Se il tipo di dato non è trovato durante il caricamento dei dati.
     */
-    public void caricaDaFile(File filename) throws IOException{
+    public void loadFromFile(File filename) throws IOException{
         
         try(BufferedReader br=new BufferedReader(new FileReader(filename))){
             if (br.readLine() == null) return;
@@ -208,7 +209,7 @@ public class Contactbook {
                 String campi []=line.split(";",-1);
                 Contact c=new Contact(campi[0], campi[1]);
                 try {
-                    sleep(100); //diamo il tempo di generare un id univoco valido per il contatto
+                    sleep(3000); //diamo il tempo di generare un id univoco valido per il contatto
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Contactbook.class.getName()).log(Level.SEVERE, null, ex);
                 }

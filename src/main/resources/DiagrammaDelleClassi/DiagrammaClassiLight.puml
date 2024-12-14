@@ -7,7 +7,7 @@ class App {
     + {static} void setRoot(String fxml)
     - {static} Parent loadFXML(String fxml)
     + void main(String[] args)
-}+
+}
 
 class Database {
     + Connection connectDB(String dbname, String user, String password)
@@ -21,7 +21,7 @@ class Database {
     + void insertContact(Connection conn, String tableName, Contact cont, String email_Utente)
     - String formattaOut(ArrayList<String> s)
     + void modifyContact(Connection conn, String tableName, Contact cont, String email_Utente)
-    + void remuveContactByID(Connection conn, String tableName, String ID, String email)
+    + void removeContactByID(Connection conn, String tableName, String ID, String email)
     + void closeConnection(Connection conn)
     + int getNumberContact(Connection conn, String tableName)
 }
@@ -79,8 +79,8 @@ class Contactbook {
     + boolean contains(Contact c)
     + boolean contains(Contact newC, Contact oldC)
     + void initializeList()
-    + void caricaDaFile(File filename)
-    + void salvaSuFile(File filename)
+    + void loadFromFile(File filename)
+    + void saveOnFile(File filename)
 
 }
 
@@ -122,11 +122,17 @@ class LoginViewController {
 
 class AddViewController {
     - Contactbook contactbook
+    - Filter filter
+    - SortedList<Contact> sortedContacts
     --
     + void initialize(URL url, ResourceBundle rb)
     + void setContactbook(Contactbook c)
     + void actionAdd(ActionEvent event)
     + void actionCanel(ActionEvent event)
+    - void onKeyReleasedEmail1(KeyEvent event)
+    - void onKeyReleasedEmail2(KeyEvent event)
+    - void onKeyReleasedNumber1(KeyEvent event)
+    - void onKeyReleasedNumber2(KeyEvent event)
 }
 
 class ModifyViewController {
@@ -138,11 +144,16 @@ class ModifyViewController {
     + void setContactbook(Contactbook c)
     + void setContact(Contact contact)
     + void actionModify(ActionEvent event)
+    - void onKeyReleasedEmail1(KeyEvent event)
+    - void onKeyReleasedEmail2(KeyEvent event)
+    - void onKeyReleasedNumber1(KeyEvent event)
+    - void onKeyReleasedNumber2(KeyEvent event)
 }
 
 class ContactsbookViewController {
     - Contactbook contactbook
     - Filter filter
+    - SortedList<Contact> sortedContacts
     --
     + void createList()
     + void initializeList()
@@ -178,6 +189,9 @@ enum Tag {
 Tag --> Contact : Association
 DuplicateContactViewController -> AddViewController : Association
 DuplicateContactViewController -> ModifyViewController : Association
+AddViewController -> Database : Association
+ContactsbookViewController : Association
+ModifyViewController : Association 
 
 ContactsbookViewController "1" *-- "1" Contactbook : Composition
 ContactsbookViewController "1" *-- "1" Filter : Composition
@@ -186,6 +200,7 @@ Filter "1" o-- "1" Contactbook : Aggregation
 AddViewController "1" o-- "1" Contactbook : Aggregation
 ModifyViewController  "1" o-- "1"  Contactbook : Aggregation 
 Contactbook "1" o-- "0..*" Contact  : Aggregation
+User "1" *-- "1" Database: Aggregation
 
 
 LoginViewController ..> Database : Dependency

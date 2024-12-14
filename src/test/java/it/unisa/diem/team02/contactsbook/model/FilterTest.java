@@ -45,24 +45,28 @@ public class FilterTest {
     
     @AfterEach
     public void tearDown() {
+        
     }
     
     
     /**
-     * Test del construttore e dei metodi getter
-     * 
+     * Test del construttore per verificare che l'oggetto venga istanziato correttamente 
+     * e che siano inizializzati correttamente i parametri matchString, isSelectedHome, isSelectedUni, 
+     * isSelectedJob.
      */
+    
     @Test
     public void testConstructor() {
         flContactTest = new Filter (listTest);
-        assertEquals(3,flContactTest.getFlContacts().size(),"La lista filtrata deve contenere tutti gli elementi iniziali");
-        assertFalse(flContactTest.getIsSelectedHome(), "Il valore iniziale di isSelectedHome deve essere false");
-        assertFalse(flContactTest.getIsSelectedUniversity(),"Il valore iniziale di isSelectedUni deve essere false");
-        assertFalse(flContactTest.getIsSelectedJob(),"Il valore iniziale di isSelectedJob deve essere false");
-
+        assertNotNull(flContactTest);
+        assertEquals(3,flContactTest.getFlContacts().size());
+        assertFalse(flContactTest.getIsSelectedHome());
+        assertFalse(flContactTest.getIsSelectedUniversity());
+        assertFalse(flContactTest.getIsSelectedJob());
     }
     
-
+   
+    
     /**
      * Test n1 del metodo updateFilter della classe Filter. Il filtro viene aggiornato passando solamente
      * una sottostringa
@@ -127,5 +131,72 @@ public class FilterTest {
         assertEquals(2,flContactTest.getFlContacts().size());
         
     }
+    
+    /**
+     * Test del metodo getMatchString 
+     * 
+     */
+     @Test
+     public void testGetMatchString(){
+        flContactTest = new Filter(listTest);
+        String string = "an";
+        boolean h = true;
+        boolean u = false;
+        boolean j = true;
+        flContactTest.updateFilter(string, h, u, j);
+        
+        assertEquals(string,flContactTest.getMatchString());
+    
+    }
+     
+     /**
+     * Test del metodo getIsSelectedHome
+     */
+     
+     @Test
+     public void testGetIsSelectedHome() {
+        flContactTest = new Filter(listTest);
+        String string = "an";
+        boolean h = true;
+        boolean u = false;
+        boolean j = true;
+        flContactTest.updateFilter(string, h, u, j);
+        
+        assertTrue(flContactTest.getIsSelectedHome());
+     }
+     
+     /**
+     * Test del metodo getIsSelectedUniversity
+     */
+     
+     @Test
+     public void testGetIsSelectedUniversity() {
+        flContactTest = new Filter(listTest);
+        String string = "an";
+        boolean h = true;
+        boolean u = false;
+        boolean j = true;
+        flContactTest.updateFilter(string, h, u, j);
+        
+        assertFalse(flContactTest.getIsSelectedUniversity());
+     }
+     
+     /**
+     * Test del metodo getIsSelectedJob
+     */
+     
+     @Test
+     public void testGetIsSelectedJob() {
+        flContactTest = new Filter(listTest);
+        String string = "an";
+        boolean h = true;
+        boolean u = false;
+        boolean j = true;
+        flContactTest.updateFilter(string, h, u, j);
+        
+        assertTrue(flContactTest.getIsSelectedJob());
+     }
+     
+     
     
 }

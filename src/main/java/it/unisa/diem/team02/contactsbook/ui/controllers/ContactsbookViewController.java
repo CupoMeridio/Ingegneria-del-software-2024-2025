@@ -5,29 +5,17 @@ import it.unisa.diem.team02.contactsbook.database.Database;
 import it.unisa.diem.team02.contactsbook.model.Contact;
 import it.unisa.diem.team02.contactsbook.model.Contactbook;
 import it.unisa.diem.team02.contactsbook.model.Filter;
-import it.unisa.diem.team02.contactsbook.model.Tag;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.Map;
 import java.net.URL;
-import java.sql.Connection;
-import java.util.Comparator;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
-import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -336,20 +324,19 @@ public class ContactsbookViewController implements Initializable {
     }
     
 /**
- * @brief Applica un filtro alla lista di contatti mostrata nella tabella.
+ * @brief Applica un filtro alla lista di contatti mostrata nella tabella in funizone di una tag selezionato.
  *
  * Questo metodo imposta la lista filtrata FilteredList di contatti sulla tabella tblvRubrica 
  * e aggiunge dei listener alle checkbox (chkmHome, chkmJob, chkmUni) per aggiornare il filtro
  * ogni volta che una di queste viene selezionata o deselezionata. Ogni cambio di stato nelle checkbox
  * farà chiamare il metodo updateFilter di filter per aggiornare la visualizzazione della lista dei contatti.
  *
- * @pre La lista flContacts deve essere una lista filtrata valida di contatti.
- * @pre La tabella tblvRubrica deve essere inizializzata correttamente e pronta per l'aggiornamento.
- * @post La lista filtrata viene applicata alla tabella e i listener sono stati aggiunti per monitorare
- *       le modifiche nei checkbox e aggiornare il filtro di conseguenza.
- * @invariant Il filtro sui contatti deve essere applicato correttamente in base alle selezioni delle checkbox.
+ * @pre La lista filtrata deve essere stata inzizializzata.
+ * @pre La tabella tblvRubrica deve essere inizializzata correttamente.
+ * @post La lista filtrata viene modificata in funzione dei tag selezionati.
+ * 
+ * @invariant non viene rimosso il filtro fornito da initializeSearch()
  *
- * @param flContacts La lista filtrata di contatti da visualizzare nella tabella.
  * 
  * @see Filter
  */
@@ -367,26 +354,24 @@ public class ContactsbookViewController implements Initializable {
 
          
     /**
-    * @brief Inizializza la funzionalità di ricerca per filtrare i contatti.
+    * @brief Inizializza la funzionalità di ricerca per filtrare i contatti in funzione di una sottostringa inserita
+    * all'interno della barra di ricerca.
     * 
     * Questo metodo imposta un campo di ricerca che permette agli utenti di filtrare i contatti 
     * nella rubrica in base ai criteri inseriti nella barra di ricerca. Ogni volta che l'utente 
     * digita un carattere, la lista dei contatti viene filtrata in tempo reale richiamando il metodo 
-    * updateFilter di filter per aggiornare la visualizzazione della lista dei contatti.. La ricerca può essere 
-    * effettuata su nome, cognome, numero di telefono ed e-mail. 
+    * updateFilter di filter per aggiornare la visualizzazione della lista dei contatti. La ricerca viene eseguita
+    * su tutti i campi eccetto il campo tag.
     *
     * 
     * 
-    * @pre La lista flContacts deve essere una lista filtrata valida di contatti.
-    * @pre La tabella tblvRubrica deve essere inizializzata correttamente e pronta per l'aggiornamento.
-    * 
-    * @invariant Il filtro sui contatti deve essere applicato correttamente in base alle selezioni delle checkbox.
+    * @pre La lista filtrata deve essere inizializzata correttamente.
+    * @pre La tabella tblvRubrica deve essere inizializzata correttamente.
+    * @post La lista viene aggiornata e contiene solo quei contatti in cui uno dei campi è presente la
+    *   sottostringa inserita nella barra di ricerca.
     *
+    * @invariant non viene rimosso il filtro da actionFilter()
     * 
-    * Vengono visualizzati solo i contatti della rubrica contenenti la sottostringa inserita nella barra
-    * di ricerca
-    * 
-    * @param flContacts
     * 
     * @see Filter
     * 
@@ -434,7 +419,7 @@ public class ContactsbookViewController implements Initializable {
         
         if (selectedFile!=null)
             try {
-                contactbook.caricaDaFile(selectedFile);
+                contactbook.loadFromFile(selectedFile);
                 System.out.println(contactbook.getContacts());
                 for(Contact c : contactbook.getContacts())
                 try {
@@ -480,7 +465,7 @@ public class ContactsbookViewController implements Initializable {
         
         if (selectedFile!=null)
             try {
-                contactbook.salvaSuFile(selectedFile);
+                contactbook.saveOnFile(selectedFile);
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Operation completed");
                 alert.setHeaderText("");

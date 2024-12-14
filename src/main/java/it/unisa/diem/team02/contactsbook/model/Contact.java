@@ -344,7 +344,8 @@ public class Contact implements Comparable<Contact>{
     }
      
     /**
-    * @brief Confronta l'oggetto su cui viene invocato il metodo con un altro per verificarne l'uguaglianza.
+    * @brief Confronta l'oggetto su cui viene invocato il metodo con un altro per verificarne l'uguaglianza. Il metodo
+    * equals gode della proprietà asimmetrica
     *
     * Questo metodo confronta l'oggetto corrente con un altro oggetto di tipo `Object`. Due oggetti sono considerati uguali
     * se hanno lo stesso nome e cognome.
@@ -424,15 +425,14 @@ public class Contact implements Comparable<Contact>{
      */
     @Override
     public int compareTo(Contact o) {
-        
+    
         if(!this.surname.equals(o.getSurname()))
             return this.surname.compareTo(o.getSurname());
         return this.name.compareTo(o.getName());
     
-    }
-    
 }
     
+}
     
     
   

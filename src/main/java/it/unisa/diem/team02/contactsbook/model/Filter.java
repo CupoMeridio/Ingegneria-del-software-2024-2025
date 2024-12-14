@@ -44,21 +44,48 @@ public class Filter {
         matchString="";
     }
     
+    /**
+    * @brief Metodo getter che restituisce il nome della stringa attualmente presente nella barra di ricerca.
+    *
+    * @return Una stringa contenente il valore della stringa presente nella barra di ricerca. Restituisce
+    * la stringa vuota "" se non è stato scritto nulla nella barra di ricerca. 
+    */
     public String getMatchString(){
         return this.matchString;
     }
     
+    /**
+    * @brief Restituisce un valore di verità che indica se il tag Home checkmenuitem è stato selezionato dal menu
+    * button Filter
+    *
+    * @return Restituisce false se il tag Home non è stato selezionato, true altrimenti
+    */
     public boolean getIsSelectedHome(){
         return this.isSelectedHome;
     }
     
+    
+    /**
+    * @brief Restituisce un valore di verità che indica se il tag University checkmenuitem è stato selezionato dal menu
+    * button Filter
+    *
+    * @return Restituisce false se il tag University non è stato selezionato, true altrimenti
+    */
     public boolean getIsSelectedUniversity(){
         return this.isSelectedUni;
     }
     
+    
+    /**
+    * @brief Restituisce un valore di verità che indica se il tag Job checkmenuitem è stato selezionato dal menu
+    * button Filter
+    *
+    * @return Restituisce false se il tag Job non è stato selezionato, true altrimenti
+    */
     public boolean getIsSelectedJob(){
         return this.isSelectedJob;
     }
+    
     
     /**
      * 
@@ -71,6 +98,7 @@ public class Filter {
      * 
      * 
     */
+    
     public FilteredList<Contact> getFlContacts() {
         return flContacts;
     }

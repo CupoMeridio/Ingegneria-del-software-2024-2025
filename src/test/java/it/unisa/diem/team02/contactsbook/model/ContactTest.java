@@ -18,26 +18,23 @@ public class ContactTest {
     ArrayList<String> email1, email2;
     ArrayList<Tag> tag1, tag2;
     
+        
     @BeforeEach
     public void setUp() {
         
         //inizializzazione dei contatti
-        Test1 = new Contact("Anuar", "Zouhri");
-        Test2 = new Contact("Valeria","");
-        Test3 = new Contact("","Postiglione","10");
         
-        //inizializzazione della lista di numeri number1 con i numeri 3393434025 e ""
+        
+        //inizializzazione della lista di numeri number1 con i numeri 3393434025
         number1 = new ArrayList<>(3);
         number1.add("3393434025");
-        number1.add("");
         
-        //inizializzazione della lista di numeri number2 con i numeri 333173282, "" e 3349891345
+        //inizializzazione della lista di numeri number2 con i numeri 333173282, 3349891345
         number2 = new ArrayList<>(3);
         number2.add("333173282");
-        number2.add("");
         number2.add("3349891345");
         
-        //instanziazione della lista di email email1 con nessuna email
+        //instanziazione della lista di email email1 con nessuna email.
         email1 = new ArrayList<>(3);
         
         //inizializzazione della lista di email email2 con l'email 337897345
@@ -57,17 +54,80 @@ public class ContactTest {
     
     @AfterEach
     public void tearDown() {
-        Test1=null;
-        Test2=null;
-        Test3=null;
-       
-    }
 
+    }
+    
     /**
-     * Test n1 dei metodi addNumber e getNumber della classe Contact. L'oggetto ha un numero.
+     * Test del construttore con due parametri.
      */
     @Test
-    public void testAddAndGetNumber1() {
+    public void testConstructor1() {
+        Test1 = new Contact("Anuar", "Zouhri");
+        Test2 = new Contact("Valeria","");
+        assertNotNull(Test1);
+        assertNotNull(Test2);
+    }
+    
+    
+    /**
+     * Test del construttore con tre parametri.
+     */
+    @Test
+    public void testConstructor2() {
+        Test3 = new Contact("","Postiglione","10");
+        assertNotNull(Test3);
+    }
+    
+    
+    /**
+     * Test del metodo getName.
+     */
+    
+    @Test
+    public void testGetName(){
+        Test1 = new Contact("Anuar", "Zouhri");
+        assertEquals("Anuar",Test1.getName());   
+    }
+    
+    /**
+     * Test del metodo setName.
+     */
+    
+    @Test
+    public void testSetName(){
+        Test1 = new Contact("Anuar", "Zouhri");
+        Test1.setName("Vittorio");
+        assertEquals("Vittorio",Test1.getName());   
+    }
+    
+    
+    /**
+     * Test del metodo getSurname.
+     */
+    
+    @Test
+    public void testGetSurname(){
+        Test1 = new Contact("Anuar", "Zouhri");
+        assertEquals("Zouhri",Test1.getSurname());   
+    }
+    
+    /**
+     * Test del metodo setSurname.
+     */
+    
+    @Test
+    public void testSetSurname(){
+        Test1 = new Contact("Anuar", "Zouhri");
+        Test1.setSurname("");
+        assertEquals("",Test1.getSurname());   
+    }
+    
+    /**
+     * Test  del metodo addNumber della classe Contact. Il contatto ha un numero.
+     */
+    @Test
+    public void testAddNumber() {
+        Test1 = new Contact("Anuar", "Zouhri");
         Test1.addNumber("3393424025");
         String expResult = "3393424025";
         String result = Test1.getNumber();
@@ -75,10 +135,11 @@ public class ContactTest {
     }
     
     /**
-     * Test n2 dei metodi addNumber e getNumber della classe Contact. L'oggetto ha due numeri.
+     * Test del metodo getNumber della classe Contact. Il contatto ha due numeri.
      */
     @Test
-    public void testAddAndGetNumber2() {
+    public void testGetNumber() {
+        Test2 = new Contact("Valeria","");
         Test2.addNumber("3393424025");
         Test2.addNumber("2238123");
         String expResult = "3393424025\n2238123";
@@ -88,10 +149,11 @@ public class ContactTest {
     
 
     /**
-     * Test n1 dei metodi addEmail e getEmail method della classe Contact. L'oggetto ha tre email.
+     * Test del metodo addEmail della classe Contact. Il contatto ha tre email.
      */
     @Test
-    public void testAddAndGetEmail1() {
+    public void testAddEmail() {
+        Test3 = new Contact("","Postiglione","10");
         Test3.addEmail("vittorio@gmail.it");
         Test3.addEmail("vittorio@gmail.it");
         Test3.addEmail("vitt@gmail.com");
@@ -102,11 +164,11 @@ public class ContactTest {
     }
     
     /**
-     * Test n2 dei metodi addEmail e getEmail method della classe Contact.
+     * Test del metodo getEmail della classe Contact. Il contatto non ha email.
      */
     @Test
-    public void testAddAndGetEmail2() {
-        Test2.addEmail("");
+    public void testGetEmail() {
+        Test3 = new Contact("","Postiglione","10");
         String expResult = "";
         String result = Test3.getEmail();
         assertEquals(expResult, result);
@@ -114,10 +176,11 @@ public class ContactTest {
     }
 
     /**
-     * Test n1 dei metodi addTag e getTag della classe Contact. L'oggetto ha due tag
+     * Test del metodo addTag della classe Contact. Il contatto ha due tag.
      */
     @Test
-    public void testAddAndGetTag1() {
+    public void testAddTag() {
+        Test1 = new Contact("Anuar", "Zouhri");
         Test1.addTag(Tag.Job);
         Test1.addTag(Tag.University);
         String expResult = "Job\nUniversity";
@@ -127,10 +190,11 @@ public class ContactTest {
     }
     
     /**
-     * Test n2 dei metodi addTag e getTag della classe Contact. L'oggetto ha tre tag
+     * Test del metodo getTag della classe Contact. Il contatto ha tre tag.
      */
     @Test
-    public void testAddAndGetTag2() {
+    public void testGetTag() {
+        Test1 = new Contact("Anuar", "Zouhri");
         Test1.addTag(Tag.Home);
         Test1.addTag(Tag.Job);
         Test1.addTag(Tag.University);
@@ -140,57 +204,63 @@ public class ContactTest {
     }
 
     /**
-     * Test n1 dei metodi setNumber e getNumberList della classe Contact. 
+     * Test del metodi setNumber della classe Contact. Viene inserito un numero nella lista.
      */
     @Test
-    public void testSetAndGetNumberList1() {
+    public void testSetNumberList() {
+        Test1 = new Contact("Anuar", "Zouhri");
         Test1.setNumber(number1);
         assertEquals(number1, Test1.getNumberList()); 
         
     }
     
     /**
-     * Test n2 dei metodi setNumber e getNumberList della classe Contact. 
+     * Test del metodo getNumberList della classe Contact. La lista ha un solo numero.
      */
     @Test
-    public void testSetAndGetNumberList2() {
+    public void testGetNumberList() {
+        Test2 = new Contact("Valeria","");
         Test2.setNumber(number2);
         assertEquals(number2, Test2.getNumberList()); 
         
     }
 
     /**
-     * Test n1 dei metodi setEmail e getEmailList della classe Contact.
+     * Test del metodo setEmail della classe Contact. Viene inserita una sola email nella lista
      */
     @Test
-    public void testSetAndGetEmailList1() {
+    public void testSetEmailList() {
+        Test2 = new Contact("Valeria","");
         Test2.setEmail(email1);
         assertEquals(email1, Test2.getEmailList()); 
     }
     
     /**
-     * Test n2 dei metodi setEmail e getEmailList della classe Contact.
+     * Test del metodo getEmailList della classe Contact. La lista ha una sola email.
      */
     @Test
-    public void testSetAndGetEmailList2() {
+    public void testGetEmailList() {
+        Test3 = new Contact("","Postiglione","10");
         Test3.setEmail(email2);
         assertEquals(email2, Test3.getEmailList()); 
     }
 
     /**
-     * Test n1 dei metodi setTag ae getTagList della classe Contact.
+     * Test del metodo setTagList  della classe Contact. Viene inserito un solo tag nella lista.
      */
     @Test
-    public void testSetAndGetTagList1() {
+    public void testSetTagList() {
+        Test1 = new Contact("Anuar", "Zouhri");
         Test1.setTag(tag1);
         assertEquals(tag1, Test1.getTagList()); 
     }
     
     /**
-     * Test n2 dei metodi setTag ae getTagList della classe Contact.
+     * Test del metodo getTagList della classe Contact. La lista ha un solo tag.
      */
     @Test
-    public void testSetAndGetTagList2() {
+    public void testGetTagList() {
+        Test2 = new Contact("Valeria","");
         Test2.setTag(tag2);
         assertEquals(tag2, Test2.getTagList()); 
     }
@@ -198,12 +268,14 @@ public class ContactTest {
     
     /**
      * 
-     * Test n1 del metodo equals. Il  The metodo è utilizzato su due oggetti con diverso nome e cognome. 
+     * Test n1 del metodo equals. Il metodo è utilizzato su due oggetti con diverso nome e cognome. 
      * Viene utilizzato assertFalse.
      *
      */
     @Test
     public void testEquals1() {
+        Test1 = new Contact("Anuar", "Zouhri");
+        Test2 = new Contact("Valeria","");
         assertFalse(Test1.equals(Test2));
     
     }
@@ -215,6 +287,7 @@ public class ContactTest {
      */
     @Test
     public void testEquals2() {
+        Test1 = new Contact("Anuar", "Zouhri");
         Contact c = new Contact(Test1.getName(),Test1.getSurname());
         assertTrue(Test1.equals(c));
     
@@ -227,6 +300,8 @@ public class ContactTest {
      */
     @Test
     public void testEquals3() {
+        Test1 = new Contact("Anuar", "Zouhri");
+        Test2 = new Contact("Valeria","");
         Contact c = new Contact(Test1.getName(),Test2.getSurname());
         assertFalse(Test1.equals(c));
     
@@ -239,6 +314,8 @@ public class ContactTest {
      */
     @Test
     public void testEquals4() {
+        Test1 = new Contact("Anuar", "Zouhri");
+        Test2 = new Contact("Valeria","");
         Contact c = new Contact(Test1.getName(),Test2.getSurname());
         assertFalse(Test2.equals(c));
     

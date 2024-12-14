@@ -241,10 +241,8 @@ public class AddViewController implements Initializable {
  * - Il pulsante associato a questa azione deve essere correttamente configurato e visibile nell'interfaccia utente.
  * 
  * @post
- * - La finestra corrente viene chiusa.
+ * - La finestra corrente viene chiusa e non vengono modificati i dati.
  * 
- * @invariant
- * - Nessuna modifica ai dati gestiti dall'applicazione è consentita durante l'esecuzione di questo metodo.
  */
     @FXML
     public void actionCancel(ActionEvent event){

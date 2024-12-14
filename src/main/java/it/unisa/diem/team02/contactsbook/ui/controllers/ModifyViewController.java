@@ -108,8 +108,8 @@ public class ModifyViewController implements Initializable {
  * Si occupa di legare le proprietà dei controlli dell'interfaccia utente (come bottoni e campi di testo) con le 
  * condizioni di stato, disabilitando o abilitando determinati elementi in base al contenuto degli altri campi.
  * 
- * @param url URL utilizzato per il caricamento della risorsa FXML (non utilizzato in questo caso).
- * @param rb Risorse locali associate alla vista (non utilizzato in questo caso).
+ * @param url URL utilizzato per il caricamento della risorsa FXML (non utilizzate in questo caso).
+ * @param rb Risorse locali associate alla vista (non utilizzate in questo caso).
  * 
  * @pre
  * - La vista FXML è stata correttamente caricata e tutti i controlli sono disponibili.
@@ -126,7 +126,20 @@ public class ModifyViewController implements Initializable {
         txtEmail2.disableProperty().bind(Bindings.isEmpty(txtEmail1.textProperty()));
         txtEmail3.disableProperty().bind(Bindings.isEmpty(txtEmail2.textProperty()));
     }    
-
+    
+    /**
+    * @brief Gestisce l'azione di annullamento dell'operazione corrente.
+    * 
+    * Questo metodo chiude la finestra attualmente aperta senza apportare modifiche ai dati o alle operazioni in corso.
+    * 
+    * @param event L'evento che ha attivato l'azione di annullamento.
+    * 
+    * @pre 
+    * - Il pulsante associato a questa azione deve essere correttamente configurato e visibile nell'interfaccia utente.
+    * 
+    * @post
+    * - La finestra corrente viene chiusa e non vengono modificati i dati.
+    */
 
     @FXML
     private void actionCancel(ActionEvent event) {
@@ -175,8 +188,7 @@ public class ModifyViewController implements Initializable {
  * 
  * @invariant
  * - I campi di testo (txtName, txtSur, txtNumber1, txtNumber2, txtNumber3, txtEmail1, txtEmail2, txtEmail3, chkmHome, 
- * chkmUni, chkmJob) 
- *   devono essere correttamente aggiornati con i dati del contatto.
+ * chkmUni, chkmJob) devono essere correttamente aggiornati con i dati del contatto.
  * 
  * @see Contact#getName()
  * @see Contact#getSurname()
