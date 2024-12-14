@@ -7,8 +7,8 @@ import java.util.ArrayList;
 /**
  * @brief Classe che modella un contatto.
  * 
- * Definisce attributi e metodi per effettuare operazioni sugli oggetti Contact. Gli attributi 
- * number, email e tag sono implementati tramite un ArrayList.
+ * Definisce attributi e metodi per effettuare operazioni sugli oggetti Contact.
+ * Gli attributi number, email e tag sono implementati tramite un ArrayList.
  * 
  * @author team02
  */
@@ -18,14 +18,13 @@ public class Contact implements Comparable<Contact>{
     private ArrayList<String> number;
     private ArrayList<String> email;
     private ArrayList<Tag> tag;
-    //private static int contatore; // bisogna Salvare il numero di contatti da rivedere 
     private final String ID;
     
     
     /**
      * @brief Crea un nuovo oggetto Contact con il nome e cognome forniti.
      * 
-     * Questo costruttore inizializza il contatto con un nome e un cognome, e crea nuove liste vuote per i numeri di telefono, 
+     * Questo costruttore inizializza il contatto con un nome e un cognome, e inizilizza liste vuote per i numeri di telefono, 
      * gli indirizzi email e i tag associati. Inoltre, genera un ID univoco per il contatto.
      * 
      * @param name Il nome del contatto.
@@ -35,6 +34,7 @@ public class Contact implements Comparable<Contact>{
      * - I parametri `name` e `surname` devono essere non nulli.
      * 
      * @post
+     * - La variabili di istanza 'name' e 'surnname' vengono inizializzate rispettivamente con i valori dei parametri name e surname.
      * - La variabile di istanza `number` è stata inizializzata come una lista vuota.
      * - La variabile di istanza `email` è stata inizializzata come una lista vuota.
      * - La variabile di istanza `tag` è stata inizializzata come una lista vuota di tag.
@@ -51,15 +51,11 @@ public class Contact implements Comparable<Contact>{
         this.ID = this.generateID();
     }
     
-   /* public static void setContatore(int contatore) {
-        Contact.contatore = contatore;
-    }*/
-    
     
      /**
      * @brief Crea un nuovo oggetto {@link Contact} con il nome, cognome e ID forniti.
      * 
-     * Questo costruttore inizializza il contatto con un nome, un cognome e un ID, e crea nuove liste vuote per i numeri di 
+     * Questo costruttore inizializza il contatto con un nome, un cognome e un ID, e inizializza liste vuote per i numeri di 
      * telefono, gli indirizzi email e i tag associati.
      * 
      * @param name Il nome del contatto.
@@ -70,13 +66,11 @@ public class Contact implements Comparable<Contact>{
      * - Il parametro `name`, `surname` e `ID` devono essere non nulli.
      * 
      * @post
+     * - La variabili di istanza 'name', 'surnname' e ID vengono inizializzate rispettivamente con i valori dei parametri name, surname e ID.
      * - La variabile di istanza `number` è stata inizializzata come una lista vuota.
      * - La variabile di istanza `email` è stata inizializzata come una lista vuota.
      * - La variabile di istanza `tag` è stata inizializzata come una lista vuota di tag.
-     * - L'ID del contatto è stato impostato con il valore fornito nel parametro `ID`.
      * 
-     * @invariant
-     * - Il contatto avrà sempre un nome, un cognome, un ID valido e liste vuote per numeri, email e tag.
      * @note Questo costruttore consente di specificare manualmente l'ID del contatto, rendendolo 
      * utile in scenari come il caricamento di dati da un database o da file.
      */
@@ -94,8 +88,6 @@ public class Contact implements Comparable<Contact>{
     *
     * @pre La variabile d'istanza `name` deve essere stata inizializzata correttamente.
     * @post La stringa restituita rappresenta il nome della persona e non è modificata dal metodo.
-    * @invariant La variabile `name` deve sempre contenere un valore valido che rappresenta
-    *            il nome della persona.
     *
     * @return Una stringa contenente il nome della persona.
     */
@@ -108,8 +100,6 @@ public class Contact implements Comparable<Contact>{
     *
     * @pre La variabile d'istanza `surname` deve essere stata inizializzata correttamente.
     * @post La stringa restituita rappresenta il cognome della persona e non è modificata dal metodo.
-    * @invariant La variabile `surname` deve sempre contenere un valore valido che rappresenta
-    *            il cognome della persona.
     *
     * @return Una stringa contenente il cognome della persona.
     */
@@ -122,7 +112,6 @@ public class Contact implements Comparable<Contact>{
     *
     * @pre Il parametro `name` non deve essere null.
     * @post La variabile d'istanza `name` viene aggiornata con il valore del parametro `name`.
-    * @invariant La variabile `name` deve sempre contenere un valore valido.
     *
     * @param name Il nuovo nome della persona.
     */
@@ -135,7 +124,6 @@ public class Contact implements Comparable<Contact>{
     *
     * @pre Il parametro `surname` non deve essere null.
     * @post La variabile d'istanza `surname` viene aggiornata con il valore del parametro `surname`.
-    * @invariant La variabile `surname` deve sempre contenere un valore valido.
     *
     * @param surname Il nuovo cognome della persona.
     */
@@ -146,8 +134,9 @@ public class Contact implements Comparable<Contact>{
     /**
      * @brief Restituisce i numeri di telefono del contatto.
      * 
-     * Questo metodo restituisce i numeri di telefono associati al contatto. Se il contatto ha più numeri, vengono 
-     * restituiti ognuno su una linea diversa. Se non sono presenti numeri, viene restituita una stringa vuota.
+     * Questo metodo restituisce i numeri di telefono associati al contatto.
+     * Se il contatto ha più numeri, vengono restituiti ognuno su una linea diversa.
+     * Se non sono presenti numeri, viene restituita una stringa vuota.
      * 
      * @return Una stringa contenente i numeri di telefono del contatto, ognuno su una linea diversa.
      * 
@@ -156,9 +145,6 @@ public class Contact implements Comparable<Contact>{
      * 
      * @post
      * - La stringa restituita contiene i numeri di telefono del contatto.
-     * 
-     * @invariant
-     * - La lista `number` non è mai nulla e può contenere zero, uno o più numeri di telefono.
      */
     public String getNumber(){
         if(number.isEmpty()) return "";
@@ -180,9 +166,6 @@ public class Contact implements Comparable<Contact>{
      * 
      * @post
      * - La stringa restituita contiene le email del contatto.
-     * 
-     * @invariant
-     * - La lista `email` non è mai nulla e può contenere zero, uno o più email.
      */
     public String getEmail() {
         if(email.isEmpty()) return "";
@@ -204,9 +187,6 @@ public class Contact implements Comparable<Contact>{
      * 
      * @post
      * - La stringa restituita contiene i tag del contatto.
-     * 
-     * @invariant
-     * - La lista `tag` non è mai nulla e può contenere zero, uno o più tag.
      */
     public String getTag(){
         if(tag.isEmpty()) return "";
@@ -231,9 +211,6 @@ public class Contact implements Comparable<Contact>{
      * 
      * @post
      * - Se il tag è valido e non duplicato, viene aggiunto alla lista dei tag del contatto.
-     * 
-     * @invariant
-     * - La lista `tag` non contiene mai duplicati.
      */
     public void addTag(Tag tag) {
         if (tag == null) {
@@ -256,9 +233,6 @@ public class Contact implements Comparable<Contact>{
      * 
      * @post
      * - Il numero di telefono fornito viene aggiunto alla lista dei numeri del contatto.
-     * 
-     * @invariant
-     * - La lista `number` mantiene uno stato coerente
      */
     public void addNumber(String number) {
         this.number.add(number);
@@ -276,9 +250,6 @@ public class Contact implements Comparable<Contact>{
      * 
      * @post
      * - L'indirizzo email fornito viene aggiunto alla lista degli indirizzi email del contatto.
-     * 
-     * @invariant
-     * - La lista `email` mantiene uno stato coerente
      */
     public void addEmail(String email){
         this.email.add(email);
@@ -291,7 +262,6 @@ public class Contact implements Comparable<Contact>{
      *
      * @pre Il parametro `number` non deve essere null.
      * @post Il campo `number` dell'oggetto viene aggiornato con la lista fornita.
-     * @invariant Il campo `number` deve sempre contenere un ArrayList valido di stringhe (i valori null non sono ammessi).
      */
     public void setNumber(ArrayList<String> number) {
         this.number = number;
@@ -304,7 +274,6 @@ public class Contact implements Comparable<Contact>{
      *
      * @pre Il parametro `email` non deve essere null.
      * @post Il campo `email` dell'oggetto viene aggiornato con la lista fornita.
-     * @invariant Il campo `email` deve sempre contenere un ArrayList valido di stringhe (i valori null non sono ammessi).
      */
     public void setEmail(ArrayList<String> email) {
         this.email = email;
@@ -317,7 +286,6 @@ public class Contact implements Comparable<Contact>{
      *
      * @pre Il parametro `tag` non deve essere null.
      * @post Il campo `tag` dell'oggetto viene aggiornato con la lista fornita.
-     * @invariant Il campo `tag` deve sempre contenere un ArrayList valido di oggetti Tag (i valori null non sono ammessi).
      */
     public void setTag(ArrayList<Tag> tag) {
         this.tag = tag;
@@ -384,7 +352,6 @@ public class Contact implements Comparable<Contact>{
     *
     * @post Il metodo restituisce `true` se l'oggetto corrente è uguale all'oggetto passato come parametro, 
     *       altrimenti restituisce `false`.
-    * @invariant Gli oggetti `name` e `surname` devono contenere valori consistenti.
     *
     * @param o L'oggetto da confrontare con l'oggetto corrente.
     * @return `true` se l'oggetto corrente è uguale all'oggetto passato, `false` altrimenti.
@@ -406,11 +373,10 @@ public class Contact implements Comparable<Contact>{
      *
      * @pre La variabile d'istanza `number` deve essere stata inizializzata correttamente 
      *      (non null) e può contenere una lista di numeri di telefono.
-     * @pre La variabile d'istanza `email` deve essere stata inizializzata correttamente 
+     *      La variabile d'istanza `email` deve essere stata inizializzata correttamente 
      *      (non null) e può contenere una lista di indirizzi email.
      * @post La stringa restituita include il nome, il cognome, i numeri di telefono e gli indirizzi email associati al contatto.
-     * @invariant Le variabili `number` ed `email` rimangono consistenti e non vengono
-     *            modificate durante l'esecuzione del metodo.
+     * @invariant Le variabili `number` ed `email` non vengono modificate durante l'esecuzione del metodo.
      *
      * @return Una stringa che rappresenta l'oggetto, contenente il nome, il cognome, 
      *         i numeri di telefono e gli indirizzi email associati.
@@ -428,10 +394,7 @@ public class Contact implements Comparable<Contact>{
     /**
      * @brief Genera un ID basato su data e ora correnti con precisione ai nanosecondi.
      *
-     * @pre Il sistema deve essere in grado di ottenere la data e l'ora correnti.
-     * @post Viene restituito un identificatore univoco sotto forma di stringa.
-     * @invariant Il formato dell'ID generato è sempre coerente con il pattern specificato 
-     *            "yyyy-MM-dd HH:mm:ss.SSSSSSSSS" e non dipende dallo stato dell'oggetto.
+     * @post Viene restituito un identificatore univoco sotto forma di stringa con il pattern specificato "yyyy-MM-dd HH:mm:ss.SSSSSSSSS".
      *
      * @return Una stringa che rappresenta la data e ora correnti con precisione ai nanosecondi.
      */
@@ -445,7 +408,21 @@ public class Contact implements Comparable<Contact>{
         String id = now.format(nanoFormatter); 
         return id;
     }
-
+     
+       
+        
+    /**
+     * @brief  Confronta l'oggetto su cui viene invocato il metodo con un altro per verificarne la relazione d'ordine
+     * Questo metodo confronta l'oggetto corrente con un altro oggetto di tipo `Contact`.
+     * Il confronto viene effettuato in base all'ordine alfabetico dei cognomi.
+     * Nel caso in cui i cognomi risultassero uguali, allora vengono confrontati i nomi.
+     * 
+     * @param o Contatto da confrontare con il Contatto corrente.
+     * @return un intero:
+     * - positivo se l'oggetto corrente è maggiore di quello passato come parametro
+     * - negativo se l'oggetto corrente è minore di quello passato come parametro
+     * - uguale a 0 se l'oggetto corrente è uguale a quello passato come parametro
+     */
     @Override
     public int compareTo(Contact o) {
     

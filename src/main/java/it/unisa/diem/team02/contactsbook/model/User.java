@@ -33,8 +33,6 @@ public class User{
  *
  * @param password La password dell'utente.
  * @param email L'email dell'utente.
- * @param name Il nome dell'utente.
- * @param surname Il cognome dell'utente.
  */
     public User(String password, String email) {
         this.password = password;

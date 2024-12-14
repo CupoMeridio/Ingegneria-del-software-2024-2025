@@ -23,12 +23,11 @@ import org.mindrot.jbcrypt.BCrypt;
 /**
  * @brief
  * Classe che implementa tutti i metodi per comunicare con il database
- * 
  * @author team02
  */
 public class Database  {
     static public Connection connection; ///Variabile statica che memorizza lo stato della connesione con il database
-    static public User user;
+    static public User user; ///Variabile statica che memorizza l'utente attualemnet collegato
 /**
  * 
  * @brief Stabilisce una connessione al database PostgreSQL.
@@ -41,8 +40,6 @@ public class Database  {
  * @param user Nome del possessore del database in pgAdmin.
  * @param password Password per accedere al Database .
  * @return Oggetto Connection se la connessione è riuscita, altrimenti null.
- * @throws SQLException Se si verifica un errore durante la connessione.
- * 
  */
     public Connection ConnectionDB(String dbname, String user, String password) {
         Connection conn=null;
@@ -128,10 +125,7 @@ public class Database  {
             while(rs.next()){
                 email=rs.getString("email");
                 password=rs.getString("password");
-                table.put(email, password);
-                
-               /* System.out.print(email+" ");
-                System.out.print(password+" ");*/
+                table.put(email, password);      
             }
             statement.close(); 
         } catch (SQLException ex) {
@@ -210,7 +204,6 @@ public class Database  {
     
     private static String hashPassword(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());
-        //per renderlo più sicuro conviene aggiungere un salt
     }
     
     /**
@@ -240,14 +233,14 @@ public class Database  {
     * @brief Recupera i contatti associati a un utente specifico.
     * 
     * @pre  la password!= null,tableName deve esistere nel database connesso, l' email inserita deve esser valida e deve essere di un utente registrato
-    * @post restituisce l' hashmap con chiave ID del Contact e come valore il Contact
+    * @post restituisce una TreeMap con chiave ID del Contact e come valore il Contact
     * @invariant  conn,tableName, email
     * 
     * 
     * @param conn Oggetto Connection per interagire con il database.
     * @param tableName Nome della tabella contenente i contatti.
     * @param email Email dell'utente di cui recuperare i contatti.
-    * @return HashMap contenente i contatti dell'utente.
+    * @return TreeMap contenente i contatti dell'utente.
     */
 
     
@@ -262,7 +255,6 @@ public class Database  {
             statement= conn.createStatement();
             rs= statement.executeQuery(query);
             while(rs.next()){
-            //  String em = rs.getString("email");
                 String name = rs.getString("name");
                 String surname= rs.getString("surname");
                 String numeri = rs.getString("number");
@@ -298,7 +290,7 @@ public class Database  {
     */
 
    private Contact createContact(String name, String surname, String numeri, String tag, String em_cont,String ID) {
-        Contact c= new Contact(name,surname, ID);// quando cambierai Contat funzionera  
+        Contact c= new Contact(name,surname, ID); 
         ArrayList<String> n = new ArrayList<>();
         ArrayList<String> e = new ArrayList<>();
         ArrayList<Tag> t = new ArrayList<>();
@@ -520,8 +512,6 @@ public class Database  {
     * @param conn Oggetto Connection per interagire con il database.
     * @param tableName nome della tabella dal quale prendere le informazioni
     * @return viene restituito il numero di righe della tabella 
-    * 
-    * @throws SQLException Se si verifica un errore durante l'interrogazione.
     */
     public int getNumberContact(Connection conn, String tableName){
         

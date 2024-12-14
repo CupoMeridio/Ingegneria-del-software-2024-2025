@@ -1,3 +1,4 @@
+# 🇮🇹
 # 📒 Rubrica per PC
 ### Università degli Studi di Salerno (UNISA)
 **Corso di Ingegneria Informatica**
@@ -36,7 +37,13 @@ Il progetto è stato realizzato dal Gruppo 02, composto da 4 studenti del corso 
 git clone https://github.com/CupoMeridio/Ingegneria-del-software-2024-2025.git
 ```
 Configurare il database:
-(istruzioni per l'installazione e configurazione del database ancora da definire)
+L'applicazione utilizza un database online tramite i servizi offerti da https://aiven.io, pertanto non è necessario configurare obbligatoriamente un database locale.
+Dati però i frequenti problemi della piattaforma, è possibile configurare il programma per funzionare con un database locale:
+- Scaricare PostgreSQL -> https://www.postgresql.org
+- Aprire pgAdmin4 -> Servers -> tasto destro su PostgreSQL 17 -> Create -> Database.
+  Impostare "rubrica" come nome del database e "postgres" come Owner.
+  Tasto destro sul database appena creato -> Backup -> selezionare il file rubrica.sql e confermare
+
 
 Avviare l'applicazione:
 (comandi per eseguire l'applicazione ancora da definire)

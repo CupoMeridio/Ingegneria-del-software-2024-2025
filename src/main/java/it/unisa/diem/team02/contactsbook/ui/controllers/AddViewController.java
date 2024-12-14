@@ -98,7 +98,7 @@ public class AddViewController implements Initializable {
     
 
 /**
- * @brief Inizializza la finestra o il controller associato alla vista FXML.
+ * @brief Inizializza la finestra e il controller associato alla vista FXML.
  * 
  * Questo metodo configura le proprietà di abilitazione/disabilitazione di alcuni componenti dell'interfaccia utente,
  * utilizzando binding JavaFX per collegare le proprietà degli elementi.
@@ -119,9 +119,6 @@ public class AddViewController implements Initializable {
  * 
  * @post
  * - Le proprietà di abilitazione/disabilitazione dei componenti sono configurate in base alle condizioni specificate.
- * 
- * @invariant
- * - Gli oggetti associati alle proprietà (es. `txtName.textProperty()`) devono rimanere consistenti durante l'esecuzione del metodo.
  */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -142,10 +139,6 @@ public class AddViewController implements Initializable {
     * 
     * @post
     * - L'attributo `contactbook` contiene il riferimento alla rubrica specificata.
-    * - La rubrica può essere utilizzata per monitorare e aggiornare dinamicamente le modifiche ai contatti.
-    * 
-    * @invariant
-    * - L'attributo `contactbook` rimane consistente durante l'esecuzione del metodo.
     */
     public void setContactbook(Contactbook c){
         contactbook=c;
@@ -155,9 +148,9 @@ public class AddViewController implements Initializable {
  * @brief Aggiunge un nuovo contatto alla lista osservabile e gestisce duplicati.
  * 
  * Questo metodo crea un oggetto `Contact` basato sui dati inseriti nei campi di testo 
- * e lo aggiunge al contactbook. Se il contatto esiste già, viene mostrata una finestra per gestire il duplicato.
+ * e lo aggiunge al contactbook e alla tabella del database . Se il contatto esiste già, viene mostrata una finestra per gestire il duplicato.
  * 
- * @param event L'evento che ha attivato l'azione, tipicamente un clic sul pulsante "Aggiungi".
+ * @param event L'evento che ha attivato l'azione, ovvero il clic sul pulsante "Aggiungi".
  * 
  * @throws IOException Se si verifica un errore durante il caricamento del file FXML per la gestione dei duplicati.
  * 
@@ -177,8 +170,6 @@ public class AddViewController implements Initializable {
  * - In caso di duplicato, viene caricata la vista `DuplicateContactView.fxml`, e l'utente 
  *   sceglie se aggiungere il contatto o tornare a modificare i dati.
  * 
- * @invariant
- * - Il `contactbook` deve rimanere consistente durante l'esecuzione.
  * @see Contact
  * @see DuplicateContactViewController
  */
@@ -244,7 +235,7 @@ public class AddViewController implements Initializable {
  * 
  * Questo metodo chiude la finestra attualmente aperta senza apportare modifiche ai dati o alle operazioni in corso.
  * 
- * @param event L'evento che ha attivato l'azione di annullamento.
+ * @param event L'evento che ha attivato l'azione di annullamento, ovvero il click sul tasto 'annulla'.
  * 
  * @pre 
  * - Il pulsante associato a questa azione deve essere correttamente configurato e visibile nell'interfaccia utente.
@@ -258,6 +249,10 @@ public class AddViewController implements Initializable {
         Stage stage=(Stage) btnCanc.getScene().getWindow();
         stage.close();
     }   
+    /**
+     * @brief Funzione di utilità per gestire l'interfaccia di aggiunta di un contatto
+     * Metodo privato
+     */
     
     @FXML
     private void onKeyReleasedEmail1(KeyEvent event) {
@@ -269,7 +264,11 @@ public class AddViewController implements Initializable {
             txtEmail3.setText("");
         }
     }
-
+    
+    /**
+     * @brief Funzione di utilità per gestire l'interfaccia di aggiunta di un contatto
+     * Metodo privato
+     */
     @FXML
     private void onKeyReleasedEmail2(KeyEvent event) {
         if (txtEmail2.getText().equals("")){
@@ -277,7 +276,11 @@ public class AddViewController implements Initializable {
             txtEmail3.setText("");
         }
     }
-
+    
+    /**
+     * @brief Funzione di utilità per gestire l'interfaccia di aggiunta di un contatto
+     * Metodo privato
+     */
     @FXML
     private void onKeyReleasedNumber1(KeyEvent event) {
         if(txtNumber1.getText().equals("")){
@@ -289,6 +292,10 @@ public class AddViewController implements Initializable {
         }
     }
 
+    /**
+     * @brief Funzione di utilità per gestire l'interfaccia di aggiunta di un contatto
+     * Metodo privato
+     */
     @FXML
     private void onKeyReleasedNumber2(KeyEvent event) {
         if (txtNumber2.getText().equals("")){
