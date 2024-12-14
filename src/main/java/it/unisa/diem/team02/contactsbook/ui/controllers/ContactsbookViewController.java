@@ -334,6 +334,8 @@ public class ContactsbookViewController implements Initializable {
  * @pre La lista filtrata deve essere stata inzizializzata.
  * @pre La tabella tblvRubrica deve essere inizializzata correttamente.
  * @post La lista filtrata viene modificata in funzione dei tag selezionati.
+ * 
+ * @invariant non viene rimosso il filtro fornito da initializeSearch()
  *
  * 
  * @see Filter
@@ -368,6 +370,7 @@ public class ContactsbookViewController implements Initializable {
     * @post La lista viene aggiornata e contiene solo quei contatti in cui uno dei campi è presente la
     *   sottostringa inserita nella barra di ricerca.
     *
+    * @invariant non viene rimosso il filtro da actionFilter()
     * 
     * 
     * @see Filter
