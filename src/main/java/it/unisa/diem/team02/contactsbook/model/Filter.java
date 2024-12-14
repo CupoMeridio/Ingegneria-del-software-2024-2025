@@ -26,7 +26,7 @@ public class Filter {
      * parametro. Vengono anche inizializzati gli attributi di tipo String matchString e gli attributi di 
      * tipo boolean isSelectedHome, isSelectedUni, isSelectedJob.
      * 
-     * @param ObservableList<Contact> list
+     * @param list Lista osservabile contenenete tutti i contatti della rubrica.
      *
      * @pre La lista di osservabili passata come parametro non deve essere un riferimento a null
      * @post 
@@ -113,19 +113,16 @@ public class Filter {
     * cercherà i contatti che contengono la stringa nei loro campi (`name`, `surname`, `number` ed `email`) o i contatti 
     * per cui si è selezionato un certo tag.
     * 
-    * @param
-    * - String string è la sottostringa con cui si deve effettuare la ricerca tra i contatti.
-    * - boolean h è settato su false se la check box di Home non è selezionata, altrimenti è settata su true.
-    * - boolean u è settato su false se la check box di University non è selezionata, altrimenti è settata su true.
-    * - boolean j è settato su false se la check box di Job non è selezionata, altrimenti è settata su true.
+    * @param string è la sottostringa con cui si deve effettuare la ricerca tra i contatti.
+    * @param h è settato su false se la check box di Home non è selezionata, altrimenti è settata su true.
+    * @param u è settato su false se la check box di University non è selezionata, altrimenti è settata su true.
+    * @param j è settato su false se la check box di Job non è selezionata, altrimenti è settata su true.
     * 
     * @pre La stringa passata non deve essere un riferimento a null. I valori di h, u e j devono essere coerenti con 
     *      il fatto che la check box sia stata selezionata o meno.
     * @post La lista `flContacts` è filtrata in base al testo di ricerca e alle selezioni dei tag, aggiornando
     *       i contatti visibili nella lista.
     * @invariant I contatti che soddisfano i criteri di ricerca e tag selezionati saranno visibili nella lista.
-    *
-    * @return Nessun valore restituito. La lista di contatti viene modificata direttamente.
     */
     
     public void updateFilter(String string, boolean h, boolean u, boolean j){
