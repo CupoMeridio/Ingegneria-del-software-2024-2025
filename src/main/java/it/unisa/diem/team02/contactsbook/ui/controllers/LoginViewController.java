@@ -100,9 +100,6 @@ public class LoginViewController implements Initializable {
     private Label lblLogOpp;
     
     @FXML
-    private Button btnLoginLocal;
-    
-    @FXML
     private Label txtSignError;
     
     private BooleanProperty bMail=new SimpleBooleanProperty(true);
@@ -443,28 +440,6 @@ private void txtConfirmPassInitialize() {
             } catch (IOException ex) {
                Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
-    }
-    
-/**
- * @brief Gestisce l'azione di login locale e carica la vista della rubrica dei contatti.
- * 
- * Questo metodo viene invocato quando l'utente effettua il login locale. Dopo che l'utente 
- * ha completato il login, la vista "ContactsbookView" viene caricata tramite il metodo `setRoot` di `App`.
- * In caso di errore nel caricamento della vista, viene registrato un errore nel log.
- * 
- * @pre Il login locale deve essere stato completato con successo prima di chiamare questo metodo.
- * @post La vista "ContactsbookView" sarà caricata.
- * @invariant Se un errore si verifica durante il caricamento della vista, un log verrà generato.
- * 
- * @param event L'evento che attiva l'azione di login.
- */
-    @FXML
-    private void actionLoginLocal(ActionEvent event){
-        try{ 
-            App.setRoot("ContactsbookView");} 
-        catch (IOException ex) {
-            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /**
