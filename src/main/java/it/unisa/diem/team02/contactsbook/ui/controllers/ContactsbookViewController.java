@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 import java.util.logging.Level;
@@ -163,11 +165,13 @@ public class ContactsbookViewController implements Initializable {
 
         System.out.println("Sto recuperando i contatti");
         Database database = new Database();
-        TreeMap<String, Contact> listaContatti = database.getContact(Database.connection, "contatti",Database.user.getEmail());
-        for (Contact c : listaContatti.values()){
+        ArrayList<Contact> listaContatti = database.getContact(Database.connection, "contatti",Database.user.getEmail());
+        System.out.println("Lista 1:"+listaContatti);
+        Collections.sort(listaContatti);
+        for (Contact c : listaContatti){
             contactbook.add(c);    
         }
-        System.out.println(listaContatti);
+        System.out.println("Lista 2:"+listaContatti);
     }
     
 /**
