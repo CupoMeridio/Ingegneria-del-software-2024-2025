@@ -111,11 +111,11 @@ public class ContactsbookViewController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        tblvContactsInizialize();
         createList();
         btnMofidyInitialize();
         btnDeleteInitialize();
         initializeSearch();
-        tblvContactsInizialize();
         mbtnFilter.setOnShown(event->{actionFilter();});
            
     }    
@@ -446,6 +446,13 @@ public class ContactsbookViewController implements Initializable {
                         System.out.println("Rilevato contatto duplicato: " + c);
                     }
                 
+                try{
+                    TableColumn<Contact, ?> c=tblvContacts.getSortOrder().get(0);
+                    tblvContacts.getSortOrder().clear();
+                    tblvContacts.getSortOrder().add(c);
+                } catch (Exception ex){
+                    tblvContacts.getSortOrder().add(clmSur);
+                }
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Operation completed");
                 alert.setHeaderText("");
