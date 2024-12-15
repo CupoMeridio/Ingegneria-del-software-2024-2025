@@ -248,7 +248,7 @@ public class Database  {
         
         Statement statement;
         ResultSet rs= null;
-        Map <String, Contact>table=null;
+            Map <String, Contact>table=null;
         try {
             table =  new TreeMap<>();
             String query= String.format("select * from %s where email='%s'", tableName,email);

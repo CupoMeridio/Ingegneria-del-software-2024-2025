@@ -203,6 +203,9 @@ public class ContactsbookViewController implements Initializable {
               newStage.initModality(Modality.WINDOW_MODAL);
               newStage.initOwner(btnAdd.getScene().getWindow());
               newStage.showAndWait(); 
+              TableColumn<Contact, ?> c=tblvRubrica.getSortOrder().get(0);
+              tblvRubrica.getSortOrder().clear();
+              tblvRubrica.getSortOrder().add(c);
     }
     
 /**
